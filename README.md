@@ -1,145 +1,179 @@
-# 🤖 Naukri Job AI Agent
+# 💼 Naukri Job AI Agent
 
-## 📌 Project Overview
+> **Automated daily job alert system** — sends top 15 fresh fresher jobs to your email every morning at **9:00 AM IST** ⏰
 
-**Naukri Job AI Agent** is an automated job monitoring system built using **Node.js automation and web scraping techniques**.
-
-The agent runs automatically every day at **9:00 AM IST**, collects the latest job postings related to **Software Development and Data Analysis (0–1 year experience)**, filters the most relevant opportunities, and sends a **structured HTML email with job links**.
-
-This project demonstrates real-world skills in **automation, scraping, scheduling, and email notification systems**.
-
----
-
-## 🎯 Project Objectives
-
-* Automate job search process
-* Fetch latest job opportunities daily
-* Filter domain-specific fresher jobs
-* Remove duplicate job listings
-* Send curated job list via email
-* Build production-ready automation workflow
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automated-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodejs&logoColor=white)
+![Nodemailer](https://img.shields.io/badge/Nodemailer-Email-0078D4?style=for-the-badge&logo=gmail&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 
 ---
 
-## 🧰 Tech Stack
+## 🎯 What It Does
 
-* Node.js
-* Axios
-* Cheerio
-* Nodemailer
-* Dotenv
-* GitHub Actions (Scheduler)
+- 🔍 Searches **multiple job sources** every day automatically
+- 🎛️ Filters for **0–1 Year Experience (Freshers)** only
+- 🧹 Removes duplicate job listings
+- 📊 Picks **Top 15 most recent** jobs
+- 📩 Sends a **beautiful HTML email** straight to your inbox
+- ⏰ Runs daily at **9:00 AM IST** via **GitHub Actions** (zero manual effort)
+
+---
+
+## 🧑‍💻 Job Domains Covered
+
+| Domain |
+|--------|
+| Software Developer |
+| Frontend Developer |
+| Web Developer |
+| Python Developer |
+| Data Analyst |
+| Junior Data Analyst |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-naukri-ai-agent/
+naukri-job-ai-agent/
 │
-├── index.js
+├── index.js                     ← Main orchestrator
 ├── services/
-│     ├── scraper.js
-│     ├── filter.js
-│     ├── mail.js
-│
+│     ├── scraper.js             ← Multi-source job scraper
+│     ├── filter.js              ← Dedup, sort, top-15 filter
+│     └── mail.js                ← HTML email sender (Nodemailer)
 ├── utils/
-│     ├── formatter.js
-│
-├── .env
-├── .env.example
+│     └── formatter.js           ← Time & salary formatter
+├── .env.example                 ← Credentials template
 ├── package.json
 ├── .gitignore
-└── .github/workflows/daily.yml
+└── .github/workflows/daily.yml  ← Auto-scheduler (9 AM IST)
 ```
 
 ---
 
-## ⚙️ Features
+## 🧰 Tech Stack
 
-* Daily automated execution
-* Job scraping from Naukri search pages
-* Domain filtering:
-
-  * Software Developer
-  * Frontend Developer
-  * Python Developer
-  * Data Analyst
-* Experience filtering (0–1 year)
-* Duplicate job removal
-* Sorting by latest job posted
-* Top 15 job recommendations
-* Beautiful responsive HTML email notification
-* Secure credentials using GitHub Secrets
+| Tool | Purpose |
+|------|---------|
+| **Node.js** | Runtime |
+| **Axios** | HTTP requests |
+| **Cheerio** | HTML parsing |
+| **Nodemailer** | Gmail email sending |
+| **Remotive API** | Free job listings (no auth) |
+| **Arbeitnow API** | Free job listings (no auth) |
+| **JSearch (RapidAPI)** | Premium job listings (optional) |
+| **GitHub Actions** | Daily cron automation |
+| **dotenv** | Secrets management |
 
 ---
 
-## 🔄 Execution Flow
+## ⚙️ Setup & Installation
 
-1. Scrape job listings from Naukri search results
-2. Extract job title, company, experience, location, salary, job URL
-3. Filter jobs based on domain and experience
-4. Remove duplicate job entries
-5. Sort jobs by most recently posted
-6. Select top 15 relevant jobs
-7. Generate HTML email template
-8. Send email notification
-9. Run automatically via GitHub Actions scheduler
+### 1. Clone the repository
 
----
-
-## ⏰ Automation Schedule
-
-The agent runs daily using GitHub Actions cron:
-
-```
-3:30 AM UTC = 9:00 AM IST
+```bash
+git clone https://github.com/Rohitkr2002/Naukri.com-AI-Agent-.git
+cd Naukri.com-AI-Agent-
 ```
 
----
+### 2. Install dependencies
 
-## 🔐 Environment Variables
-
-Create `.env` file:
-
-```
-GMAIL_USER=your_email@gmail.com
-GMAIL_PASS=your_app_password
-```
-
----
-
-## 🚀 How to Run Locally
-
-```
+```bash
 npm install
+```
+
+### 3. Configure credentials
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and fill in your values:
+
+```env
+GMAIL_USER=your_gmail@gmail.com
+GMAIL_PASS=your_16_char_app_password
+RECIPIENT_EMAIL=your_gmail@gmail.com
+RAPIDAPI_KEY=your_rapidapi_key_here     # Optional
+```
+
+> **Gmail App Password:** Google Account → Security → 2-Step Verification → App Passwords → Generate
+
+### 4. Run locally
+
+```bash
 node index.js
 ```
 
 ---
 
-## ✅ Testing Results
+## ☁️ Deploy with GitHub Actions (Auto 9 AM IST)
 
-* Jobs successfully scraped from multiple sources
-* Domain-specific filtering applied
-* Top 15 jobs selected
-* Email notification delivered successfully
-* GitHub Actions scheduler verified
+### Step 1: Push to GitHub
+
+```bash
+git add .
+git commit -m "Deploy Naukri Job Agent"
+git push origin main
+```
+
+### Step 2: Add GitHub Secrets
+
+Go to: **Settings → Secrets and variables → Actions → New repository secret**
+
+| Secret Name | Value |
+|-------------|-------|
+| `GMAIL_USER` | Your Gmail address |
+| `GMAIL_PASS` | Gmail App Password |
+| `RECIPIENT_EMAIL` | Where to receive alerts |
+| `RAPIDAPI_KEY` | RapidAPI key (optional) |
+
+### Step 3: Manual Test
+
+GitHub → **Actions** tab → Select workflow → **Run workflow**
 
 ---
 
-## 💡 Future Improvements
+## ⏰ Schedule
 
-* Add LinkedIn job scraping
-* Add AI job relevance scoring
-* Add Telegram / WhatsApp notification
-* Add dashboard UI
-* Add database job history tracking
+| Timezone | Time |
+|----------|------|
+| IST | 9:00 AM |
+| UTC (cron) | 3:30 AM |
+| Cron expression | `30 3 * * *` |
 
 ---
 
-## 👨‍💻 Author
+## 📩 Email Preview
 
-**Rohit Kumar Singh**
+The daily alert email includes:
 
-Aspiring Software Developer & Data Analyst
+- 🏷️ **Job Title** (clickable link)
+- 🏢 **Company Name**
+- 💼 **Experience Required**
+- 📍 **Location**
+- 💰 **Salary** (if available)
+- 🟢 **Posted Time** (freshness indicator)
+- 🚀 **Apply Now** button
+
+---
+
+## 🔐 Security
+
+- `.env` file is **gitignored** — credentials never exposed
+- GitHub Secrets used for Actions deployment
+- App Password used instead of main Gmail password
+
+---
+
+## 📄 License
+
+MIT © [Rohit Kumar Singh](https://github.com/Rohitkr2002)
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ using Node.js + GitHub Actions</sub>
+</div>
