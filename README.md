@@ -1,430 +1,618 @@
 <div align="center">
 
-# 🤖 Naukri Job AI Agent
-### *Enhanced Edition — Powered by Google Gemini AI*
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1b2a,100:1e3a5f&height=200&section=header&text=🤖%20Naukri%20Job%20AI%20Agent&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=AI-Powered%20Daily%20Job%20Monitor%20|%20Built%20by%20Rohit%20Kumar%20Singh&descAlignY=55&descSize=18" alt="Header"/>
 
 <br/>
 
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![Puppeteer](https://img.shields.io/badge/Puppeteer-Headless%20Chrome-40B5A4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://pptr.dev)
-[![Gemini AI](https://img.shields.io/badge/Gemini%20AI-2.0%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://aistudio.google.com)
-[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Auto%209AM%20IST-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+[![Gemini AI](https://img.shields.io/badge/Google%20Gemini-AI%20Powered-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://aistudio.google.com)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Auto%20Daily-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
+[![Nodemailer](https://img.shields.io/badge/Nodemailer-Email%20Engine-009688?style=for-the-badge&logo=gmail&logoColor=white)](https://nodemailer.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-F5A623?style=for-the-badge)](LICENSE)
 
 <br/>
 
-> **A fully automated, AI-powered job monitoring agent that scrapes Naukri.com every day, scores each job using Google Gemini AI, matches the best resume, and delivers a stunning dark-mode email report to your inbox at 9:00 AM IST — zero manual effort required.**
+> ### 🧠 *"Job dhundhna band karo, agent karne do."*
+> **A fully automated, self-running AI Agent that scrapes Naukri.com daily, scores every job using Google Gemini AI, selects your best resume, generates a cover letter — and delivers it all to your inbox at 9:00 AM IST every morning. Zero manual effort.**
 
 <br/>
 
 ```
-📅 Runs Daily at 9:00 AM IST  ·  🔍 4 Cities  ·  💼 5 Job Roles  ·  🤖 AI-Powered  ·  📬 Premium Email
+╔══════════════════════════════════════════════════════════════════════╗
+║   🔍 Scrapes Naukri.com  →  🤖 AI Scores Jobs  →  📄 Matches Resume  ║
+║         →  ✉️ Cover Letter  →  📧 Premium Email @ 9 AM IST           ║
+╚══════════════════════════════════════════════════════════════════════╝
 ```
+
+<br/>
 
 </div>
 
 ---
 
-## 📌 Table of Contents
+## 📌 Quick Index
 
-- [🎯 What Is This?](#-what-is-this)
-- [⚡ Features Overview](#-features-overview)
-- [🚀 Feature 1 — Daily Profile Boost](#-feature-1--daily-profile-boost-automation)
-- [🤖 Feature 2 — AI Job Scoring](#-feature-2--ai-job-scoring--ranking)
-- [📄 Feature 3 — Resume Smart Matching](#-feature-3--resume-smart-matching-system)
-- [📧 Premium Email Design](#-premium-email-design)
-- [🔄 How It Works](#-how-it-works--5-step-pipeline)
-- [📁 Project Structure](#-project-structure)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [⚙️ Installation & Setup](#️-installation--setup)
-- [🔑 GitHub Actions Setup](#-github-actions-setup-automated-daily-run)
-- [🎨 Customization Guide](#-customization-guide)
-- [🔧 Troubleshooting](#-troubleshooting)
-- [📊 Stats & Performance](#-stats--performance)
-
----
-
-## 🎯 What Is This?
-
-**Naukri Job AI Agent** is a production-grade, self-running automation system built for freshers and early-career developers. It solves the single biggest problem in job hunting — **consistency**.
-
-Instead of manually checking Naukri.com every day, browsing hundreds of irrelevant listings, and copy-pasting the same cover letter — this agent does **everything automatically**:
-
-| ❌ Without Agent | ✅ With Agent |
-|------------------|--------------|
-| Manually check Naukri every day | Automated daily scrape at 9 AM IST |
-| Browse 100+ irrelevant jobs | Only top 20 freshers jobs, filtered & ranked |
-| Guess which jobs match you | AI scores each job 0–100% against your skills |
-| Send same resume everywhere | Correct resume auto-selected per job domain |
-| Write cover letters manually | AI-generated personalized cover letter |
-| Forget to update your profile | Daily ATS tips + profile boost report |
+| Section | Description |
+|---------|-------------|
+| [🎯 Problem Statement](#-problem-statement) | Why this project was built |
+| [💡 Solution](#-solution--what-this-agent-does) | What the agent does |
+| [🏗️ Architecture](#️-system-architecture) | How it all connects |
+| [🚀 Feature 1 – Profile Boost](#-feature-1--daily-profile-boost-automation) | Daily profile optimizer |
+| [🤖 Feature 2 – AI Job Scoring](#-feature-2--ai-job-scoring--ranking) | Gemini AI match scoring |
+| [📄 Feature 3 – Resume Matching](#-feature-3--resume-smart-matching--cover-letter) | Smart resume selector |
+| [🔍 Core Engine – Scraper](#-core-engine--naukricom-scraper) | Headless browser scraper |
+| [📧 Email Engine](#-email-engine--premium-dark-mode-design) | Premium HTML email |
+| [⚙️ Setup & Installation](#️-setup--installation) | Get it running in 10 min |
+| [🔑 GitHub Actions](#-github-actions--automated-daily-run) | Automate daily runs |
+| [🎨 Customization](#-customization-guide) | Make it your own |
+| [🔧 Troubleshooting](#-troubleshooting) | Common fixes |
 
 ---
 
-## ⚡ Features Overview
+## 🎯 Problem Statement
+
+Every fresher faces the same daily grind:
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                  NAUKRI JOB AI AGENT                        │
-├─────────────────┬───────────────────────────────────────────┤
-│  🔍 SCRAPER     │ Puppeteer headless browser · 4 cities     │
-│                 │ 5 job roles · Anti-bot stealth             │
-├─────────────────┼───────────────────────────────────────────┤
-│  🔧 FILTER      │ 0-1 yr exp · Deduplication · Sort fresh   │
-├─────────────────┼───────────────────────────────────────────┤
-│  🚀 BOOST       │ Profile completeness · ATS tips · Gaps    │
-├─────────────────┼───────────────────────────────────────────┤
-│  🤖 AI SCORER   │ Gemini AI · 0-100% match · Skill gaps     │
-├─────────────────┼───────────────────────────────────────────┤
-│  📄 RESUME      │ Domain detect · Best resume · Cover letter│
-├─────────────────┼───────────────────────────────────────────┤
-│  📧 EMAIL       │ Dark mode · Premium design · Job cards    │
-└─────────────────┴───────────────────────────────────────────┘
+😤 Wake up → Open Naukri → Scroll through 200+ jobs → 180 not relevant
+   → 15 expired → 5 require 2 years experience → 0 good matches
+   → Apply with same generic resume → Get 0 callbacks → Repeat tomorrow
+```
+
+**Why this happens:**
+- ❌ Manually checking Naukri.com every day is tedious and inconsistent
+- ❌ No way to know WHICH jobs actually match YOUR skills
+- ❌ Sending the same resume to every job — software jobs need a different resume than data analyst jobs
+- ❌ Cover letters are time-consuming to write for every application
+- ❌ Profile ranking drops when you're not "active" on Naukri
+
+---
+
+## 💡 Solution — What This Agent Does
+
+```
+✅ Automatically scrapes Naukri.com at 9 AM every day (0 manual effort)
+✅ Filters out irrelevant jobs (keeps only 0-1 yr experience)
+✅ AI scores each job against YOUR exact skills (0-100% match)
+✅ Ranks jobs best-to-worst before sending
+✅ Auto-selects the right resume (Software or Data) per job
+✅ Generates a personalized cover letter for your top match
+✅ Sends a beautiful email report with everything you need
+✅ Shows profile gaps + ATS tips to improve your Naukri ranking
+```
+
+| | Without Agent | With Agent |
+|-|--------------|------------|
+| Time spent daily | 60–90 min | 0 min (check email) |
+| Job relevance | ~5% relevant | ~80% relevant (filtered) |
+| Resume used | Same for all | Best-fit per domain |
+| Cover letter | Manual, 20 min | AI-generated, personalized |
+| Profile ranking | Drops if inactive | Daily tips to stay active |
+| Best match visibility | Manual guessing | AI Match Score 0-100% |
+
+---
+
+## 🏗️ System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     GITHUB ACTIONS (Cron)                       │
+│                  Every day at 9:00 AM IST                       │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │ triggers
+                          ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        index.js                                 │
+│                   MAIN ORCHESTRATOR                             │
+└──┬──────────┬────────────┬───────────────┬──────────────┬───────┘
+   │          │            │               │              │
+   ▼          ▼            ▼               ▼              ▼
+┌──────┐  ┌────────┐  ┌─────────┐   ┌──────────┐  ┌──────────┐
+│PROFI-│  │SCRAPER │  │ FILTER  │   │ AI SCORER│  │ RESUME   │
+│LE    │  │        │  │         │   │          │  │ MATCHER  │
+│BOOST │  │Puppeteer  │0-1yr exp│   │Gemini AI │  │+Cover Ltr│
+│      │  │4 cities│  │Dedup    │   │OR Heurist│  │          │
+│ATS   │  │5 roles │  │Sort     │   │0-100%    │  │Software  │
+│Tips  │  │20 URLs │  │Top 20   │   │Rank jobs │  │or Data   │
+└──┬───┘  └───┬────┘  └────┬────┘   └────┬─────┘  └────┬─────┘
+   │          │            │              │              │
+   └──────────┴────────────┴──────────────┴──────────────┘
+                                │
+                                ▼
+              ┌─────────────────────────────────┐
+              │          mail.js                │
+              │     PREMIUM EMAIL BUILDER       │
+              │   Dark Mode · Glassmorphism     │
+              │   City Cards · AI Badges        │
+              └──────────────┬──────────────────┘
+                             │
+                             ▼
+              ┌─────────────────────────────────┐
+              │       Gmail SMTP                │
+              │   📬 Inbox at 9:00 AM IST       │
+              └─────────────────────────────────┘
+```
+
+### Data Flow
+
+```
+Naukri.com  ──[Puppeteer]──▶  Raw Jobs (60-120)
+            ──[Filter]──────▶  Clean Jobs (20)
+            ──[Gemini AI]───▶  Scored & Ranked Jobs
+            ──[Resume Match]▶  Best Resume + Cover Letter
+            ──[Email]───────▶  📬 Your Inbox
 ```
 
 ---
 
 ## 🚀 Feature 1 — Daily Profile Boost Automation
 
-> *Make your Naukri profile the first one recruiters see — every single day*
+> *"Naukri ka algorithm active profiles ko pehle dikhata hai — agar roz update nahi kiya toh ranking drop ho jaati hai!"*
 
-### 📊 Profile Completeness Scoring
+### What It Does
 
-Scores your profile out of **100%** across **14 weighted sections**:
+Every day, the agent generates a **complete profile health report** so you know exactly what to do to stay at the top of recruiter search results.
 
-| Section | Weight | Description |
-|---------|--------|-------------|
-| Photo | 10% | Professional profile picture |
-| Headline | 10% | Keyword-rich professional title |
-| Summary | 10% | Strong, ATS-optimized bio |
-| Education | 10% | Degree, CGPA, graduation year |
-| Skills | 10% | Key skills + IT skills sections |
-| Projects | 10% | Portfolio projects with tech stack |
-| Resume | 10% | Uploaded, up-to-date resume |
-| Experience | 8% | Internships / work experience |
-| Languages | 5% | Language proficiency |
-| Preferred Locations | 5% | City preferences |
-| Certifications | 5% | Online courses & certificates |
-| Expected Salary | 3% | Salary expectations |
-| Key Skills | 2% | Tagged skills for search |
-| IT Skills | 2% | Technical tool proficiency |
+### 📊 Profile Completeness Scoring System
+
+14 sections, each with a weight — your total score = your **Naukri ranking health**:
+
+```
+Section               Weight    Your Status
+──────────────────────────────────────────
+📸 Profile Photo        10%     ✅ Complete
+📝 Headline             10%     ✅ Complete
+📋 Professional Summary 10%     ✅ Complete
+🎓 Education            10%     ✅ Complete
+💡 Skills Section       10%     ✅ Complete
+🛠️ Projects Portfolio   10%     ✅ Complete
+📄 Resume Uploaded      10%     ✅ Complete
+💼 Work Experience       8%     ✅ Rinex Internship
+🌍 Preferred Locations   5%     ✅ Set
+🗣️ Languages             5%     ✅ Set
+📜 Certifications        5%     ⚠️ Add Coursera certs
+💰 Expected Salary       3%     ⚠️ Add to profile
+🔑 Key Skills            2%     ✅ Set
+💻 IT Skills             2%     ✅ Set
+──────────────────────────────────────────
+TOTAL                         ~84% (Good)
+```
 
 ### 🔍 Keyword Gap Analysis
 
-Compares **your current skills** against **2025 trending skills** per domain and identifies what's missing:
+Trending 2025 skills your profile/resume is missing:
 
 ```
-Software Developer gaps:  TypeScript, Docker, Kubernetes, System Design, Redis
-Frontend Developer gaps:  Next.js, Redux, GraphQL, PWA, Web Performance
-Data Analyst gaps:        Power BI, Tableau, ETL, Spark, Alteryx
-Python Developer gaps:    FastAPI, Celery, SQLAlchemy, Asyncio, Pytest
-Web Developer gaps:       TypeScript, GraphQL, PWA, SEO Basics
+Software Developer: TypeScript, Docker, React.js, System Design, DSA
+Data Analyst:       Power BI (adv), Tableau, ETL, BigQuery, Spark
+Frontend Developer: Next.js, Redux, Tailwind CSS, GraphQL, Jest
 ```
 
-### 💡 ATS-Friendly Tips — 25 Rotating Daily Tips
+### 💡 ATS Tip Rotation System
 
-Different 5 tips every day — covering:
-- Resume formatting for ATS parsers
-- Keyword placement strategies
-- Recruiter search optimization
-- Profile activity signals
-- Portfolio & GitHub optimization
+**25 curated tips**, 5 shown every day (rotating) — so you learn something new each day:
 
-### ⚡ Daily Action Checklist
+```
+Day 1:  Use exact job title keywords in your headline
+        Add GitHub link — recruiters actively check it
+        Keep resume to 1 page as a fresher
+        ...
 
-5 specific actions each morning to boost recruiter visibility:
-1. Re-order top skill to position #1
-2. Edit headline with one trending keyword
-3. Re-upload resume with today's date
-4. Search for "software developer fresher" on Naukri
-5. Save 5 jobs to boost engagement signals
+Day 2:  Use action verbs: Built, Developed, Optimized...
+        Add quantifiable numbers to every achievement
+        ...
+```
+
+### ⚡ Daily Action Checklist (5 steps, visible in email)
+
+```
+STEP 1  → Re-order your top skill to position #1
+STEP 2  → Edit headline: add one trending keyword from gaps
+STEP 3  → Re-upload resume with today's date
+STEP 4  → Search "software developer fresher" on Naukri
+STEP 5  → Save 5 jobs to boost engagement signals
+```
 
 ---
 
 ## 🤖 Feature 2 — AI Job Scoring & Ranking
 
-> *Google Gemini AI reads every job description and tells you exactly how well you match*
+> *"Not all jobs are equal. Gemini AI reads each JD and tells you exactly where you stand."*
 
-### How Scoring Works
+### Scoring with Google Gemini AI
 
-**With Gemini API Key (AI Mode):**
-```
-For each job → Send to Gemini AI:
-  ├── Job Title + Company + Domain + Requirements
-  └── Your Skills + Education + Projects + Target Roles
-
-Gemini returns:
-  ├── Match Score (0–100%)
-  ├── Why it's a good/bad match (1 sentence)
-  ├── Top 3 skills that matched
-  ├── Skill gaps (what you're missing)
-  └── Learning recommendation (free resource)
-```
-
-**Without API Key (Heuristic Mode — fallback):**
-```
-Domain relevance score  → max 40 points
-Skill keyword match     → max 50 points
-Fresher bonus           → 10 points
-────────────────────────────────────────
-Total                   → 0-100%
-```
-
-> Agent **never crashes** — always falls back to heuristic mode gracefully
-
-### 📈 Score Color System in Email
-
-| Score | Color | Label | Meaning |
-|-------|-------|-------|---------|
-| 80–100% | 🟢 Green | Excellent | Apply immediately |
-| 65–79% | 🔵 Blue | Good | Strong candidate |
-| 50–64% | 🟠 Orange | Fair | Worth applying |
-| 0–49% | 🔴 Red | Low | Skill gap exists |
-
-### 📚 Skill Gap Learning Resources
-
-When gaps are detected, the agent suggests **free** learning resources:
+When `GEMINI_API_KEY` is configured, for **each job** the agent sends:
 
 ```
-TypeScript    → TypeScript for Beginners – freeCodeCamp (YouTube)
-Docker        → Docker Crash Course – TechWorld with Nana (YouTube)
-Power BI      → Power BI Full Course – Simplilearn (YouTube)
-System Design → System Design Primer – GitHub (Alex Xu)
-AWS           → AWS Cloud Practitioner – freeCodeCamp
-Next.js       → Next.js 14 Course – Vercel Docs + freeCodeCamp
-... and 10+ more
+TO GEMINI:
+──────────────────────────────────────────
+JOB:
+  Title:      Software Engineer
+  Company:    TCS
+  Domain:     Software Developer
+  Experience: 0-1 Years
+
+CANDIDATE (Rohit Kumar Singh):
+  Skills:     JavaScript, Python, HTML5, CSS3, SQL,
+              NumPy, Pandas, Power BI, Chart.js...
+  Education:  B.Tech ECE – Haldia Inst of Technology
+  Target:     Software Dev, Frontend, Web, Data Analyst
+  Projects:   Portfolio, Blood Bank, Smart To-Do, FNP Dashboard...
+──────────────────────────────────────────
+
+GEMINI RETURNS:
+  Score:             78%
+  Match Reason:      "Strong JavaScript & Python match for this role"
+  Top Skills Match:  ["JavaScript", "HTML5", "Python"]
+  Skill Gaps:        ["TypeScript", "React.js"]
+  Learning Tip:      "React Full Course – Dave Gray (YouTube)"
+```
+
+### 🔢 Heuristic Fallback (No API Key Needed)
+
+If Gemini key is not set or quota is exhausted, a smart keyword fallback runs:
+
+```
+Domain keyword match  →  0 to 40 points
+Your skill match      →  0 to 50 points
+Fresher bonus         →  10 points
+─────────────────────────────────────────
+Final Score           →  0–100%
+```
+
+> ✅ **Agent never crashes** — fallback mode ensures email always gets sent
+
+### 🎨 Score Badge Colors in Email
+
+| Score Range | Badge Color | Action |
+|-------------|-------------|--------|
+| **80–100%** | 🟢 `#4ade80` Green | **Apply First!** |
+| **65–79%** | 🔵 `#60a5fa` Blue | Strong match — apply |
+| **50–64%** | 🟠 `#fb923c` Orange | Fair — worth applying |
+| **0–49%** | 🔴 `#f87171` Red | Skill gap — consider skipping |
+
+### 📚 Skill Gap Learning Resources (Free Only)
+
+```
+TypeScript   →  freeCodeCamp YouTube Course
+Docker       →  TechWorld with Nana (YouTube)
+React.js     →  Dave Gray Full Course (YouTube)
+Next.js      →  Vercel Official Docs + freeCodeCamp
+Power BI     →  Simplilearn YouTube Course
+System Design→  Alex Xu's GitHub Primer (free)
+AWS          →  freeCodeCamp Cloud Practitioner
+DSA          →  Abdul Bari (YouTube) + LeetCode 75
 ```
 
 ---
 
-## 📄 Feature 3 — Resume Smart Matching System
+## 📄 Feature 3 — Resume Smart Matching & Cover Letter
 
-> *Always send the right resume — automatically*
+> *"Sending a software resume for a Data Analyst job = automatic rejection. This feature fixes that."*
 
-### 🎯 Domain Auto-Detection
+### 🎯 Domain Auto-Detection Logic
 
-The system analyzes each job's title and domain using keyword matching:
+The agent analyzes each job's title + domain keyword against two keyword banks:
 
-```
-Job: "Data Analyst at Infosys"       → 📊 DATA domain detected
-Job: "React Developer at TCS"        → 💻 SOFTWARE domain detected
-Job: "Python Developer at Wipro"     → 📊 DATA domain detected
-Job: "Frontend Engineer at Accenture"→ 💻 SOFTWARE domain detected
+```javascript
+// Data domain keywords
+['data analyst', 'python', 'power bi', 'tableau', 'sql analyst',
+ 'machine learning', 'analytics', 'etl', 'data engineer'...]
+
+// Software domain keywords
+['software developer', 'frontend', 'react', 'backend',
+ 'web developer', 'javascript', 'full stack', 'node'...]
+
+// Higher match count wins → Software or Data resume selected
 ```
 
 ### 📋 Dual Resume System
 
-| Resume | Used For | File |
-|--------|----------|------|
-| 💻 Software Developer Resume | Software Dev · Frontend · Web Dev · Full Stack | `resumes/resume_software.txt` |
-| 📊 Data Analyst Resume | Data Analyst · Python Dev · ML Engineer · BI Developer | `resumes/resume_data.txt` |
+#### 💻 Software Developer Resume → `resumes/resume_software.txt`
+**Used for:** Software Developer · Frontend Developer · Web Developer · Full Stack
+
+**Highlights shown:**
+```
+✅ Personal Portfolio    – HTML5, CSS3, JS (dark/light theme, 6+ projects)
+✅ Blood Bank System     – Python, Tkinter (60% efficiency improvement)
+✅ Smart To-Do List      – JS, Chart.js (40% task org. improvement)
+✅ Rinex Internship      – 30% page load improvement
+✅ CSI Treasurer         – Rs.50,000+ budget, 10+ workshops
+```
+
+#### 📊 Data Analyst Resume → `resumes/resume_data.txt`
+**Used for:** Data Analyst · Python Developer · Business Analyst · BI Developer
+
+**Highlights shown:**
+```
+✅ FNP Sales Dashboard   – Excel, 1,000+ orders, Rs.35.2L revenue, 80% effort reduction
+✅ HR Power BI Dashboard – DAX, Power Query, 1,000+ employees, 40% reporting improvement
+✅ Blood Bank System     – Python data management, Matplotlib visualization
+✅ Rinex Internship      – data-driven UI components
+✅ CSI Treasurer         – Rs.50,000+ financial data management
+```
 
 ### ✉️ AI-Generated Cover Letter
 
-For the **top-ranked job**, a personalized cover letter is generated:
+For the **top AI-ranked job**, a fully personalized cover letter is generated:
 
-- **With Gemini API**: Fully customized, mentions your specific project, skills, and the exact company/role
-- **Without API**: Professional template with your real name, education, skills, and top project auto-filled
+**With Gemini AI (sample output):**
+```
+Dear Hiring Manager,
 
-**Cover Letter includes:**
-- Specific job title and company name
-- Your most relevant 2–3 skills for that role
-- Brief mention of your best project with impact
-- Confident call-to-action closing
-- Kept under 180 words (recruiter attention span)
+I am excited to apply for the Software Engineer position at TCS.
+As a B.Tech graduate from Haldia Institute of Technology (2025, CGPA: 7.33),
+I bring strong hands-on experience in JavaScript, Python, and web development.
 
-### 🛠️ ATS Resume Improvement Tips
+One of my notable projects — "Blood Bank Management System" — demonstrates
+my ability to design and deploy real-world Python applications, improving
+data handling efficiency by 60%. I also built a responsive Smart To-Do List
+with real-time Chart.js visualizations used by peers and rated highly.
 
-**10 tips per resume type**, top 4 shown in email:
+I am a fast learner, highly motivated, and eager to contribute meaningfully
+to your engineering team.
+
+Warm regards,
+Rohit Kumar Singh
+```
+
+**Without API key:** A professional template auto-fills with Rohit's real name, education, skills, and top project.
+
+---
+
+## 🔍 Core Engine — Naukri.com Scraper
+
+> *"The agent uses an army of headless Chrome browsers to read Naukri like a human would — but 100x faster."*
+
+### How It Works
+
+```javascript
+// For each of 20 URLs (4 cities × 5 roles):
+page.goto('https://www.naukri.com/software-developer-jobs-in-bangalore?experience=0')
+  → Wait for job cards to load
+  → Extract data from DOM elements
+  → Return structured job objects
+```
+
+### Target Coverage
 
 ```
-Software Resume Tips:
-  → Add GitHub link at top — recruiters WILL check it
-  → List tech stack per project: "Built with React.js, Node.js, MongoDB"
-  → Use numbers: "Reduced load time by 30%" not "Improved performance"
-  → Keep to 1 page — freshers with 2-page resumes are ignored
+Cities  ×  Roles  =  URLs Visited Per Day
+──────────────────────────────────────────────
+Bangalore     Software Developer      → 1 URL
+Bangalore     Frontend Developer      → 1 URL
+Bangalore     Python Developer        → 1 URL
+Bangalore     Data Analyst            → 1 URL
+Bangalore     Web Developer           → 1 URL
+Delhi         [same 5 roles]          → 5 URLs
+Pune          [same 5 roles]          → 5 URLs
+Kolkata       [same 5 roles]          → 5 URLs
+──────────────────────────────────────────────
+TOTAL:        20 pages scraped/day
+```
 
-Data Resume Tips:
-  → List tools clearly: Python, Pandas, NumPy, SQL, Power BI, Tableau
-  → Add dataset size: "Analyzed 50,000+ rows"
-  → Include Kaggle profile URL if you have notebooks
-  → Mention SQL level: "Advanced SQL – CTEs, Window Functions"
+### Data Extracted Per Job
+
+```json
+{
+  "title":    "Software Engineer",
+  "company":  "TCS",
+  "exp":      "0-1 Yrs",
+  "salary":   "Not Disclosed",
+  "location": "Bangalore, India",
+  "posted":   "Just Now",
+  "url":      "https://www.naukri.com/job/...",
+  "domain":   "Software Developer",
+  "city":     "Bangalore"
+}
+```
+
+### Anti-Bot Stealth Techniques
+
+```javascript
+// Real browser fingerprint to bypass detection
+setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64)...')
+setViewport({ width: 1280, height: 900 })
+evaluateOnNewDocument(() => {
+  Object.defineProperty(navigator, 'webdriver', { get: () => false })
+})
+// Polite delays between requests (1.2s gap)
+```
+
+### Intelligent Filtering Pipeline
+
+```
+Raw Jobs (~60-120)
+  → Step 1: Keep only 0-1 yr experience jobs
+  → Step 2: Remove exact duplicate title+company
+  → Step 3: Sort by freshness (Just Now > Hours > Today > Days > Weeks)
+  → Step 4: Take top 20 only
+Final Jobs (~15-20, all fresh and relevant)
 ```
 
 ---
 
-## 📧 Premium Email Design
+## 📧 Email Engine — Premium Dark Mode Design
 
-Every morning, a beautifully crafted dark-mode HTML email lands in your inbox:
+> *"Your daily email looks like a product dashboard, not a plain text alert."*
 
-### Email Structure
+### Email Layout (What You See Every Morning)
 
 ```
-┌──────────────────────────────────────────────┐
-│         💼  NAUKRI JOB ALERT                 │
-│    📅 Date  ·  ⏰ 9:00 AM IST               │
-│    🎯 Top N Fresh Jobs · 0-1 Yr Experience   │
-├───────────┬───────────┬──────────┬───────────┤
-│ TOTAL     │  CITIES   │ DOMAINS  │  AI SCORE │
-│  JOBS     │           │          │           │
-├──────────────────────────────────────────────┤
-│         🚀 PROFILE BOOST REPORT              │
-│   Completeness: ████████░░ 84%  (Good)       │
-│   Keyword Gaps: TypeScript · Docker · ...    │
-│   Today's Tips: 1. ... 2. ... 3. ...        │
-│   Today's Actions: Step 1, Step 2, Step 3   │
-├──────────────────────────────────────────────┤
-│         🤖 AI JOB MATCH ANALYSIS             │
-│   Top: 78% | Avg: 62% | High Match: 8 jobs  │
-│   🏆 Best Job: Software Engineer @ TCS       │
-│   📚 Skill Gaps to Close: TypeScript, Docker │
-├──────────────────────────────────────────────┤
-│         📄 RESUME SMART MATCHING             │
-│   💻 Software Resume → 14 jobs              │
-│   📊 Data Resume → 6 jobs                  │
-│   ✉️ Cover Letter Preview for Top Job       │
-├──────────────────────────────────────────────┤
-│         💼 TODAY'S JOB LISTINGS              │
-│  🏙️ BANGALORE                               │
-│  ┌─────────────────────────────────────┐    │
-│  │ #01 · Software Developer · 🤖 78%  │    │
-│  │ Senior React Developer              │    │
-│  │ 🏢 TCS  🕐 Just Now               │    │
-│  │ 💼 0-1 Yrs  📍 Bangalore  💰 3-5L │    │
-│  │       [ Apply on Naukri → ]         │    │
-│  └─────────────────────────────────────┘    │
-│  ... more job cards ...                      │
-├──────────────────────────────────────────────┤
-│     🚀 Explore All Jobs on Naukri.com        │
-├──────────────────────────────────────────────┤
-│  🤖 Automated by Naukri Job AI Agent         │
-│  Runs daily · GitHub Actions · Gemini AI     │
-└──────────────────────────────────────────────┘
+╔════════════════════════════════════════════════════╗
+║  💼  NAUKRI JOB ALERT                              ║
+║  📅  Wednesday, 18 March 2026  ·  ⏰ 9:00 AM IST  ║
+║  🎯  Top 18 Fresh Jobs · 0-1 Year Experience       ║
+╠════════════════╦══════════════╦════════════════════╣
+║   18 TOTAL     ║    4 CITIES  ║   5 DOMAINS        ║
+║    JOBS        ║              ║                    ║
+╠════════════════╩══════════════╩════════════════════╣
+║                                                    ║
+║  🚀 PROFILE BOOST REPORT                           ║
+║  ┌──────────────────────────────────────────────┐  ║
+║  │  Completeness: ████████░░  84%  (Good ✅)   │  ║
+║  │  Keyword Gaps: TypeScript · React · Docker  │  ║
+║  │                                              │  ║
+║  │  💡 Today's ATS Tips:                       │  ║
+║  │   ✦ Use exact job title in your headline    │  ║
+║  │   ✦ Add GitHub link at top of resume        │  ║
+║  │   ✦ List tech stack per project             │  ║
+║  │   ✦ Keep resume to 1 page                   │  ║
+║  │                                              │  ║
+║  │  ⚡ Today's Actions:                         │  ║
+║  │   STEP 1  Re-order top skill                │  ║
+║  │   STEP 2  Add trending keyword to headline  │  ║
+║  │   STEP 3  Re-upload resume with today's date│  ║
+║  └──────────────────────────────────────────────┘  ║
+║                                                    ║
+║  🤖 AI JOB MATCH ANALYSIS                          ║
+║  ┌──────────────────────────────────────────────┐  ║
+║  │  Top: 82%  │  Avg: 61%  │  High Match: 7     │  ║
+║  │                                              │  ║
+║  │  🏆 Best Match:                              │  ║
+║  │     Frontend Developer @ Infosys             │  ║
+║  │     "Strong JS + HTML match for this role"  │  ║
+║  │                                              │  ║
+║  │  📚 Skill Gaps to Close:                    │  ║
+║  │     TypeScript → freeCodeCamp YouTube       │  ║
+║  │     Docker → TechWorld with Nana (YouTube)  │  ║
+║  └──────────────────────────────────────────────┘  ║
+║                                                    ║
+║  📄 RESUME SMART MATCHING                          ║
+║  ┌──────────────────────────────────────────────┐  ║
+║  │  💻 Software Resume → 12 jobs               │  ║
+║  │  📊 Data Resume     → 6  jobs               │  ║
+║  │                                              │  ║
+║  │  🛠️ Resume Tips:                             │  ║
+║  │   ● Add GitHub at top of resume             │  ║
+║  │   ● List tech stack per project             │  ║
+║  │   ● Use numbers in achievements             │  ║
+║  │                                              │  ║
+║  │  ✉️ Cover Letter (for Backend Dev @ TCS):   │  ║
+║  │  "Dear Hiring Manager, I am excited to...   │  ║
+║  │   As a B.Tech grad from Haldia Institute... │  ║
+║  └──────────────────────────────────────────────┘  ║
+║                                                    ║
+║  💼 TODAY'S JOB LISTINGS                           ║
+║                                                    ║
+║  🏙️ BANGALORE  (7 jobs)                           ║
+║  ┌──────────────────────────────────────────────┐  ║
+║  │ 🏆 #01  Software Developer  🤖 82% Match    │  ║
+║  │                                              │  ║
+║  │  Frontend Developer                          │  ║
+║  │  🏢 Infosys  🕐 Just Now                    │  ║
+║  │                                              │  ║
+║  │  💼 0-1 Yrs  📍 Bangalore  💰 3-5 LPA       │  ║
+║  │  💡 Gaps: TypeScript, Next.js                │  ║
+║  │                                              │  ║
+║  │  [ APPLY ON NAUKRI → ]                       │  ║
+║  └──────────────────────────────────────────────┘  ║
+║  ... (more job cards)                              ║
+╠════════════════════════════════════════════════════╣
+║   🚀 EXPLORE ALL JOBS ON NAUKRI.COM                ║
+╠════════════════════════════════════════════════════╣
+║  🤖 Naukri Job AI Agent · Runs daily @ 9 AM IST   ║
+║  Gemini AI · Puppeteer · GitHub Actions            ║
+╚════════════════════════════════════════════════════╝
 ```
 
-### Design Features
-- **Dark mode** background (`#070d1a`) — easy on eyes
-- **City-themed accent colors** — Bangalore 🟠, Delhi 🔴, Pune 🟣, Kolkata 🩵
-- **AI score color badges** — green/blue/orange/red per percentage
-- **Glassmorphism** job cards with gradient borders
-- **Mobile responsive** layout
-- **ATS skill gap tips** embedded in each job card
+### Design Highlights
+
+- **Background:** Deep navy `#070d1a` — easy on eyes
+- **Job Cards:** Glassmorphism with gradient borders
+- **City Themes:** Bangalore 🟠 Orange · Delhi 🔴 Red · Pune 🟣 Purple · Kolkata 🩵 Teal
+- **AI Badge:** Color changes by score (green/blue/orange/red)
+- **Top Pick:** 🏆 Gold badge + glow effect on best job
+- **Mobile Responsive:** Works perfectly on phone too
 
 ---
 
-## 🔄 How It Works — 5-Step Pipeline
+## 📁 Project Structure (Every File Explained)
 
 ```
-╔══════════════════════════════════════════════════════════════╗
-║                    DAILY PIPELINE (9 AM IST)                 ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  STEP 0  🚀 Profile Boost Analysis                          ║
-║          ├── Load userProfile.js config                      ║
-║          ├── Calculate completeness score (14 sections)      ║
-║          ├── Compare skills vs trending 2025 stack           ║
-║          ├── Select today's 5 ATS tips (daily rotation)      ║
-║          └── Generate action checklist + recruiter signals   ║
-║                                                              ║
-║  STEP 1  🔍 Scrape Naukri.com                               ║
-║          ├── Launch headless Chromium (Puppeteer)            ║
-║          ├── Navigate 4 cities × 5 roles = 20 URLs           ║
-║          ├── Extract: title, company, exp, salary, location  ║
-║          ├── Anti-bot: real user-agent, viewport, delays     ║
-║          └── Collect all raw job listings                    ║
-║                                                              ║
-║  STEP 2  🔧 Filter & Rank                                   ║
-║          ├── Keep only 0-1 year experience jobs              ║
-║          ├── Remove duplicate listings                       ║
-║          ├── Sort by posting freshness (Just Now → Week Ago) ║
-║          └── Cap at top 20 unique jobs                       ║
-║                                                              ║
-║  STEP 3  🤖 AI Scoring (Gemini or Heuristic)                ║
-║          ├── For each job → call Gemini API (or heuristic)   ║
-║          ├── Get match score, reason, gaps, learning tip     ║
-║          ├── Sort all jobs by AI score descending            ║
-║          └── Aggregate skill gap summary across all jobs     ║
-║                                                              ║
-║  STEP 4  📄 Resume Matching                                  ║
-║          ├── Detect domain for each job (software/data)      ║
-║          ├── Assign correct resume file                      ║
-║          ├── Generate cover letter for top-ranked job        ║
-║          └── Add ATS tips per resume type                    ║
-║                                                              ║
-║  STEP 5  📧 Send Premium Email                               ║
-║          ├── Build full HTML email with all sections         ║
-║          ├── Inject: boost report, AI scores, resume match   ║
-║          ├── Group jobs by city with themed cards            ║
-║          └── Send via Gmail SMTP (Nodemailer)                ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-```
-
----
-
-## 📁 Project Structure
-
-```
-Nukari.com/
+Nukari.com/                           ← Project root
 │
 ├── 📂 .github/
 │   └── 📂 workflows/
-│       └── 📄 daily.yml          # GitHub Actions cron (9 AM IST = 3:30 AM UTC)
+│       └── 📄 daily.yml              ← GitHub Actions cron job
+│                                       Runs at 3:30 AM UTC = 9:00 AM IST
 │
 ├── 📂 config/
-│   └── 📄 userProfile.js         # ⚙️ YOUR profile config — EDIT THIS FIRST!
-│                                  #    (skills, education, projects, sections)
+│   └── 📄 userProfile.js             ← ⭐ YOUR PROFILE (edit this!)
+│                                       Skills, education, projects,
+│                                       Naukri section status, resume paths
 │
 ├── 📂 resumes/
-│   ├── 📄 resume_software.txt    # 💻 Resume for Software/Frontend/Web roles
-│   └── 📄 resume_data.txt        # 📊 Resume for Data Analyst/Python roles
+│   ├── 📄 resume_software.txt        ← 💻 Software Dev / Frontend resume
+│   │                                   Used for: SW Dev, Frontend, Web Dev
+│   └── 📄 resume_data.txt            ← 📊 Data Analyst resume
+│                                       Used for: Data Analyst, Python Dev
 │
 ├── 📂 services/
-│   ├── 📄 scraper.js             # Naukri.com headless browser scraper (Puppeteer)
-│   ├── 📄 filter.js              # Experience filter, dedup, freshness sort
-│   ├── 📄 profileBoost.js        # Feature 1: Completeness score, ATS tips, gaps
-│   ├── 📄 aiScorer.js            # Feature 2: Gemini AI scoring + fallback
-│   ├── 📄 resumeMatcher.js       # Feature 3: Domain detect, resume assign, cover letter
-│   └── 📄 mail.js                # HTML email builder (dark-mode, premium design)
+│   ├── 📄 scraper.js                 ← Puppeteer headless browser scraper
+│   │                                   4 cities × 5 roles = 20 URLs/day
+│   │
+│   ├── 📄 filter.js                  ← Job filtering engine
+│   │                                   Keeps 0-1 yr, removes dupes, sorts
+│   │
+│   ├── 📄 profileBoost.js            ← 🚀 Feature 1: Profile Boost
+│   │                                   Completeness score, ATS tips,
+│   │                                   keyword gaps, action checklist
+│   │
+│   ├── 📄 aiScorer.js                ← 🤖 Feature 2: AI Job Scoring
+│   │                                   Gemini API + heuristic fallback
+│   │                                   Scores 0-100%, finds skill gaps
+│   │
+│   ├── 📄 resumeMatcher.js           ← 📄 Feature 3: Resume Matching
+│   │                                   Domain detection, resume selection,
+│   │                                   AI cover letter generation
+│   │
+│   └── 📄 mail.js                    ← 📧 Premium Email Builder
+│                                       Dark mode, city themes, AI badges
+│                                       Renders all sections into HTML
 │
 ├── 📂 utils/
-│   └── 📄 formatter.js           # Utility formatting helpers
+│   └── 📄 formatter.js               ← Utility helpers (date, text format)
 │
-├── 📄 index.js                   # Main orchestrator — runs 5-step pipeline
-├── 📄 package.json               # Dependencies
-├── 📄 .env                       # Local secrets (NOT committed to git)
-├── 📄 .env.example               # Environment variable template
-└── 📄 .gitignore                 # Excludes .env and node_modules
+├── 📄 index.js                       ← 🎯 MAIN ENTRYPOINT
+│                                       Runs all 5 steps in sequence
+│                                       Error handling + summary log
+│
+├── 📄 package.json                   ← Dependencies & scripts
+├── 📄 .env                           ← 🔐 Local secrets (NOT committed)
+├── 📄 .env.example                   ← Template for all required variables
+└── 📄 .gitignore                     ← Excludes .env + node_modules
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack (Detailed)
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Runtime** | Node.js 20 LTS | Core execution environment |
-| **Scraper** | Puppeteer-core | Headless browser automation |
-| **Browser** | @sparticuz/chromium | Chromium for CI/CD environments |
-| **AI Engine** | Google Gemini 2.0 Flash Lite | Job scoring + cover letter generation |
-| **HTTP Client** | Native `https` module | Gemini API calls (no extra dependency) |
-| **Email** | Nodemailer + Gmail SMTP | HTML email delivery |
-| **HTML Parsing** | Cheerio | DOM parsing fallback |
-| **HTTP Requests** | Axios | API request utility |
-| **Scheduler** | GitHub Actions Cron | Daily 9 AM IST automation |
-| **Config** | dotenv | Environment variable management |
+| Component | Technology | Version | Why This? |
+|-----------|-----------|---------|-----------|
+| Runtime | Node.js | 20 LTS | Fast async I/O, npm ecosystem |
+| Web Scraper | puppeteer-core | 24.x | Full browser control, JS rendering |
+| Chromium | @sparticuz/chromium | 143.x | Lightweight Chromium for CI/CD |
+| AI Engine | Google Gemini | 2.0 Flash Lite | Free tier, fast, accurate |
+| API Calls | Native `https` | Built-in | Zero extra dependency |
+| HTML Parsing | cheerio | 1.x | jQuery-like DOM parsing |
+| Email | nodemailer | 6.x | Reliable Gmail SMTP |
+| HTTP Client | axios | 1.x | Promise-based HTTP |
+| Config | dotenv | 16.x | Secure env variable loading |
+| Scheduler | GitHub Actions | - | Free 2000 min/month, reliable |
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Setup & Installation
 
 ### Prerequisites
 
-- Node.js 18+ installed
-- Gmail account with 2-Step Verification enabled
-- Google Gemini API key (free at [aistudio.google.com](https://aistudio.google.com/apikey))
+- [ ] Node.js 18 or higher
+- [ ] Gmail account with 2-Step Verification
+- [ ] Google Gemini API key (free)
 
-### Step 1 — Clone & Install
+### 📥 Step 1 — Clone & Install
 
 ```bash
 git clone https://github.com/Rohitkr2002/Naukri.com-AI-Agent-.git
@@ -432,136 +620,166 @@ cd Naukri.com-AI-Agent-
 npm install
 ```
 
-### Step 2 — Create Gmail App Password
+### 🔐 Step 2 — Create Gmail App Password
 
-1. Go to [myaccount.google.com/security](https://myaccount.google.com/security)
-2. Enable **2-Step Verification**
-3. Search for **"App Passwords"**
-4. Create password for **"Mail"**
-5. Copy the 16-character password (no spaces)
+```
+Google Account → Security → 2-Step Verification → App Passwords
+Select "Mail" → Generate → Copy 16-character password
+```
 
-### Step 3 — Get Gemini API Key (Free)
+### 🔑 Step 3 — Get Free Gemini API Key
 
-1. Go to [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
-2. Click **"Create API key"**
-3. Copy the key (starts with `AIza...`)
+```
+1. Visit: https://aistudio.google.com/apikey
+2. Click: "Create API key"
+3. Copy the key (starts with AIza...)
+```
 
-### Step 4 — Configure Environment
+### ⚙️ Step 4 — Configure .env
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your actual values:
-
 ```env
-# ─── Gmail Credentials ──────────────────────────
+# ── Gmail ────────────────────────────────────
 GMAIL_USER=your_email@gmail.com
-GMAIL_PASS=abcd efgh ijkl mnop    # 16-char App Password
+GMAIL_PASS=abcdefghijklmnop       # 16-char App Password
 
-# ─── Where to send the daily report ─────────────
+# ── Recipient ────────────────────────────────
 RECIPIENT_EMAIL=your_email@gmail.com
 
-# ─── RapidAPI (optional) ─────────────────────────
-RAPIDAPI_KEY=your_rapidapi_key
-
-# ─── Gemini AI (FREE — highly recommended) ───────
+# ── Gemini AI (FREE) ─────────────────────────
 GEMINI_API_KEY=AIzaSy...your_key
+
+# ── RapidAPI (optional) ──────────────────────
+RAPIDAPI_KEY=your_key
 ```
 
-### Step 5 — Personalize Your Profile
+### 📝 Step 5 — Personalize Your Profile
 
-Open `config/userProfile.js` and update with **your actual details**:
+Open `config/userProfile.js` and update:
 
-```js
+```javascript
 const USER_PROFILE = {
-  name: 'Your Full Name',
-  targetRole: ['Software Developer', 'Frontend Developer'],
-  experienceYears: 0,  // 0 for fresher
-
+  name: 'Rohit Kumar Singh',
   skills: {
-    languages: ['JavaScript', 'Python', 'HTML', 'CSS'],
-    frontend:  ['React.js', 'Tailwind CSS'],
-    backend:   ['Node.js', 'Express.js'],
-    database:  ['MySQL', 'MongoDB'],
-    tools:     ['Git', 'VS Code', 'Postman'],
+    languages: ['JavaScript', 'Python', 'SQL'],
+    frontend:  ['HTML5', 'CSS3', 'Bootstrap'],
+    dataTools: ['NumPy', 'Pandas', 'Power BI', 'Excel'],
+    // ... update with YOUR skills
   },
-
-  education: {
-    degree: 'B.Tech',
-    field: 'Computer Science',
-    year: 2024,
-    cgpa: '8.0',
-  },
-
-  projects: [
-    {
-      name: 'My Best Project',
-      tech: ['React.js', 'Node.js'],
-      description: 'What it does and its impact',
-    },
-  ],
-
-  // Set true for sections you have completed on Naukri
+  // Mark which Naukri profile sections you have completed:
   profileSections: {
     photo: true,
     headline: true,
-    summary: true,
-    experience: false,  // set true if you have internship
-    education: true,
-    skills: true,
-    projects: true,
-    resumeUploaded: true,
-    certifications: false,
+    certifications: false, // will be flagged in profile tips
     // ...
-  },
+  }
 };
 ```
 
-### Step 6 — Update Your Resumes
+### 📄 Step 6 — Update Your Resumes
 
-Edit the resume files in `resumes/` folder with **your actual information**:
-- `resumes/resume_software.txt` — for Software/Frontend/Web jobs
-- `resumes/resume_data.txt` — for Data Analyst/Python jobs
+Edit `resumes/resume_software.txt` with your Software Dev resume content.
+Edit `resumes/resume_data.txt` with your Data Analyst resume content.
 
-### Step 7 — Test Run
+### 🚀 Step 7 — Run & Test
 
 ```bash
 node index.js
 ```
 
-Check your email inbox — you should receive the full report!
+**Expected output:**
+```
+============================================================
+  🤖 Naukri Job AI Agent – Enhanced Edition
+  ⏰ Run Time (IST): 18/3/2026, 9:00:00 am
+  🚀 Features: Profile Boost | AI Scoring | Resume Matching
+============================================================
+
+🚀 Feature 1: Running Daily Profile Boost Analysis...
+   📊 Profile Completeness: 84% (Good)
+   🔍 Keyword gap analysis complete for 5 domains
+✅ Profile Boost report ready
+
+🚀 Starting Naukri.com Direct Scraper (Headless Browser)...
+   Cities: Bangalore | Delhi | Pune | Kolkata
+   Roles:  Software Dev | Frontend | Python | Data Analyst | Web Dev
+
+🤖 Feature 2: AI Job Scoring & Ranking...
+   Mode: ✨ Gemini AI
+   Scoring 18 jobs...
+   ✅ Top Score: 82% | Avg: 61% | High Match: 7 jobs
+
+📄 Feature 3: Resume Smart Matching System...
+   ✅ Software Resume: 12 jobs | Data Resume: 6 jobs
+
+📧 Sending email to: rohit@gmail.com
+✅ Email sent!
+
+============================================================
+  ✅ Agent completed successfully!
+  📊 Features: Profile Boost ✅ | AI Scoring ✅ | Resume Match ✅
+============================================================
+```
 
 ---
 
-## 🔑 GitHub Actions Setup (Automated Daily Run)
+## 🔑 GitHub Actions — Automated Daily Run
 
 ### Add Repository Secrets
 
-Go to: **GitHub → Your Repo → Settings → Secrets and variables → Actions → New repository secret**
+```
+GitHub → Repo → Settings → Secrets and variables → Actions → New repository secret
+```
 
-| Secret Name | Value | Required |
-|-------------|-------|----------|
-| `GMAIL_USER` | Your Gmail address | ✅ Required |
-| `GMAIL_PASS` | 16-char Gmail App Password | ✅ Required |
-| `RECIPIENT_EMAIL` | Email to receive reports | ✅ Required |
+| Secret Name | Value | Required? |
+|-------------|-------|-----------|
+| `GMAIL_USER` | your_email@gmail.com | ✅ Required |
+| `GMAIL_PASS` | 16-char App Password | ✅ Required |
+| `RECIPIENT_EMAIL` | where to send report | ✅ Required |
+| `GEMINI_API_KEY` | free Gemini API key | ⭐ Recommended |
 | `RAPIDAPI_KEY` | RapidAPI key | ⚡ Optional |
-| `GEMINI_API_KEY` | Gemini AI key (free) | ⭐ Recommended |
 
-### Workflow Schedule
-
-The agent runs at **3:30 AM UTC = 9:00 AM IST** every day:
+### Workflow File (`.github/workflows/daily.yml`)
 
 ```yaml
+name: Naukri Job AI Agent – Daily 9AM IST
+
 on:
   schedule:
-    - cron: '30 3 * * *'   # 9:00 AM IST
-  workflow_dispatch:         # Manual trigger available
+    - cron: '30 3 * * *'    # 3:30 AM UTC = 9:00 AM IST
+  workflow_dispatch:          # Manual trigger from Actions tab
+
+jobs:
+  run-job-agent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Chrome
+        run: sudo apt-get install -y google-chrome-stable
+      - name: Install dependencies
+        run: npm install
+      - name: Run Agent
+        env:
+          GMAIL_USER:      ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS:      ${{ secrets.GMAIL_PASS }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          GEMINI_API_KEY:  ${{ secrets.GEMINI_API_KEY }}
+          RAPIDAPI_KEY:    ${{ secrets.RAPIDAPI_KEY }}
+        run: node index.js
 ```
 
 ### Manual Trigger
 
-Go to: **Actions tab → "Naukri Job AI Agent – Daily 9AM IST" → Run workflow → Run workflow**
+```
+GitHub → Actions → "Naukri Job AI Agent – Daily 9AM IST" → Run workflow
+```
 
 ---
 
@@ -569,135 +787,141 @@ Go to: **Actions tab → "Naukri Job AI Agent – Daily 9AM IST" → Run workflo
 
 ### Add More Job Roles
 
-Edit `services/scraper.js`:
-
-```js
+```javascript
+// services/scraper.js
 const ROLES = [
-  { keyword: 'software-developer',  label: 'Software Developer'  },
-  { keyword: 'frontend-developer',  label: 'Frontend Developer'  },
-  { keyword: 'python-developer',    label: 'Python Developer'    },
-  { keyword: 'data-analyst',        label: 'Data Analyst'        },
-  { keyword: 'web-developer',       label: 'Web Developer'       },
-  // ADD NEW ROLE HERE:
-  { keyword: 'java-developer',      label: 'Java Developer'      },
-  { keyword: 'ui-ux-designer',      label: 'UI/UX Designer'      },
+  { keyword: 'software-developer', label: 'Software Developer' },
+  { keyword: 'data-analyst',       label: 'Data Analyst'       },
+  // 👇 Add your role here:
+  { keyword: 'java-developer',     label: 'Java Developer'     },
+  { keyword: 'devops-engineer',    label: 'DevOps Engineer'    },
 ];
 ```
 
 ### Add More Cities
 
-Edit `services/scraper.js`:
-
-```js
+```javascript
+// services/scraper.js
 const CITIES = ['bangalore', 'delhi', 'pune', 'kolkata'];
-// Add: 'hyderabad', 'mumbai', 'chennai', 'noida'
+// 👇 Add more:
+// const CITIES = ['bangalore', 'delhi', 'pune', 'kolkata', 'hyderabad', 'mumbai'];
 ```
 
-### Change Experience Filter
-
-Edit `services/filter.js` — modify `VALID_EXP_PATTERNS` for different experience ranges.
-
-### Change Email Schedule
-
-Edit `.github/workflows/daily.yml`:
+### Change Schedule Timing
 
 ```yaml
-- cron: '30 3 * * *'     # 9:00 AM IST
-# Change to 12:00 PM IST:
-- cron: '30 6 * * *'     # 12:00 PM IST
+# .github/workflows/daily.yml
+- cron: '30 3 * * *'    # 9:00 AM IST (default)
+- cron: '30 6 * * *'    # 12:00 PM IST
+- cron: '30 1 * * *'    # 7:00 AM IST
 ```
 
-### Add Your Own ATS Tips
+### Change Max Jobs Returned
 
-Edit `services/profileBoost.js` — add to the `ATS_TIPS` array.
+```javascript
+// services/filter.js
+const top20 = deduped.slice(0, 20); // Change 20 to any number
+```
 
 ---
 
 ## 🔧 Troubleshooting
 
-### ❌ No jobs scraped
+<details>
+<summary><b>❌ No jobs scraped — "Naukri may have changed HTML"</b></summary>
+
+Naukri.com occasionally changes their DOM selectors. Update `services/scraper.js`:
+
+```javascript
+// Find the new selector using Chrome DevTools on Naukri.com
+const cards = document.querySelectorAll('YOUR_NEW_SELECTOR');
+```
+</details>
+
+<details>
+<summary><b>❌ Email not sending — Gmail authentication error</b></summary>
+
+Most common cause: `GMAIL_PASS` is your regular password.
 
 ```
-⚠️  No jobs scraped. Naukri may have changed their HTML structure.
+Fix: Use Gmail APP PASSWORD (16 chars, no spaces)
+     Google Account → Security → 2-Step Verification → App Passwords
 ```
-**Fix:** Naukri.com occasionally changes their HTML. Update the CSS selectors in `services/scraper.js`.
+</details>
 
-### ❌ Email not sending
-
-```
-❌ Missing GMAIL_USER or GMAIL_PASS
-```
-**Fix:** Check `.env` file — make sure `GMAIL_PASS` is the **App Password** (16 chars), not your regular Gmail password.
-
-### ❌ Gemini API failing
+<details>
+<summary><b>❌ Gemini API failing — using heuristic fallback</b></summary>
 
 ```
-⚠️  Gemini API failed – using heuristic fallback
+Cause 1: New key — quota activates in 10-30 minutes, wait and retry
+Cause 2: Wrong key format — must start with "AIza"
+Cause 3: Rate limit — gemini-2.0-flash-lite allows 30 req/min (free)
 ```
-**Causes:**
-- New API key — quota activates in 10–30 minutes, try again later
-- Invalid key — must start with `AIza`
-- Rate limit — `gemini-2.0-flash-lite` allows 30 requests/minute on free tier
 
-**Fix:** Agent automatically falls back to heuristic scoring. No action needed — Gemini mode turns on automatically when quota is available.
+Note: **Agent still works** — heuristic scoring takes over automatically.
+</details>
 
-### ❌ GitHub Actions failing
+<details>
+<summary><b>❌ GitHub Actions failing</b></summary>
 
-Check the Actions tab for logs. Common causes:
-- Missing GitHub Secret (add all 5 secrets)
-- Chrome installation failed (usually transient — retry)
+1. Check **Actions tab** for error logs
+2. Verify all 5 secrets are set in Repository Settings
+3. If Chrome install failed → re-run workflow (usually transient)
+</details>
 
 ---
 
-## 📊 Stats & Performance
+## 📊 Performance & Cost
 
 | Metric | Value |
 |--------|-------|
-| Cities scraped | 4 (Bangalore, Delhi, Pune, Kolkata) |
-| Job roles | 5 (SD, Frontend, Python, Data, Web) |
-| Max URLs visited | 20 per run |
-| Jobs collected | ~60–120 raw |
-| After filtering | Top 20 (0-1 yr, unique, fresh) |
-| Email delivery time | ~3–4 mins total run |
-| Gemini API calls | Max 20/run (well within free tier) |
-| GitHub Actions minutes | ~5–8 min/day (well within free 2000 min/month) |
-| Cost | **₹0 — Completely Free** |
+| 🌍 Cities scraped | 4 (Bangalore, Delhi, Pune, Kolkata) |
+| 💼 Job roles | 5 (Software, Frontend, Python, Data, Web) |
+| 🔗 URLs visited | 20 per run |
+| 📦 Raw jobs collected | 60–120 |
+| ✅ After filtering | 15–20 (0-1 yr, unique, fresh) |
+| 🤖 Gemini API calls | Max 20/day (well within free tier of 1500/day) |
+| ⏱️ Total runtime | 5–8 minutes |
+| 📅 GitHub Actions minutes used | 5–8 min/day vs 2000 min/month free |
+| 💸 **Total Cost** | **₹0 — 100% Free** |
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests are welcome! Here's how to contribute:
-
 1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m 'feat: Add your feature'`
-4. Push to the branch: `git push origin feature/your-feature`
+2. Create feature branch: `git checkout -b feature/your-feature`
+3. Commit: `git commit -m 'feat: add your feature'`
+4. Push: `git push origin feature/your-feature`
 5. Open a Pull Request
 
-**Ideas for contributions:**
-- Add more city support
-- Add LinkedIn/Indeed scraping
-- Add Telegram/WhatsApp notification support
-- Add job application tracking
-- Add interview prep tips per job
+**Ideas welcome:**
+- LinkedIn / Indeed scraper support
+- Telegram / WhatsApp notifications
+- Job application tracker
+- Interview preparation tips per job role
+- Multiple recipient email support
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — free to use, modify, and distribute for personal and commercial use.
+MIT License — free to use, fork, and build upon.
 
 ---
 
 <div align="center">
 
-### 🌟 Built with passion by [Rohit Singh Rajput](https://github.com/Rohitkr2002)
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1e3a5f,100:0d1b2a&height=120&section=footer" alt="Footer"/>
 
-**Using:** Node.js · Puppeteer · Google Gemini AI · Nodemailer · GitHub Actions
+### Built with ❤️ by [Rohit Kumar Singh](https://github.com/Rohitkr2002)
+
+**Haldia Institute of Technology · B.Tech ECE · 2025**
+
+📧 rajputrohitsingh998@gmail.com &nbsp;·&nbsp; 🔗 [LinkedIn](https://linkedin.com/in/rohit-kumar-singh) &nbsp;·&nbsp; 💻 [GitHub](https://github.com/Rohitkr2002)
 
 ---
 
-*If this project helped you land a job or saved you time, please ⭐ star the repo!*
+*⭐ If this project helped you land an interview or saved you hours of job hunting — please star the repo! It means a lot.*
 
 </div>
