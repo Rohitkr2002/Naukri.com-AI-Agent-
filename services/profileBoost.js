@@ -157,14 +157,40 @@ async function runProfileBoost() {
   // 4. Today's recruiter signals
   const todaysSignals = pickRandom(RECRUITER_SIGNALS, 3);
 
-  // 5. Profile actions checklist for today
+  // 5. Profile actions checklist — each with direct Naukri link
   const todaysActions = [
-    `🔄 Re-order your top skill: move "${USER_PROFILE.skills.languages[0]}" to position #1`,
-    '✏️  Edit your headline: add one trending keyword from the gap list',
-    '📄 Re-upload your resume with today\'s date (even if unchanged)',
-    '🔍 Search for "software developer fresher" on Naukri to signal activity',
-    '⭐ Save 5 jobs that match your profile to boost engagement signals',
+    {
+      step: 1,
+      text: `Skills reorder karo — "${USER_PROFILE.skills.languages[0]}" ko #1 pe le jao`,
+      url:  'https://www.naukri.com/mnjuser/profile?id=&altresid',
+      btn:  'Skills Edit Karo →',
+    },
+    {
+      step: 2,
+      text: 'Headline update karo — ek trending keyword add karo',
+      url:  'https://www.naukri.com/mnjuser/profile?id=&altresid',
+      btn:  'Headline Edit Karo →',
+    },
+    {
+      step: 3,
+      text: 'Resume re-upload karo (aaj ki date ke saath)',
+      url:  'https://www.naukri.com/mnjuser/homepage#resume',
+      btn:  'Resume Upload Karo →',
+    },
+    {
+      step: 4,
+      text: '"Software developer fresher" search karo Naukri pe (activity signal)',
+      url:  'https://www.naukri.com/software-developer-fresher-jobs?experience=0',
+      btn:  'Naukri Open Karo →',
+    },
+    {
+      step: 5,
+      text: '5 matching jobs save karo — recruiter visibility badhti hai',
+      url:  'https://www.naukri.com/software-developer-jobs?experience=0',
+      btn:  'Jobs Dekho & Save Karo →',
+    },
   ];
+
 
   const result = {
     profileScore,

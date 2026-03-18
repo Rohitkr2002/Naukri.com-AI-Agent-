@@ -304,22 +304,55 @@ function renderProfileBoostSection(boostReport) {
       </td>
     </tr>`).join('');
 
-  const actionRows = todaysActions.slice(0, 3).map((action, i) => `
+  const actionRows = todaysActions.slice(0, 5).map((action, i) => {
+    // Support both old string format and new {text, url, btn} object format
+    const isObj   = typeof action === 'object';
+    const stepNum = isObj ? action.step : (i + 1);
+    const text    = isObj ? action.text : action;
+    const url     = isObj ? action.url  : null;
+    const btnText = isObj ? action.btn  : null;
+
+    const linkBtn = url ? `
+      <a href="${url}" target="_blank" style="
+        display: inline-block;
+        background: linear-gradient(135deg, #1e3a5f, #0f2540);
+        color: #60a5fa;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 20px;
+        border: 1px solid #2563eb;
+        text-decoration: none;
+        white-space: nowrap;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        letter-spacing: 0.3px;
+      ">${btnText || 'Open Naukri →'}</a>` : '';
+
+    return `
     <tr>
-      <td style="padding: 5px 0;">
-        <span style="
-          background: #1e3a5f;
-          color: #7dd3fc;
-          font-size: 10px;
-          font-weight: 700;
-          padding: 2px 8px;
-          border-radius: 10px;
-          margin-right: 6px;
-          font-family: 'Segoe UI', Arial, sans-serif;
-        ">STEP ${i + 1}</span>
-        <span style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif;">${action}</span>
+      <td style="padding: 7px 0; border-bottom: 1px solid #0f1e33;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="width: auto; vertical-align: middle;">
+              <span style="
+                background: #1e3a5f;
+                color: #7dd3fc;
+                font-size: 10px;
+                font-weight: 700;
+                padding: 2px 8px;
+                border-radius: 10px;
+                margin-right: 8px;
+                font-family: 'Segoe UI', Arial, sans-serif;
+              ">STEP ${stepNum}</span>
+              <span style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif;">${text}</span>
+            </td>
+            ${url ? `<td style="width: 1%; white-space: nowrap; text-align: right; vertical-align: middle; padding-left: 8px;">${linkBtn}</td>` : ''}
+          </tr>
+        </table>
       </td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
+
 
   const gapTags = gaps.slice(0, 6).map((g) =>
     `<span style="
