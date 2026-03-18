@@ -19,8 +19,18 @@
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"/>
 </p>
 
-<!-- Animated typing -->
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&pause=1000&color=38BDF8&center=true&vCenter=true&width=620&height=50&lines=🤖+Automated+Job+Monitoring+Agent;📍+Bangalore+%7C+Delhi+%7C+Pune+%7C+Kolkata;🎯+Top+20+Fresh+Jobs+Every+Morning;⏰+Delivered+at+9+AM+IST+Daily;🚀+Built+with+Node.js+%2B+Puppeteer" alt="Typing SVG" />
+<!-- Info Badges (reliable on GitHub) -->
+<p>
+  <img src="https://img.shields.io/badge/🤖_Automated-Job_Monitoring_Agent-38BDF8?style=flat-square"/>
+</p>
+<p>
+  <img src="https://img.shields.io/badge/📍_Cities-Bangalore_|_Delhi_|_Pune_|_Kolkata-a78bfa?style=flat-square"/>
+</p>
+<p>
+  <img src="https://img.shields.io/badge/🎯_Top_20-Fresh_Jobs_Every_Morning-34d399?style=flat-square"/>
+  &nbsp;
+  <img src="https://img.shields.io/badge/⏰_Schedule-9:00_AM_IST_Daily-f97316?style=flat-square"/>
+</p>
 
 </div>
 
