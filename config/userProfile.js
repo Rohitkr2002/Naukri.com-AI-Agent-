@@ -1,34 +1,70 @@
 // ============================================================
 // config/userProfile.js
-// Your personal profile – Edited this to match YOUR actual skills!
-// Used by: AI Scorer (Feature 2) & Resume Matcher (Feature 3)
+// Rohit Kumar Singh — Personal Profile Configuration
+// Primary Target: Software Development | Secondary: Data Analysis
 // ============================================================
 
 const USER_PROFILE = {
   // ─── Basic Info ─────────────────────────────────────────────
-  name: 'Rohit Singh Rajput',
-  targetRole: ['Software Developer', 'Frontend Developer', 'Data Analyst', 'Web Developer', 'Python Developer'],
-  experienceYears: 0,  // 0 = fresher
-  currentLocation: 'India',
-  preferredLocations: ['Bangalore', 'Delhi', 'Pune', 'Kolkata', 'Remote'],
+  name: 'Rohit Kumar Singh',
+  targetRole: [
+    'Software Developer',
+    'Frontend Developer',
+    'Web Developer',
+    'Data Analyst',
+    'Python Developer',
+  ],
+  experienceYears: 0,  // Fresher – internship experience
+  currentLocation: 'Patna, Bihar, India',
+  preferredLocations: ['Bangalore', 'Delhi', 'Pune', 'Kolkata', 'Remote', 'Patna'],
+
+  // ─── Contact ────────────────────────────────────────────────
+  contact: {
+    email:    'rajputrohitsingh998@gmail.com',
+    phone:    '9065039396',
+    linkedin: 'linkedin.com/in/rohit-kumar-singh',
+    github:   'github.com/Rohitkr2002',
+  },
 
   // ─── Education ──────────────────────────────────────────────
   education: {
-    degree: 'B.Tech / B.E.',
-    field: 'Computer Science / Information Technology',
-    year: 2024,
-    cgpa: '7.5+',
+    degree: 'B.Tech',
+    field:  'Electronics and Communication Engineering',
+    institute: 'Haldia Institute of Technology',
+    year:   2025,
+    cgpa:   '7.33',
   },
+
+  // ─── Experience ─────────────────────────────────────────────
+  experience: [
+    {
+      role:     'Web Development Intern',
+      company:  'Rinex',
+      duration: 'July 2022 – August 2022',
+      type:     'Remote Internship',
+      highlights: [
+        'Developed 5+ responsive web pages using HTML5, CSS3, and JavaScript',
+        'Ensured 100% mobile responsiveness and cross-browser compatibility',
+        'Improved page load time by 30% by optimizing CSS stylesheets',
+      ],
+    },
+  ],
 
   // ─── Core Technical Skills ──────────────────────────────────
   skills: {
-    languages: ['JavaScript', 'Python', 'HTML', 'CSS', 'SQL'],
-    frontend:  ['React.js', 'Node.js', 'Tailwind CSS', 'Bootstrap'],
-    backend:   ['Node.js', 'Express.js', 'REST APIs'],
-    database:  ['MySQL', 'MongoDB'],
-    tools:     ['Git', 'GitHub', 'VS Code', 'Puppeteer', 'Postman'],
-    cloud:     ['GitHub Actions', 'Vercel'],
-    aiml:      ['Gemini API', 'AI Agents', 'Web Scraping', 'Automation'],
+    languages: ['JavaScript', 'Python', 'SQL', 'HTML5', 'CSS3'],
+    frontend:  [
+      'HTML5', 'CSS3', 'JavaScript', 'Bootstrap',
+      'Responsive Design', 'Flexbox', 'CSS Grid', 'DOM Manipulation',
+    ],
+    backend:   ['Node.js'],
+    database:  ['SQL', 'MySQL'],
+    dataTools: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'Chart.js', 'Power BI', 'Excel'],
+    tools:     ['Git', 'GitHub', 'VS Code', 'Jupyter Notebook', 'Google Colab', 'Linux'],
+    concepts:  [
+      'Object-Oriented Programming', 'Problem Solving', 'Debugging',
+      'Data Visualization', 'EDA', 'Data Cleaning',
+    ],
   },
 
   // ─── All skills as flat list (auto-generated) ───────────────
@@ -38,86 +74,120 @@ const USER_PROFILE = {
       ...this.skills.frontend,
       ...this.skills.backend,
       ...this.skills.database,
+      ...this.skills.dataTools,
       ...this.skills.tools,
-      ...this.skills.cloud,
-      ...this.skills.aiml,
+      ...this.skills.concepts,
     ].map(s => s.toLowerCase());
   },
 
-  // ─── Projects / Portfolio ───────────────────────────────────
+  // ─── Projects ───────────────────────────────────────────────
   projects: [
     {
-      name: 'Naukri Job AI Agent',
-      tech: ['Node.js', 'Puppeteer', 'GitHub Actions', 'Nodemailer', 'Gemini API'],
-      description: 'Automated job monitoring agent that scrapes Naukri.com and emails curated job listings daily',
+      name: 'Personal Portfolio Website',
+      tech: ['HTML5', 'CSS3', 'JavaScript'],
+      date: 'Aug 2022',
+      description: 'Responsive portfolio website with dark/light theme toggle, typing animation, and 6+ completed projects. Improved mobile compatibility by 50%.',
     },
     {
-      name: 'Web Scraper Bot',
-      tech: ['Python', 'BeautifulSoup', 'Selenium'],
-      description: 'Automated data extraction and reporting tool',
+      name: 'Blood Bank Management System',
+      tech: ['Python', 'Tkinter', 'Matplotlib'],
+      date: 'June 2025',
+      description: 'GUI-based blood bank system managing donor records and blood stock for 8 blood groups. Improved data handling efficiency by 60%.',
+    },
+    {
+      name: 'Smart To-Do List',
+      tech: ['HTML', 'CSS', 'JavaScript', 'Chart.js'],
+      date: 'May 2025',
+      description: 'Feature-rich task management app with scheduling, priority filtering, and real-time task status visualization. 40% improvement in organization efficiency.',
+    },
+    {
+      name: 'FNP Sales Analysis Dashboard',
+      tech: ['Microsoft Excel', 'Pivot Tables', 'SUMIFS', 'COUNTIFS'],
+      date: 'Sep 2025',
+      description: 'Analyzed 1,000+ orders generating 35.2 Lakh revenue using advanced Excel. Built interactive dashboard with Pivot Tables, Charts, and Slicers. Reduced manual effort by 80%.',
+    },
+    {
+      name: 'HR Dashboard Using Power BI',
+      tech: ['Power BI', 'Power Query', 'DAX', 'Excel'],
+      date: 'Oct 2025',
+      description: 'Interactive HR Analytics Dashboard for 1,000+ employees tracking attrition, salary, and retention trends. Used DAX measures and Power Query transformations.',
+    },
+  ],
+
+  // ─── Leadership / Extracurricular ───────────────────────────
+  leadership: [
+    {
+      role:     'Treasurer',
+      org:      'Computer Society of India (CSI)',
+      institute:'Haldia Institute of Technology',
+      duration: 'Jun 2024 – Jun 2025',
+      highlights: [
+        'Managed Rs.50,000+ budget with 100% financial transparency',
+        'Led 10+ seminars and coding workshops on web development and ML',
+        'Increased student participation by 40%',
+      ],
     },
   ],
 
   // ─── Profile Completeness Sections ──────────────────────────
-  // Set each to true if you have it completed on Naukri profile
+  // Set each to true if you have completed it on Naukri profile
   profileSections: {
-    photo: true,
-    headline: true,
-    summary: true,
-    experience: false,       // fresher – set true if you added internships
-    education: true,
-    skills: true,
-    projects: true,
-    resumeUploaded: true,
-    certifications: false,   // set true if you have any
-    languages: true,
+    photo:              true,
+    headline:           true,
+    summary:            true,
+    experience:         true,   // Rinex internship added
+    education:          true,
+    skills:             true,
+    projects:           true,
+    resumeUploaded:     true,
+    certifications:     false,  // Add Coursera/freeCodeCamp certs
+    languages:          true,
     preferredLocations: true,
-    expectedSalary: false,
-    keySkills: true,
-    itSkills: true,
+    expectedSalary:     false,  // Add expected salary on Naukri
+    keySkills:          true,
+    itSkills:           true,
   },
 
   // ─── Resume Paths ────────────────────────────────────────────
   resumes: {
-    software: './resumes/resume_software.txt',  // for SW Dev, Frontend, Web Dev
-    data:     './resumes/resume_data.txt',       // for Data Analyst, Python Dev
+    software: './resumes/resume_software.txt',  // SW Dev, Frontend, Web Dev
+    data:     './resumes/resume_data.txt',       // Data Analyst, Python Dev
   },
 };
 
-// ─── Trending 2025 Tech Skills (for keyword optimization) ────
+// ─── Trending 2025 Tech Skills (for keyword gap analysis) ────
 const TRENDING_SKILLS_2025 = {
   'Software Developer': [
-    'ReactJS', 'Node.js', 'TypeScript', 'REST API', 'Microservices',
-    'Docker', 'Kubernetes', 'AWS', 'System Design', 'DSA', 'Spring Boot',
+    'ReactJS', 'Node.js', 'TypeScript', 'REST API', 'MongoDB',
+    'Docker', 'AWS', 'System Design', 'DSA', 'Spring Boot',
     'GraphQL', 'CI/CD', 'Agile', 'Redis', 'PostgreSQL',
   ],
   'Frontend Developer': [
     'React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Redux',
     'Figma', 'Web Performance', 'GraphQL', 'PWA', 'Testing (Jest)',
-    'Responsive Design', 'CSS Grid', 'Web Components', 'Vite',
+    'CSS Animation', 'Vite', 'Web Components',
   ],
   'Data Analyst': [
-    'Python', 'Pandas', 'NumPy', 'SQL', 'Power BI', 'Tableau',
-    'Excel (Advanced)', 'Machine Learning', 'Data Visualization',
-    'Statistics', 'ETL', 'BigQuery', 'Spark', 'Alteryx',
+    'Power BI', 'Tableau', 'SQL (Advanced)', 'Python (Advanced)',
+    'Machine Learning', 'Statistics', 'ETL', 'BigQuery',
+    'Spark', 'Alteryx', 'Data Storytelling', 'R Language',
   ],
   'Python Developer': [
-    'Python', 'Django', 'FastAPI', 'Flask', 'REST API', 'Pandas',
-    'NumPy', 'PostgreSQL', 'Docker', 'Celery', 'Redis',
-    'Asyncio', 'Pytest', 'SQLAlchemy', 'Pydantic',
+    'Django', 'FastAPI', 'Flask', 'REST API', 'PostgreSQL',
+    'Docker', 'Celery', 'Redis', 'Asyncio', 'Pytest',
+    'SQLAlchemy', 'Pydantic',
   ],
   'Web Developer': [
-    'JavaScript', 'React.js', 'HTML5', 'CSS3', 'Node.js',
-    'MongoDB', 'Express.js', 'REST API', 'TypeScript',
-    'Git', 'Responsive Design', 'Bootstrap', 'SEO Basics',
+    'React.js', 'Node.js', 'TypeScript', 'MongoDB', 'Express.js',
+    'REST API', 'GraphQL', 'Tailwind CSS', 'Responsive Design', 'SEO',
   ],
 };
 
-// ─── ATS Keywords (general, non-domain) ─────────────────────
+// ─── ATS General Keywords ────────────────────────────────────
 const ATS_GENERAL_KEYWORDS = [
   'problem-solving', 'team player', 'communication', 'agile',
-  'cross-functional', 'deadline-oriented', 'self-motivated',
-  'analytical thinking', 'attention to detail',
+  'deadline-oriented', 'self-motivated', 'analytical thinking',
+  'attention to detail', 'leadership',
 ];
 
 module.exports = { USER_PROFILE, TRENDING_SKILLS_2025, ATS_GENERAL_KEYWORDS };

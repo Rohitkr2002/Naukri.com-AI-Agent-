@@ -1,75 +1,103 @@
-ROHIT SINGH RAJPUT
-📧 rajputrohitsingh998@gmail.com | 📱 +91-XXXXXXXXXX
-🔗 GitHub: github.com/rohit-rajput | 💼 LinkedIn: linkedin.com/in/rohit-rajput
-📊 Kaggle: kaggle.com/rohitrajput | 📍 India | Available: Immediate Joining
+ROHIT KUMAR SINGH
+Patna, Bihar, India
+Phone: 9065039396  |  Email: rajputrohitsingh998@gmail.com
+LinkedIn: linkedin.com/in/rohit-kumar-singh  |  GitHub: github.com/Rohitkr2002
 
 ──────────────────────────────────────────────
 PROFESSIONAL SUMMARY
 ──────────────────────────────────────────────
-Detail-oriented B.Tech Computer Science graduate (2024) with strong analytical
-skills and hands-on experience in Python, SQL, data analysis, and visualization.
-Proficient in translating complex datasets into actionable business insights.
-Experienced with Pandas, NumPy, and data automation tools. Seeking Data Analyst
-/ Python Developer / Business Analyst roles (0–1 year experience bracket).
-
-──────────────────────────────────────────────
-TECHNICAL SKILLS
-──────────────────────────────────────────────
-Programming Languages : Python, SQL, JavaScript, HTML, CSS
-Data Analysis Tools   : Pandas, NumPy, Matplotlib, Seaborn
-Database              : MySQL, MongoDB, SQLite
-Visualization Tools   : Power BI (Basic), Tableau (Basic), Excel (Advanced)
-Python Frameworks     : Flask, FastAPI (Basic), Requests, BeautifulSoup
-Automation & Scripting: Python automation, Web Scraping, Selenium, Puppeteer
-DevTools              : Git, GitHub, Jupyter Notebook, VS Code, Google Colab
-AI/ML Exposure        : Gemini API, Scikit-learn (Basic), Feature Engineering
-Soft Skills           : Analytical Thinking, Attention to Detail, Communication
-
-──────────────────────────────────────────────
-DATA PROJECTS
-──────────────────────────────────────────────
-📊 Job Market Analytics Agent                      [Python | Pandas | Gemini API]
-• Designed an automated job data scraper collecting 200+ job listings daily
-• Analyzed job trends across 4 cities and 5 domains using Pandas DataFrames
-• Integrated Gemini AI for intelligent job-to-candidate match scoring (0–100%)
-• Generated daily email reports with trend insights and visual data summaries
-• Reduced manual job searching effort by 100% through full automation
-• Tech: Python, Node.js, Pandas, Gemini API, Nodemailer, GitHub Actions
-
-📈 Web Data Extraction & Analysis System       [Python | BeautifulSoup | SQL]
-• Built end-to-end ETL pipeline extracting structured data from multiple websites
-• Cleaned and transformed raw datasets (50,000+ records) using Pandas
-• Stored processed data in MySQL with optimized queries for reporting
-• Generated visual dashboards with Matplotlib/Seaborn for stakeholder insights
-• Tech: Python, BeautifulSoup, MySQL, Pandas, Matplotlib
+Detail-oriented B.Tech graduate (2025) with hands-on experience in data
+analysis, visualization, and dashboard development. Proficient in Python,
+Pandas, NumPy, SQL, Microsoft Excel (Advanced), and Power BI. Experienced
+in Exploratory Data Analysis (EDA), data cleaning, and business intelligence
+reporting. Built real-world analytics dashboards analyzing 1,000+ records
+and uncovering actionable business insights. Seeking a Data Analyst / Business
+Analyst / Python Developer role. Immediate joiner.
 
 ──────────────────────────────────────────────
 EDUCATION
 ──────────────────────────────────────────────
-B.Tech / B.E. – Computer Science / Information Technology
-Graduated: 2024 | CGPA: 7.5+ / 10.0
+Haldia Institute of Technology                        Aug 2021 – June 2025
+Bachelor of Technology – Electronics and Communication Engineering
+CGPA: 7.33 / 10.0
+
+G.K. College, Adampur                                        March 2020
+BSEB 12th Board – Physics, Chemistry, Mathematics (PCM)
+Percentage: 58.8%
+
+Jyoti Central High School, Ekma                              March 2017
+CBSE 10th Board
+Percentage: 85.5%
 
 ──────────────────────────────────────────────
-CERTIFICATIONS & LEARNING
+EXPERIENCE
 ──────────────────────────────────────────────
-• Python for Everybody – Coursera (University of Michigan)
-• Data Analysis with Python – freeCodeCamp / IBM
-• SQL for Data Science – Coursera
-• Excel Skills for Business – Coursera (Macquarie University)
-• Google Data Analytics Certificate – Coursera (in progress)
+Web Development Intern                          July 2022 – August 2022
+Rinex                                                          [Remote]
+  – Developed 5+ responsive web pages with data-driven UI components
+  – Improved page performance by 30% through code optimization
+  – Worked with structured data and JavaScript for dynamic rendering
 
 ──────────────────────────────────────────────
-KEY ANALYTICAL ACHIEVEMENTS
+DATA ANALYSIS PROJECTS
 ──────────────────────────────────────────────
-• Automated daily data collection saving 2+ hours of manual research daily
-• Built Python scripts to process and clean 50,000+ data records accurately
-• Designed 5+ reproducible Jupyter notebooks for data analysis workflows
-• Applied statistical analysis (correlation, distribution, trend analysis)
+FNP Sales Analysis Dashboard               [Microsoft Excel] Sep 2025
+  – Analyzed 1,000+ orders generating Rs.35.2 Lakh revenue to uncover
+    top-performing occasions and high-demand product categories
+  – Built interactive Excel dashboard using Pivot Tables, Charts, and
+    Slicers — automating KPIs for revenue, orders, and customer spend,
+    reducing manual reporting effort by 80%
+  – Applied advanced Excel functions: SUMIFS, COUNTIFS, INDEX-MATCH,
+    AVERAGEIFS for data-driven business insights
+
+HR Analytics Dashboard Using Power BI  [Power BI, Power Query, DAX] Oct 2025
+  – Developed an interactive HR Analytics Dashboard for 1,000+ employees,
+    enabling insights into attrition rate, average salary, and retention
+  – Implemented advanced DAX measures and Power Query transformations to
+    calculate KPIs: Attrition %, Average Tenure, Employee Count
+  – Designed dark-theme interface with dynamic slicers for Department,
+    Gender, and Education — improving reporting efficiency by 40%
+
+Blood Bank Management System            [Python, Tkinter, Matplotlib] June 2025
+  – Built a data management system to track blood stock across 8 groups
+  – Improved data handling efficiency by 60% with structured data operations
+  – Visualized real-time blood inventory using Matplotlib bar charts
+
+Personal Portfolio Website                     [HTML5, CSS3, JS] Aug 2022
+  – Built and deployed responsive portfolio showcasing 6+ completed projects
+  – Reduced page load time to under 2 seconds using CSS/JS optimization
+
+──────────────────────────────────────────────
+TECHNICAL SKILLS
+──────────────────────────────────────────────
+Languages / Database   : Python, SQL, HTML/CSS, JavaScript (Basics)
+Data Analysis          : Exploratory Data Analysis (EDA), Data Cleaning,
+                         Data Wrangling, Data Visualization
+Tools & Software       : NumPy, Pandas, Matplotlib, Seaborn, Chart.js,
+                         Microsoft Excel (Advanced), Power BI, GitHub
+Excel Skills           : Pivot Tables, VLOOKUP, SUMIFS, COUNTIFS,
+                         INDEX-MATCH, AVERAGEIFS, Power Query
+Power BI Skills        : DAX Measures, Power Query, Interactive Dashboards,
+                         Dynamic Slicers, KPI Reporting
+OS / IDE               : VS Code, Jupyter Notebook, Google Colab, Linux
+Soft Skills            : Analytical Thinking, Problem-Solving, Communication,
+                         Leadership, Attention to Detail
+
+──────────────────────────────────────────────
+LEADERSHIP / EXTRACURRICULAR
+──────────────────────────────────────────────
+Treasurer – Computer Society of India (CSI)          Jun 2024 – Jun 2025
+Haldia Institute of Technology
+  – Managed Rs.50,000+ budget with 100% financial transparency for workshops,
+    tech events, and student initiatives
+  – Led 10+ seminars and coding workshops on web development and ML,
+    increasing student participation by 40%
 
 ──────────────────────────────────────────────
 ADDITIONAL INFORMATION
 ──────────────────────────────────────────────
-Preferred Work Mode   : Remote / Hybrid / On-site
-Notice Period         : Immediate Joining
-Languages             : English (Professional), Hindi (Native)
-Interests             : Data Storytelling, Open Data Projects, Kaggle Competitions
+Notice Period    : Immediate Joining
+Preferred Mode   : Remote / Hybrid / On-site
+Languages        : English (Professional), Hindi (Native)
+Portfolio        : github.com/Rohitkr2002
+Interests        : Data Storytelling, Business Intelligence, Analytics Projects

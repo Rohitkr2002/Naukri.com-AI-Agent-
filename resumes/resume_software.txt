@@ -1,68 +1,90 @@
-ROHIT SINGH RAJPUT
-📧 rajputrohitsingh998@gmail.com | 📱 +91-XXXXXXXXXX
-🔗 GitHub: github.com/rohit-rajput | 💼 LinkedIn: linkedin.com/in/rohit-rajput
-📍 India | Available: Immediate Joining
+ROHIT KUMAR SINGH
+Patna, Bihar, India
+Phone: 9065039396  |  Email: rajputrohitsingh998@gmail.com
+LinkedIn: linkedin.com/in/rohit-kumar-singh  |  GitHub: github.com/Rohitkr2002
 
 ──────────────────────────────────────────────
 PROFESSIONAL SUMMARY
 ──────────────────────────────────────────────
-Highly motivated B.Tech Computer Science graduate (2024) with hands-on experience
-in full-stack web development using JavaScript, React.js, Node.js, and Python.
-Passionate about building scalable web applications and automation tools.
-Active GitHub contributor with production-deployed projects. Seeking Software
-Developer / Frontend Developer / Web Developer roles (0–1 year experience bracket).
-
-──────────────────────────────────────────────
-TECHNICAL SKILLS
-──────────────────────────────────────────────
-Programming Languages : JavaScript (ES6+), Python, HTML5, CSS3, SQL
-Frontend Development  : React.js, Next.js, Tailwind CSS, Bootstrap, Redux
-Backend Development   : Node.js, Express.js, REST APIs
-Database              : MySQL, MongoDB, Firebase
-DevTools & Platforms  : Git, GitHub, GitHub Actions, VS Code, Postman, Vercel
-AI & Automation       : Gemini API, Puppeteer, Web Scraping, GitHub Actions CI/CD
-Soft Skills           : Problem Solving, Team Collaboration, Agile, Self-motivated
-
-──────────────────────────────────────────────
-FEATURED PROJECTS
-──────────────────────────────────────────────
-🤖 Naukri Job AI Agent                          [Node.js | Puppeteer | GitHub Actions]
-• Built a fully automated job monitoring AI agent that scrapes Naukri.com daily
-• Integrates Gemini AI API for job match scoring (0–100%) and resume matching
-• Sends rich HTML email reports with job cards, AI scores, and cover letters
-• Deployed on GitHub Actions – runs every day at 9:00 AM IST without manual input
-• Tech: Node.js, Puppeteer, Nodemailer, Gemini API, GitHub Actions
-
-🌐 Web Scraper Automation Bot                   [Python | Selenium | BeautifulSoup]
-• Automated data extraction from multiple websites with structured JSON output
-• Implemented anti-bot stealth techniques (user-agent rotation, request delays)
-• Built reporting module to email structured summaries daily
-• Tech: Python, BeautifulSoup, Selenium, Pandas, smtplib
+Entry-level Software Engineer with hands-on experience delivering web and
+product-focused applications across mobile and multi-platform environments.
+Proficient in HTML5, CSS3, JavaScript, Python, and Bootstrap with practical
+experience through internship and self-driven academic projects. Seeking a
+Software Developer / Frontend Developer / Web Developer role to strengthen
+fundamentals, gain mentorship, and grow long-term within a product-driven
+organization. Immediate joiner.
 
 ──────────────────────────────────────────────
 EDUCATION
 ──────────────────────────────────────────────
-B.Tech / B.E. – Computer Science / Information Technology
-Graduated: 2024 | CGPA: 7.5+ / 10.0
+Haldia Institute of Technology                        Aug 2021 – June 2025
+Bachelor of Technology – Electronics and Communication Engineering
+CGPA: 7.33 / 10.0
+
+G.K. College, Adampur                                        March 2020
+BSEB 12th Board – Physics, Chemistry, Mathematics (PCM)
+Percentage: 58.8%
+
+Jyoti Central High School, Ekma                              March 2017
+CBSE 10th Board
+Percentage: 85.5%
 
 ──────────────────────────────────────────────
-CERTIFICATIONS & LEARNING
+EXPERIENCE
 ──────────────────────────────────────────────
-• JavaScript Algorithms and Data Structures – freeCodeCamp
-• Responsive Web Design – freeCodeCamp
-• Git & GitHub – Coursera / LinkedIn Learning
-• REST API Design – Postman Academy
+Web Development Intern                          July 2022 – August 2022
+Rinex                                                          [Remote]
+  – Developed 5+ responsive web pages using HTML5, CSS3, and JavaScript,
+    ensuring 100% mobile responsiveness and cross-browser compatibility
+  – Improved page load time by 30% by optimizing CSS stylesheets and
+    minimizing redundant JavaScript for better performance and UX
 
 ──────────────────────────────────────────────
-GITHUB ACTIVITY
+PROJECTS
 ──────────────────────────────────────────────
-• 10+ repositories including production-ready automation tools
-• Regular commits demonstrating active development practice
-• Open-source contributions and personal project portfolio
+Personal Portfolio Website                 [HTML5, CSS3, JavaScript] Aug 2022
+  – Created a responsive portfolio site with dark/light theme toggle, typing
+    animation, and 6+ completed projects to showcase technical skills
+  – Improved mobile compatibility by 50% and reduced page load to under 2s
+  – Integrated responsive navigation and smooth CSS transitions
+
+Blood Bank Management System          [Python, Tkinter, Matplotlib] June 2025
+  – Built a GUI-based blood bank system to manage donor data and track
+    blood stock for 8 blood groups in real time
+  – Improved data handling efficiency by 60% with structured data management
+  – Implemented real-time blood stock visualization using Matplotlib bar charts
+
+Smart To-Do List                     [HTML, CSS, JavaScript, Chart.js] May 2025
+  – Built a feature-rich task management app with task creation, scheduling,
+    priority-based filtering, and real-time task status visualization
+  – Implemented dark/light mode and dynamic Chart.js graphs for task tracking
+  – Achieved 40% improvement in task organization efficiency
+
+──────────────────────────────────────────────
+TECHNICAL SKILLS
+──────────────────────────────────────────────
+Programming Languages  : JavaScript (ES6+), Python, SQL, HTML5, CSS3
+Frontend Development   : Responsive Design, Flexbox, CSS Grid, Bootstrap,
+                         DOM Manipulation, Chart.js
+Libraries              : NumPy, Pandas, Matplotlib, Chart.js
+Tools & Version Control: Git, GitHub, VS Code, Linux, Google Colab
+Core Concepts          : OOP, Problem Solving, Debugging, REST APIs (basic)
+Soft Skills            : Communication, Leadership, Team Collaboration, Agile
+
+──────────────────────────────────────────────
+LEADERSHIP / EXTRACURRICULAR
+──────────────────────────────────────────────
+Treasurer – Computer Society of India (CSI)          Jun 2024 – Jun 2025
+Haldia Institute of Technology
+  – Managed Rs.50,000+ budget with 100% financial transparency for workshops,
+    tech events, and student initiatives
+  – Led 10+ seminars and coding workshops on web development and ML,
+    increasing student participation by 40%
 
 ──────────────────────────────────────────────
 ADDITIONAL INFORMATION
 ──────────────────────────────────────────────
-Preferred Work Mode   : Remote / Hybrid / On-site
-Notice Period         : Immediate Joining
-Languages             : English (Professional), Hindi (Native)
+Notice Period    : Immediate Joining
+Preferred Mode   : Remote / Hybrid / On-site
+Languages        : English (Professional), Hindi (Native)
+Portfolio        : github.com/Rohitkr2002
