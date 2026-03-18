@@ -1,0 +1,75 @@
+ROHIT SINGH RAJPUT
+📧 rajputrohitsingh998@gmail.com | 📱 +91-XXXXXXXXXX
+🔗 GitHub: github.com/rohit-rajput | 💼 LinkedIn: linkedin.com/in/rohit-rajput
+📊 Kaggle: kaggle.com/rohitrajput | 📍 India | Available: Immediate Joining
+
+──────────────────────────────────────────────
+PROFESSIONAL SUMMARY
+──────────────────────────────────────────────
+Detail-oriented B.Tech Computer Science graduate (2024) with strong analytical
+skills and hands-on experience in Python, SQL, data analysis, and visualization.
+Proficient in translating complex datasets into actionable business insights.
+Experienced with Pandas, NumPy, and data automation tools. Seeking Data Analyst
+/ Python Developer / Business Analyst roles (0–1 year experience bracket).
+
+──────────────────────────────────────────────
+TECHNICAL SKILLS
+──────────────────────────────────────────────
+Programming Languages : Python, SQL, JavaScript, HTML, CSS
+Data Analysis Tools   : Pandas, NumPy, Matplotlib, Seaborn
+Database              : MySQL, MongoDB, SQLite
+Visualization Tools   : Power BI (Basic), Tableau (Basic), Excel (Advanced)
+Python Frameworks     : Flask, FastAPI (Basic), Requests, BeautifulSoup
+Automation & Scripting: Python automation, Web Scraping, Selenium, Puppeteer
+DevTools              : Git, GitHub, Jupyter Notebook, VS Code, Google Colab
+AI/ML Exposure        : Gemini API, Scikit-learn (Basic), Feature Engineering
+Soft Skills           : Analytical Thinking, Attention to Detail, Communication
+
+──────────────────────────────────────────────
+DATA PROJECTS
+──────────────────────────────────────────────
+📊 Job Market Analytics Agent                      [Python | Pandas | Gemini API]
+• Designed an automated job data scraper collecting 200+ job listings daily
+• Analyzed job trends across 4 cities and 5 domains using Pandas DataFrames
+• Integrated Gemini AI for intelligent job-to-candidate match scoring (0–100%)
+• Generated daily email reports with trend insights and visual data summaries
+• Reduced manual job searching effort by 100% through full automation
+• Tech: Python, Node.js, Pandas, Gemini API, Nodemailer, GitHub Actions
+
+📈 Web Data Extraction & Analysis System       [Python | BeautifulSoup | SQL]
+• Built end-to-end ETL pipeline extracting structured data from multiple websites
+• Cleaned and transformed raw datasets (50,000+ records) using Pandas
+• Stored processed data in MySQL with optimized queries for reporting
+• Generated visual dashboards with Matplotlib/Seaborn for stakeholder insights
+• Tech: Python, BeautifulSoup, MySQL, Pandas, Matplotlib
+
+──────────────────────────────────────────────
+EDUCATION
+──────────────────────────────────────────────
+B.Tech / B.E. – Computer Science / Information Technology
+Graduated: 2024 | CGPA: 7.5+ / 10.0
+
+──────────────────────────────────────────────
+CERTIFICATIONS & LEARNING
+──────────────────────────────────────────────
+• Python for Everybody – Coursera (University of Michigan)
+• Data Analysis with Python – freeCodeCamp / IBM
+• SQL for Data Science – Coursera
+• Excel Skills for Business – Coursera (Macquarie University)
+• Google Data Analytics Certificate – Coursera (in progress)
+
+──────────────────────────────────────────────
+KEY ANALYTICAL ACHIEVEMENTS
+──────────────────────────────────────────────
+• Automated daily data collection saving 2+ hours of manual research daily
+• Built Python scripts to process and clean 50,000+ data records accurately
+• Designed 5+ reproducible Jupyter notebooks for data analysis workflows
+• Applied statistical analysis (correlation, distribution, trend analysis)
+
+──────────────────────────────────────────────
+ADDITIONAL INFORMATION
+──────────────────────────────────────────────
+Preferred Work Mode   : Remote / Hybrid / On-site
+Notice Period         : Immediate Joining
+Languages             : English (Professional), Hindi (Native)
+Interests             : Data Storytelling, Open Data Projects, Kaggle Competitions

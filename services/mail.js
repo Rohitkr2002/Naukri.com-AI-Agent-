@@ -3,6 +3,8 @@
 // Premium HTML Email – Naukri Job Alert
 // Design: Dark mode, gradient header, city-grouped cards,
 //         glassmorphism effects, professional badges
+// Now includes: AI Match Scores, Profile Boost Report,
+//               Resume Smart Matching + Cover Letter
 // ============================================================
 
 const nodemailer = require('nodemailer');
@@ -35,6 +37,14 @@ const DOMAIN_COLORS = {
   'Web Developer':      { bg: '#2d2a1a', color: '#fde68a' },
 };
 
+// ─── AI Score color ───────────────────────────────────────────────────────────
+function getScoreColor(score) {
+  if (score >= 80) return { bg: '#14532d', color: '#4ade80', label: 'Excellent' };
+  if (score >= 65) return { bg: '#1e3a5f', color: '#60a5fa', label: 'Good'      };
+  if (score >= 50) return { bg: '#422006', color: '#fb923c', label: 'Fair'      };
+  return                  { bg: '#450a0a', color: '#f87171', label: 'Low'       };
+}
+
 // ─── Truncate helper ──────────────────────────────────────────────────────────
 function trunc(str, n) {
   if (!str) return '';
@@ -47,7 +57,7 @@ function fmtSalary(s) {
   return s;
 }
 
-// ─── Render one job card ──────────────────────────────────────────────────────
+// ─── Render one job card (with AI score badge + resume match) ─────────────────
 function renderJobCard(job, index, cityColor) {
   const domainStyle = DOMAIN_COLORS[job.domain] || { bg: '#1e293b', color: '#94a3b8' };
   const salary      = fmtSalary(job.salary);
@@ -56,20 +66,72 @@ function renderJobCard(job, index, cityColor) {
   const posted      = job.posted || 'Recently';
   const applyUrl    = job.url || 'https://www.naukri.com';
 
+  // AI Score badge
+  const hasScore    = job.aiScore && typeof job.aiScore.score === 'number';
+  const scoreColor  = hasScore ? getScoreColor(job.aiScore.score) : null;
+  const isTopJob    = index === 0;
+
+  // Resume match badge
+  const resumeLabel = job.resumeMatch?.resumeLabel || '';
+
+  const aiBadge = hasScore ? `
+    <span style="
+      background: ${scoreColor.bg};
+      color: ${scoreColor.color};
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      border: 1px solid ${scoreColor.color}44;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    ">🤖 ${job.aiScore.score}% Match</span>` : '';
+
+  const topBadge = isTopJob ? `
+    <span style="
+      background: linear-gradient(135deg, #854d0e, #78350f);
+      color: #fde68a;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-right: 4px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    ">🏆 TOP PICK</span>` : '';
+
+  const resumeBadge = resumeLabel ? `
+    <br/>
+    <span style="
+      color: #64748b;
+      font-size: 10px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin-top: 4px;
+      display: inline-block;
+    ">${resumeLabel}</span>` : '';
+
+  // Skill gap tip
+  const skillGapTip = hasScore && job.aiScore.skillGaps?.length > 0
+    ? `<p style="color:#475569; font-size:11px; margin: 8px 0 0; font-family:'Segoe UI', Arial, sans-serif; border-top: 1px solid #1e293b; padding-top: 8px;">
+        💡 <strong style="color:#94a3b8;">Learn:</strong> ${job.aiScore.skillGaps.slice(0, 2).join(', ')}
+       </p>`
+    : '';
+
   return `
   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:14px;">
     <tr>
       <td style="
         background: linear-gradient(135deg, #131c2e 0%, #1a2540 100%);
-        border: 1px solid #1e2d45;
+        border: 1px solid ${isTopJob ? cityColor + '66' : '#1e2d45'};
         border-left: 4px solid ${cityColor};
         border-radius: 12px;
         padding: 18px 20px;
+        ${isTopJob ? 'box-shadow: 0 0 20px ' + cityColor + '22;' : ''}
       ">
-        <!-- Top Row: Number + Domain tag + Posted -->
+        <!-- Top Row: Badges + Posted -->
         <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
           <tr>
             <td>
+              ${topBadge}
               <span style="
                 background: ${cityColor};
                 color: #000;
@@ -90,10 +152,11 @@ function renderJobCard(job, index, cityColor) {
                 padding: 3px 10px;
                 border-radius: 20px;
                 font-family: 'Segoe UI', Arial, sans-serif;
-                letter-spacing: 0.5px;
               ">${job.domain}</span>
+              &nbsp;${aiBadge}
+              ${resumeBadge}
             </td>
-            <td align="right">
+            <td align="right" style="vertical-align: top;">
               <span style="color:#475569; font-size:11px; font-family:'Segoe UI', Arial, sans-serif;">
                 🕐 ${posted}
               </span>
@@ -158,10 +221,12 @@ function renderJobCard(job, index, cityColor) {
                 font-weight: 600;
                 font-family: 'Segoe UI', Arial, sans-serif;
                 white-space: nowrap;
-              ">💰 ${salary}</span>
+              ">💰 ${fmtSalary(job.salary)}</span>
             </td>
           </tr>
         </table>
+
+        ${skillGapTip}
 
         <!-- Apply Button -->
         <a href="${applyUrl}" target="_blank" style="
@@ -176,6 +241,7 @@ function renderJobCard(job, index, cityColor) {
           letter-spacing: 0.5px;
           font-family: 'Segoe UI', Arial, sans-serif;
           text-transform: uppercase;
+          margin-top: 10px;
         ">Apply on Naukri →</a>
 
       </td>
@@ -183,10 +249,9 @@ function renderJobCard(job, index, cityColor) {
   </table>`;
 }
 
-// ─── Render a city section header ─────────────────────────────────────────────
+// ─── City section header ──────────────────────────────────────────────────────
 function renderCitySection(cityName, jobs) {
   const theme = CITY_THEME[cityName] || { color: '#38bdf8', bg: '#0f2027', light: '#bae6fd', emoji: '📍' };
-
   const cards = jobs.map((job, i) => renderJobCard(job, i, theme.color)).join('');
 
   return `
@@ -197,7 +262,6 @@ function renderCitySection(cityName, jobs) {
         background: linear-gradient(90deg, ${theme.bg} 0%, #0d1b2a 100%);
         border-radius: 10px;
         padding: 14px 20px;
-        margin-bottom: 12px;
         border-left: 5px solid ${theme.color};
         margin-bottom: 16px;
       ">
@@ -206,7 +270,6 @@ function renderCitySection(cityName, jobs) {
           font-size: 18px;
           font-weight: 800;
           font-family: 'Segoe UI', Arial, sans-serif;
-          letter-spacing: -0.3px;
         ">${theme.emoji} ${cityName}</span>
         <span style="
           color: #475569;
@@ -220,8 +283,423 @@ function renderCitySection(cityName, jobs) {
   ${cards}`;
 }
 
+// ─── Profile Boost Section ────────────────────────────────────────────────────
+function renderProfileBoostSection(boostReport) {
+  if (!boostReport) return '';
+
+  const { profileScore, scoreLabel, todaysTips, todaysActions, keywordGaps } = boostReport;
+
+  // Progress bar
+  const pct = profileScore.percentage;
+
+  // Keyword gaps for primary domain
+  const primaryDomain = Object.keys(keywordGaps)[0];
+  const gaps          = keywordGaps[primaryDomain] || [];
+
+  const tipRows = todaysTips.slice(0, 4).map((tip) => `
+    <tr>
+      <td style="padding: 6px 0; border-bottom: 1px solid #0f172a;">
+        <span style="color:#38bdf8; font-size:12px; margin-right:6px;">✦</span>
+        <span style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif; line-height:1.5;">${tip}</span>
+      </td>
+    </tr>`).join('');
+
+  const actionRows = todaysActions.slice(0, 3).map((action, i) => `
+    <tr>
+      <td style="padding: 5px 0;">
+        <span style="
+          background: #1e3a5f;
+          color: #7dd3fc;
+          font-size: 10px;
+          font-weight: 700;
+          padding: 2px 8px;
+          border-radius: 10px;
+          margin-right: 6px;
+          font-family: 'Segoe UI', Arial, sans-serif;
+        ">STEP ${i + 1}</span>
+        <span style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif;">${action}</span>
+      </td>
+    </tr>`).join('');
+
+  const gapTags = gaps.slice(0, 6).map((g) =>
+    `<span style="
+      background:#1e293b;
+      color:#f87171;
+      font-size:10px;
+      font-weight:700;
+      padding:3px 10px;
+      border-radius:20px;
+      margin:3px 3px 3px 0;
+      display:inline-block;
+      font-family:'Segoe UI', Arial, sans-serif;
+    ">+ ${g}</span>`
+  ).join('');
+
+  return `
+  <!-- PROFILE BOOST SECTION -->
+  <tr>
+    <td style="padding: 0 20px 8px;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="
+        background: linear-gradient(135deg, #0d1f3c 0%, #0a1628 100%);
+        border: 1px solid #1e3a5f;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 8px;
+      ">
+        <!-- Header -->
+        <tr>
+          <td colspan="2" style="padding-bottom: 16px; border-bottom: 1px solid #1e293b;">
+            <span style="
+              font-size: 18px;
+              font-weight: 900;
+              color: #38bdf8;
+              font-family: 'Segoe UI', Arial, sans-serif;
+            ">🚀 Daily Profile Boost Report</span>
+            <span style="
+              display:inline-block;
+              background:#1e3a5f;
+              color:#7dd3fc;
+              font-size:10px;
+              font-weight:700;
+              padding:2px 10px;
+              border-radius:20px;
+              margin-left:8px;
+              font-family:'Segoe UI', Arial, sans-serif;
+            ">Feature 1</span>
+          </td>
+        </tr>
+
+        <!-- Completeness Score -->
+        <tr>
+          <td colspan="2" style="padding-top: 16px; padding-bottom: 16px;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td>
+                  <p style="color:#64748b; font-size:11px; margin:0 0 6px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">PROFILE COMPLETENESS</p>
+                  <!-- Progress bar -->
+                  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a; border-radius:20px; height:10px; margin-bottom:6px;">
+                    <tr>
+                      <td style="
+                        width: ${pct}%;
+                        background: linear-gradient(90deg, #38bdf8, ${scoreLabel.color});
+                        border-radius: 20px;
+                        height: 10px;
+                      "></td>
+                    </tr>
+                  </table>
+                  <span style="
+                    color: ${scoreLabel.color};
+                    font-size: 22px;
+                    font-weight: 900;
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                  ">${pct}%</span>
+                  <span style="
+                    color: ${scoreLabel.color};
+                    font-size: 12px;
+                    font-weight: 700;
+                    margin-left: 6px;
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                  ">${scoreLabel.emoji} ${scoreLabel.label}</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Keyword Gaps -->
+        ${gaps.length > 0 ? `
+        <tr>
+          <td colspan="2" style="padding-bottom:16px;">
+            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">🔍 ADD THESE TRENDING KEYWORDS (${primaryDomain})</p>
+            ${gapTags}
+          </td>
+        </tr>` : ''}
+
+        <!-- ATS Tips -->
+        <tr>
+          <td colspan="2" style="padding-bottom:16px;">
+            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">💡 TODAY'S ATS PROFILE TIPS</p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              ${tipRows}
+            </table>
+          </td>
+        </tr>
+
+        <!-- Today's Actions -->
+        <tr>
+          <td colspan="2">
+            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">⚡ TODAY'S PROFILE BOOST ACTIONS</p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              ${actionRows}
+            </table>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>`;
+}
+
+// ─── AI Score Summary Section ─────────────────────────────────────────────────
+function renderAIScoreSummary(jobs, skillGapSummary) {
+  if (!jobs[0]?.aiScore) return '';
+
+  const topJob  = jobs[0];
+  const hasGemini = topJob.aiScore.source === 'gemini';
+  const highMatchJobs = jobs.filter((j) => j.aiScore?.score >= 70).length;
+  const avgScore      = Math.round(jobs.reduce((s, j) => s + (j.aiScore?.score || 0), 0) / jobs.length);
+
+  const gapRows = (skillGapSummary || []).slice(0, 3).map((item) => `
+    <tr>
+      <td style="padding: 8px 0; border-bottom: 1px solid #0f172a;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td>
+              <span style="
+                background: #450a0a;
+                color: #f87171;
+                font-size: 10px;
+                font-weight: 700;
+                padding: 2px 8px;
+                border-radius: 10px;
+                font-family: 'Segoe UI', Arial, sans-serif;
+              ">${item.skill}</span>
+            </td>
+            <td align="right">
+              <span style="color:#64748b; font-size:11px; font-family:'Segoe UI', Arial, sans-serif;">needed in ${item.count} jobs</span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <span style="color:#475569; font-size:11px; font-family:'Segoe UI', Arial, sans-serif;">📚 ${item.resource}</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>`).join('');
+
+  return `
+  <!-- AI SCORE SUMMARY SECTION -->
+  <tr>
+    <td style="padding: 0 20px 8px;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="
+        background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 100%);
+        border: 1px solid #2d1f3e;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 8px;
+      ">
+        <!-- Header -->
+        <tr>
+          <td style="padding-bottom:16px; border-bottom: 1px solid #1e293b;">
+            <span style="
+              font-size: 18px;
+              font-weight: 900;
+              color: #a78bfa;
+              font-family: 'Segoe UI', Arial, sans-serif;
+            ">🤖 AI Job Match Analysis</span>
+            <span style="
+              display:inline-block;
+              background:#2d1f3e;
+              color:#c4b5fd;
+              font-size:10px;
+              font-weight:700;
+              padding:2px 10px;
+              border-radius:20px;
+              margin-left:8px;
+              font-family:'Segoe UI', Arial, sans-serif;
+            ">${hasGemini ? '✨ Gemini AI' : '🔢 Heuristic'} · Feature 2</span>
+          </td>
+        </tr>
+
+        <!-- Stats -->
+        <tr>
+          <td style="padding-top:16px; padding-bottom:16px;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="33%" align="center">
+                  <div style="color:#4ade80; font-size:26px; font-weight:900; font-family:'Segoe UI', Arial, sans-serif;">${topJob.aiScore.score}%</div>
+                  <div style="color:#475569; font-size:10px; letter-spacing:0.5px; font-family:'Segoe UI', Arial, sans-serif;">TOP JOB SCORE</div>
+                </td>
+                <td width="33%" align="center" style="border-left:1px solid #1e293b; border-right:1px solid #1e293b;">
+                  <div style="color:#60a5fa; font-size:26px; font-weight:900; font-family:'Segoe UI', Arial, sans-serif;">${avgScore}%</div>
+                  <div style="color:#475569; font-size:10px; letter-spacing:0.5px; font-family:'Segoe UI', Arial, sans-serif;">AVG SCORE</div>
+                </td>
+                <td width="33%" align="center">
+                  <div style="color:#fb923c; font-size:26px; font-weight:900; font-family:'Segoe UI', Arial, sans-serif;">${highMatchJobs}</div>
+                  <div style="color:#475569; font-size:10px; letter-spacing:0.5px; font-family:'Segoe UI', Arial, sans-serif;">HIGH MATCH (≥70%)</div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Top Job Highlight -->
+        <tr>
+          <td style="padding-bottom:16px;">
+            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">🏆 TOP MATCHED JOB</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="
+              background: #14532d22;
+              border: 1px solid #14532d;
+              border-radius: 8px;
+              padding: 12px;
+            ">
+              <tr>
+                <td style="padding: 4px 12px;">
+                  <div style="color:#f1f5f9; font-size:14px; font-weight:700; font-family:'Segoe UI', Arial, sans-serif;">${trunc(topJob.title, 50)}</div>
+                  <div style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif;">🏢 ${trunc(topJob.company, 35)} · 📍 ${topJob.city || 'India'}</div>
+                  ${topJob.aiScore.matchReason ? `<div style="color:#4ade80; font-size:11px; margin-top:4px; font-family:'Segoe UI', Arial, sans-serif;">✅ ${topJob.aiScore.matchReason}</div>` : ''}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Skill Gaps -->
+        ${gapRows ? `
+        <tr>
+          <td>
+            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">📚 TOP SKILL GAPS TO CLOSE</p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              ${gapRows}
+            </table>
+          </td>
+        </tr>` : ''}
+
+      </table>
+    </td>
+  </tr>`;
+}
+
+// ─── Resume & Cover Letter Section ────────────────────────────────────────────
+function renderResumeSection(jobs) {
+  const topJob = jobs.find((j) => j.coverLetterPreview) || jobs[0];
+  if (!topJob || !topJob.resumeMatch) return '';
+
+  const { resumeMatch, coverLetterPreview } = topJob;
+  const tips = (resumeMatch.tips || []).slice(0, 3);
+
+  const tipRows = tips.map((tip) => `
+    <tr>
+      <td style="padding: 5px 0; border-bottom: 1px solid #0f172a;">
+        <span style="color:#f59e0b; font-size:12px; margin-right:6px;">●</span>
+        <span style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif;">${tip}</span>
+      </td>
+    </tr>`).join('');
+
+  const coverLetterHtml = coverLetterPreview
+    ? coverLetterPreview.replace(/\n/g, '<br/>').slice(0, 900) + (coverLetterPreview.length > 900 ? '...' : '')
+    : '';
+
+  // Resume distribution stats
+  const swCount   = jobs.filter((j) => j.resumeMatch?.domainType === 'software').length;
+  const dataCount = jobs.filter((j) => j.resumeMatch?.domainType === 'data').length;
+
+  return `
+  <!-- RESUME & COVER LETTER SECTION -->
+  <tr>
+    <td style="padding: 0 20px 8px;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="
+        background: linear-gradient(135deg, #0a1a0a 0%, #0d1f0d 100%);
+        border: 1px solid #14532d;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 8px;
+      ">
+        <!-- Header -->
+        <tr>
+          <td style="padding-bottom:16px; border-bottom: 1px solid #1e293b;">
+            <span style="
+              font-size: 18px;
+              font-weight: 900;
+              color: #4ade80;
+              font-family: 'Segoe UI', Arial, sans-serif;
+            ">📄 Resume Smart Matching</span>
+            <span style="
+              display:inline-block;
+              background:#14532d;
+              color:#4ade80;
+              font-size:10px;
+              font-weight:700;
+              padding:2px 10px;
+              border-radius:20px;
+              margin-left:8px;
+              font-family:'Segoe UI', Arial, sans-serif;
+            ">Feature 3</span>
+          </td>
+        </tr>
+
+        <!-- Resume Distribution -->
+        <tr>
+          <td style="padding-top:16px; padding-bottom:16px; border-bottom: 1px solid #1e293b;">
+            <p style="color:#64748b; font-size:11px; margin:0 0 10px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">📊 RESUME ASSIGNMENT FOR TODAY'S JOBS</p>
+            <table cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="padding-right:12px;">
+                  <span style="
+                    background:#1e3a5f;
+                    color:#93c5fd;
+                    font-size:12px;
+                    font-weight:700;
+                    padding:6px 14px;
+                    border-radius:20px;
+                    font-family:'Segoe UI', Arial, sans-serif;
+                  ">💻 Software Resume → ${swCount} jobs</span>
+                </td>
+                <td>
+                  <span style="
+                    background:#1f2d3e;
+                    color:#7dd3fc;
+                    font-size:12px;
+                    font-weight:700;
+                    padding:6px 14px;
+                    border-radius:20px;
+                    font-family:'Segoe UI', Arial, sans-serif;
+                  ">📊 Data Resume → ${dataCount} jobs</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- Resume Improvement Tips -->
+        <tr>
+          <td style="padding-top:16px; padding-bottom:16px; border-bottom: 1px solid #1e293b;">
+            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">🛠️ RESUME IMPROVEMENT TIPS (${resumeMatch.resumeLabel})</p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              ${tipRows}
+            </table>
+          </td>
+        </tr>
+
+        <!-- Cover Letter -->
+        ${coverLetterHtml ? `
+        <tr>
+          <td style="padding-top:16px;">
+            <p style="color:#64748b; font-size:11px; margin:0 0 10px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">
+              ✉️ CUSTOMIZED COVER LETTER PREVIEW
+              <span style="color:#475569;"> – for ${trunc(topJob.title, 35)} @ ${trunc(topJob.company, 25)}</span>
+            </p>
+            <div style="
+              background: #0f172a;
+              border-left: 3px solid #4ade80;
+              border-radius: 8px;
+              padding: 16px;
+              color: #94a3b8;
+              font-size: 12px;
+              font-family: 'Segoe UI', Arial, sans-serif;
+              line-height: 1.8;
+            ">${coverLetterHtml}</div>
+          </td>
+        </tr>` : ''}
+
+      </table>
+    </td>
+  </tr>`;
+}
+
 // ─── Build full HTML email ─────────────────────────────────────────────────────
-function buildHtmlEmail(jobs) {
+function buildHtmlEmail(jobs, boostReport, skillGapSummary) {
   const today = new Date().toLocaleDateString('en-IN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
     timeZone: 'Asia/Kolkata',
@@ -236,11 +714,10 @@ function buildHtmlEmail(jobs) {
   });
 
   // Render city sections
-  let citySections = '';
-  let totalRendered = 0;
+  let citySections   = '';
+  let totalRendered  = 0;
 
-  // Preferred city order
-  const cityOrder = ['Bangalore', 'Delhi', 'Pune', 'Kolkata'];
+  const cityOrder    = ['Bangalore', 'Delhi', 'Pune', 'Kolkata'];
   const sortedCities = [
     ...cityOrder.filter((c) => byCity[c]),
     ...Object.keys(byCity).filter((c) => !cityOrder.includes(c)),
@@ -248,7 +725,7 @@ function buildHtmlEmail(jobs) {
 
   sortedCities.forEach((city) => {
     if (byCity[city] && byCity[city].length > 0) {
-      citySections += renderCitySection(city, byCity[city]);
+      citySections  += renderCitySection(city, byCity[city]);
       totalRendered += byCity[city].length;
     }
   });
@@ -256,6 +733,8 @@ function buildHtmlEmail(jobs) {
   // Stats bar
   const cityCount  = Object.keys(byCity).length;
   const domainSet  = [...new Set(jobs.map((j) => j.domain))];
+  const topScore   = jobs[0]?.aiScore?.score;
+  const hasAI      = !!topScore;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -269,7 +748,7 @@ function buildHtmlEmail(jobs) {
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#070d1a;">
   <tr>
     <td align="center" style="padding: 28px 12px;">
-    <table width="640" cellpadding="0" cellspacing="0" style="max-width:640px; width:100%;">
+    <table width="660" cellpadding="0" cellspacing="0" style="max-width:660px; width:100%;">
 
       <!-- ═══════════════ HEADER ═══════════════ -->
       <tr>
@@ -280,7 +759,6 @@ function buildHtmlEmail(jobs) {
           text-align: center;
           border-bottom: 2px solid #1e3a5f;
         ">
-          <!-- Logo / Icon -->
           <div style="
             display: inline-block;
             background: linear-gradient(135deg, #2563eb, #7c3aed);
@@ -292,23 +770,17 @@ function buildHtmlEmail(jobs) {
             margin-bottom: 16px;
           ">💼</div>
 
-          <!-- Title -->
           <h1 style="
             color: #f8fafc;
             font-size: 28px;
             font-weight: 900;
             margin: 0 0 6px;
             letter-spacing: -0.5px;
-            line-height: 1.2;
           ">Naukri Job Alert</h1>
-          <p style="
-            color: #94a3b8;
-            font-size: 13px;
-            margin: 0 0 20px;
-            letter-spacing: 0.3px;
-          ">📅 ${today} &nbsp;·&nbsp; ⏰ 9:00 AM IST</p>
+          <p style="color: #94a3b8; font-size: 13px; margin: 0 0 20px;">
+            📅 ${today} &nbsp;·&nbsp; ⏰ 9:00 AM IST
+          </p>
 
-          <!-- Badge -->
           <div style="
             display: inline-block;
             background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(129,140,248,0.15));
@@ -318,7 +790,6 @@ function buildHtmlEmail(jobs) {
             color: #7dd3fc;
             font-size: 14px;
             font-weight: 700;
-            letter-spacing: 0.3px;
           ">🎯 Top ${totalRendered} Fresh Jobs · 0–1 Year Experience</div>
         </td>
       </tr>
@@ -328,23 +799,21 @@ function buildHtmlEmail(jobs) {
         <td style="background: #0d1526; padding: 0;">
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
-              <td width="33%" align="center" style="
-                padding: 18px 8px;
-                border-right: 1px solid #1e293b;
-              ">
-                <div style="color:#38bdf8; font-size:22px; font-weight:900; line-height:1;">${totalRendered}</div>
-                <div style="color:#475569; font-size:11px; letter-spacing:0.5px; margin-top:3px;">TOTAL JOBS</div>
+              <td width="25%" align="center" style="padding: 16px 6px; border-right: 1px solid #1e293b;">
+                <div style="color:#38bdf8; font-size:20px; font-weight:900;">${totalRendered}</div>
+                <div style="color:#475569; font-size:10px; letter-spacing:0.5px; margin-top:3px;">TOTAL JOBS</div>
               </td>
-              <td width="33%" align="center" style="
-                padding: 18px 8px;
-                border-right: 1px solid #1e293b;
-              ">
-                <div style="color:#a78bfa; font-size:22px; font-weight:900; line-height:1;">${cityCount}</div>
-                <div style="color:#475569; font-size:11px; letter-spacing:0.5px; margin-top:3px;">CITIES</div>
+              <td width="25%" align="center" style="padding: 16px 6px; border-right: 1px solid #1e293b;">
+                <div style="color:#a78bfa; font-size:20px; font-weight:900;">${cityCount}</div>
+                <div style="color:#475569; font-size:10px; letter-spacing:0.5px; margin-top:3px;">CITIES</div>
               </td>
-              <td width="33%" align="center" style="padding: 18px 8px;">
-                <div style="color:#34d399; font-size:22px; font-weight:900; line-height:1;">${domainSet.length}</div>
-                <div style="color:#475569; font-size:11px; letter-spacing:0.5px; margin-top:3px;">DOMAINS</div>
+              <td width="25%" align="center" style="padding: 16px 6px; border-right: 1px solid #1e293b;">
+                <div style="color:#34d399; font-size:20px; font-weight:900;">${domainSet.length}</div>
+                <div style="color:#475569; font-size:10px; letter-spacing:0.5px; margin-top:3px;">DOMAINS</div>
+              </td>
+              <td width="25%" align="center" style="padding: 16px 6px;">
+                <div style="color:#fb923c; font-size:20px; font-weight:900;">${hasAI ? topScore + '%' : 'ON'}</div>
+                <div style="color:#475569; font-size:10px; letter-spacing:0.5px; margin-top:3px;">${hasAI ? 'TOP AI SCORE' : 'AI SCORING'}</div>
               </td>
             </tr>
           </table>
@@ -371,6 +840,7 @@ function buildHtmlEmail(jobs) {
                     font-size: 11px;
                     font-weight: 700;
                     white-space:nowrap;
+                    font-family: 'Segoe UI', Arial, sans-serif;
                   ">${c}</span>
                 </td>`;
               }).join('')}
@@ -379,9 +849,51 @@ function buildHtmlEmail(jobs) {
         </td>
       </tr>
 
+      <!-- ═══════════════ PROFILE BOOST REPORT ═══════════════ -->
+      <tr>
+        <td style="background: #0a1120; padding: 20px 0 0;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            ${renderProfileBoostSection(boostReport)}
+          </table>
+        </td>
+      </tr>
+
+      <!-- ═══════════════ AI JOB SCORE SUMMARY ═══════════════ -->
+      <tr>
+        <td style="background: #0a1120; padding: 0;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            ${renderAIScoreSummary(jobs, skillGapSummary)}
+          </table>
+        </td>
+      </tr>
+
+      <!-- ═══════════════ RESUME SECTION ═══════════════ -->
+      <tr>
+        <td style="background: #0a1120; padding: 0;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            ${renderResumeSection(jobs)}
+          </table>
+        </td>
+      </tr>
+
+      <!-- ═══════════════ SECTION DIVIDER ═══════════════ -->
+      <tr>
+        <td style="background: #0a1120; padding: 8px 20px 16px;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="border-top: 1px solid #1e293b; padding-top: 16px;">
+                <span style="color:#475569; font-size:13px; font-weight:700; letter-spacing:0.5px; font-family:'Segoe UI', Arial, sans-serif;">
+                  💼 TODAY'S JOB LISTINGS
+                </span>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
       <!-- ═══════════════ JOB CARDS ═══════════════ -->
       <tr>
-        <td style="background: #0a1120; padding: 24px 20px;">
+        <td style="background: #0a1120; padding: 0 20px 24px;">
           ${citySections}
         </td>
       </tr>
@@ -436,7 +948,8 @@ function buildHtmlEmail(jobs) {
           </p>
           <p style="color:#1e293b; font-size:11px; margin:0; line-height:1.6;">
             Runs daily at 9:00 AM IST via GitHub Actions · Jobs sourced from Naukri.com<br/>
-            Built with Node.js · Puppeteer · Nodemailer
+            Features: Profile Boost 🚀 · AI Scoring 🤖 · Resume Matcher 📄<br/>
+            Built with Node.js · Puppeteer · Gemini AI · Nodemailer
           </p>
           <div style="margin-top:16px; padding-top:16px; border-top:1px solid #0f172a;">
             <span style="
@@ -461,7 +974,7 @@ function buildHtmlEmail(jobs) {
 }
 
 // ─── Main send function ────────────────────────────────────────────────────────
-async function sendJobEmail(jobs) {
+async function sendJobEmail(jobs, boostReport, skillGapSummary) {
   if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
     throw new Error('❌ Missing GMAIL_USER or GMAIL_PASS in .env file!');
   }
@@ -470,15 +983,18 @@ async function sendJobEmail(jobs) {
   }
 
   const transporter = createTransporter();
-  const htmlContent = buildHtmlEmail(jobs);
+  const htmlContent = buildHtmlEmail(jobs, boostReport, skillGapSummary);
   const today       = new Date().toLocaleDateString('en-IN', {
     day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata',
   });
 
+  const topScore    = jobs[0]?.aiScore?.score;
+  const scorePart   = topScore ? ` | 🤖 Top Match: ${topScore}%` : '';
+
   const mailOptions = {
-    from:    `"Naukri Job Agent 🤖" <${process.env.GMAIL_USER}>`,
+    from:    `"Naukri AI Agent 🤖" <${process.env.GMAIL_USER}>`,
     to:      process.env.RECIPIENT_EMAIL,
-    subject: `💼 ${jobs.length} Fresh Jobs – ${today} | Bangalore · Delhi · Pune · Kolkata`,
+    subject: `💼 ${jobs.length} Fresh Jobs – ${today}${scorePart} | Bangalore · Delhi · Pune · Kolkata`,
     html:    htmlContent,
   };
 

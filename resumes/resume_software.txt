@@ -1,0 +1,68 @@
+ROHIT SINGH RAJPUT
+📧 rajputrohitsingh998@gmail.com | 📱 +91-XXXXXXXXXX
+🔗 GitHub: github.com/rohit-rajput | 💼 LinkedIn: linkedin.com/in/rohit-rajput
+📍 India | Available: Immediate Joining
+
+──────────────────────────────────────────────
+PROFESSIONAL SUMMARY
+──────────────────────────────────────────────
+Highly motivated B.Tech Computer Science graduate (2024) with hands-on experience
+in full-stack web development using JavaScript, React.js, Node.js, and Python.
+Passionate about building scalable web applications and automation tools.
+Active GitHub contributor with production-deployed projects. Seeking Software
+Developer / Frontend Developer / Web Developer roles (0–1 year experience bracket).
+
+──────────────────────────────────────────────
+TECHNICAL SKILLS
+──────────────────────────────────────────────
+Programming Languages : JavaScript (ES6+), Python, HTML5, CSS3, SQL
+Frontend Development  : React.js, Next.js, Tailwind CSS, Bootstrap, Redux
+Backend Development   : Node.js, Express.js, REST APIs
+Database              : MySQL, MongoDB, Firebase
+DevTools & Platforms  : Git, GitHub, GitHub Actions, VS Code, Postman, Vercel
+AI & Automation       : Gemini API, Puppeteer, Web Scraping, GitHub Actions CI/CD
+Soft Skills           : Problem Solving, Team Collaboration, Agile, Self-motivated
+
+──────────────────────────────────────────────
+FEATURED PROJECTS
+──────────────────────────────────────────────
+🤖 Naukri Job AI Agent                          [Node.js | Puppeteer | GitHub Actions]
+• Built a fully automated job monitoring AI agent that scrapes Naukri.com daily
+• Integrates Gemini AI API for job match scoring (0–100%) and resume matching
+• Sends rich HTML email reports with job cards, AI scores, and cover letters
+• Deployed on GitHub Actions – runs every day at 9:00 AM IST without manual input
+• Tech: Node.js, Puppeteer, Nodemailer, Gemini API, GitHub Actions
+
+🌐 Web Scraper Automation Bot                   [Python | Selenium | BeautifulSoup]
+• Automated data extraction from multiple websites with structured JSON output
+• Implemented anti-bot stealth techniques (user-agent rotation, request delays)
+• Built reporting module to email structured summaries daily
+• Tech: Python, BeautifulSoup, Selenium, Pandas, smtplib
+
+──────────────────────────────────────────────
+EDUCATION
+──────────────────────────────────────────────
+B.Tech / B.E. – Computer Science / Information Technology
+Graduated: 2024 | CGPA: 7.5+ / 10.0
+
+──────────────────────────────────────────────
+CERTIFICATIONS & LEARNING
+──────────────────────────────────────────────
+• JavaScript Algorithms and Data Structures – freeCodeCamp
+• Responsive Web Design – freeCodeCamp
+• Git & GitHub – Coursera / LinkedIn Learning
+• REST API Design – Postman Academy
+
+──────────────────────────────────────────────
+GITHUB ACTIVITY
+──────────────────────────────────────────────
+• 10+ repositories including production-ready automation tools
+• Regular commits demonstrating active development practice
+• Open-source contributions and personal project portfolio
+
+──────────────────────────────────────────────
+ADDITIONAL INFORMATION
+──────────────────────────────────────────────
+Preferred Work Mode   : Remote / Hybrid / On-site
+Notice Period         : Immediate Joining
+Languages             : English (Professional), Hindi (Native)
