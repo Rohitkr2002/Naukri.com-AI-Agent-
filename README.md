@@ -20,9 +20,7 @@
 </p>
 
 <!-- Animated typing -->
-<a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1000&color=38BDF8&center=true&vCenter=true&width=600&lines=🤖+Automated+Job+Monitoring+Agent;📍+Bangalore+%7C+Delhi+%7C+Pune+%7C+Kolkata;🎯+Top+20+Fresh+Jobs+Every+Morning;⏰+Delivered+at+9%3A00+AM+IST+Daily;🚀+Built+with+Node.js+%2B+Puppeteer" alt="Typing SVG" />
-</a>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&pause=1000&color=38BDF8&center=true&vCenter=true&width=620&height=50&lines=🤖+Automated+Job+Monitoring+Agent;📍+Bangalore+%7C+Delhi+%7C+Pune+%7C+Kolkata;🎯+Top+20+Fresh+Jobs+Every+Morning;⏰+Delivered+at+9+AM+IST+Daily;🚀+Built+with+Node.js+%2B+Puppeteer" alt="Typing SVG" />
 
 </div>
 
@@ -275,7 +273,7 @@ Gmail App Password + Nodemailer = **completely free, zero sign-ups**, and works 
 
 ## 👤 Author
 
-**Rohit Kumar Rajput**
+**Rohit Kumar Singh**
 
 [![GitHub](https://img.shields.io/badge/GitHub-Rohitkr2002-181717?style=for-the-badge&logo=github)](https://github.com/Rohitkr2002)
 
