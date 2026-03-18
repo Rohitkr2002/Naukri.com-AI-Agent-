@@ -1,344 +1,116 @@
+# 🤖 Naukri Job AI Agent — Enhanced Edition
+
 <div align="center">
 
-<!-- Animated Banner -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Naukri%20Job%20AI%20Agent&fontSize=50&fontColor=fff&animation=twinkling&fontAlignY=35&desc=Automated%20Daily%20Job%20Alerts%20from%20Naukri.com&descAlignY=55&descSize=18" width="100%"/>
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs)
+![Puppeteer](https://img.shields.io/badge/Puppeteer-Headless-40B5A4?style=for-the-badge&logo=googlechrome)
+![Gemini AI](https://img.shields.io/badge/Gemini-AI%20Powered-4285F4?style=for-the-badge&logo=google)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-Daily%209AM-2088FF?style=for-the-badge&logo=githubactions)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-<!-- Badges Row 1 -->
-<p>
-  <img src="https://img.shields.io/badge/Node.js-20-339933?style=for-the-badge&logo=node.js&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Puppeteer-Headless_Browser-40B5A4?style=for-the-badge&logo=googlechrome&logoColor=white"/>
-  <img src="https://img.shields.io/badge/GitHub_Actions-Automated-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Gmail-SMTP_Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>
-</p>
-
-<!-- Badges Row 2 -->
-<p>
-  <img src="https://img.shields.io/badge/Schedule-9:00_AM_IST_Daily-orange?style=flat-square&logo=clockify&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Source-Naukri.com-blue?style=flat-square&logo=naukri&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Jobs-Top_20_Freshers-brightgreen?style=flat-square"/>
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"/>
-</p>
-
-<!-- Info Badges (reliable on GitHub) -->
-<p>
-  <img src="https://img.shields.io/badge/🤖_Automated-Job_Monitoring_Agent-38BDF8?style=flat-square"/>
-</p>
-<p>
-  <img src="https://img.shields.io/badge/📍_Cities-Bangalore_|_Delhi_|_Pune_|_Kolkata-a78bfa?style=flat-square"/>
-</p>
-<p>
-  <img src="https://img.shields.io/badge/🎯_Top_20-Fresh_Jobs_Every_Morning-34d399?style=flat-square"/>
-  &nbsp;
-  <img src="https://img.shields.io/badge/⏰_Schedule-9:00_AM_IST_Daily-f97316?style=flat-square"/>
-</p>
+**An intelligent, fully automated job monitoring AI agent that scrapes Naukri.com daily, scores jobs with Gemini AI, matches your best resume, and delivers a premium daily email report — every morning at 9:00 AM IST.**
 
 </div>
 
 ---
 
-## ❓ Problem Statement
+## ✨ Features
 
-> **Job hunting is time-consuming.** A fresher has to manually visit Naukri.com every morning, search for relevant jobs, filter by city and experience, and check each listing — which takes 30–60 minutes daily.
+### 🚀 Feature 1 — Daily Profile Boost Automation
+> Maximizes your visibility in recruiter searches every single day
 
-This project **automates the entire workflow**:
-- ✅ No manual searching
-- ✅ No missing new listings
-- ✅ Curated top 20 jobs land directly in your inbox at 9 AM
-- ✅ Covers 4 cities and 5 job roles simultaneously
-- ✅ Runs 365 days/year — completely hands-free
+- **Profile Completeness Scoring** — Scores your Naukri profile out of 100% across 14 weighted sections (photo, headline, skills, projects, etc.)
+- **Keyword Gap Analysis** — Compares your skills vs. trending 2025 tech skills per domain (React, TypeScript, Docker, etc.)
+- **ATS-Friendly Tips** — 25 curated tips, 5 rotating daily so you learn something new each day
+- **Recruiter Engagement Signals** — Tells you exactly what to do today to boost your profile ranking
+- **Daily Action Checklist** — 5 specific micro-actions to do each morning before applying
 
----
+### 🤖 Feature 2 — AI Job Scoring & Ranking
+> Powered by Google Gemini AI — finds your best matches automatically
 
-## 🌟 What This Project Does
+- **AI Match Score (0–100%)** — Each job is analyzed and scored against your skills & experience
+- **Gemini AI Mode** — Deep semantic understanding of job descriptions vs your profile
+- **Smart Fallback** — Keyword heuristic scoring if no API key (agent never crashes)
+- **Job Ranking** — All jobs sorted best-to-worst match before emailing
+- **Skill Gap Detection** — Identifies missing skills with free learning resources (YouTube, Coursera)
+- **Top Match Highlight** — Best matching job prominently featured in email
 
-<table>
-<tr>
-<td width="50%">
+### 📄 Feature 3 — Resume Smart Matching System
+> Right resume for the right job, every time
 
-### 🔍 Scrapes Naukri.com Directly
-Uses **Puppeteer headless browser** to open Naukri.com like a real user — bypasses anti-bot restrictions and scrapes JS-rendered pages.
+- **Domain Auto-Detection** — Automatically detects if a job is Software Dev or Data Analyst
+- **Dual Resume Support** — Software resume for Dev/Frontend/Web roles, Data resume for Analyst/Python roles
+- **AI-Generated Cover Letter** — Personalized cover letter for your top job via Gemini AI
+- **Professional Template Fallback** — Beautiful template cover letter if no API key
+- **ATS Improvement Tips** — 10 domain-specific tips per resume type
+- **Resume Assignment Report** — Shows which resume goes to which job in the email
 
-### 🎯 Smart Filtering
-Filters for **0–1 year experience**, removes duplicates, sorts by recency, and picks the **Top 20** best jobs.
-
-</td>
-<td width="50%">
-
-### 📧 Premium Email Design
-Sends a **dark-mode HTML email** with city-grouped job cards, color-coded themes, salary, location & direct apply links.
-
-### ☁️ 100% Automated
-Runs on **GitHub Actions** every day at **9 AM IST** — no server needed, completely free.
-
-</td>
-</tr>
-</table>
-
----
-
-## 🏙️ Cities & Roles Covered
-
-<div align="center">
-
-| 🔶 Bangalore | 🔴 Delhi | 🟣 Pune | 🟢 Kolkata |
-|:---:|:---:|:---:|:---:|
-| Software Developer | Software Developer | Software Developer | Software Developer |
-| Frontend Developer | Frontend Developer | Frontend Developer | Frontend Developer |
-| Python Developer | Python Developer | Python Developer | Python Developer |
-| Data Analyst | Data Analyst | Data Analyst | Data Analyst |
-| Web Developer | Web Developer | Web Developer | Web Developer |
-
-</div>
+### 📧 Premium Daily Email
+- Dark mode, glassmorphism design
+- **Profile Boost Report section** — score progress bar, gaps, tips
+- **AI Match Analysis section** — scores, top pick, skill gaps + courses
+- **Resume Matching section** — assignment stats + cover letter preview
+- **Job Cards** — with AI score badges, skill gap tips, apply buttons
+- City-grouped listings: Bangalore · Delhi · Pune · Kolkata
 
 ---
 
-## 🏗️ Architecture
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|-----------|-----------|
+| Runtime | Node.js 20 LTS |
+| Web Scraper | Puppeteer (Headless Chrome) |
+| AI Engine | Google Gemini 2.0 Flash Lite |
+| Email | Nodemailer + Gmail SMTP |
+| Scheduler | GitHub Actions (Cron) |
+| Domains | Software Dev · Frontend · Python · Data Analyst · Web Dev |
+| Cities | Bangalore · Delhi · Pune · Kolkata |
+
+---
+
+## 📁 Project Structure
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│              GitHub Actions  (9:00 AM IST / 3:30 AM UTC)    │
-│                    cron: '30 3 * * *'                        │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    index.js  (Orchestrator)                  │
-└──────┬─────────────────────────────────────────────────┬────┘
-       │                                                 │
-       ▼                                                 ▼
-┌──────────────────────────┐             ┌───────────────────────────┐
-│      scraper.js          │             │       filter.js            │
-│                          │             │                            │
-│  Puppeteer launches      │  ~800 jobs  │  • 0–1 yr exp filter       │
-│  headless Chrome         │ ──────────► │  • Deduplicate             │
-│                          │             │  • Sort by recency          │
-│  4 Cities × 5 Roles      │             │  • Pick Top 20             │
-│  = 20 Naukri.com pages   │             │                            │
-└──────────────────────────┘             └────────────┬──────────────┘
-                                                      │ 20 best jobs
-                                                      ▼
-                                         ┌────────────────────────────┐
-                                         │        mail.js              │
-                                         │                             │
-                                         │  • Premium HTML template    │
-                                         │  • City-grouped cards       │
-                                         │  • Direct Naukri.com links  │
-                                         │  • Send via Gmail SMTP      │
-                                         └────────────┬───────────────┘
-                                                      │
-                                                      ▼
-                                              📬 Your Inbox!
+Nukari.com/
+├── .github/
+│   └── workflows/
+│       └── daily.yml          # GitHub Actions scheduler (9 AM IST)
+│
+├── config/
+│   └── userProfile.js         # ⚙️ YOUR skills, education, projects (edit this!)
+│
+├── resumes/
+│   ├── resume_software.txt    # 💻 Software Dev / Frontend resume
+│   └── resume_data.txt        # 📊 Data Analyst / Python Dev resume
+│
+├── services/
+│   ├── scraper.js             # Naukri.com headless browser scraper
+│   ├── filter.js              # Experience filter + dedup + sorter
+│   ├── profileBoost.js        # Feature 1: Profile scoring & ATS tips
+│   ├── aiScorer.js            # Feature 2: Gemini AI job scoring
+│   ├── resumeMatcher.js       # Feature 3: Resume matching + cover letter
+│   └── mail.js                # Premium HTML email builder & sender
+│
+├── index.js                   # Main orchestrator (5-step pipeline)
+├── .env                       # Local secrets (NOT committed)
+├── .env.example               # Environment variable template
+└── package.json
 ```
 
 ---
 
-## 🔄 How It Works — Step by Step
+## ⚙️ Setup & Installation
 
-### Step 1️⃣ — GitHub Actions Triggers at 9 AM IST
-```
-Cron: '30 3 * * *'  →  Runs at 3:30 AM UTC = 9:00 AM IST
-```
-GitHub's free cloud server wakes up, installs Node.js + Chrome, and runs `node index.js`.
-
----
-
-### Step 2️⃣ — Puppeteer Opens Naukri.com
-```
-URL format: https://www.naukri.com/software-developer-jobs-in-bangalore?experience=0
-```
-- Launches a **real headless Chrome browser** (not a fake HTTP request)
-- Sets a realistic User-Agent to avoid bot detection
-- Waits for JavaScript to fully load the job cards
-- Runs **20 searches** (4 cities × 5 roles) in sequence
-- Collects ~**800 raw job listings**
-
----
-
-### Step 3️⃣ — filter.js Cleans the Data
-
-| Filter | Logic |
-|--------|-------|
-| **Experience** | Keeps only jobs with `0–1 yr`, `fresher`, `entry level` |
-| **Deduplication** | Removes same job title + company appearing multiple times |
-| **Sorting** | Jobs posted `Just Now` → `Today` → `1 Day Ago` → older |
-| **Capping** | Final top **20 jobs** selected |
-
----
-
-### Step 4️⃣ — mail.js Builds & Sends the Email
-- Generates a full **dark-mode HTML email** (not plain text)
-- Groups jobs **city-wise** with unique color themes
-- Each job card has: Title (clickable) · Company · Experience · Location · Salary · Apply button
-- Sends via **Gmail SMTP** using `nodemailer`
-- Email arrives in inbox within seconds ✅
-
----
-
-## 📊 Real Output (Sample Run)
-
-```bash
-🚀 Starting Naukri.com Direct Scraper (Headless Browser)...
-   Cities : Bangalore | Delhi | Pune | Kolkata
-   Roles  : Software Dev | Frontend | Python | Data Analyst | Web Dev
-
-📍 City: Bangalore
-🔍 Software Developer → Bangalore  ✅ 45 jobs
-🔍 Frontend Developer → Bangalore  ✅ 40 jobs
-🔍 Python Developer   → Bangalore  ✅ 40 jobs
-🔍 Data Analyst       → Bangalore  ✅ 42 jobs
-🔍 Web Developer      → Bangalore  ✅ 40 jobs
-
-📍 City: Delhi     → 208 jobs
-📍 City: Pune      → 203 jobs
-📍 City: Kolkata   → 198 jobs
-
-📊 Total raw jobs collected : 816
-   After experience filter  : 214 jobs
-   After deduplication      :  82 jobs
-   ✅ Final top 20 selected
-
-📧 Sending email to: yourname@gmail.com
-✅ Email sent! Message ID: <abc123@gmail.com>
-============================================================
-  ✅ Agent completed successfully!
-  📬 Email delivered!
-============================================================
-```
-
----
-
-## ⚡ Challenges & Solutions
-
-<details>
-<summary><b>🚧 Challenge 1 — Naukri.com is a React SPA</b></summary>
-
-**Problem:** Naukri.com renders job listings dynamically using JavaScript (React). A plain `axios.get()` returns an empty HTML page with no jobs — the DOM is empty before JS runs.
-
-**Solution:** Used **Puppeteer** (headless Chrome) which launches a real browser, waits for JavaScript to execute, and reads the fully rendered DOM including all job cards.
-
-</details>
-
-<details>
-<summary><b>🚧 Challenge 2 — Anti-Bot Detection</b></summary>
-
-**Problem:** Websites detect and block automated scrapers using browser fingerprinting (e.g., `navigator.webdriver = true` flag, missing User-Agent headers).
-
-**Solution:**
-- Set a real **Chrome User-Agent** string
-- Disabled the `--enable-automation` flag
-- Overrode `navigator.webdriver` to return `false`
-- Added **polite delays** (800ms–1200ms) between requests
-
-</details>
-
-<details>
-<summary><b>🚧 Challenge 3 — Gmail App Password with Spaces</b></summary>
-
-**Problem:** Gmail displays App Passwords with spaces (e.g., `wspj wvdn rbey riqr`) for readability, but Nodemailer rejects passwords with spaces — causing silent authentication failures.
-
-**Solution:** Strip all spaces from the App Password before storing in `.env`: `wspjwvdnrbeyriqr`
-
-</details>
-
-<details>
-<summary><b>🚧 Challenge 4 — Duplicate Jobs Across Cities/Roles</b></summary>
-
-**Problem:** Same job appears in multiple search results (e.g., a "Software Developer" at "TCS" shows up for both Bangalore Software Dev search and Bangalore Python Dev search).
-
-**Solution:** Implemented **deduplication** using a composite key of `job_title + company_name` — if the same combo appears twice, only the first occurrence is kept.
-
-</details>
-
----
-
-## 🔮 Future Scope
-
-| Feature | Description |
-|---------|-------------|
-| 🌐 **More Cities** | Add Hyderabad, Mumbai, Chennai, Noida |
-| 🤖 **AI Scoring** | Use Gemini/GPT API to score and rank jobs by profile match |
-| 📱 **WhatsApp Alert** | Send jobs via WhatsApp Business API |
-| 💾 **Database** | Store job history in MongoDB to avoid re-sending old jobs |
-| 🖥️ **Web Dashboard** | React dashboard to view, filter and bookmark jobs |
-| 📄 **Resume Match** | Upload resume → AI matches best-fit jobs automatically |
-
----
-
-## ❓ FAQ
-
-<details>
-<summary><b>Is this free to run?</b></summary>
-
-Yes! 100% free.
-- **GitHub Actions** — 2,000 free minutes/month (this uses ~5 min/day = 150 min/month)
-- **Gmail SMTP** — free for personal use
-- **Naukri.com scraping** — no paid API needed
-
-</details>
-
-<details>
-<summary><b>Will it break if Naukri.com updates their website?</b></summary>
-
-Possibly — if Naukri changes their HTML class names or page structure, the CSS selectors in `scraper.js` may need updating. This is a common challenge with web scraping. The fix is to update the selectors in `scraper.js`.
-
-</details>
-
-<details>
-<summary><b>Why is 0–1 year experience the only filter?</b></summary>
-
-This project is specifically built for **freshers** entering the job market. The filter targets candidates with no prior experience or up to 1 year, which matches the fresher job category on Naukri.com.
-
-</details>
-
-
-<div align="center">
-
-| Technology | Role | Why? |
-|:---:|:---:|:---|
-| ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=flat-square) | Runtime | Fast, async, perfect for scraping |
-| ![Puppeteer](https://img.shields.io/badge/Puppeteer-40B5A4?logo=googlechrome&logoColor=white&style=flat-square) | Scraper | Handles JS-rendered React pages |
-| ![Nodemailer](https://img.shields.io/badge/Nodemailer-EA4335?logo=gmail&logoColor=white&style=flat-square) | Email | Zero-cost SMTP delivery |
-| ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white&style=flat-square) | Scheduler | Free cloud cron — no server needed |
-| ![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white&style=flat-square) | HTTP | HTTP client for API fallbacks |
-| ![dotenv](https://img.shields.io/badge/dotenv-ECD53F?logo=dotenv&logoColor=black&style=flat-square) | Config | Secure credential management |
-
-</div>
-
----
-
-## 📧 Email Preview
-
-<div align="center">
-
-> **Dark-mode Premium Design sent every morning** 🌙
-
-</div>
-
-| Section | Design |
-|---------|--------|
-| **Header** | Gradient dark-blue with job count badge |
-| **Stats Bar** | Total Jobs · Cities · Domains (3-column) |
-| **City Labels** | Color-coded pills — 🔶Orange · 🔴Red · 🟣Purple · 🟢Teal |
-| **Job Cards** | Role badge · Company · Salary chip · Location chip · Apply button |
-| **CTA Banner** | "Explore All Jobs on Naukri.com" full-width button |
-| **Footer** | Auto-sent badge · Powered by GitHub Actions |
-
----
-
-## 🚀 Quick Start
-
-<details>
-<summary><b>📦 Step 1 — Clone & Install</b></summary>
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Rohitkr2002/Naukri.com-AI-Agent-.git
 cd Naukri.com-AI-Agent-
 npm install
 ```
-</details>
 
-<details>
-<summary><b>🔑 Step 2 — Setup Credentials</b></summary>
+### 2. Configure Environment Variables
 
 ```bash
 cp .env.example .env
@@ -347,120 +119,155 @@ cp .env.example .env
 Edit `.env`:
 
 ```env
-GMAIL_USER=your-email@gmail.com
-GMAIL_PASS=your16charpassword    # ⚠️ No spaces!
-RECIPIENT_EMAIL=receiver@gmail.com
+# Gmail Credentials
+GMAIL_USER=your_gmail@gmail.com
+GMAIL_PASS=your_16_char_app_password   # Google Account → Security → App Passwords
+
+# Recipient
+RECIPIENT_EMAIL=where_to_send@gmail.com
+
+# RapidAPI (optional fallback)
+RAPIDAPI_KEY=your_rapidapi_key
+
+# Gemini AI (FREE — for AI scoring + cover letter)
+GEMINI_API_KEY=your_gemini_api_key     # Get free at aistudio.google.com/apikey
 ```
 
-> 💡 **Get Gmail App Password:**
-> Google Account → Security → 2-Step Verification → App Passwords
+### 3. Personalize Your Profile
 
-</details>
+Edit **`config/userProfile.js`** with your actual skills, education, and projects:
 
-<details>
-<summary><b>▶️ Step 3 — Run Locally</b></summary>
+```js
+const USER_PROFILE = {
+  name: 'Your Name',
+  skills: {
+    languages: ['JavaScript', 'Python', ...],
+    frontend:  ['React.js', 'Node.js', ...],
+    // ...
+  },
+  education: { degree: 'B.Tech', field: 'CS', year: 2024 },
+  // ...
+};
+```
+
+### 4. Update Your Resumes
+
+Edit the resume files in `resumes/` folder:
+- `resumes/resume_software.txt` — for Software/Frontend/Web roles
+- `resumes/resume_data.txt` — for Data Analyst/Python roles
+
+### 5. Run Locally
 
 ```bash
 node index.js
 ```
 
-You'll see:
-```
-🚀 Starting Naukri.com Direct Scraper...
-📍 City: Bangalore → 45 jobs found
-📍 City: Delhi     → 43 jobs found
-📍 City: Pune      → 40 jobs found
-📍 City: Kolkata   → 40 jobs found
-📊 Total: 816 raw → 20 filtered
-📧 Email sent! ✅
-```
+---
 
-</details>
+## 🚀 Daily Automation (GitHub Actions)
 
-<details>
-<summary><b>☁️ Step 4 — Deploy to GitHub Actions (Free!)</b></summary>
+The agent runs **automatically every day at 9:00 AM IST** via GitHub Actions.
 
-Go to your repo → `Settings` → `Secrets and variables` → `Actions` → `New repository secret`
+### Add GitHub Secrets
 
-| Secret | Value |
-|--------|-------|
-| `GMAIL_USER` | your-email@gmail.com |
-| `GMAIL_PASS` | 16-char app password (no spaces) |
-| `RECIPIENT_EMAIL` | where to receive alerts |
-| `RAPIDAPI_KEY` | optional |
+Go to: **Repository → Settings → Secrets and variables → Actions → New repository secret**
 
-The agent will now **auto-run every day at 9:00 AM IST** 🎉
+| Secret Name | Value |
+|-------------|-------|
+| `GMAIL_USER` | Your Gmail address |
+| `GMAIL_PASS` | Gmail App Password (16 chars) |
+| `RECIPIENT_EMAIL` | Email to receive job alerts |
+| `RAPIDAPI_KEY` | Your RapidAPI key |
+| `GEMINI_API_KEY` | Your Gemini API key (free) |
 
-</details>
+### Manual Trigger
+
+Go to: **Actions tab → "Naukri Job AI Agent – Daily 9AM IST" → Run workflow**
 
 ---
 
-## 📁 Project Structure
+## 🔄 How It Works (5-Step Pipeline)
 
 ```
-📦 Naukri.com-AI-Agent
- ┣ 📂 services
- ┃ ┣ 📜 scraper.js     ── Puppeteer bot → scrapes Naukri.com
- ┃ ┣ 📜 filter.js      ── Experience filter → dedup → top 20
- ┃ ┗ 📜 mail.js        ── Premium HTML email → Gmail SMTP
- ┣ 📂 .github
- ┃ ┗ 📂 workflows
- ┃   ┗ 📜 daily.yml    ── GitHub Actions cron trigger
- ┣ 📜 index.js         ── Main orchestrator
- ┣ 📜 .env.example     ── Credential template
- ┗ 📜 package.json
+Step 0: 🚀 Profile Boost Analysis
+         └─ Score profile, find keyword gaps, generate today's ATS tips
+
+Step 1: 🔍 Scrape Naukri.com
+         └─ Headless Puppeteer across 4 cities × 5 roles
+
+Step 2: 🔧 Filter Jobs
+         └─ Keep 0-1 yr exp only, remove duplicates, sort by freshness
+
+Step 3: 🤖 AI Job Scoring (Gemini)
+         └─ Score each job 0-100%, rank by match, find skill gaps
+
+Step 4: 📄 Resume Smart Matching
+         └─ Detect domain, assign resume, generate cover letter
+
+Step 5: 📧 Send Premium Email
+         └─ Beautiful dark-mode email with all sections & job cards
 ```
 
 ---
 
-## 🔒 Security
+## 📊 What's In Your Daily Email
 
-> ⚠️ **Your credentials are never exposed.**
-
-- `.env` is listed in `.gitignore` — **never committed** to Git
-- GitHub Secrets are **AES-256 encrypted** at rest
-- Secrets are only injected **at runtime** during Actions execution
-- **Zero hardcoded credentials** anywhere in the codebase
+| Section | Content |
+|---------|---------|
+| 🚀 Profile Boost Report | Completeness %, keyword gaps, 5 ATS tips, today's actions |
+| 🤖 AI Job Match Analysis | Top score, avg score, high-match count, skill gaps + courses |
+| 📄 Resume Smart Matching | Resume assignment chart, improvement tips, cover letter |
+| 💼 Job Listings | All jobs with AI score badge, exp, salary, location, apply button |
 
 ---
 
-## 🛠️ Technical Decisions
+## 🔑 Getting Your Free Gemini API Key
 
-<details>
-<summary><b>Why Puppeteer over plain HTTP?</b></summary>
+1. Go to [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+2. Click **"Create API key"**
+3. Select an existing Google project or create a new one
+4. Copy the key (starts with `AIza...`)
+5. Add to `.env` as `GEMINI_API_KEY=your_key`
+6. Add to **GitHub Secrets** for the automated run
 
-Naukri.com is a **React SPA** — all job cards are injected by JavaScript after page load. A plain `axios.get()` returns an empty shell with no jobs. Puppeteer launches a real Chrome browser, waits for the JS to execute, and then reads the fully rendered DOM.
+> **Without key**: Agent uses smart keyword heuristic scoring — still works perfectly, just not AI-powered.
 
-</details>
+---
 
-<details>
-<summary><b>Why GitHub Actions over a server?</b></summary>
+## 🎯 Target Job Roles & Cities
 
-GitHub Actions gives **2,000 free minutes/month** with built-in cron scheduling. No VPS, no cloud bills, no maintenance. Just push → it runs every morning automatically.
+| Job Roles | Cities |
+|-----------|--------|
+| Software Developer | 🏙️ Bangalore |
+| Frontend Developer | 🕌 Delhi |
+| Python Developer | 🏯 Pune |
+| Data Analyst | 🌉 Kolkata |
+| Web Developer | |
 
-</details>
+**Experience Filter:** 0–1 year (freshers only)
 
-<details>
-<summary><b>Why Gmail SMTP over SendGrid/Mailgun?</b></summary>
+---
 
-Gmail App Password + Nodemailer = **completely free, zero sign-ups**, and works reliably. No monthly limits for personal use, no third-party dependency.
+## 🤝 Contributing
 
-</details>
+Pull requests welcome! Feel free to:
+- Add more job roles or cities in `services/scraper.js`
+- Add more ATS tips to `services/profileBoost.js`
+- Improve resume templates in `resumes/`
+- Enhance the email design in `services/mail.js`
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and distribute.
 
 ---
 
 <div align="center">
 
-## 👤 Author
+Built with ❤️ using **Node.js · Puppeteer · Gemini AI · GitHub Actions**
 
-**Rohit Kumar Singh**
-
-[![GitHub](https://img.shields.io/badge/GitHub-Rohitkr2002-181717?style=for-the-badge&logo=github)](https://github.com/Rohitkr2002)
-
----
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
-
-*Built with ❤️ to automate the boring parts of job hunting.*
+⭐ **Star this repo** if it helped you land a job!
 
 </div>
