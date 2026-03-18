@@ -51,5 +51,6 @@ jobs:
           GMAIL_PASS:       ${{ secrets.GMAIL_PASS }}
           RECIPIENT_EMAIL:  ${{ secrets.RECIPIENT_EMAIL }}
           RAPIDAPI_KEY:     ${{ secrets.RAPIDAPI_KEY }}
+          GEMINI_API_KEY:   ${{ secrets.GEMINI_API_KEY }}
         run: node index.js
 
