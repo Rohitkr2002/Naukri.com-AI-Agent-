@@ -36,6 +36,19 @@
 
 ---
 
+## ❓ Problem Statement
+
+> **Job hunting is time-consuming.** A fresher has to manually visit Naukri.com every morning, search for relevant jobs, filter by city and experience, and check each listing — which takes 30–60 minutes daily.
+
+This project **automates the entire workflow**:
+- ✅ No manual searching
+- ✅ No missing new listings
+- ✅ Curated top 20 jobs land directly in your inbox at 9 AM
+- ✅ Covers 4 cities and 5 job roles simultaneously
+- ✅ Runs 365 days/year — completely hands-free
+
+---
+
 ## 🌟 What This Project Does
 
 <table>
@@ -119,7 +132,164 @@ Runs on **GitHub Actions** every day at **9 AM IST** — no server needed, compl
 
 ---
 
-## ⚙️ Tech Stack
+## 🔄 How It Works — Step by Step
+
+### Step 1️⃣ — GitHub Actions Triggers at 9 AM IST
+```
+Cron: '30 3 * * *'  →  Runs at 3:30 AM UTC = 9:00 AM IST
+```
+GitHub's free cloud server wakes up, installs Node.js + Chrome, and runs `node index.js`.
+
+---
+
+### Step 2️⃣ — Puppeteer Opens Naukri.com
+```
+URL format: https://www.naukri.com/software-developer-jobs-in-bangalore?experience=0
+```
+- Launches a **real headless Chrome browser** (not a fake HTTP request)
+- Sets a realistic User-Agent to avoid bot detection
+- Waits for JavaScript to fully load the job cards
+- Runs **20 searches** (4 cities × 5 roles) in sequence
+- Collects ~**800 raw job listings**
+
+---
+
+### Step 3️⃣ — filter.js Cleans the Data
+
+| Filter | Logic |
+|--------|-------|
+| **Experience** | Keeps only jobs with `0–1 yr`, `fresher`, `entry level` |
+| **Deduplication** | Removes same job title + company appearing multiple times |
+| **Sorting** | Jobs posted `Just Now` → `Today` → `1 Day Ago` → older |
+| **Capping** | Final top **20 jobs** selected |
+
+---
+
+### Step 4️⃣ — mail.js Builds & Sends the Email
+- Generates a full **dark-mode HTML email** (not plain text)
+- Groups jobs **city-wise** with unique color themes
+- Each job card has: Title (clickable) · Company · Experience · Location · Salary · Apply button
+- Sends via **Gmail SMTP** using `nodemailer`
+- Email arrives in inbox within seconds ✅
+
+---
+
+## 📊 Real Output (Sample Run)
+
+```bash
+🚀 Starting Naukri.com Direct Scraper (Headless Browser)...
+   Cities : Bangalore | Delhi | Pune | Kolkata
+   Roles  : Software Dev | Frontend | Python | Data Analyst | Web Dev
+
+📍 City: Bangalore
+🔍 Software Developer → Bangalore  ✅ 45 jobs
+🔍 Frontend Developer → Bangalore  ✅ 40 jobs
+🔍 Python Developer   → Bangalore  ✅ 40 jobs
+🔍 Data Analyst       → Bangalore  ✅ 42 jobs
+🔍 Web Developer      → Bangalore  ✅ 40 jobs
+
+📍 City: Delhi     → 208 jobs
+📍 City: Pune      → 203 jobs
+📍 City: Kolkata   → 198 jobs
+
+📊 Total raw jobs collected : 816
+   After experience filter  : 214 jobs
+   After deduplication      :  82 jobs
+   ✅ Final top 20 selected
+
+📧 Sending email to: yourname@gmail.com
+✅ Email sent! Message ID: <abc123@gmail.com>
+============================================================
+  ✅ Agent completed successfully!
+  📬 Email delivered!
+============================================================
+```
+
+---
+
+## ⚡ Challenges & Solutions
+
+<details>
+<summary><b>🚧 Challenge 1 — Naukri.com is a React SPA</b></summary>
+
+**Problem:** Naukri.com renders job listings dynamically using JavaScript (React). A plain `axios.get()` returns an empty HTML page with no jobs — the DOM is empty before JS runs.
+
+**Solution:** Used **Puppeteer** (headless Chrome) which launches a real browser, waits for JavaScript to execute, and reads the fully rendered DOM including all job cards.
+
+</details>
+
+<details>
+<summary><b>🚧 Challenge 2 — Anti-Bot Detection</b></summary>
+
+**Problem:** Websites detect and block automated scrapers using browser fingerprinting (e.g., `navigator.webdriver = true` flag, missing User-Agent headers).
+
+**Solution:**
+- Set a real **Chrome User-Agent** string
+- Disabled the `--enable-automation` flag
+- Overrode `navigator.webdriver` to return `false`
+- Added **polite delays** (800ms–1200ms) between requests
+
+</details>
+
+<details>
+<summary><b>🚧 Challenge 3 — Gmail App Password with Spaces</b></summary>
+
+**Problem:** Gmail displays App Passwords with spaces (e.g., `wspj wvdn rbey riqr`) for readability, but Nodemailer rejects passwords with spaces — causing silent authentication failures.
+
+**Solution:** Strip all spaces from the App Password before storing in `.env`: `wspjwvdnrbeyriqr`
+
+</details>
+
+<details>
+<summary><b>🚧 Challenge 4 — Duplicate Jobs Across Cities/Roles</b></summary>
+
+**Problem:** Same job appears in multiple search results (e.g., a "Software Developer" at "TCS" shows up for both Bangalore Software Dev search and Bangalore Python Dev search).
+
+**Solution:** Implemented **deduplication** using a composite key of `job_title + company_name` — if the same combo appears twice, only the first occurrence is kept.
+
+</details>
+
+---
+
+## 🔮 Future Scope
+
+| Feature | Description |
+|---------|-------------|
+| 🌐 **More Cities** | Add Hyderabad, Mumbai, Chennai, Noida |
+| 🤖 **AI Scoring** | Use Gemini/GPT API to score and rank jobs by profile match |
+| 📱 **WhatsApp Alert** | Send jobs via WhatsApp Business API |
+| 💾 **Database** | Store job history in MongoDB to avoid re-sending old jobs |
+| 🖥️ **Web Dashboard** | React dashboard to view, filter and bookmark jobs |
+| 📄 **Resume Match** | Upload resume → AI matches best-fit jobs automatically |
+
+---
+
+## ❓ FAQ
+
+<details>
+<summary><b>Is this free to run?</b></summary>
+
+Yes! 100% free.
+- **GitHub Actions** — 2,000 free minutes/month (this uses ~5 min/day = 150 min/month)
+- **Gmail SMTP** — free for personal use
+- **Naukri.com scraping** — no paid API needed
+
+</details>
+
+<details>
+<summary><b>Will it break if Naukri.com updates their website?</b></summary>
+
+Possibly — if Naukri changes their HTML class names or page structure, the CSS selectors in `scraper.js` may need updating. This is a common challenge with web scraping. The fix is to update the selectors in `scraper.js`.
+
+</details>
+
+<details>
+<summary><b>Why is 0–1 year experience the only filter?</b></summary>
+
+This project is specifically built for **freshers** entering the job market. The filter targets candidates with no prior experience or up to 1 year, which matches the fresher job category on Naukri.com.
+
+</details>
+
 
 <div align="center">
 
