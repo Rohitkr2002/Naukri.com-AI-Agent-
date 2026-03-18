@@ -11,8 +11,8 @@ const https = require('https');
 const { USER_PROFILE } = require('../config/userProfile');
 
 // ─── Gemini API Config ────────────────────────────────────────────────────────
-const GEMINI_MODEL = 'gemini-1.5-flash';
-const GEMINI_URL   = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+const GEMINI_MODEL = 'gemini-2.0-flash-lite';
+const GEMINI_URL   = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent`;
 
 // ─── Domain detection keywords ────────────────────────────────────────────────
 const DATA_DOMAIN_KEYWORDS = [

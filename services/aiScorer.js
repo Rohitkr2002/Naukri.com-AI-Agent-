@@ -9,8 +9,8 @@ const https = require('https');
 const { USER_PROFILE } = require('../config/userProfile');
 
 // ─── Gemini API Config ────────────────────────────────────────────────────────
-const GEMINI_MODEL  = 'gemini-1.5-flash';
-const GEMINI_URL    = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+const GEMINI_MODEL  = 'gemini-2.0-flash-lite';
+const GEMINI_URL    = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent`;
 
 // ─── Skill → domain keyword map for fallback scoring ─────────────────────────
 const DOMAIN_KEYWORDS = {
@@ -67,7 +67,13 @@ function callGeminiAPI(prompt) {
         try {
           const parsed = JSON.parse(data);
           const text   = parsed?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-          resolve(text.trim());
+          if (parsed.error) {
+            const code = parsed.error.code;
+            const msg  = parsed.error.message?.slice(0, 80);
+            reject(new Error(`GEMINI_${code}: ${msg}`));
+          } else {
+            resolve(text.trim());
+          }
         } catch (e) {
           reject(e);
         }
