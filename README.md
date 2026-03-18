@@ -1,224 +1,288 @@
-# 🤖 Naukri Job AI Agent
+<div align="center">
 
-> **An automated job monitoring agent that scrapes Naukri.com daily and delivers curated fresher job listings directly to your inbox every morning at 9:00 AM IST.**
+<!-- Animated Banner -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Naukri%20Job%20AI%20Agent&fontSize=50&fontColor=fff&animation=twinkling&fontAlignY=35&desc=Automated%20Daily%20Job%20Alerts%20from%20Naukri.com&descAlignY=55&descSize=18" width="100%"/>
 
-![Node.js](https://img.shields.io/badge/Node.js-20-green?logo=node.js)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automated-blue?logo=githubactions)
-![Puppeteer](https://img.shields.io/badge/Puppeteer-Headless_Browser-orange?logo=googlechrome)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+<!-- Badges Row 1 -->
+<p>
+  <img src="https://img.shields.io/badge/Node.js-20-339933?style=for-the-badge&logo=node.js&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Puppeteer-Headless_Browser-40B5A4?style=for-the-badge&logo=googlechrome&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GitHub_Actions-Automated-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Gmail-SMTP_Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>
+</p>
 
----
+<!-- Badges Row 2 -->
+<p>
+  <img src="https://img.shields.io/badge/Schedule-9:00_AM_IST_Daily-orange?style=flat-square&logo=clockify&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Source-Naukri.com-blue?style=flat-square&logo=naukri&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Jobs-Top_20_Freshers-brightgreen?style=flat-square"/>
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"/>
+</p>
 
-## 📌 What This Project Does
+<!-- Animated typing -->
+<a href="https://git.io/typing-svg">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1000&color=38BDF8&center=true&vCenter=true&width=600&lines=🤖+Automated+Job+Monitoring+Agent;📍+Bangalore+%7C+Delhi+%7C+Pune+%7C+Kolkata;🎯+Top+20+Fresh+Jobs+Every+Morning;⏰+Delivered+at+9%3A00+AM+IST+Daily;🚀+Built+with+Node.js+%2B+Puppeteer" alt="Typing SVG" />
+</a>
 
-This project is a **fully automated AI-powered job agent** that:
-
-1. **Scrapes Naukri.com directly** using a headless Chrome browser (Puppeteer)
-2. **Filters jobs** for freshers (0–1 year experience) across 4 major Indian cities
-3. **Deduplicates & ranks** listings by recency
-4. **Sends a premium HTML email** with the top **20 jobs** every day at **9:00 AM IST**
-5. **Runs automatically via GitHub Actions** — no server or hosting required
-
----
-
-## 🏙️ Covered Cities & Job Roles
-
-| Cities | Job Roles |
-|--------|-----------|
-| 📍 Bangalore | Software Developer |
-| 📍 Delhi | Frontend Developer |
-| 📍 Pune | Python Developer |
-| 📍 Kolkata | Data Analyst |
-| | Web Developer |
+</div>
 
 ---
 
-## 🏗️ Project Architecture
+## 🌟 What This Project Does
 
-```
-Naukri.com/
-├── index.js                   # Main orchestrator – runs the full pipeline
-├── services/
-│   ├── scraper.js             # Puppeteer-based Naukri.com scraper
-│   ├── filter.js              # Experience filter, dedup, sort, top-20 logic
-│   └── mail.js                # Premium HTML email builder + Nodemailer sender
-├── .github/
-│   └── workflows/
-│       └── daily.yml          # GitHub Actions – runs daily at 9 AM IST
-├── .env                       # Local credentials (never committed to Git)
-├── .env.example               # Template for setting up credentials
-└── package.json
-```
+<table>
+<tr>
+<td width="50%">
 
-### Pipeline Flow
+### 🔍 Scrapes Naukri.com Directly
+Uses **Puppeteer headless browser** to open Naukri.com like a real user — bypasses anti-bot restrictions and scrapes JS-rendered pages.
 
-```
-GitHub Actions (Cron 9AM IST)
-        │
-        ▼
-  index.js (Orchestrator)
-        │
-        ▼
-  scraper.js ──► Puppeteer opens Naukri.com
-        │         4 cities × 5 roles = 20 searches
-        │         ~800 raw jobs collected
-        ▼
-  filter.js ───► Experience filter (0–1 yr)
-        │         Deduplication
-        │         Sort by recency
-        │         → Top 20 jobs selected
-        ▼
-  mail.js ─────► Build Premium HTML email
-                  City-wise grouped cards
-                  Send via Gmail SMTP
-                  📬 Delivered to inbox!
-```
+### 🎯 Smart Filtering
+Filters for **0–1 year experience**, removes duplicates, sorts by recency, and picks the **Top 20** best jobs.
+
+</td>
+<td width="50%">
+
+### 📧 Premium Email Design
+Sends a **dark-mode HTML email** with city-grouped job cards, color-coded themes, salary, location & direct apply links.
+
+### ☁️ 100% Automated
+Runs on **GitHub Actions** every day at **9 AM IST** — no server needed, completely free.
+
+</td>
+</tr>
+</table>
 
 ---
 
-## 📧 Email Design
+## 🏙️ Cities & Roles Covered
 
-The daily email features a **premium dark-mode design** with:
+<div align="center">
 
-| Feature | Detail |
-|---------|--------|
-| 🎨 City color themes | Orange (Bangalore) · Red (Delhi) · Purple (Pune) · Teal (Kolkata) |
-| 📊 Stats bar | Total jobs · Cities covered · Domains |
-| 💼 Job cards | Domain badge · Company · Experience · Location · Salary · Apply button |
-| 🚀 CTA Banner | Direct link to explore all Naukri.com fresher jobs |
-| 🔒 Footer | Auto-sent badge with tech stack info |
+| 🔶 Bangalore | 🔴 Delhi | 🟣 Pune | 🟢 Kolkata |
+|:---:|:---:|:---:|:---:|
+| Software Developer | Software Developer | Software Developer | Software Developer |
+| Frontend Developer | Frontend Developer | Frontend Developer | Frontend Developer |
+| Python Developer | Python Developer | Python Developer | Python Developer |
+| Data Analyst | Data Analyst | Data Analyst | Data Analyst |
+| Web Developer | Web Developer | Web Developer | Web Developer |
+
+</div>
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│              GitHub Actions  (9:00 AM IST / 3:30 AM UTC)    │
+│                    cron: '30 3 * * *'                        │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    index.js  (Orchestrator)                  │
+└──────┬─────────────────────────────────────────────────┬────┘
+       │                                                 │
+       ▼                                                 ▼
+┌──────────────────────────┐             ┌───────────────────────────┐
+│      scraper.js          │             │       filter.js            │
+│                          │             │                            │
+│  Puppeteer launches      │  ~800 jobs  │  • 0–1 yr exp filter       │
+│  headless Chrome         │ ──────────► │  • Deduplicate             │
+│                          │             │  • Sort by recency          │
+│  4 Cities × 5 Roles      │             │  • Pick Top 20             │
+│  = 20 Naukri.com pages   │             │                            │
+└──────────────────────────┘             └────────────┬──────────────┘
+                                                      │ 20 best jobs
+                                                      ▼
+                                         ┌────────────────────────────┐
+                                         │        mail.js              │
+                                         │                             │
+                                         │  • Premium HTML template    │
+                                         │  • City-grouped cards       │
+                                         │  • Direct Naukri.com links  │
+                                         │  • Send via Gmail SMTP      │
+                                         └────────────┬───────────────┘
+                                                      │
+                                                      ▼
+                                              📬 Your Inbox!
+```
 
 ---
 
 ## ⚙️ Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| **Node.js** | Runtime environment |
-| **Puppeteer-core** | Headless Chrome browser for JS-rendered scraping |
-| **Cheerio** | HTML parsing (fallback) |
-| **Axios** | HTTP client |
-| **Nodemailer** | Email delivery via Gmail SMTP |
-| **GitHub Actions** | Free cloud automation (cron scheduler) |
-| **dotenv** | Environment variable management |
+<div align="center">
+
+| Technology | Role | Why? |
+|:---:|:---:|:---|
+| ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=flat-square) | Runtime | Fast, async, perfect for scraping |
+| ![Puppeteer](https://img.shields.io/badge/Puppeteer-40B5A4?logo=googlechrome&logoColor=white&style=flat-square) | Scraper | Handles JS-rendered React pages |
+| ![Nodemailer](https://img.shields.io/badge/Nodemailer-EA4335?logo=gmail&logoColor=white&style=flat-square) | Email | Zero-cost SMTP delivery |
+| ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white&style=flat-square) | Scheduler | Free cloud cron — no server needed |
+| ![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white&style=flat-square) | HTTP | HTTP client for API fallbacks |
+| ![dotenv](https://img.shields.io/badge/dotenv-ECD53F?logo=dotenv&logoColor=black&style=flat-square) | Config | Secure credential management |
+
+</div>
 
 ---
 
-## 🚀 How to Run Locally
+## 📧 Email Preview
 
-### 1. Clone the Repository
+<div align="center">
+
+> **Dark-mode Premium Design sent every morning** 🌙
+
+</div>
+
+| Section | Design |
+|---------|--------|
+| **Header** | Gradient dark-blue with job count badge |
+| **Stats Bar** | Total Jobs · Cities · Domains (3-column) |
+| **City Labels** | Color-coded pills — 🔶Orange · 🔴Red · 🟣Purple · 🟢Teal |
+| **Job Cards** | Role badge · Company · Salary chip · Location chip · Apply button |
+| **CTA Banner** | "Explore All Jobs on Naukri.com" full-width button |
+| **Footer** | Auto-sent badge · Powered by GitHub Actions |
+
+---
+
+## 🚀 Quick Start
+
+<details>
+<summary><b>📦 Step 1 — Clone & Install</b></summary>
 
 ```bash
 git clone https://github.com/Rohitkr2002/Naukri.com-AI-Agent-.git
 cd Naukri.com-AI-Agent-
-```
-
-### 2. Install Dependencies
-
-```bash
 npm install
 ```
+</details>
 
-### 3. Setup Environment Variables
+<details>
+<summary><b>🔑 Step 2 — Setup Credentials</b></summary>
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your credentials:
+Edit `.env`:
 
 ```env
 GMAIL_USER=your-email@gmail.com
-GMAIL_PASS=your16charapppassword   # No spaces!
+GMAIL_PASS=your16charpassword    # ⚠️ No spaces!
 RECIPIENT_EMAIL=receiver@gmail.com
 ```
 
-> **How to get Gmail App Password:**
-> Google Account → Security → 2-Step Verification → App Passwords → Generate
+> 💡 **Get Gmail App Password:**
+> Google Account → Security → 2-Step Verification → App Passwords
 
-### 4. Run the Agent
+</details>
+
+<details>
+<summary><b>▶️ Step 3 — Run Locally</b></summary>
 
 ```bash
 node index.js
 ```
 
-That's it! Jobs will be scraped and emailed instantly.
+You'll see:
+```
+🚀 Starting Naukri.com Direct Scraper...
+📍 City: Bangalore → 45 jobs found
+📍 City: Delhi     → 43 jobs found
+📍 City: Pune      → 40 jobs found
+📍 City: Kolkata   → 40 jobs found
+📊 Total: 816 raw → 20 filtered
+📧 Email sent! ✅
+```
+
+</details>
+
+<details>
+<summary><b>☁️ Step 4 — Deploy to GitHub Actions (Free!)</b></summary>
+
+Go to your repo → `Settings` → `Secrets and variables` → `Actions` → `New repository secret`
+
+| Secret | Value |
+|--------|-------|
+| `GMAIL_USER` | your-email@gmail.com |
+| `GMAIL_PASS` | 16-char app password (no spaces) |
+| `RECIPIENT_EMAIL` | where to receive alerts |
+| `RAPIDAPI_KEY` | optional |
+
+The agent will now **auto-run every day at 9:00 AM IST** 🎉
+
+</details>
 
 ---
 
-## ☁️ Automated Deployment (GitHub Actions)
+## 📁 Project Structure
 
-The agent runs **for free** on GitHub's cloud infrastructure using GitHub Actions.
-
-### Setup Steps
-
-1. Push this repo to GitHub
-2. Go to: `Settings → Secrets and variables → Actions`
-3. Add these **4 Repository Secrets**:
-
-| Secret Name | Value |
-|-------------|-------|
-| `GMAIL_USER` | Your Gmail address |
-| `GMAIL_PASS` | 16-char App Password (no spaces) |
-| `RECIPIENT_EMAIL` | Email to receive job alerts |
-| `RAPIDAPI_KEY` | RapidAPI key (optional) |
-
-4. The workflow runs automatically every day at **9:00 AM IST (3:30 AM UTC)**
-5. You can also trigger it manually: **Actions tab → Run workflow**
-
-### Cron Schedule
-
-```yaml
-schedule:
-  - cron: '30 3 * * *'   # 3:30 AM UTC = 9:00 AM IST
+```
+📦 Naukri.com-AI-Agent
+ ┣ 📂 services
+ ┃ ┣ 📜 scraper.js     ── Puppeteer bot → scrapes Naukri.com
+ ┃ ┣ 📜 filter.js      ── Experience filter → dedup → top 20
+ ┃ ┗ 📜 mail.js        ── Premium HTML email → Gmail SMTP
+ ┣ 📂 .github
+ ┃ ┗ 📂 workflows
+ ┃   ┗ 📜 daily.yml    ── GitHub Actions cron trigger
+ ┣ 📜 index.js         ── Main orchestrator
+ ┣ 📜 .env.example     ── Credential template
+ ┗ 📜 package.json
 ```
 
 ---
 
-## 🔒 Security Practices
+## 🔒 Security
 
-- `.env` is in `.gitignore` — credentials are **never committed** to Git
-- GitHub Secrets are **encrypted at rest** and only exposed during workflow runs
-- No hardcoded credentials anywhere in the codebase
+> ⚠️ **Your credentials are never exposed.**
 
----
-
-## 🛠️ Key Technical Decisions
-
-### Why Puppeteer instead of plain HTTP?
-Naukri.com is a **React-based Single Page Application (SPA)**. Its job listings are rendered dynamically via JavaScript. Plain HTTP requests (`axios + cheerio`) only get an empty HTML shell. Puppeteer launches a real headless Chrome browser that executes JavaScript, loads the full page, and then extracts the data.
-
-### Why GitHub Actions for scheduling?
-GitHub Actions provides **free cloud compute** (2,000 minutes/month on free tier) with built-in cron scheduling. This eliminates the need for any paid server or hosting to run a daily task.
-
-### Why Gmail SMTP + Nodemailer?
-Gmail's SMTP with App Passwords is a **zero-cost, reliable** email delivery method that works without any third-party email service subscription.
+- `.env` is listed in `.gitignore` — **never committed** to Git
+- GitHub Secrets are **AES-256 encrypted** at rest
+- Secrets are only injected **at runtime** during Actions execution
+- **Zero hardcoded credentials** anywhere in the codebase
 
 ---
 
-## 📁 File Descriptions
+## 🛠️ Technical Decisions
 
-| File | Description |
-|------|-------------|
-| `index.js` | Entry point — orchestrates scrape → filter → email pipeline |
-| `services/scraper.js` | Launches Puppeteer, visits Naukri.com for each city+role, extracts job data |
-| `services/filter.js` | Filters by 0–1 yr experience, removes duplicates, sorts by recency, picks top **20** |
-| `services/mail.js` | Builds premium dark-mode HTML email (city-grouped, colored themes), sends via Nodemailer |
-| `.github/workflows/daily.yml` | GitHub Actions workflow with Chrome install + Node.js setup + cron trigger |
+<details>
+<summary><b>Why Puppeteer over plain HTTP?</b></summary>
+
+Naukri.com is a **React SPA** — all job cards are injected by JavaScript after page load. A plain `axios.get()` returns an empty shell with no jobs. Puppeteer launches a real Chrome browser, waits for the JS to execute, and then reads the fully rendered DOM.
+
+</details>
+
+<details>
+<summary><b>Why GitHub Actions over a server?</b></summary>
+
+GitHub Actions gives **2,000 free minutes/month** with built-in cron scheduling. No VPS, no cloud bills, no maintenance. Just push → it runs every morning automatically.
+
+</details>
+
+<details>
+<summary><b>Why Gmail SMTP over SendGrid/Mailgun?</b></summary>
+
+Gmail App Password + Nodemailer = **completely free, zero sign-ups**, and works reliably. No monthly limits for personal use, no third-party dependency.
+
+</details>
 
 ---
+
+<div align="center">
 
 ## 👤 Author
 
 **Rohit Kumar Rajput**
-- GitHub: [@Rohitkr2002](https://github.com/Rohitkr2002)
+
+[![GitHub](https://img.shields.io/badge/GitHub-Rohitkr2002-181717?style=for-the-badge&logo=github)](https://github.com/Rohitkr2002)
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License**.
-
----
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
 
 *Built with ❤️ to automate the boring parts of job hunting.*
+
+</div>
