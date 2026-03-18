@@ -16,6 +16,11 @@
 [![Stars](https://img.shields.io/github/stars/Rohitkr2002/Naukri.com-AI-Agent-?style=social)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
 [![Last Commit](https://img.shields.io/github/last-commit/Rohitkr2002/Naukri.com-AI-Agent-?color=green)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
 [![Repo Size](https://img.shields.io/github/repo-size/Rohitkr2002/Naukri.com-AI-Agent-)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
+[![Profile Views](https://komarev.com/ghpvc/?username=Rohitkr2002&label=Profile+Views&color=0e75b6&style=flat)](https://github.com/Rohitkr2002)
+
+<br/>
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=700&height=80&lines=🤖+Scrapes+Naukri.com+across+4+cities+daily;🧠+Gemini+2.5+AI+scores+every+job+0–100%25;📧+Premium+email+delivered+at+9%3A00+AM+IST)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
 
 <br/>
 
@@ -27,12 +32,29 @@
 
 <br/>
 
-```
-╔══════════════════════════════════════════════════════════════════════════╗
-║  STEP 0 → 🚀 Profile Boost   STEP 3 → 🤖 Gemini AI Scores 0–100%       ║
-║  STEP 1 → 🔍 Scrape Naukri   STEP 4 → 📄 Smart Resume + Cover Letter   ║
-║  STEP 2 → ✅ Filter & Rank   STEP 5 → 📧 Premium Email @ 9:00 AM IST   ║
-╚══════════════════════════════════════════════════════════════════════════╝
+### 🛠️ Tech Stack
+
+[![My Skills](https://skillicons.dev/icons?i=nodejs,js,python,html,css,github,vscode,linux,git,gmail&theme=dark)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
+
+<br/>
+
+```mermaid
+flowchart LR
+    A(["⏰ GitHub Actions\n9:00 AM IST"]) --> B
+    B(["🚀 Profile Boost\nScore + ATS Tips"]) --> C
+    C(["🔍 Scraper\n4 Cities × 5 Roles"]) --> D
+    D(["✅ Filter\nDedupe + Sort"]) --> E
+    E(["🤖 Gemini 2.5 AI\nScore 0–100%"]) --> F
+    F(["📄 Resume Match\n+ Cover Letter"]) --> G
+    G(["📧 Premium Email\nDelivered @ 9 AM"])
+
+    style A fill:#1e3a5f,color:#7dd3fc,stroke:#2563eb
+    style B fill:#14532d,color:#4ade80,stroke:#16a34a
+    style C fill:#422006,color:#fb923c,stroke:#ea580c
+    style D fill:#1e293b,color:#94a3b8,stroke:#475569
+    style E fill:#312e81,color:#a5b4fc,stroke:#6366f1
+    style F fill:#4a1d96,color:#e9d5ff,stroke:#7c3aed
+    style G fill:#450a0a,color:#fca5a5,stroke:#dc2626
 ```
 
 </div>
