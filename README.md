@@ -13,10 +13,10 @@
 
 This project is a **fully automated AI-powered job agent** that:
 
-1. **Scrapes Naukri.com** directly using a headless Chrome browser (Puppeteer)
+1. **Scrapes Naukri.com directly** using a headless Chrome browser (Puppeteer)
 2. **Filters jobs** for freshers (0–1 year experience) across 4 major Indian cities
 3. **Deduplicates & ranks** listings by recency
-4. **Sends a beautifully formatted HTML email** with the top 15 jobs every day at **9:00 AM IST**
+4. **Sends a premium HTML email** with the top **20 jobs** every day at **9:00 AM IST**
 5. **Runs automatically via GitHub Actions** — no server or hosting required
 
 ---
@@ -40,8 +40,8 @@ Naukri.com/
 ├── index.js                   # Main orchestrator – runs the full pipeline
 ├── services/
 │   ├── scraper.js             # Puppeteer-based Naukri.com scraper
-│   ├── filter.js              # Experience filter, dedup, sort, top-15 logic
-│   └── mail.js                # HTML email builder + Nodemailer sender
+│   ├── filter.js              # Experience filter, dedup, sort, top-20 logic
+│   └── mail.js                # Premium HTML email builder + Nodemailer sender
 ├── .github/
 │   └── workflows/
 │       └── daily.yml          # GitHub Actions – runs daily at 9 AM IST
@@ -66,12 +66,27 @@ GitHub Actions (Cron 9AM IST)
   filter.js ───► Experience filter (0–1 yr)
         │         Deduplication
         │         Sort by recency
-        │         → Top 15 jobs selected
+        │         → Top 20 jobs selected
         ▼
-  mail.js ─────► Build HTML email
+  mail.js ─────► Build Premium HTML email
+                  City-wise grouped cards
                   Send via Gmail SMTP
                   📬 Delivered to inbox!
 ```
+
+---
+
+## 📧 Email Design
+
+The daily email features a **premium dark-mode design** with:
+
+| Feature | Detail |
+|---------|--------|
+| 🎨 City color themes | Orange (Bangalore) · Red (Delhi) · Purple (Pune) · Teal (Kolkata) |
+| 📊 Stats bar | Total jobs · Cities covered · Domains |
+| 💼 Job cards | Domain badge · Company · Experience · Location · Salary · Apply button |
+| 🚀 CTA Banner | Direct link to explore all Naukri.com fresher jobs |
+| 🔒 Footer | Auto-sent badge with tech stack info |
 
 ---
 
@@ -114,9 +129,8 @@ Edit `.env` with your credentials:
 
 ```env
 GMAIL_USER=your-email@gmail.com
-GMAIL_PASS=your-16-char-app-password   # No spaces!
+GMAIL_PASS=your16charapppassword   # No spaces!
 RECIPIENT_EMAIL=receiver@gmail.com
-RAPIDAPI_KEY=your-rapidapi-key         # Optional
 ```
 
 > **How to get Gmail App Password:**
@@ -150,7 +164,7 @@ The agent runs **for free** on GitHub's cloud infrastructure using GitHub Action
 | `RAPIDAPI_KEY` | RapidAPI key (optional) |
 
 4. The workflow runs automatically every day at **9:00 AM IST (3:30 AM UTC)**
-5. You can also trigger it manually from the **Actions** tab → **Run workflow**
+5. You can also trigger it manually: **Actions tab → Run workflow**
 
 ### Cron Schedule
 
@@ -158,19 +172,6 @@ The agent runs **for free** on GitHub's cloud infrastructure using GitHub Action
 schedule:
   - cron: '30 3 * * *'   # 3:30 AM UTC = 9:00 AM IST
 ```
-
----
-
-## 📧 Email Output Sample
-
-The email includes for each job:
-
-- 🏢 **Company Name**
-- 💼 **Job Title** (clickable link → opens directly on Naukri.com)
-- 📍 **City** (Bangalore / Delhi / Pune / Kolkata)
-- 🎓 **Experience Required** (0–1 Yrs)
-- 💰 **Salary** (if disclosed)
-- 🕐 **Posted Time** (e.g., "2 hrs ago")
 
 ---
 
@@ -200,16 +201,10 @@ Gmail's SMTP with App Passwords is a **zero-cost, reliable** email delivery meth
 | File | Description |
 |------|-------------|
 | `index.js` | Entry point — orchestrates scrape → filter → email pipeline |
-| `services/scraper.js` | Launches Puppeteer, visits Naukri.com for each city+role combination, extracts job data |
-| `services/filter.js` | Filters by 0–1 yr experience, removes duplicates, sorts by recency, picks top 15 |
-| `services/mail.js` | Builds responsive HTML email template, sends via Nodemailer + Gmail |
+| `services/scraper.js` | Launches Puppeteer, visits Naukri.com for each city+role, extracts job data |
+| `services/filter.js` | Filters by 0–1 yr experience, removes duplicates, sorts by recency, picks top **20** |
+| `services/mail.js` | Builds premium dark-mode HTML email (city-grouped, colored themes), sends via Nodemailer |
 | `.github/workflows/daily.yml` | GitHub Actions workflow with Chrome install + Node.js setup + cron trigger |
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome! For major changes, please open an issue first.
 
 ---
 
