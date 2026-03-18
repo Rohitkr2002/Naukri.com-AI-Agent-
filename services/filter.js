@@ -1,7 +1,7 @@
 // ============================================================
 // services/filter.js
 // Filters, deduplicates, sorts and caps job listings
-// Rules: 0-1 yr experience only, no duplicates, top 15
+// Rules: 0-1 yr experience only, no duplicates, top 20
 // ============================================================
 
 // Experience keywords that indicate 0-1 year range
@@ -64,11 +64,11 @@ function filterJobs(rawJobs) {
   // Step 3: Sort by most recently posted
   deduped.sort((a, b) => postedScore(a.posted) - postedScore(b.posted));
 
-  // Step 4: Pick top 15
-  const top15 = deduped.slice(0, 15);
-  console.log(`   → Final top jobs selected: ${top15.length} jobs\n`);
+  // Step 4: Pick top 20
+  const top20 = deduped.slice(0, 20);
+  console.log(`   → Final top jobs selected: ${top20.length} jobs\n`);
 
-  return top15;
+  return top20;
 }
 
 module.exports = { filterJobs };
