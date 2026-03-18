@@ -9,7 +9,7 @@ const https = require('https');
 const { USER_PROFILE } = require('../config/userProfile');
 
 // ─── Gemini API Config ────────────────────────────────────────────────────────
-const GEMINI_MODEL  = 'gemini-2.0-flash-lite';
+const GEMINI_MODEL  = 'gemini-2.5-flash';
 const GEMINI_URL    = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent`;
 
 // ─── Skill → domain keyword map for fallback scoring ─────────────────────────
@@ -49,7 +49,10 @@ function callGeminiAPI(prompt) {
 
     const body = JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.2, maxOutputTokens: 512 },
+      generationConfig: {
+        temperature:     0.1,
+        maxOutputTokens: 2048,
+      },
     });
 
     const url = new URL(`${GEMINI_URL}?key=${apiKey}`);
@@ -66,22 +69,31 @@ function callGeminiAPI(prompt) {
       res.on('end', () => {
         try {
           const parsed = JSON.parse(data);
-          const text   = parsed?.candidates?.[0]?.content?.parts?.[0]?.text || '';
           if (parsed.error) {
             const code = parsed.error.code;
             const msg  = parsed.error.message?.slice(0, 80);
             reject(new Error(`GEMINI_${code}: ${msg}`));
-          } else {
-            resolve(text.trim());
+            return;
           }
+          // DEBUG: log parts structure
+          const parts = parsed?.candidates?.[0]?.content?.parts || [];
+          if (process.env.GEMINI_DEBUG) {
+            console.log('DEBUG parts count:', parts.length);
+            parts.forEach((p, i) => console.log(`  part[${i}]: thought=${p.thought}, textLen=${p.text?.length}, text="${p.text?.slice(0, 200)}"`));
+          }
+          // gemini-2.5-flash thinking model — collect all text parts
+          const text = parts.filter((p) => p.text && !p.thought).map((p) => p.text).join('')
+                    || parts.map((p) => p.text || '').join('') || '';
+          resolve(text.trim());
         } catch (e) {
           reject(e);
         }
       });
     });
 
+
     req.on('error', reject);
-    req.setTimeout(15000, () => { req.destroy(); reject(new Error('TIMEOUT')); });
+    req.setTimeout(30000, () => { req.destroy(); reject(new Error('TIMEOUT')); });
     req.write(body);
     req.end();
   });
@@ -90,8 +102,12 @@ function callGeminiAPI(prompt) {
 // ─── Parse JSON safely from Gemini response ───────────────────────────────────
 function extractJSON(text) {
   try {
-    // Strip markdown code blocks if present
-    const cleaned = text.replace(/```json|```/g, '').trim();
+    if (!text) return null;
+    // Strip <think>...</think> tags (gemini-2.5 thinking model output)
+    let cleaned = text.replace(/<think>[\s\S]*?<\/think>/gi, '');
+    // Strip markdown code fences
+    cleaned = cleaned.replace(/```json|```/g, '').trim();
+    // Find first JSON object
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
     if (jsonMatch) return JSON.parse(jsonMatch[0]);
   } catch (_) {}
@@ -100,29 +116,17 @@ function extractJSON(text) {
 
 // ─── Score ONE job with Gemini API ───────────────────────────────────────────
 async function scoreWithGemini(job) {
-  const userSkills = USER_PROFILE.allSkills.join(', ');
-  const prompt = `You are an expert HR AI system. Score this job match for a fresher candidate.
+  const userSkills = USER_PROFILE.allSkills.slice(0, 20).join(', ');
+  const prompt = `Score this job match. Return a JSON object ONLY. No thinking, no explanation outside JSON.
 
-JOB:
-Title: ${job.title}
-Company: ${job.company}
-Domain: ${job.domain}
-Experience Required: ${job.exp || '0-1 years'}
+JOB: ${job.title} at ${job.company} (${job.domain}, ${job.exp || '0-1 years'})
 
-CANDIDATE PROFILE:
-Skills: ${userSkills}
-Target Roles: ${USER_PROFILE.targetRole.join(', ')}
-Experience: Fresher (0 years)
-Education: ${USER_PROFILE.education.degree} in ${USER_PROFILE.education.field}
+CANDIDATE SKILLS: ${userSkills}
+TARGET ROLES: ${USER_PROFILE.targetRole.join(', ')}
+EDUCATION: ${USER_PROFILE.education.degree} in ${USER_PROFILE.education.field}
 
-Analyze the match and return ONLY a valid JSON object (no markdown):
-{
-  "score": <integer 0-100>,
-  "matchReason": "<1 sentence why this is a good/bad match>",
-  "topMatchingSkills": ["skill1", "skill2", "skill3"],
-  "skillGaps": ["missing1", "missing2"],
-  "learningTip": "<1 short learning recommendation>"
-}`;
+Output ONLY this JSON (no markdown, no text before or after):
+{"score":<0-100>,"matchReason":"<one sentence>","topMatchingSkills":["s1","s2"],"skillGaps":["g1","g2"],"learningTip":"<resource>"}`;
 
   const response = await callGeminiAPI(prompt);
   const parsed   = extractJSON(response);
@@ -182,15 +186,23 @@ function scoreWithHeuristic(job) {
   };
 }
 
-// ─── Score a single job (Gemini with fallback) ────────────────────────────────
+// ─── Score a single job (Gemini with 1 retry, then fallback) ─────────────────
 async function scoreOneJob(job) {
-  try {
-    if (process.env.GEMINI_API_KEY) {
+  if (!process.env.GEMINI_API_KEY) return scoreWithHeuristic(job);
+
+  // Try Gemini — 1 retry on failure with 2s wait
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
       return await scoreWithGemini(job);
-    }
-  } catch (err) {
-    if (err.message !== 'NO_API_KEY') {
-      console.warn(`   ⚠️  Gemini API failed for "${job.title}" – using heuristic fallback`);
+    } catch (err) {
+      if (attempt === 1 && !err.message.includes('NO_API_KEY')) {
+        // Wait 2s before retry
+        await new Promise((r) => setTimeout(r, 2000));
+      } else {
+        console.warn(`   ⚠️  Gemini API failed for "${job.title}" – using heuristic fallback`);
+        console.warn(`      Reason: ${err.message}`);
+        break;
+      }
     }
   }
   return scoreWithHeuristic(job);
@@ -210,9 +222,9 @@ async function scoreJobs(jobs) {
     const result = await scoreOneJob(job);
     scored.push({ ...job, aiScore: result });
 
-    // Small delay for Gemini API rate limits
+    // Delay between calls to avoid Gemini rate limits (3s gap)
     if (useGemini && i < jobs.length - 1) {
-      await new Promise((r) => setTimeout(r, 300));
+      await new Promise((r) => setTimeout(r, 3000));
     }
   }
 

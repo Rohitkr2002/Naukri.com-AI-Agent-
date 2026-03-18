@@ -11,7 +11,7 @@ const https = require('https');
 const { USER_PROFILE } = require('../config/userProfile');
 
 // ─── Gemini API Config ────────────────────────────────────────────────────────
-const GEMINI_MODEL = 'gemini-2.0-flash-lite';
+const GEMINI_MODEL = 'gemini-2.5-flash';
 const GEMINI_URL   = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent`;
 
 // ─── Domain detection keywords ────────────────────────────────────────────────
@@ -104,12 +104,19 @@ function callGeminiAPI(prompt) {
       res.on('end', () => {
         try {
           const parsed = JSON.parse(data);
-          resolve(parsed?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '');
+          if (parsed.error) {
+            reject(new Error(`GEMINI_${parsed.error.code}: ${parsed.error.message?.slice(0, 80)}`));
+            return;
+          }
+          // gemini-2.5-flash thinking model: filter out thought parts, get actual text
+          const parts = parsed?.candidates?.[0]?.content?.parts || [];
+          const text  = parts.filter((p) => p.text && !p.thought).map((p) => p.text).join('') || '';
+          resolve(text.trim());
         } catch (e) { reject(e); }
       });
     });
     req.on('error', reject);
-    req.setTimeout(20000, () => { req.destroy(); reject(new Error('TIMEOUT')); });
+    req.setTimeout(30000, () => { req.destroy(); reject(new Error('TIMEOUT')); });
     req.write(body);
     req.end();
   });
