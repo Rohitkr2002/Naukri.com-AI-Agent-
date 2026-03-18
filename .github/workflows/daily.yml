@@ -17,7 +17,7 @@ on:
 jobs:
   run-job-agent:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       # Step 1: Checkout the repository code
@@ -31,11 +31,20 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      # Step 3: Install dependencies
+      # Step 3: Install Google Chrome (required for Puppeteer headless browser)
+      - name: 🌐 Install Google Chrome
+        run: |
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update -q
+          sudo apt-get install -y google-chrome-stable
+          google-chrome --version
+
+      # Step 4: Install dependencies
       - name: 📦 Install Dependencies
         run: npm install
 
-      # Step 4: Run the Naukri Job Agent
+      # Step 5: Run the Naukri Job Agent
       - name: 🚀 Run Naukri Job Agent
         env:
           GMAIL_USER:       ${{ secrets.GMAIL_USER }}
@@ -43,3 +52,4 @@ jobs:
           RECIPIENT_EMAIL:  ${{ secrets.RECIPIENT_EMAIL }}
           RAPIDAPI_KEY:     ${{ secrets.RAPIDAPI_KEY }}
         run: node index.js
+

@@ -17,9 +17,11 @@
   "author": "Naukri AI Agent",
   "license": "MIT",
   "dependencies": {
+    "@sparticuz/chromium": "^143.0.4",
     "axios": "^1.6.8",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.4.5",
-    "nodemailer": "^6.9.13"
+    "nodemailer": "^6.9.13",
+    "puppeteer-core": "^24.39.1"
   }
 }

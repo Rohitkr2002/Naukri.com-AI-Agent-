@@ -1,186 +1,224 @@
 // ============================================================
 // services/scraper.js
-// Multi-source Job Scraper (No extra sign-up required)
-// Sources:
-//   1. JSearch via RapidAPI (if subscribed)
-//   2. Remotive API – free, no auth (remote tech jobs)
-//   3. Arbeitnow API – free, no auth (global tech jobs)
+// Direct Naukri.com Scraper – Puppeteer Headless Browser
+// Cities: Bangalore, Delhi, Pune, Kolkata
+// Domains: Software Developer, Frontend Dev, Python Dev,
+//          Data Analyst, Web Developer
+// Experience: Fresher / 0-1 year
 // ============================================================
 
-const axios = require('axios');
+const puppeteer = require('puppeteer-core');
 
-// Job domains for filtering
-const DOMAINS = [
-  'software developer',
-  'frontend developer',
-  'web developer',
-  'python developer',
-  'data analyst',
-  'fresher developer',
-];
+// ─── Try to get Chromium path ─────────────────────────────────────────────────
+let chromium;
+try {
+  chromium = require('@sparticuz/chromium');
+} catch (_) {
+  chromium = null;
+}
 
-const JSEARCH_QUERIES = [
-  { keyword: 'software developer fresher 0 1 year India', label: 'Software Developer' },
-  { keyword: 'frontend developer fresher India entry level',  label: 'Frontend Developer' },
-  { keyword: 'python developer fresher India 0 year',         label: 'Python Developer' },
-  { keyword: 'data analyst fresher India entry level',        label: 'Data Analyst' },
+// ─── Target cities ────────────────────────────────────────────────────────────
+const CITIES = ['bangalore', 'delhi', 'pune', 'kolkata'];
+
+const CITY_LABELS = {
+  bangalore: 'Bangalore',
+  delhi:     'Delhi',
+  pune:      'Pune',
+  kolkata:   'Kolkata',
+};
+
+// ─── Job roles ────────────────────────────────────────────────────────────────
+const ROLES = [
+  { keyword: 'software-developer', label: 'Software Developer' },
+  { keyword: 'frontend-developer', label: 'Frontend Developer' },
+  { keyword: 'python-developer',   label: 'Python Developer'   },
+  { keyword: 'data-analyst',       label: 'Data Analyst'       },
+  { keyword: 'web-developer',      label: 'Web Developer'      },
 ];
 
 // ─── Delay helper ─────────────────────────────────────────────────────────────
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// ─── SOURCE 1: JSearch (RapidAPI) ─────────────────────────────────────────────
-async function scrapeJSearch() {
-  const jobs = [];
-  if (!process.env.RAPIDAPI_KEY) return jobs;
-
-  for (const q of JSEARCH_QUERIES) {
-    try {
-      console.log(`🔍 [JSearch] ${q.label}`);
-      const resp = await axios.get('https://jsearch.p.rapidapi.com/search', {
-        headers: {
-          'x-rapidapi-host': 'jsearch.p.rapidapi.com',
-          'x-rapidapi-key': process.env.RAPIDAPI_KEY,
-        },
-        params: {
-          query:     q.keyword,
-          page:      '1',
-          num_pages: '1',
-          date_posted: 'today',
-          country:   'in',
-        },
-        timeout: 20000,
-      });
-
-      (resp.data?.data || []).forEach((item) => {
-        const title   = item.job_title      || '';
-        const company = item.employer_name  || 'N/A';
-        const jobUrl  = item.job_apply_link || '';
-        const location= [item.job_city, item.job_state].filter(Boolean).join(', ') || 'India';
-        const salary  = item.job_min_salary ? `₹${item.job_min_salary}–₹${item.job_max_salary}` : 'Not Disclosed';
-        const posted  = item.job_posted_at_datetime_utc ? relativeTime(item.job_posted_at_datetime_utc) : 'Recently';
-
-        if (title) jobs.push({ title, company, exp: '0–1 Yrs', location, salary, posted, url: jobUrl, domain: q.label });
-      });
-
-      console.log(`   ✅ JSearch: ${jobs.filter(j=>j.domain===q.label).length} results`);
-    } catch (e) {
-      const status = e.response?.status;
-      if (status === 403) console.warn(`   ⚠️  [JSearch] Not subscribed – visit https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch and click Subscribe`);
-      else if (status === 429) console.warn('   ⚠️  [JSearch] Rate limit hit');
-      else console.warn(`   ⚠️  [JSearch] ${q.label}: ${e.message}`);
-    }
-    await sleep(1000);
+// ─── Get Chromium executable path ────────────────────────────────────────────
+async function getExecutablePath() {
+  // Lambda/CI environment – use @sparticuz/chromium
+  if (chromium && process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return await chromium.executablePath();
   }
-  return jobs;
-}
-
-// ─── SOURCE 2: Remotive API (free, no auth) ───────────────────────────────────
-async function scrapeRemotive() {
-  const jobs  = [];
-  const tags  = ['software', 'frontend', 'python', 'data-analyst', 'web'];
-
-  console.log('\n🔍 [Remotive] Fetching remote tech jobs...');
-  try {
-    for (const tag of tags) {
-      const resp = await axios.get(`https://remotive.com/api/remote-jobs`, {
-        params: { category: 'software-dev', search: tag, limit: 10 },
-        timeout: 15000,
-      });
-
-      (resp.data?.jobs || []).forEach((item) => {
-        const title   = item.title          || '';
-        const company = item.company_name   || 'N/A';
-        const jobUrl  = item.url            || '';
-        const location= item.candidate_required_location || 'Remote / India';
-        const salary  = item.salary         || 'Not Disclosed';
-        const posted  = item.publication_date ? relativeTime(item.publication_date) : 'Recently';
-        const label   = matchDomain(title);
-
-        if (title && label) {
-          jobs.push({ title, company, exp: '0–1 Yrs', location, salary, posted, url: jobUrl, domain: label });
-        }
-      });
-      await sleep(500);
+  // GitHub Actions (ubuntu-latest)
+  const fs   = require('fs');
+  const ciPaths = [
+    '/usr/bin/google-chrome',
+    '/usr/bin/google-chrome-stable',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/chromium',
+    '/snap/bin/chromium',
+  ];
+  for (const p of ciPaths) {
+    if (fs.existsSync(p)) {
+      console.log(`   ℹ️  Using Chrome at: ${p}`);
+      return p;
     }
-    console.log(`   ✅ Remotive: ${jobs.length} results`);
-  } catch (e) {
-    console.warn(`   ⚠️  [Remotive] ${e.message}`);
   }
-  return jobs;
-}
-
-// ─── SOURCE 3: Arbeitnow API (free, no auth, global jobs) ─────────────────────
-async function scrapeArbeitnow() {
-  const jobs = [];
-  const searches = ['software developer', 'python developer', 'data analyst', 'web developer'];
-
-  console.log('🔍 [Arbeitnow] Fetching global tech jobs...');
+  // Local Windows / macOS – use bundled Chromium from puppeteer
   try {
-    for (const q of searches) {
-      const resp = await axios.get('https://www.arbeitnow.com/api/job-board-api', {
-        params: { search: q, page: 1 },
-        timeout: 15000,
-      });
+    // puppeteer (not puppeteer-core) bundles Chromium
+    const pup = require('puppeteer');
+    return pup.executablePath();
+  } catch (_) {}
 
-      (resp.data?.data || []).forEach((item) => {
-        const title   = item.title    || '';
-        const company = item.company_name || 'N/A';
-        const jobUrl  = item.url      || '';
-        const location= item.location || 'Remote';
-        const posted  = item.created_at ? relativeTime(new Date(item.created_at * 1000).toISOString()) : 'Recently';
-        const label   = matchDomain(title);
-
-        if (title && label) {
-          jobs.push({ title, company, exp: '0–1 Yrs', location, salary: 'Not Disclosed', posted, url: jobUrl, domain: label });
-        }
-      });
-      await sleep(500);
-    }
-    console.log(`   ✅ Arbeitnow: ${jobs.length} results`);
-  } catch (e) {
-    console.warn(`   ⚠️  [Arbeitnow] ${e.message}`);
+  // Fallback: common local paths
+  const localPaths = [
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  ];
+  for (const p of localPaths) {
+    const fs = require('fs');
+    if (fs.existsSync(p)) return p;
   }
-  return jobs;
-}
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-function relativeTime(isoString) {
-  try {
-    const diffMs  = Date.now() - new Date(isoString).getTime();
-    const mins    = Math.floor(diffMs / 60000);
-    const hrs     = Math.floor(diffMs / 3600000);
-    const days    = Math.floor(diffMs / 86400000);
-    if (mins < 60)  return `${mins} mins ago`;
-    if (hrs  < 24)  return `${hrs} hrs ago`;
-    return `${days} day${days > 1 ? 's' : ''} ago`;
-  } catch (_) { return 'Recently'; }
-}
-
-function matchDomain(title) {
-  const t = title.toLowerCase();
-  if (t.includes('python'))                              return 'Python Developer';
-  if (t.includes('frontend') || t.includes('front-end')) return 'Frontend Developer';
-  if (t.includes('data analyst'))                        return 'Data Analyst';
-  if (t.includes('web developer'))                       return 'Web Developer';
-  if (t.includes('software') || t.includes('developer')) return 'Software Developer';
   return null;
+}
+
+// ─── Launch browser ───────────────────────────────────────────────────────────
+async function launchBrowser() {
+  const execPath = await getExecutablePath();
+
+  const launchArgs = {
+    headless: 'new',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-blink-features=AutomationControlled',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--window-size=1280,900',
+    ],
+    ignoreDefaultArgs: ['--enable-automation'],
+  };
+
+  if (execPath) {
+    launchArgs.executablePath = execPath;
+  } else if (chromium) {
+    launchArgs.executablePath = await chromium.executablePath();
+    launchArgs.args = [...(await chromium.args), ...launchArgs.args];
+  }
+
+  return puppeteer.launch(launchArgs);
+}
+
+// ─── Scrape one role+city combination ────────────────────────────────────────
+async function scrapeNaukriPage(page, role, city) {
+  const url = `https://www.naukri.com/${role.keyword}-jobs-in-${city}?experience=0`;
+  console.log(`🔍 [Naukri] ${role.label} → ${CITY_LABELS[city]}`);
+
+  try {
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+    // Wait for job cards to appear (Naukri lazy-loads them)
+    await page.waitForSelector(
+      'article.jobTuple, div.cust-job-tuple, div[class*="jobTuple"], div[class*="srp-jobtuple"]',
+      { timeout: 12000 }
+    ).catch(() => {}); // ignore timeout — page may still have results
+
+    await sleep(1500); // give JS time to paint
+
+    // Extract job data from page DOM
+    const jobs = await page.evaluate((cityLabel, roleLabel) => {
+      const results = [];
+
+      // Naukri uses different class names — we handle multiple versions
+      const cards = document.querySelectorAll(
+        'article.jobTuple, div.cust-job-tuple, div[class*="jobTupleHeader"], ' +
+        'div[class*="srp-jobtuple-wrapper"], article[class*="jobTuple"]'
+      );
+
+      cards.forEach((card) => {
+        // Title & URL
+        const titleEl  = card.querySelector('a.title, a[class*="title"], h2 a, a[class*="jobTitle"]');
+        const title    = titleEl?.innerText?.trim() || '';
+        const rawHref  = titleEl?.getAttribute('href') || '';
+        const jobUrl   = rawHref.startsWith('http') ? rawHref : `https://www.naukri.com${rawHref}`;
+
+        // Company
+        const company  = card.querySelector('a.comp-name, a[class*="comp-name"], span[class*="comp-name"]')
+                            ?.innerText?.trim() || 'N/A';
+
+        // Experience
+        const exp      = card.querySelector('li.exp, span[class*="experience"], li[class*="exp"], span[class*="exp"]')
+                            ?.innerText?.trim() || '0-1 Yrs';
+
+        // Location shown on card
+        const locEl    = card.querySelector('li.loc, span[class*="loc"], li[class*="loc"]');
+        const location = locEl?.innerText?.trim() || cityLabel;
+
+        // Salary
+        const salary   = card.querySelector('li.salary, span[class*="salary"]')
+                            ?.innerText?.trim() || 'Not Disclosed';
+
+        // Posted
+        const posted   = card.querySelector('span.job-post-day, span[class*="post"], time')
+                            ?.innerText?.trim() || 'Recently';
+
+        if (title) {
+          results.push({ title, company, exp, location: `${cityLabel}, India`, salary, posted, url: jobUrl, domain: roleLabel, city: cityLabel });
+        }
+      });
+
+      return results;
+    }, CITY_LABELS[city], role.label);
+
+    console.log(`   ✅ ${jobs.length} jobs found`);
+    return jobs;
+
+  } catch (err) {
+    console.warn(`   ⚠️  ${role.label}/${city}: ${err.message}`);
+    return [];
+  }
 }
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 async function scrapeAllJobs() {
-  console.log('\n🚀 Starting Multi-Source Job Scraper...\n');
+  console.log('\n🚀 Starting Naukri.com Direct Scraper (Headless Browser)...');
+  console.log('   Cities : Bangalore | Delhi | Pune | Kolkata');
+  console.log('   Roles  : Software Dev | Frontend | Python | Data Analyst | Web Dev\n');
 
-  // Run all sources in parallel
-  const [jsearchJobs, remotiveJobs, arbeitnowJobs] = await Promise.all([
-    scrapeJSearch(),
-    scrapeRemotive(),
-    scrapeArbeitnow(),
-  ]);
+  let browser;
+  const allJobs = [];
 
-  const allJobs = [...jsearchJobs, ...remotiveJobs, ...arbeitnowJobs];
+  try {
+    browser = await launchBrowser();
+    const page = await browser.newPage();
+
+    // Stealth: set real user-agent & viewport
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+    );
+    await page.setViewport({ width: 1280, height: 900 });
+    // Disable navigator.webdriver flag (basic anti-bot)
+    await page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, 'webdriver', { get: () => false });
+    });
+
+    for (const city of CITIES) {
+      console.log(`\n📍 City: ${CITY_LABELS[city]}`);
+      console.log('─'.repeat(48));
+
+      for (const role of ROLES) {
+        const jobs = await scrapeNaukriPage(page, role, city);
+        allJobs.push(...jobs);
+        await sleep(1200); // polite delay
+      }
+    }
+
+  } catch (err) {
+    console.error('❌ Browser error:', err.message);
+  } finally {
+    if (browser) await browser.close();
+  }
+
   console.log(`\n📊 Total raw jobs collected: ${allJobs.length}`);
-  console.log(`   JSearch: ${jsearchJobs.length} | Remotive: ${remotiveJobs.length} | Arbeitnow: ${arbeitnowJobs.length}\n`);
+  console.log(`   From Naukri.com across 4 cities × 5 roles\n`);
 
   return allJobs;
 }
