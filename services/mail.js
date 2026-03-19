@@ -20,29 +20,28 @@ function createTransporter() {
   });
 }
 
-// ─── City accent colors ───────────────────────────────────────────────────────
+// ─── Cyber-Pro Theme Tokens (HSL) ───────────────────────────────────────────
+const THEME = {
+  bg:      '#020617', // Deeper slate-950 for better contrast
+  glass:   'rgba(255, 255, 255, 0.04)',
+  border:  'rgba(255, 255, 255, 0.12)',
+  text:    { main: '#f8fafc', dim: '#cbd5e1', muted: '#64748b' },
+  accent:  '#38bdf8', // Sky-400
+  glow:    '0 0 20px rgba(56, 189, 248, 0.4)',
+};
+
 const CITY_THEME = {
-  'Bangalore': { color: '#f97316', bg: '#431407', light: '#fed7aa', emoji: '🏙️' },
-  'Delhi':     { color: '#ef4444', bg: '#450a0a', light: '#fecaca', emoji: '🕌' },
-  'Pune':      { color: '#a855f7', bg: '#3b0764', light: '#e9d5ff', emoji: '🏯' },
-  'Kolkata':   { color: '#14b8a6', bg: '#042f2e', light: '#99f6e4', emoji: '🌉' },
+  'Bangalore': { accent: '#fb923c', glow: 'rgba(251, 146, 60, 0.3)', emoji: '🏙️' }, // Orange-400
+  'Delhi':     { accent: '#f87171', glow: 'rgba(248, 113, 113, 0.3)', emoji: '🕌' }, // Red-400
+  'Pune':      { accent: '#c084fc', glow: 'rgba(192, 132, 252, 0.3)', emoji: '🏯' }, // Purple-400
+  'Kolkata':   { accent: '#2dd4bf', glow: 'rgba(45, 212, 191, 0.3)',  emoji: '🌉' }, // Teal-400
 };
 
-// ─── Domain tag colors ────────────────────────────────────────────────────────
-const DOMAIN_COLORS = {
-  'Software Developer': { bg: '#1e3a5f', color: '#93c5fd' },
-  'Frontend Developer': { bg: '#1c2a1e', color: '#86efac' },
-  'Python Developer':   { bg: '#2d1f3e', color: '#c4b5fd' },
-  'Data Analyst':       { bg: '#1f2d3e', color: '#7dd3fc' },
-  'Web Developer':      { bg: '#2d2a1a', color: '#fde68a' },
-};
-
-// ─── AI Score color ───────────────────────────────────────────────────────────
-function getScoreColor(score) {
-  if (score >= 80) return { bg: '#14532d', color: '#4ade80', label: 'Excellent' };
-  if (score >= 65) return { bg: '#1e3a5f', color: '#60a5fa', label: 'Good'      };
-  if (score >= 50) return { bg: '#422006', color: '#fb923c', label: 'Fair'      };
-  return                  { bg: '#450a0a', color: '#f87171', label: 'Low'       };
+function getScoreStyle(score) {
+  if (score >= 85) return { color: '#4ade80', bg: 'rgba(74, 222, 128, 0.1)', glow: 'rgba(74, 222, 128, 0.3)' };
+  if (score >= 70) return { color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.1)', glow: 'rgba(96, 165, 250, 0.3)' };
+  if (score >= 50) return { color: '#fb923c', bg: 'rgba(251, 146, 60, 0.1)', glow: 'rgba(251, 146, 60, 0.3)' };
+  return                  { color: '#f87171', bg: 'rgba(248, 113, 113, 0.1)', glow: 'rgba(248, 113, 113, 0.3)' };
 }
 
 // ─── Truncate helper ──────────────────────────────────────────────────────────
@@ -57,229 +56,104 @@ function fmtSalary(s) {
   return s;
 }
 
-// ─── Render one job card (with AI score badge + resume match) ─────────────────
-function renderJobCard(job, index, cityColor) {
-  const domainStyle = DOMAIN_COLORS[job.domain] || { bg: '#1e293b', color: '#94a3b8' };
-  const salary      = fmtSalary(job.salary);
-  const company     = trunc(job.company, 40);
-  const title       = trunc(job.title, 60);
-  const posted      = job.posted || 'Recently';
-  const applyUrl    = job.url || 'https://www.naukri.com';
-
-  // AI Score badge
-  const hasScore    = job.aiScore && typeof job.aiScore.score === 'number';
-  const scoreColor  = hasScore ? getScoreColor(job.aiScore.score) : null;
+// ─── Render one job card ───────────────────────────────────────────────────────
+function renderJobCard(job, index, cityTheme) {
+  const accentColor = cityTheme.accent;
+  const score       = job.aiScore?.score || 0;
+  const scoreStyle  = getScoreStyle(score);
   const isTopJob    = index === 0;
 
-  // Resume match badge
-  const resumeLabel = job.resumeMatch?.resumeLabel || '';
-
-  const aiBadge = hasScore ? `
-    <span style="
-      background: ${scoreColor.bg};
-      color: ${scoreColor.color};
-      font-size: 10px;
-      font-weight: 800;
-      padding: 3px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.5px;
-      border: 1px solid ${scoreColor.color}44;
-      font-family: 'Segoe UI', Arial, sans-serif;
-    ">🤖 ${job.aiScore.score}% Match</span>` : '';
-
-  const topBadge = isTopJob ? `
-    <span style="
-      background: linear-gradient(135deg, #854d0e, #78350f);
-      color: #fde68a;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-right: 4px;
-      font-family: 'Segoe UI', Arial, sans-serif;
-    ">🏆 TOP PICK</span>` : '';
-
-  const resumeBadge = resumeLabel ? `
-    <br/>
-    <span style="
-      color: #64748b;
-      font-size: 10px;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin-top: 4px;
-      display: inline-block;
-    ">${resumeLabel}</span>` : '';
-
-  // Skill gap tip
-  const skillGapTip = hasScore && job.aiScore.skillGaps?.length > 0
-    ? `<p style="color:#475569; font-size:11px; margin: 8px 0 0; font-family:'Segoe UI', Arial, sans-serif; border-top: 1px solid #1e293b; padding-top: 8px;">
-        💡 <strong style="color:#94a3b8;">Learn:</strong> ${job.aiScore.skillGaps.slice(0, 2).join(', ')}
-       </p>`
-    : '';
+  // AI Match Progress Bar (Premium Redesign)
+  const meterWidth  = Math.max(10, score);
+  const matchMeter = `
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 16px; margin-bottom: 4px;">
+      <tr>
+        <td style="padding-bottom: 8px;">
+          <span style="color: ${scoreStyle.color}; font-size: 11px; font-weight: 900; font-family: 'Outfit', sans-serif; letter-spacing: 1px;">AI MATCH CONFIDENCE: ${score}%</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; height: 8px; overflow: hidden; position: relative;">
+            <div style="width: ${meterWidth}%; height: 100%; background: linear-gradient(90deg, ${scoreStyle.color}88, ${scoreStyle.color}); box-shadow: 0 0 15px ${scoreStyle.glow}; border-radius: 20px;"></div>
+          </div>
+        </td>
+      </tr>
+    </table>`;
 
   return `
-  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:14px;">
-    <tr>
-      <td style="
-        background: linear-gradient(135deg, #131c2e 0%, #1a2540 100%);
-        border: 1px solid ${isTopJob ? cityColor + '66' : '#1e2d45'};
-        border-left: 4px solid ${cityColor};
-        border-radius: 12px;
-        padding: 18px 20px;
-        ${isTopJob ? 'box-shadow: 0 0 20px ' + cityColor + '22;' : ''}
-      ">
-        <!-- Top Row: Badges + Posted -->
-        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
-          <tr>
-            <td>
-              ${topBadge}
-              <span style="
-                background: ${cityColor};
-                color: #000;
-                font-size: 10px;
-                font-weight: 800;
-                padding: 3px 10px;
-                border-radius: 20px;
-                letter-spacing: 0.8px;
-                text-transform: uppercase;
-                font-family: 'Segoe UI', Arial, sans-serif;
-              ">#${String(index + 1).padStart(2, '0')}</span>
-              &nbsp;
-              <span style="
-                background: ${domainStyle.bg};
-                color: ${domainStyle.color};
-                font-size: 10px;
-                font-weight: 700;
-                padding: 3px 10px;
-                border-radius: 20px;
-                font-family: 'Segoe UI', Arial, sans-serif;
-              ">${job.domain}</span>
-              &nbsp;${aiBadge}
-              ${resumeBadge}
-            </td>
-            <td align="right" style="vertical-align: top;">
-              <span style="color:#475569; font-size:11px; font-family:'Segoe UI', Arial, sans-serif;">
-                🕐 ${posted}
-              </span>
-            </td>
-          </tr>
-        </table>
+  <!-- JOB CARD: ${job.title} -->
+  <div style="
+    background: ${THEME.glass};
+    border: 1px solid ${isTopJob ? accentColor + '66' : THEME.border};
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow: ${isTopJob ? '0 15px 40px ' + cityTheme.glow : 'none'};
+  ">
+    ${isTopJob ? `<div style="position: absolute; top: -14px; right: 28px; background: linear-gradient(135deg, ${accentColor}, #818cf8); color: #000; font-size: 10px; font-weight: 900; padding: 6px 16px; border-radius: 30px; box-shadow: 0 5px 15px ${cityTheme.glow}; letter-spacing: 1.5px; border: 2px solid ${THEME.bg};">PREMIUM MATCH</div>` : ''}
 
-        <!-- Job Title -->
-        <a href="${applyUrl}" target="_blank" style="
-          color: #f1f5f9;
-          font-size: 16px;
-          font-weight: 700;
-          text-decoration: none;
-          display: block;
-          margin-bottom: 4px;
-          line-height: 1.4;
-          font-family: 'Segoe UI', Arial, sans-serif;
-        ">${title}</a>
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="vertical-align: top;">
+          <!-- Badge Row -->
+          <div style="margin-bottom: 16px;">
+            <span style="background: ${accentColor}10; color: ${accentColor}; font-size: 10px; font-weight: 900; padding: 5px 14px; border-radius: 40px; border: 1px solid ${accentColor}30; text-transform: uppercase; letter-spacing: 1.5px;">#${index + 1} ${job.domain}</span>
+            <span style="color: ${THEME.text.muted}; font-size: 11px; margin-left: 12px; font-weight: 700;">• ${job.posted || 'Recently'}</span>
+          </div>
 
-        <!-- Company -->
-        <p style="
-          color: #64748b;
-          font-size: 13px;
-          margin: 0 0 14px;
-          font-family: 'Segoe UI', Arial, sans-serif;
-        ">🏢 <span style="color:#94a3b8;">${company}</span></p>
+          <!-- Title -->
+          <a href="${job.url}" target="_blank" style="color: ${THEME.text.main}; font-size: 22px; font-weight: 900; text-decoration: none; display: block; margin-bottom: 8px; line-height: 1.2; font-family: 'Outfit', sans-serif; letter-spacing: -0.5px;">${trunc(job.title, 75)}</a>
 
-        <!-- Info Chips -->
-        <table cellpadding="0" cellspacing="0" style="margin-bottom:16px;">
-          <tr>
-            <td style="padding-right:8px; padding-bottom:6px;">
-              <span style="
-                background: #1e3a5f;
-                color: #93c5fd;
-                padding: 5px 12px;
-                border-radius: 20px;
-                font-size: 11px;
-                font-weight: 600;
-                font-family: 'Segoe UI', Arial, sans-serif;
-                white-space: nowrap;
-              ">💼 ${job.exp || '0-1 Yrs'}</span>
-            </td>
-            <td style="padding-right:8px; padding-bottom:6px;">
-              <span style="
-                background: #1a3a2a;
-                color: #86efac;
-                padding: 5px 12px;
-                border-radius: 20px;
-                font-size: 11px;
-                font-weight: 600;
-                font-family: 'Segoe UI', Arial, sans-serif;
-                white-space: nowrap;
-              ">📍 ${job.location || 'India'}</span>
-            </td>
-            <td style="padding-bottom:6px;">
-              <span style="
-                background: #2d1f3e;
-                color: #c4b5fd;
-                padding: 5px 12px;
-                border-radius: 20px;
-                font-size: 11px;
-                font-weight: 600;
-                font-family: 'Segoe UI', Arial, sans-serif;
-                white-space: nowrap;
-              ">💰 ${fmtSalary(job.salary)}</span>
-            </td>
-          </tr>
-        </table>
+          <!-- Company -->
+          <div style="color: ${THEME.text.dim}; font-size: 15px; margin-bottom: 20px; font-weight: 600; display: flex; align-items: center;">
+            <span style="opacity: 0.7; margin-right: 6px;">🏢</span> ${trunc(job.company, 50)}
+          </div>
 
-        ${skillGapTip}
+          <!-- Info Pill Cloud -->
+          <div style="margin-bottom: 20px;">
+            <span style="background: rgba(56, 189, 248, 0.1); color: #7dd3fc; padding: 7px 16px; border-radius: 14px; font-size: 11px; font-weight: 800; margin-right: 8px; border: 1px solid rgba(56, 189, 248, 0.2);">💼 ${job.exp || '0-1 yr'}</span>
+            <span style="background: rgba(34, 197, 94, 0.1); color: #86efac; padding: 7px 16px; border-radius: 14px; font-size: 11px; font-weight: 800; margin-right: 8px; border: 1px solid rgba(34, 197, 94, 0.2);">📍 ${job.location || 'India'}</span>
+            <span style="background: rgba(168, 85, 247, 0.1); color: #d8b4fe; padding: 7px 16px; border-radius: 14px; font-size: 11px; font-weight: 800; border: 1px solid rgba(168, 85, 247, 0.2);">💰 ${fmtSalary(job.salary)}</span>
+          </div>
 
-        <!-- Apply Button -->
-        <a href="${applyUrl}" target="_blank" style="
-          display: inline-block;
-          background: linear-gradient(135deg, ${cityColor} 0%, #818cf8 100%);
-          color: #000000;
-          font-size: 12px;
-          font-weight: 800;
-          padding: 10px 22px;
-          border-radius: 8px;
-          text-decoration: none;
-          letter-spacing: 0.5px;
-          font-family: 'Segoe UI', Arial, sans-serif;
-          text-transform: uppercase;
-          margin-top: 10px;
-        ">Apply on Naukri →</a>
+          ${matchMeter}
 
-      </td>
-    </tr>
-  </table>`;
+          ${job.aiScore?.matchReason ? `
+            <div style="margin-top: 20px; padding: 16px; background: rgba(255,255,255,0.02); border-radius: 16px; border-left: 4px solid ${scoreStyle.color};">
+              <p style="color: ${scoreStyle.color}; font-size: 13px; margin: 0; line-height: 1.6; font-style: italic; font-weight: 500;">
+                " ${job.aiScore.matchReason} "
+              </p>
+            </div>` : ''}
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-top: 28px;">
+           <a href="${job.url}" target="_blank" style="display: block; width: 100%; text-align: center; background: linear-gradient(135deg, ${accentColor}, #6366f1); color: #fff; font-size: 14px; font-weight: 900; padding: 18px; border-radius: 16px; text-decoration: none; letter-spacing: 1.5px; box-shadow: 0 10px 25px ${cityTheme.glow}; text-transform: uppercase;">Apply to this role on Naukri →</a>
+        </td>
+      </tr>
+    </table>
+  </div>`;
 }
 
 // ─── City section header ──────────────────────────────────────────────────────
 function renderCitySection(cityName, jobs) {
-  const theme = CITY_THEME[cityName] || { color: '#38bdf8', bg: '#0f2027', light: '#bae6fd', emoji: '📍' };
-  const cards = jobs.map((job, i) => renderJobCard(job, i, theme.color)).join('');
+  const theme = CITY_THEME[cityName] || { accent: '#38bdf8', glow: 'rgba(56,189,248,0.2)', emoji: '📍' };
+  const cards = jobs.map((job, i) => renderJobCard(job, i, theme)).join('');
 
   return `
   <!-- CITY SECTION: ${cityName} -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 8px;">
-    <tr>
-      <td style="
-        background: linear-gradient(90deg, ${theme.bg} 0%, #0d1b2a 100%);
-        border-radius: 10px;
-        padding: 14px 20px;
-        border-left: 5px solid ${theme.color};
-        margin-bottom: 16px;
-      ">
-        <span style="
-          color: ${theme.color};
-          font-size: 18px;
-          font-weight: 800;
-          font-family: 'Segoe UI', Arial, sans-serif;
-        ">${theme.emoji} ${cityName}</span>
-        <span style="
-          color: #475569;
-          font-size: 12px;
-          font-family: 'Segoe UI', Arial, sans-serif;
-          margin-left: 10px;
-        ">${jobs.length} job${jobs.length > 1 ? 's' : ''} found</span>
-      </td>
-    </tr>
-  </table>
+  <div style="margin-top: 40px; margin-bottom: 24px;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="background: linear-gradient(90deg, ${theme.accent}22 0%, transparent 100%); border-left: 4px solid ${theme.accent}; padding: 12px 20px; border-radius: 0 12px 12px 0;">
+          <span style="color: ${theme.accent}; font-size: 20px; font-weight: 900; font-family: 'Outfit', sans-serif; letter-spacing: 1px;">${theme.emoji} ${cityName.toUpperCase()}</span>
+          <span style="color: ${THEME.text.muted}; font-size: 13px; font-family: 'Inter', sans-serif; margin-left: 12px; font-weight: 600;">— ${jobs.length} NEW OPPORTUNITIES</span>
+        </td>
+      </tr>
+    </table>
+  </div>
   ${cards}`;
 }
 
@@ -288,189 +162,71 @@ function renderProfileBoostSection(boostReport) {
   if (!boostReport) return '';
 
   const { profileScore, scoreLabel, todaysTips, todaysActions, keywordGaps } = boostReport;
-
-  // Progress bar
   const pct = profileScore.percentage;
-
-  // Keyword gaps for primary domain
   const primaryDomain = Object.keys(keywordGaps)[0];
   const gaps          = keywordGaps[primaryDomain] || [];
 
-  const tipRows = todaysTips.slice(0, 4).map((tip) => `
-    <tr>
-      <td style="padding: 6px 0; border-bottom: 1px solid #0f172a;">
-        <span style="color:#38bdf8; font-size:12px; margin-right:6px;">✦</span>
-        <span style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif; line-height:1.5;">${tip}</span>
-      </td>
-    </tr>`).join('');
-
   const actionRows = todaysActions.slice(0, 5).map((action, i) => {
-    // Support both old string format and new {text, url, btn} object format
     const isObj   = typeof action === 'object';
-    const stepNum = isObj ? action.step : (i + 1);
     const text    = isObj ? action.text : action;
     const url     = isObj ? action.url  : null;
-    const btnText = isObj ? action.btn  : null;
-
-    const linkBtn = url ? `
-      <a href="${url}" target="_blank" style="
-        display: inline-block;
-        background: linear-gradient(135deg, #1e3a5f, #0f2540);
-        color: #60a5fa;
-        font-size: 10px;
-        font-weight: 700;
-        padding: 4px 10px;
-        border-radius: 20px;
-        border: 1px solid #2563eb;
-        text-decoration: none;
-        white-space: nowrap;
-        font-family: 'Segoe UI', Arial, sans-serif;
-        letter-spacing: 0.3px;
-      ">${btnText || 'Open Naukri →'}</a>` : '';
 
     return `
-    <tr>
-      <td style="padding: 7px 0; border-bottom: 1px solid #0f1e33;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            <td style="width: auto; vertical-align: middle;">
-              <span style="
-                background: #1e3a5f;
-                color: #7dd3fc;
-                font-size: 10px;
-                font-weight: 700;
-                padding: 2px 8px;
-                border-radius: 10px;
-                margin-right: 8px;
-                font-family: 'Segoe UI', Arial, sans-serif;
-              ">STEP ${stepNum}</span>
-              <span style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif;">${text}</span>
-            </td>
-            ${url ? `<td style="width: 1%; white-space: nowrap; text-align: right; vertical-align: middle; padding-left: 8px;">${linkBtn}</td>` : ''}
-          </tr>
-        </table>
-      </td>
-    </tr>`;
+    <div style="padding: 14px 0; border-bottom: 1px solid ${THEME.border};">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="1%" style="vertical-align: top; padding-right: 14px;">
+            <div style="background: linear-gradient(135deg, ${THEME.accent}, #818cf8); color: #000; width: 22px; height: 22px; border-radius: 6px; text-align: center; line-height: 22px; font-size: 11px; font-weight: 900;">${i+1}</div>
+          </td>
+          <td style="color: ${THEME.text.dim}; font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 500;">
+            ${text}
+            ${url ? `<br/><a href="${url}" target="_blank" style="color: ${THEME.accent}; font-size: 12px; text-decoration: none; font-weight: 700; margin-top: 6px; display: inline-block;">Complete Task →</a>` : ''}
+          </td>
+        </tr>
+      </table>
+    </div>`;
   }).join('');
 
-
-  const gapTags = gaps.slice(0, 6).map((g) =>
-    `<span style="
-      background:#1e293b;
-      color:#f87171;
-      font-size:10px;
-      font-weight:700;
-      padding:3px 10px;
-      border-radius:20px;
-      margin:3px 3px 3px 0;
-      display:inline-block;
-      font-family:'Segoe UI', Arial, sans-serif;
-    ">+ ${g}</span>`
+  const gapTags = gaps.slice(0, 8).map((g) =>
+    `<span style="background: rgba(248,113,113,0.08); color: #f87171; border: 1px solid rgba(248,113,113,0.2); font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 10px; margin: 4px; display: inline-block; letter-spacing: 0.5px;">+ ${g}</span>`
   ).join('');
 
   return `
   <!-- PROFILE BOOST SECTION -->
-  <tr>
-    <td style="padding: 0 20px 8px;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="
-        background: linear-gradient(135deg, #0d1f3c 0%, #0a1628 100%);
-        border: 1px solid #1e3a5f;
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 8px;
-      ">
-        <!-- Header -->
-        <tr>
-          <td colspan="2" style="padding-bottom: 16px; border-bottom: 1px solid #1e293b;">
-            <span style="
-              font-size: 18px;
-              font-weight: 900;
-              color: #38bdf8;
-              font-family: 'Segoe UI', Arial, sans-serif;
-            ">🚀 Daily Profile Boost Report</span>
-            <span style="
-              display:inline-block;
-              background:#1e3a5f;
-              color:#7dd3fc;
-              font-size:10px;
-              font-weight:700;
-              padding:2px 10px;
-              border-radius:20px;
-              margin-left:8px;
-              font-family:'Segoe UI', Arial, sans-serif;
-            ">Feature 1</span>
-          </td>
-        </tr>
+  <div style="background: ${THEME.glass}; border: 1px solid ${THEME.border}; border-radius: 24px; padding: 28px; margin-bottom: 24px; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, ${THEME.accent}, #6366f1);"></div>
+    
+    <div style="margin-bottom: 24px; border-bottom: 1px solid ${THEME.border}; padding-bottom: 18px;">
+      <span style="color: ${THEME.accent}; font-size: 18px; font-weight: 900; font-family: 'Outfit', sans-serif; letter-spacing: 0.5px; text-transform: uppercase;">🚀 Profile Accelerator</span>
+      <span style="float: right; color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; border: 1px solid ${THEME.text.muted}; padding: 3px 10px; border-radius: 6px; letter-spacing: 1px;">STRATEGY ENGINE</span>
+    </div>
 
-        <!-- Completeness Score -->
-        <tr>
-          <td colspan="2" style="padding-top: 16px; padding-bottom: 16px;">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td>
-                  <p style="color:#64748b; font-size:11px; margin:0 0 6px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">PROFILE COMPLETENESS</p>
-                  <!-- Progress bar -->
-                  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a; border-radius:20px; height:10px; margin-bottom:6px;">
-                    <tr>
-                      <td style="
-                        width: ${pct}%;
-                        background: linear-gradient(90deg, #38bdf8, ${scoreLabel.color});
-                        border-radius: 20px;
-                        height: 10px;
-                      "></td>
-                    </tr>
-                  </table>
-                  <span style="
-                    color: ${scoreLabel.color};
-                    font-size: 22px;
-                    font-weight: 900;
-                    font-family: 'Segoe UI', Arial, sans-serif;
-                  ">${pct}%</span>
-                  <span style="
-                    color: ${scoreLabel.color};
-                    font-size: 12px;
-                    font-weight: 700;
-                    margin-left: 6px;
-                    font-family: 'Segoe UI', Arial, sans-serif;
-                  ">${scoreLabel.emoji} ${scoreLabel.label}</span>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 28px;">
+      <tr>
+        <td width="55%">
+          <div style="color: ${scoreLabel.color}; font-size: 44px; font-weight: 900; font-family: 'Outfit', sans-serif; line-height: 1;">${pct}%</div>
+          <div style="color: ${THEME.text.muted}; font-size: 11px; letter-spacing: 1.5px; font-weight: 800; margin-top: 4px;">STRENGTH: ${scoreLabel.label.toUpperCase()}</div>
+        </td>
+        <td style="text-align: right;">
+           <div style="background: ${scoreLabel.color}08; border: 1px solid ${scoreLabel.color}20; padding: 14px; border-radius: 16px; display: inline-block; text-align: left; max-width: 200px;">
+             <div style="color: ${scoreLabel.color}; font-size: 12px; font-weight: 900; margin-bottom: 4px; letter-spacing: 0.5px;">${scoreLabel.emoji} EXPERT TIP:</div>
+             <div style="color: ${THEME.text.dim}; font-size: 12px; line-height: 1.4; font-weight: 500;">${todaysTips[0]}</div>
+           </div>
+        </td>
+      </tr>
+    </table>
 
-        <!-- Keyword Gaps -->
-        ${gaps.length > 0 ? `
-        <tr>
-          <td colspan="2" style="padding-bottom:16px;">
-            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">🔍 ADD THESE TRENDING KEYWORDS (${primaryDomain})</p>
-            ${gapTags}
-          </td>
-        </tr>` : ''}
+    <div style="margin-bottom: 24px;">
+      <div style="color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; margin-bottom: 14px; text-transform: uppercase;">🔥 PRIORITY ACTIONS</div>
+      ${actionRows}
+    </div>
 
-        <!-- ATS Tips -->
-        <tr>
-          <td colspan="2" style="padding-bottom:16px;">
-            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">💡 TODAY'S ATS PROFILE TIPS</p>
-            <table width="100%" cellpadding="0" cellspacing="0">
-              ${tipRows}
-            </table>
-          </td>
-        </tr>
-
-        <!-- Today's Actions -->
-        <tr>
-          <td colspan="2">
-            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">⚡ TODAY'S PROFILE BOOST ACTIONS</p>
-            <table width="100%" cellpadding="0" cellspacing="0">
-              ${actionRows}
-            </table>
-          </td>
-        </tr>
-
-      </table>
-    </td>
-  </tr>`;
+    ${gaps.length > 0 ? `
+    <div>
+      <div style="color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; margin-bottom: 12px; text-transform: uppercase;">🔍 TARGET KEYWORDS (${primaryDomain})</div>
+      <div style="margin-left: -4px;">${gapTags}</div>
+    </div>` : ''}
+  </div>`;
 }
 
 // ─── AI Score Summary Section ─────────────────────────────────────────────────
@@ -479,129 +235,47 @@ function renderAIScoreSummary(jobs, skillGapSummary) {
 
   const topJob  = jobs[0];
   const hasGemini = topJob.aiScore.source === 'gemini';
-  const highMatchJobs = jobs.filter((j) => j.aiScore?.score >= 70).length;
-  const avgScore      = Math.round(jobs.reduce((s, j) => s + (j.aiScore?.score || 0), 0) / jobs.length);
+  const highMatch = jobs.filter((j) => j.aiScore?.score >= 70).length;
+  const avgScore  = Math.round(jobs.reduce((s, j) => s + (j.aiScore?.score || 0), 0) / jobs.length);
 
   const gapRows = (skillGapSummary || []).slice(0, 3).map((item) => `
-    <tr>
-      <td style="padding: 8px 0; border-bottom: 1px solid #0f172a;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            <td>
-              <span style="
-                background: #450a0a;
-                color: #f87171;
-                font-size: 10px;
-                font-weight: 700;
-                padding: 2px 8px;
-                border-radius: 10px;
-                font-family: 'Segoe UI', Arial, sans-serif;
-              ">${item.skill}</span>
-            </td>
-            <td align="right">
-              <span style="color:#64748b; font-size:11px; font-family:'Segoe UI', Arial, sans-serif;">needed in ${item.count} jobs</span>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <span style="color:#475569; font-size:11px; font-family:'Segoe UI', Arial, sans-serif;">📚 ${item.resource}</span>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>`).join('');
+    <div style="padding: 12px 0; border-bottom: 1px solid ${THEME.border};">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td><span style="background: rgba(248,113,113,0.1); color: #f87171; font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 8px; border: 1px solid rgba(248,113,113,0.2);">${item.skill}</span></td>
+          <td align="right"><span style="color: ${THEME.text.muted}; font-size: 11px; font-weight: 700;">${item.count} JOBS</span></td>
+        </tr>
+        <tr><td colspan="2" style="color: ${THEME.text.dim}; font-size: 12px; padding-top: 8px; font-family: 'Inter', sans-serif; font-weight: 500;">📚 <span style="color: ${THEME.accent};">Rec:</span> ${item.resource}</td></tr>
+      </table>
+    </div>`).join('');
 
   return `
-  <!-- AI SCORE SUMMARY SECTION -->
-  <tr>
-    <td style="padding: 0 20px 8px;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="
-        background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 100%);
-        border: 1px solid #2d1f3e;
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 8px;
-      ">
-        <!-- Header -->
-        <tr>
-          <td style="padding-bottom:16px; border-bottom: 1px solid #1e293b;">
-            <span style="
-              font-size: 18px;
-              font-weight: 900;
-              color: #a78bfa;
-              font-family: 'Segoe UI', Arial, sans-serif;
-            ">🤖 AI Job Match Analysis</span>
-            <span style="
-              display:inline-block;
-              background:#2d1f3e;
-              color:#c4b5fd;
-              font-size:10px;
-              font-weight:700;
-              padding:2px 10px;
-              border-radius:20px;
-              margin-left:8px;
-              font-family:'Segoe UI', Arial, sans-serif;
-            ">${hasGemini ? '✨ Gemini AI' : '🔢 Heuristic'} · Feature 2</span>
-          </td>
-        </tr>
+  <!-- AI MATCH ANALYSIS SECTION -->
+  <div style="background: ${THEME.glass}; border: 1px solid ${THEME.border}; border-radius: 24px; padding: 28px; margin-bottom: 24px;">
+    <div style="margin-bottom: 24px; border-bottom: 1px solid ${THEME.border}; padding-bottom: 18px;">
+      <span style="color: #a78bfa; font-size: 18px; font-weight: 900; font-family: 'Outfit', sans-serif; letter-spacing: 0.5px; text-transform: uppercase;">🤖 Intelligence Report</span>
+      <span style="float: right; color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; border: 1px solid ${THEME.text.muted}; padding: 3px 10px; border-radius: 6px; letter-spacing: 1px;">${hasGemini ? 'GEMINI FLASH 2.5' : 'CORE ENGINE'}</span>
+    </div>
 
-        <!-- Stats -->
-        <tr>
-          <td style="padding-top:16px; padding-bottom:16px;">
-            <table width="100%" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="33%" align="center">
-                  <div style="color:#4ade80; font-size:26px; font-weight:900; font-family:'Segoe UI', Arial, sans-serif;">${topJob.aiScore.score}%</div>
-                  <div style="color:#475569; font-size:10px; letter-spacing:0.5px; font-family:'Segoe UI', Arial, sans-serif;">TOP JOB SCORE</div>
-                </td>
-                <td width="33%" align="center" style="border-left:1px solid #1e293b; border-right:1px solid #1e293b;">
-                  <div style="color:#60a5fa; font-size:26px; font-weight:900; font-family:'Segoe UI', Arial, sans-serif;">${avgScore}%</div>
-                  <div style="color:#475569; font-size:10px; letter-spacing:0.5px; font-family:'Segoe UI', Arial, sans-serif;">AVG SCORE</div>
-                </td>
-                <td width="33%" align="center">
-                  <div style="color:#fb923c; font-size:26px; font-weight:900; font-family:'Segoe UI', Arial, sans-serif;">${highMatchJobs}</div>
-                  <div style="color:#475569; font-size:10px; letter-spacing:0.5px; font-family:'Segoe UI', Arial, sans-serif;">HIGH MATCH (≥70%)</div>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 28px;">
+      <tr>
+        <td width="33%" align="center">
+          <div style="color: #4ade80; font-size: 28px; font-weight: 900; font-family: 'Outfit', sans-serif;">${topJob.aiScore.score}%</div>
+          <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 900; letter-spacing: 1px; margin-top: 4px;">PEAK MATCH</div>
+        </td>
+        <td width="33%" align="center" style="border-left: 1px solid ${THEME.border}; border-right: 1px solid ${THEME.border};">
+          <div style="color: #60a5fa; font-size: 28px; font-weight: 900; font-family: 'Outfit', sans-serif;">${avgScore}%</div>
+          <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 900; letter-spacing: 1px; margin-top: 4px;">AVG RELEVANCE</div>
+        </td>
+        <td width="33%" align="center">
+          <div style="color: #fb923c; font-size: 28px; font-weight: 900; font-family: 'Outfit', sans-serif;">${highMatch}</div>
+          <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 900; letter-spacing: 1px; margin-top: 4px;">ELITE ROLES</div>
+        </td>
+      </tr>
+    </table>
 
-        <!-- Top Job Highlight -->
-        <tr>
-          <td style="padding-bottom:16px;">
-            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">🏆 TOP MATCHED JOB</p>
-            <table width="100%" cellpadding="0" cellspacing="0" style="
-              background: #14532d22;
-              border: 1px solid #14532d;
-              border-radius: 8px;
-              padding: 12px;
-            ">
-              <tr>
-                <td style="padding: 4px 12px;">
-                  <div style="color:#f1f5f9; font-size:14px; font-weight:700; font-family:'Segoe UI', Arial, sans-serif;">${trunc(topJob.title, 50)}</div>
-                  <div style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif;">🏢 ${trunc(topJob.company, 35)} · 📍 ${topJob.city || 'India'}</div>
-                  ${topJob.aiScore.matchReason ? `<div style="color:#4ade80; font-size:11px; margin-top:4px; font-family:'Segoe UI', Arial, sans-serif;">✅ ${topJob.aiScore.matchReason}</div>` : ''}
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- Skill Gaps -->
-        ${gapRows ? `
-        <tr>
-          <td>
-            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">📚 TOP SKILL GAPS TO CLOSE</p>
-            <table width="100%" cellpadding="0" cellspacing="0">
-              ${gapRows}
-            </table>
-          </td>
-        </tr>` : ''}
-
-      </table>
-    </td>
-  </tr>`;
+    ${gapRows ? `<div><div style="color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; margin-bottom: 10px; text-transform: uppercase;">📚 KNOWLEDGE OPTIMIZATION</div>${gapRows}</div>` : ''}
+  </div>`;
 }
 
 // ─── Resume & Cover Letter Section ────────────────────────────────────────────
@@ -610,129 +284,41 @@ function renderResumeSection(jobs) {
   if (!topJob || !topJob.resumeMatch) return '';
 
   const { resumeMatch, coverLetterPreview } = topJob;
-  const tips = (resumeMatch.tips || []).slice(0, 3);
-
-  const tipRows = tips.map((tip) => `
-    <tr>
-      <td style="padding: 5px 0; border-bottom: 1px solid #0f172a;">
-        <span style="color:#f59e0b; font-size:12px; margin-right:6px;">●</span>
-        <span style="color:#94a3b8; font-size:12px; font-family:'Segoe UI', Arial, sans-serif;">${tip}</span>
-      </td>
-    </tr>`).join('');
-
-  const coverLetterHtml = coverLetterPreview
-    ? coverLetterPreview.replace(/\n/g, '<br/>').slice(0, 900) + (coverLetterPreview.length > 900 ? '...' : '')
-    : '';
-
-  // Resume distribution stats
   const swCount   = jobs.filter((j) => j.resumeMatch?.domainType === 'software').length;
   const dataCount = jobs.filter((j) => j.resumeMatch?.domainType === 'data').length;
 
   return `
-  <!-- RESUME & COVER LETTER SECTION -->
-  <tr>
-    <td style="padding: 0 20px 8px;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="
-        background: linear-gradient(135deg, #0a1a0a 0%, #0d1f0d 100%);
-        border: 1px solid #14532d;
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 8px;
-      ">
-        <!-- Header -->
+  <!-- RESUME ANALYSIS SECTION -->
+  <div style="background: ${THEME.glass}; border: 1px solid ${THEME.border}; border-radius: 24px; padding: 28px; margin-bottom: 24px;">
+    <div style="margin-bottom: 24px; border-bottom: 1px solid ${THEME.border}; padding-bottom: 18px;">
+      <span style="color: #4ade80; font-size: 18px; font-weight: 900; font-family: 'Outfit', sans-serif; letter-spacing: 0.5px; text-transform: uppercase;">📄 Semantic Matching</span>
+      <span style="float: right; color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; border: 1px solid ${THEME.text.muted}; padding: 3px 10px; border-radius: 6px; letter-spacing: 1px;">RESUME V2.0</span>
+    </div>
+
+    <div style="margin-bottom: 28px;">
+      <div style="color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; margin-bottom: 14px; text-transform: uppercase;">📈 Portfolio Alignment</div>
+      <table cellpadding="0" cellspacing="0">
         <tr>
-          <td style="padding-bottom:16px; border-bottom: 1px solid #1e293b;">
-            <span style="
-              font-size: 18px;
-              font-weight: 900;
-              color: #4ade80;
-              font-family: 'Segoe UI', Arial, sans-serif;
-            ">📄 Resume Smart Matching</span>
-            <span style="
-              display:inline-block;
-              background:#14532d;
-              color:#4ade80;
-              font-size:10px;
-              font-weight:700;
-              padding:2px 10px;
-              border-radius:20px;
-              margin-left:8px;
-              font-family:'Segoe UI', Arial, sans-serif;
-            ">Feature 3</span>
-          </td>
+          <td style="padding-right:14px;"><span style="background: rgba(30, 58, 95, 0.2); color: #93c5fd; font-size: 11px; font-weight: 800; padding: 7px 16px; border-radius: 12px; border: 1px solid rgba(147, 197, 253, 0.2);">💻 Software Roles: ${swCount}</span></td>
+          <td><span style="background: rgba(31, 45, 62, 0.2); color: #7dd3fc; font-size: 11px; font-weight: 800; padding: 7px 16px; border-radius: 12px; border: 1px solid rgba(125, 211, 252, 0.2);">📊 Data Roles: ${dataCount}</span></td>
         </tr>
-
-        <!-- Resume Distribution -->
-        <tr>
-          <td style="padding-top:16px; padding-bottom:16px; border-bottom: 1px solid #1e293b;">
-            <p style="color:#64748b; font-size:11px; margin:0 0 10px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">📊 RESUME ASSIGNMENT FOR TODAY'S JOBS</p>
-            <table cellpadding="0" cellspacing="0">
-              <tr>
-                <td style="padding-right:12px;">
-                  <span style="
-                    background:#1e3a5f;
-                    color:#93c5fd;
-                    font-size:12px;
-                    font-weight:700;
-                    padding:6px 14px;
-                    border-radius:20px;
-                    font-family:'Segoe UI', Arial, sans-serif;
-                  ">💻 Software Resume → ${swCount} jobs</span>
-                </td>
-                <td>
-                  <span style="
-                    background:#1f2d3e;
-                    color:#7dd3fc;
-                    font-size:12px;
-                    font-weight:700;
-                    padding:6px 14px;
-                    border-radius:20px;
-                    font-family:'Segoe UI', Arial, sans-serif;
-                  ">📊 Data Resume → ${dataCount} jobs</span>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- Resume Improvement Tips -->
-        <tr>
-          <td style="padding-top:16px; padding-bottom:16px; border-bottom: 1px solid #1e293b;">
-            <p style="color:#64748b; font-size:11px; margin:0 0 8px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">🛠️ RESUME IMPROVEMENT TIPS (${resumeMatch.resumeLabel})</p>
-            <table width="100%" cellpadding="0" cellspacing="0">
-              ${tipRows}
-            </table>
-          </td>
-        </tr>
-
-        <!-- Cover Letter -->
-        ${coverLetterHtml ? `
-        <tr>
-          <td style="padding-top:16px;">
-            <p style="color:#64748b; font-size:11px; margin:0 0 10px; font-family:'Segoe UI', Arial, sans-serif; letter-spacing:0.5px;">
-              ✉️ CUSTOMIZED COVER LETTER PREVIEW
-              <span style="color:#475569;"> – for ${trunc(topJob.title, 35)} @ ${trunc(topJob.company, 25)}</span>
-            </p>
-            <div style="
-              background: #0f172a;
-              border-left: 3px solid #4ade80;
-              border-radius: 8px;
-              padding: 16px;
-              color: #94a3b8;
-              font-size: 12px;
-              font-family: 'Segoe UI', Arial, sans-serif;
-              line-height: 1.8;
-            ">${coverLetterHtml}</div>
-          </td>
-        </tr>` : ''}
-
       </table>
-    </td>
-  </tr>`;
+    </div>
+
+    ${coverLetterPreview ? `
+    <div>
+      <div style="color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; margin-bottom: 14px; text-transform: uppercase;">✉️ Cover Letter Draft (Snippet)</div>
+      <div style="background: #020617; border-left: 4px solid #4ade80; padding: 20px; border-radius: 16px; color: ${THEME.text.dim}; font-size: 13px; font-family: 'Inter', sans-serif; line-height: 1.8; font-weight: 500; border: 1px solid ${THEME.border};">
+        ${coverLetterPreview.replace(/\n/g, '<br/>').slice(0, 600)}...
+      </div>
+    </div>` : ''}
+  </div>`;
 }
 
 // ─── Build full HTML email ─────────────────────────────────────────────────────
-function buildHtmlEmail(jobs, boostReport, skillGapSummary) {
+function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') {
+  const isScheduled = runMode === 'Scheduled';
+  const hasJobs     = jobs.length > 0;
   const today = new Date().toLocaleDateString('en-IN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
     timeZone: 'Asia/Kolkata',
@@ -746,10 +332,7 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary) {
     byCity[city].push(job);
   });
 
-  // Render city sections
   let citySections   = '';
-  let totalRendered  = 0;
-
   const cityOrder    = ['Bangalore', 'Delhi', 'Pune', 'Kolkata'];
   const sortedCities = [
     ...cityOrder.filter((c) => byCity[c]),
@@ -758,246 +341,121 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary) {
 
   sortedCities.forEach((city) => {
     if (byCity[city] && byCity[city].length > 0) {
-      citySections  += renderCitySection(city, byCity[city]);
-      totalRendered += byCity[city].length;
+      citySections += renderCitySection(city, byCity[city]);
     }
   });
 
-  // Stats bar
   const cityCount  = Object.keys(byCity).length;
   const domainSet  = [...new Set(jobs.map((j) => j.domain))];
-  const topScore   = jobs[0]?.aiScore?.score;
-  const hasAI      = !!topScore;
+  const topScore   = jobs[0]?.aiScore?.score || 0;
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Naukri Job Alert – ${today}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>Naukri Job Alert</title>
 </head>
-<body style="margin:0; padding:0; background:#070d1a; font-family:'Segoe UI',Arial,sans-serif;">
+<body style="margin:0; padding:0; background: ${THEME.bg}; font-family: 'Inter', sans-serif; color: ${THEME.text.main};">
 
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#070d1a;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background: ${THEME.bg};">
   <tr>
-    <td align="center" style="padding: 28px 12px;">
-    <table width="660" cellpadding="0" cellspacing="0" style="max-width:660px; width:100%;">
+    <td align="center" style="padding: 40px 15px;">
+      <table width="640" cellpadding="0" cellspacing="0" style="max-width: 640px; width: 100%;">
+        
+        <!-- HEADER -->
+        <tr>
+          <td style="background: radial-gradient(circle at top right, #1e293b, ${THEME.bg}); border-radius: 40px 40px 0 0; padding: 70px 40px 50px; text-align: center; border: 1px solid ${THEME.border}; border-bottom: none;">
+            <div style="display: inline-block; background: linear-gradient(135deg, #3b82f6, #8b5cf6); width: 90px; height: 90px; border-radius: 28px; line-height: 90px; font-size: 44px; margin-bottom: 28px; box-shadow: 0 0 40px rgba(59, 130, 246, 0.4); border: 1px solid rgba(255,255,255,0.2);">🤖</div>
+            <h1 style="color: #fff; font-size: 40px; font-weight: 900; margin: 0; font-family: 'Outfit', sans-serif; letter-spacing: -1.5px; text-shadow: 0 5px 15px rgba(0,0,0,0.5);">Naukri AI Agent</h1>
+            <p style="color: ${THEME.text.dim}; font-size: 15px; margin: 12px 0 30px; font-weight: 600; letter-spacing: 0.5px;">
+              ${today} &nbsp;•&nbsp; <span style="color: ${THEME.accent};">9:00 AM IST</span>
+            </p>
+            
+            <div style="background: ${THEME.glass}; border: 1px solid ${THEME.border}; border-radius: 50px; padding: 14px 32px; display: inline-block; color: ${THEME.accent}; font-weight: 900; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; box-shadow: inset 0 0 10px rgba(255,255,255,0.05);">
+              ${hasJobs ? `🚀 Detected ${jobs.length} Matching Opportunities` : `🛡️ Monitoring System: Active`}
+            </div>
+            
+            <div style="margin-top: 15px;">
+              <span style="background: ${isScheduled ? 'rgba(56, 189, 248, 0.1)' : 'rgba(234, 179, 8, 0.1)'}; color: ${isScheduled ? '#38bdf8' : '#eab308'}; padding: 5px 14px; border-radius: 30px; font-weight: 900; font-size: 10px; letter-spacing: 1.5px; border: 1px solid ${isScheduled ? 'rgba(56, 189, 248, 0.2)' : 'rgba(234, 179, 8, 0.2)'}; text-transform: uppercase;">● ${runMode} Cycle</span>
+            </div>
+          </td>
+        </tr>
 
-      <!-- ═══════════════ HEADER ═══════════════ -->
-      <tr>
-        <td style="
-          background: linear-gradient(135deg, #0d1f3c 0%, #1a2e52 40%, #0d2137 100%);
-          border-radius: 20px 20px 0 0;
-          padding: 40px 32px 32px;
-          text-align: center;
-          border-bottom: 2px solid #1e3a5f;
-        ">
-          <div style="
-            display: inline-block;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
-            line-height: 64px;
-            font-size: 32px;
-            margin-bottom: 16px;
-          ">💼</div>
+        <!-- STATS BAR -->
+        <tr>
+          <td style="background: ${THEME.bg}; border-left: 1px solid ${THEME.border}; border-right: 1px solid ${THEME.border};">
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-top: 1px solid ${THEME.border}; border-bottom: 1px solid ${THEME.border};">
+              <tr>
+                <td width="33%" align="center" style="padding: 20px 0; border-right: 1px solid ${THEME.border};">
+                  <div style="color: ${THEME.accent}; font-size: 22px; font-weight: 900; font-family: 'Outfit', sans-serif;">${jobs.length}</div>
+                  <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-top: 4px;">TOTAL JOBS</div>
+                </td>
+                <td width="33%" align="center" style="padding: 20px 0; border-right: 1px solid ${THEME.border};">
+                  <div style="color: #a78bfa; font-size: 22px; font-weight: 900; font-family: 'Outfit', sans-serif;">${cityCount}</div>
+                  <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-top: 4px;">CITIES</div>
+                </td>
+                <td width="33%" align="center" style="padding: 20px 0;">
+                  <div style="color: #4ade80; font-size: 22px; font-weight: 900; font-family: 'Outfit', sans-serif;">${topScore}%</div>
+                  <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-top: 4px;">TOP MATCH</div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
 
-          <h1 style="
-            color: #f8fafc;
-            font-size: 28px;
-            font-weight: 900;
-            margin: 0 0 6px;
-            letter-spacing: -0.5px;
-          ">Naukri Job Alert</h1>
-          <p style="color: #94a3b8; font-size: 13px; margin: 0 0 20px;">
-            📅 ${today} &nbsp;·&nbsp; ⏰ 9:00 AM IST
-          </p>
-
-          <div style="
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(129,140,248,0.15));
-            border: 1px solid rgba(56,189,248,0.4);
-            border-radius: 50px;
-            padding: 10px 28px;
-            color: #7dd3fc;
-            font-size: 14px;
-            font-weight: 700;
-          ">🎯 Top ${totalRendered} Fresh Jobs · 0–1 Year Experience</div>
-        </td>
-      </tr>
-
-      <!-- ═══════════════ STATS BAR ═══════════════ -->
-      <tr>
-        <td style="background: #0d1526; padding: 0;">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="25%" align="center" style="padding: 16px 6px; border-right: 1px solid #1e293b;">
-                <div style="color:#38bdf8; font-size:20px; font-weight:900;">${totalRendered}</div>
-                <div style="color:#475569; font-size:10px; letter-spacing:0.5px; margin-top:3px;">TOTAL JOBS</div>
-              </td>
-              <td width="25%" align="center" style="padding: 16px 6px; border-right: 1px solid #1e293b;">
-                <div style="color:#a78bfa; font-size:20px; font-weight:900;">${cityCount}</div>
-                <div style="color:#475569; font-size:10px; letter-spacing:0.5px; margin-top:3px;">CITIES</div>
-              </td>
-              <td width="25%" align="center" style="padding: 16px 6px; border-right: 1px solid #1e293b;">
-                <div style="color:#34d399; font-size:20px; font-weight:900;">${domainSet.length}</div>
-                <div style="color:#475569; font-size:10px; letter-spacing:0.5px; margin-top:3px;">DOMAINS</div>
-              </td>
-              <td width="25%" align="center" style="padding: 16px 6px;">
-                <div style="color:#fb923c; font-size:20px; font-weight:900;">${hasAI ? topScore + '%' : 'ON'}</div>
-                <div style="color:#475569; font-size:10px; letter-spacing:0.5px; margin-top:3px;">${hasAI ? 'TOP AI SCORE' : 'AI SCORING'}</div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-      <!-- ═══════════════ CITIES STRIP ═══════════════ -->
-      <tr>
-        <td style="background:#0a1120; padding: 12px 20px; border-bottom: 1px solid #1e293b;">
-          <table cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="padding-right:8px;">
-                <span style="color:#475569; font-size:11px; letter-spacing:0.5px;">📍 CITIES:</span>
-              </td>
-              ${sortedCities.map((c) => {
-                const t = CITY_THEME[c] || { color: '#94a3b8' };
-                return `<td style="padding-right:6px;">
-                  <span style="
-                    background: ${t.color}22;
-                    color: ${t.color};
-                    border: 1px solid ${t.color}55;
-                    padding: 3px 10px;
-                    border-radius: 20px;
-                    font-size: 11px;
-                    font-weight: 700;
-                    white-space:nowrap;
-                    font-family: 'Segoe UI', Arial, sans-serif;
-                  ">${c}</span>
-                </td>`;
-              }).join('')}
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-      <!-- ═══════════════ PROFILE BOOST REPORT ═══════════════ -->
-      <tr>
-        <td style="background: #0a1120; padding: 20px 0 0;">
-          <table width="100%" cellpadding="0" cellspacing="0">
+        <!-- CONTENT -->
+        <tr>
+          <td style="background: ${THEME.bg}; padding: 32px 40px; border: 1px solid ${THEME.border}; border-top: none; border-bottom: none;">
             ${renderProfileBoostSection(boostReport)}
-          </table>
-        </td>
-      </tr>
-
-      <!-- ═══════════════ AI JOB SCORE SUMMARY ═══════════════ -->
-      <tr>
-        <td style="background: #0a1120; padding: 0;">
-          <table width="100%" cellpadding="0" cellspacing="0">
             ${renderAIScoreSummary(jobs, skillGapSummary)}
-          </table>
-        </td>
-      </tr>
-
-      <!-- ═══════════════ RESUME SECTION ═══════════════ -->
-      <tr>
-        <td style="background: #0a1120; padding: 0;">
-          <table width="100%" cellpadding="0" cellspacing="0">
             ${renderResumeSection(jobs)}
-          </table>
-        </td>
-      </tr>
+            
+            ${hasJobs ? `
+              <div style="margin-top: 40px; margin-bottom: 10px;">
+                <span style="color: ${THEME.text.muted}; font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">💼 Today's Curated Listings</span>
+              </div>
+              ${citySections}
+            ` : `
+              <div style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 50px; margin-bottom: 20px;">🛸</div>
+                <h2 style="color: #fff; font-family: 'Outfit', sans-serif;">Space is empty today!</h2>
+                <p style="color: ${THEME.text.dim}; font-size: 15px; line-height: 1.6;">No new jobs matched your filters in the last 24 hours.<br/>Check back tomorrow or update your keywords!</p>
+              </div>
+            `}
+          </td>
+        </tr>
 
-      <!-- ═══════════════ SECTION DIVIDER ═══════════════ -->
-      <tr>
-        <td style="background: #0a1120; padding: 8px 20px 16px;">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="border-top: 1px solid #1e293b; padding-top: 16px;">
-                <span style="color:#475569; font-size:13px; font-weight:700; letter-spacing:0.5px; font-family:'Segoe UI', Arial, sans-serif;">
-                  💼 TODAY'S JOB LISTINGS
-                </span>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
+        <!-- FOOTER -->
+        <tr>
+          <td style="background: #000; border: 1px solid ${THEME.border}; border-top: none; border-radius: 0 0 40px 40px; padding: 50px 40px; text-align: center;">
+             <div style="margin-bottom: 30px;">
+               <div style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); width: 44px; height: 44px; border-radius: 14px; line-height: 44px; font-size: 22px; display: inline-block; margin-bottom: 12px; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">🤖</div>
+               <div style="color: #fff; font-size: 20px; font-weight: 900; font-family: 'Outfit', sans-serif; letter-spacing: -0.5px;">Naukri AI System</div>
+             </div>
+             
+             <p style="color: ${THEME.text.muted}; font-size: 13px; line-height: 1.8; font-weight: 500; max-width: 440px; margin: 0 auto 30px;">
+              Autonomous recruitment intelligence monitoring Bangalore, Delhi, Pune, and Kolkata for elite junior engineering roles.
+             </p>
+             
+             <div style="margin-bottom: 35px;">
+               <table align="center" cellpadding="0" cellspacing="0">
+                 <tr>
+                   <td style="padding: 0 15px;"><a href="https://github.com/Rohitkr2002" style="color: ${THEME.text.dim}; text-decoration: none; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">GitHub</a></td>
+                   <td style="color: ${THEME.text.muted}; opacity: 0.2;">|</td>
+                   <td style="padding: 0 15px;"><a href="https://linkedin.com/in/rohit-kumar-singh" style="color: ${THEME.text.dim}; text-decoration: none; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">LinkedIn</a></td>
+                 </tr>
+               </table>
+             </div>
+             
+             <div style="padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05);">
+               <span style="color: ${THEME.text.muted}; font-size: 10px; letter-spacing: 2px; font-weight: 800; opacity: 0.5;">© 2026 NAUKRI AI AGENT • PROVISIONED VIA GEMINI FLASH</span>
+             </div>
+          </td>
+        </tr>
 
-      <!-- ═══════════════ JOB CARDS ═══════════════ -->
-      <tr>
-        <td style="background: #0a1120; padding: 0 20px 24px;">
-          ${citySections}
-        </td>
-      </tr>
-
-      <!-- ═══════════════ CTA BANNER ═══════════════ -->
-      <tr>
-        <td style="
-          background: linear-gradient(135deg, #1e3a5f 0%, #2d1f3e 100%);
-          padding: 28px 32px;
-          text-align: center;
-          border-top: 1px solid #1e293b;
-        ">
-          <p style="color:#94a3b8; font-size:14px; margin:0 0 16px; line-height:1.6;">
-            Want more jobs? Visit Naukri.com and explore<br/>thousands of opportunities tailored for freshers.
-          </p>
-          <a href="https://www.naukri.com/jobs-in-india?experience=0" target="_blank" style="
-            display: inline-block;
-            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 800;
-            padding: 14px 36px;
-            border-radius: 10px;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-          ">🚀 Explore All Jobs on Naukri.com</a>
-        </td>
-      </tr>
-
-      <!-- ═══════════════ FOOTER ═══════════════ -->
-      <tr>
-        <td style="
-          background: #070d1a;
-          border-radius: 0 0 20px 20px;
-          padding: 24px 32px;
-          text-align: center;
-          border-top: 1px solid #0f172a;
-        ">
-          <div style="
-            display: inline-block;
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #1e3a5f, #2d1f3e);
-            border-radius: 8px;
-            line-height: 36px;
-            font-size: 18px;
-            margin-bottom: 10px;
-          ">🤖</div>
-          <p style="color:#334155; font-size:12px; margin:0 0 6px;">
-            Automated by <strong style="color:#38bdf8;">Naukri Job AI Agent</strong>
-          </p>
-          <p style="color:#1e293b; font-size:11px; margin:0; line-height:1.6;">
-            Runs daily at 9:00 AM IST via GitHub Actions · Jobs sourced from Naukri.com<br/>
-            Features: Profile Boost 🚀 · AI Scoring 🤖 · Resume Matcher 📄<br/>
-            Built with Node.js · Puppeteer · Gemini AI · Nodemailer
-          </p>
-          <div style="margin-top:16px; padding-top:16px; border-top:1px solid #0f172a;">
-            <span style="
-              background:#0f172a;
-              color:#334155;
-              font-size:10px;
-              padding:4px 12px;
-              border-radius:20px;
-              letter-spacing:0.5px;
-            ">🔒 This email was sent securely. Do not reply.</span>
-          </div>
-        </td>
-      </tr>
-
-    </table>
+      </table>
     </td>
   </tr>
 </table>
@@ -1007,7 +465,7 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary) {
 }
 
 // ─── Main send function ────────────────────────────────────────────────────────
-async function sendJobEmail(jobs, boostReport, skillGapSummary) {
+async function sendJobEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') {
   if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
     throw new Error('❌ Missing GMAIL_USER or GMAIL_PASS in .env file!');
   }
@@ -1016,24 +474,27 @@ async function sendJobEmail(jobs, boostReport, skillGapSummary) {
   }
 
   const transporter = createTransporter();
-  const htmlContent = buildHtmlEmail(jobs, boostReport, skillGapSummary);
+  const htmlContent = buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode);
   const today       = new Date().toLocaleDateString('en-IN', {
     day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata',
   });
 
+  const hasJobs     = jobs.length > 0;
   const topScore    = jobs[0]?.aiScore?.score;
-  const scorePart   = topScore ? ` | 🤖 Top Match: ${topScore}%` : '';
+  const scorePart   = topScore ? ` | 🤖 Match: ${topScore}%` : '';
+  const statusIcon  = hasJobs ? '💼' : '✅';
+  const statusText  = hasJobs ? `${jobs.length} Fresh Jobs` : 'Daily Status: Active';
 
   const mailOptions = {
     from:    `"Naukri AI Agent 🤖" <${process.env.GMAIL_USER}>`,
     to:      process.env.RECIPIENT_EMAIL,
-    subject: `💼 ${jobs.length} Fresh Jobs – ${today}${scorePart} | Bangalore · Delhi · Pune · Kolkata`,
+    subject: `${statusIcon} ${statusText} – ${today}${scorePart} [${runMode}]`,
     html:    htmlContent,
   };
 
-  console.log(`\n📧 Sending email to: ${process.env.RECIPIENT_EMAIL}`);
+  console.log(`\n📧 Sending email (${runMode}) to: ${process.env.RECIPIENT_EMAIL}`);
   const info = await transporter.sendMail(mailOptions);
   console.log(`✅ Email sent! Message ID: ${info.messageId}`);
 }
 
-module.exports = { sendJobEmail };
+module.exports = { sendJobEmail, buildHtmlEmail };

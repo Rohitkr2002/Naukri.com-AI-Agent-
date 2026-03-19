@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;600;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-cyber-bg text-slate-200 font-inter antialiased overflow-x-hidden;
+  background: radial-gradient(circle at top right, #1e293b, #020617 70%);
+}
+
+.glass {
+  @apply bg-cyber-card border border-cyber-border backdrop-blur-md rounded-2xl;
+}
+
+.neon-glow-blue {
+  box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+}
+
+.neon-glow-purple {
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
+}
+
+.neon-glow-green {
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.3);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-cyber-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-cyber-border rounded-full hover:bg-slate-700 transition-colors;
+}

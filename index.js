@@ -19,6 +19,8 @@ const { sendJobEmail }   = require('./services/mail');
 const { runProfileBoost }= require('./services/profileBoost');
 const { scoreJobs, getSkillGapSummary } = require('./services/aiScorer');
 const { matchResumes }   = require('./services/resumeMatcher');
+const fs = require('fs');
+const path = require('path');
 
 async function runAgent() {
   console.log('============================================================');
@@ -40,30 +42,25 @@ async function runAgent() {
     const rawJobs = await scrapeAllJobs();
 
     if (rawJobs.length === 0) {
-      console.warn('⚠️  No jobs scraped. Naukri may have changed their HTML structure.');
+      console.warn('⚠️  No jobs scraped. Naukri may have changed their HTML structure or blocked the request.');
       console.warn('   Check: selectors in services/scraper.js may need updating.');
-      // Still send email with profile boost report even if no jobs
-      if (boostReport) {
-        console.log('📧 Sending profile boost report only email...');
-        await sendJobEmail([], boostReport, []);
-      }
-      process.exit(0);
     }
 
     // ── Step 2: Filter, dedup, sort, top 20 ──────────────────
-    const filteredJobs = filterJobs(rawJobs);
+    const filteredJobs = rawJobs.length > 0 ? filterJobs(rawJobs) : [];
 
-    if (filteredJobs.length === 0) {
+    if (rawJobs.length > 0 && filteredJobs.length === 0) {
       console.warn('⚠️  No jobs passed the filter (0-1 yr experience).');
-      process.exit(0);
     }
 
     // ── Step 3: AI Job Scoring & Ranking ─────────────────────
     let scoredJobs = filteredJobs;
-    try {
-      scoredJobs = await scoreJobs(filteredJobs);
-    } catch (err) {
-      console.warn('⚠️  AI Scoring skipped:', err.message);
+    if (filteredJobs.length > 0) {
+      try {
+        scoredJobs = await scoreJobs(filteredJobs);
+      } catch (err) {
+        console.warn('⚠️  AI Scoring skipped:', err.message);
+      }
     }
 
     // Get skill gap summary across all jobs
@@ -71,18 +68,44 @@ async function runAgent() {
 
     // ── Step 4: Resume Smart Matching ─────────────────────────
     let matchedJobs = scoredJobs;
-    try {
-      matchedJobs = await matchResumes(scoredJobs);
-    } catch (err) {
-      console.warn('⚠️  Resume Matching skipped:', err.message);
+    if (scoredJobs.length > 0) {
+      try {
+        matchedJobs = await matchResumes(scoredJobs);
+      } catch (err) {
+        console.warn('⚠️  Resume Matching skipped:', err.message);
+      }
     }
 
     // ── Step 5: Send Enriched HTML Email ─────────────────────
-    await sendJobEmail(matchedJobs, boostReport, skillGapSummary);
+    // Identify run mode (Scheduled vs Manual)
+    const runMode = process.env.GITHUB_EVENT_NAME === 'schedule' ? 'Scheduled' : 'Manual';
+
+    await sendJobEmail(matchedJobs, boostReport, skillGapSummary, runMode);
+    
+    // ── Step 6: Export Data for Dashboard ──────────────────
+    const dashboardData = {
+      lastUpdated: new Date().toISOString(),
+      runMode,
+      stats: {
+        totalJobs: matchedJobs.length,
+        cities: [...new Set(matchedJobs.map(j => j.city || (j.location ? j.location.split(',')[0].trim() : 'Other')))].length,
+        topScore: matchedJobs[0]?.aiScore?.score || 0
+      },
+      jobs: matchedJobs,
+      boostReport,
+      skillGapSummary
+    };
+    
+    const dashboardDataPath = path.join(__dirname, 'dashboard', 'src', 'data', 'jobs.json');
+    const dashboardDataDir = path.dirname(dashboardDataPath);
+    if (!fs.existsSync(dashboardDataDir)) fs.mkdirSync(dashboardDataDir, { recursive: true });
+    fs.writeFileSync(dashboardDataPath, JSON.stringify(dashboardData, null, 2));
+    console.log('  📊 Data exported to dashboard/src/data/jobs.json');
 
     console.log('\n============================================================');
     console.log('  ✅ Naukri Job AI Agent completed successfully!');
     console.log('  📬 Email delivered to:', process.env.RECIPIENT_EMAIL);
+    console.log(`  🕒 Run Mode: ${runMode}`);
     console.log('  📊 Features ran:');
     console.log(`     🚀 Profile Boost:  ${boostReport ? '✅ Done (Score: ' + boostReport.profileScore.percentage + '%)' : '⚠️  Skipped'}`);
     console.log(`     🤖 AI Scoring:     ✅ Done (${scoredJobs.length} jobs scored)`);
