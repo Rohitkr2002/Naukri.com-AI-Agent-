@@ -134,6 +134,18 @@ Every fresher in India faces this same painful daily routine:
 - **Multi-Platform Scraper**: Expanded to scrape **LinkedIn** and **Indeed** alongside Naukri.
 - **Auto-Apply Automation**: Real Puppeteer-based system to apply for jobs autonomously (Dry-run mode available).
 
+```mermaid
+graph TD
+    A[Scraper Engine] --> B{Platforms}
+    B -->|DIRECT| C(Naukri.com)
+    B -->|PUPPETEER| D(LinkedIn)
+    B -->|CHEERIO| E(Indeed)
+    C & D & E --> F[Deduplication Layer]
+    F --> G[Gemini 2.5 AI Scorer]
+    G --> H[Tailored Resume PDF]
+    H --> I[WhatsApp + Email Alert]
+```
+
 | Metric | Without Agent | ✅ With Agent |
 |--------|-------------|-------------|
 | Time spent daily | 60–90 minutes | **0 minutes** (just check email/WhatsApp) |
