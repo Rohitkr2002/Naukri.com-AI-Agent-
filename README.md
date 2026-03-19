@@ -29,6 +29,8 @@
 > A **fully autonomous AI Agent** that wakes up at 9:00 AM IST every day, scrapes Naukri.com across 4 cities and 5 roles, scores every job using **Google Gemini 2.5 Flash AI**, selects the best-fit resume, generates a personalized cover letter, and delivers a premium job intelligence report straight to your inbox.
 >
 > **Zero manual effort. Every single day. 100% Free.**
+>
+> 🚀 **New in V2**: Robust Email-Safe UI + Daily Scheduled Automations.
 
 <br/>
 
@@ -160,8 +162,12 @@ Step-by-step action protocols to keep your Naukri profile at the top of recruite
 
 ---
 
-## 📧 Feature 5 — Premium Email Redesign
-The daily 9 AM report has been completely overhauled with a **"Cyber-Pro"** glassmorphism aesthetic.
+## 📧 Feature 5 — Premium Email (V2)
+The daily 9 AM report has been completely overhauled with a **robust "Cyber-Pro"** design.
+- **Max Compatibility**: Rebuilt with email-safe HTML/CSS (works in Gmail, Outlook, Apple Mail).
+- **High Contrast**: Sleek dark mode using Slate-950 and Neon Blue/Purple accents.
+- **AI Match Bars**: Instant visual indicator of your fit for every job.
+- **Direct Apply**: One-click action buttons in every job card.
 
 ![Email Redesign](docs/assets/email_redesign.png)
 

@@ -324,142 +324,196 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
     timeZone: 'Asia/Kolkata',
   });
 
-  // Group jobs by city
-  const byCity = {};
-  jobs.forEach((job) => {
-    const city = job.city || (job.location ? job.location.split(',')[0].trim() : 'Other');
-    if (!byCity[city]) byCity[city] = [];
-    byCity[city].push(job);
+  // Theme Constants (Safe)
+  const colors = {
+    bg: '#020617',
+    card: '#0f172a',
+    border: '#1e293b',
+    text: '#f8fafc',
+    muted: '#94a3b8',
+    blue: '#38bdf8',
+    purple: '#a78bfa',
+    green: '#4ade80',
+    orange: '#fb923c'
+  };
+
+  // ─── Helper: Render Job Card ───────────────────────────────────────────────
+  const renderCard = (job, index) => {
+    const score = job.aiScore?.score || 0;
+    const scoreColor = score >= 85 ? colors.green : (score >= 70 ? colors.blue : colors.orange);
+    const domainLabel = job.domain.toUpperCase();
+    
+    return `
+      <tr>
+        <td style="padding-bottom: 24px;">
+          <table width="100%" cellpadding="0" cellspacing="0" style="background: ${colors.card}; border: 1px solid ${colors.border}; border-radius: 16px; overflow: hidden;">
+            <tr>
+              <td style="padding: 24px;">
+                <!-- Tag & Posted -->
+                <table width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td>
+                      <span style="background:rgba(56,189,248,0.1); color:${colors.blue}; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(56,189,248,0.2); letter-spacing: 1px;">#${index+1} ${domainLabel}</span>
+                    </td>
+                    <td align="right" style="color:${colors.muted}; font-size: 11px; font-weight: 600;">
+                      ${job.posted || 'Recently'}
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Title -->
+                <div style="margin-top: 16px;">
+                  <a href="${job.url}" target="_blank" style="color: ${colors.text}; font-size: 20px; font-weight: 800; text-decoration: none; font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;">${job.title}</a>
+                </div>
+
+                <!-- Company -->
+                <div style="margin-top: 4px; color: ${colors.blue}; font-size: 14px; font-weight: 700;">
+                  ${job.company}
+                </div>
+
+                <!-- Labels -->
+                <div style="margin-top: 16px;">
+                  <table cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="background: #1e293b; color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 8px; border: 1px solid #334155;">📍 ${job.location || 'India'}</td>
+                      <td width="8"></td>
+                      <td style="background: #1e293b; color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 8px; border: 1px solid #334155;">💼 ${job.exp || '0-1 Yr'}</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <!-- Match Progress -->
+                <div style="margin-top: 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="padding-bottom: 6px;">
+                        <span style="color: ${scoreColor}; font-size: 11px; font-weight: 900; letter-spacing: 1px;">AI MATCH: ${score}%</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="background: #1e293b; border-radius: 10px; height: 6px; overflow: hidden;">
+                          <div style="width: ${score}%; height: 100%; background: ${scoreColor}; border-radius: 10px;"></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <!-- Insight -->
+                ${job.aiScore?.matchReason ? `
+                <div style="margin-top: 20px; padding: 16px; background: rgba(248,250,252,0.03); border-radius: 12px; border-left: 3px solid ${scoreColor};">
+                  <p style="margin:0; color: #94a3b8; font-size: 13px; font-style: italic; line-height: 1.5;">"${job.aiScore.matchReason}"</p>
+                </div>` : ''}
+
+                <!-- Button -->
+                <div style="margin-top: 24px;">
+                  <a href="${job.url}" target="_blank" style="display: block; width: 100%; text-align: center; background: ${colors.blue}; color: #020617; font-size: 13px; font-weight: 800; padding: 14px 0; border-radius: 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;">View Job Details →</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>`;
+  };
+
+  // ─── Jobs Render ───────────────────────────────────────────────────────────
+  let jobItems = '';
+  jobs.slice(0, 15).forEach((job, index) => {
+    jobItems += renderCard(job, index);
   });
-
-  let citySections   = '';
-  const cityOrder    = ['Bangalore', 'Delhi', 'Pune', 'Kolkata'];
-  const sortedCities = [
-    ...cityOrder.filter((c) => byCity[c]),
-    ...Object.keys(byCity).filter((c) => !cityOrder.includes(c)),
-  ];
-
-  sortedCities.forEach((city) => {
-    if (byCity[city] && byCity[city].length > 0) {
-      citySections += renderCitySection(city, byCity[city]);
-    }
-  });
-
-  const cityCount  = Object.keys(byCity).length;
-  const domainSet  = [...new Set(jobs.map((j) => j.domain))];
-  const topScore   = jobs[0]?.aiScore?.score || 0;
 
   return `<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <title>Naukri Job Alert</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naukri AI Alert</title>
 </head>
-<body style="margin:0; padding:0; background: ${THEME.bg}; font-family: 'Inter', sans-serif; color: ${THEME.text.main};">
-
-<table width="100%" cellpadding="0" cellspacing="0" style="background: ${THEME.bg};">
-  <tr>
-    <td align="center" style="padding: 40px 15px;">
-      <table width="640" cellpadding="0" cellspacing="0" style="max-width: 640px; width: 100%;">
-        
-        <!-- HEADER -->
-        <tr>
-          <td style="background: radial-gradient(circle at top right, #1e293b, ${THEME.bg}); border-radius: 40px 40px 0 0; padding: 70px 40px 50px; text-align: center; border: 1px solid ${THEME.border}; border-bottom: none;">
-            <div style="display: inline-block; background: linear-gradient(135deg, #3b82f6, #8b5cf6); width: 90px; height: 90px; border-radius: 28px; line-height: 90px; font-size: 44px; margin-bottom: 28px; box-shadow: 0 0 40px rgba(59, 130, 246, 0.4); border: 1px solid rgba(255,255,255,0.2);">🤖</div>
-            <h1 style="color: #fff; font-size: 40px; font-weight: 900; margin: 0; font-family: 'Outfit', sans-serif; letter-spacing: -1.5px; text-shadow: 0 5px 15px rgba(0,0,0,0.5);">Naukri AI Agent</h1>
-            <p style="color: ${THEME.text.dim}; font-size: 15px; margin: 12px 0 30px; font-weight: 600; letter-spacing: 0.5px;">
-              ${today} &nbsp;•&nbsp; <span style="color: ${THEME.accent};">9:00 AM IST</span>
-            </p>
-            
-            <div style="background: ${THEME.glass}; border: 1px solid ${THEME.border}; border-radius: 50px; padding: 14px 32px; display: inline-block; color: ${THEME.accent}; font-weight: 900; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; box-shadow: inset 0 0 10px rgba(255,255,255,0.05);">
-              ${hasJobs ? `🚀 Detected ${jobs.length} Matching Opportunities` : `🛡️ Monitoring System: Active`}
-            </div>
-            
-            <div style="margin-top: 15px;">
-              <span style="background: ${isScheduled ? 'rgba(56, 189, 248, 0.1)' : 'rgba(234, 179, 8, 0.1)'}; color: ${isScheduled ? '#38bdf8' : '#eab308'}; padding: 5px 14px; border-radius: 30px; font-weight: 900; font-size: 10px; letter-spacing: 1.5px; border: 1px solid ${isScheduled ? 'rgba(56, 189, 248, 0.2)' : 'rgba(234, 179, 8, 0.2)'}; text-transform: uppercase;">● ${runMode} Cycle</span>
-            </div>
-          </td>
-        </tr>
-
-        <!-- STATS BAR -->
-        <tr>
-          <td style="background: ${THEME.bg}; border-left: 1px solid ${THEME.border}; border-right: 1px solid ${THEME.border};">
-            <table width="100%" cellpadding="0" cellspacing="0" style="border-top: 1px solid ${THEME.border}; border-bottom: 1px solid ${THEME.border};">
-              <tr>
-                <td width="33%" align="center" style="padding: 20px 0; border-right: 1px solid ${THEME.border};">
-                  <div style="color: ${THEME.accent}; font-size: 22px; font-weight: 900; font-family: 'Outfit', sans-serif;">${jobs.length}</div>
-                  <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-top: 4px;">TOTAL JOBS</div>
-                </td>
-                <td width="33%" align="center" style="padding: 20px 0; border-right: 1px solid ${THEME.border};">
-                  <div style="color: #a78bfa; font-size: 22px; font-weight: 900; font-family: 'Outfit', sans-serif;">${cityCount}</div>
-                  <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-top: 4px;">CITIES</div>
-                </td>
-                <td width="33%" align="center" style="padding: 20px 0;">
-                  <div style="color: #4ade80; font-size: 22px; font-weight: 900; font-family: 'Outfit', sans-serif;">${topScore}%</div>
-                  <div style="color: ${THEME.text.muted}; font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-top: 4px;">TOP MATCH</div>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- CONTENT -->
-        <tr>
-          <td style="background: ${THEME.bg}; padding: 32px 40px; border: 1px solid ${THEME.border}; border-top: none; border-bottom: none;">
-            ${renderProfileBoostSection(boostReport)}
-            ${renderAIScoreSummary(jobs, skillGapSummary)}
-            ${renderResumeSection(jobs)}
-            
-            ${hasJobs ? `
-              <div style="margin-top: 40px; margin-bottom: 10px;">
-                <span style="color: ${THEME.text.muted}; font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">💼 Today's Curated Listings</span>
+<body style="margin: 0; padding: 0; background-color: ${colors.bg}; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: ${colors.bg};">
+    <tr>
+      <td align="center" style="padding: 40px 15px;">
+        <table width="600" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px;">
+          
+          <!-- HEADER -->
+          <tr>
+            <td style="padding: 40px 0; text-align: center; background: linear-gradient(135deg, #0f172a, #020617); border-radius: 24px 24px 0 0; border: 1px solid ${colors.border}; border-bottom: none;">
+              <div style="display: inline-block; background: ${colors.blue}; color: #020617; width: 50px; height: 50px; line-height: 50px; border-radius: 12px; font-size: 24px; font-weight: 900; margin-bottom: 20px;">AI</div>
+              <h1 style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 900; letter-spacing: -1px;">Naukri AI Agent</h1>
+              <p style="margin: 8px 0 0; color: ${colors.muted}; font-size: 14px; font-weight: 600;">Daily Intelligence Report • ${today}</p>
+              <div style="margin-top: 20px;">
+                <span style="background: rgba(34,197,94,0.1); color: ${colors.green}; font-size: 10px; font-weight: 800; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(34,197,94,0.2); letter-spacing: 1px; text-transform: uppercase;">● SYSTEM ACTIVE: ${jobs.length} JOBS FOUND</span>
               </div>
-              ${citySections}
-            ` : `
-              <div style="text-align: center; padding: 60px 20px;">
-                <div style="font-size: 50px; margin-bottom: 20px;">🛸</div>
-                <h2 style="color: #fff; font-family: 'Outfit', sans-serif;">Space is empty today!</h2>
-                <p style="color: ${THEME.text.dim}; font-size: 15px; line-height: 1.6;">No new jobs matched your filters in the last 24 hours.<br/>Check back tomorrow or update your keywords!</p>
+            </td>
+          </tr>
+
+          <!-- STATS -->
+          <tr>
+            <td style="background: ${colors.card}; border: 1px solid ${colors.border}; border-top: 1px solid ${colors.border};">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="50%" align="center" style="padding: 20px 0; border-right: 1px solid ${colors.border};">
+                    <div style="color: ${colors.text}; font-size: 22px; font-weight: 900;">${jobs.length}</div>
+                    <div style="color: ${colors.muted}; font-size: 9px; font-weight: 800; letter-spacing: 1px;">TOTAL MATCHES</div>
+                  </td>
+                  <td width="50%" align="center" style="padding: 20px 0;">
+                    <div style="color: ${colors.purple}; font-size: 22px; font-weight: 900;">${jobs[0]?.aiScore?.score || 0}%</div>
+                    <div style="color: ${colors.muted}; font-size: 9px; font-weight: 800; letter-spacing: 1px;">TOP CONFIDENCE</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- MAIN CONTENT -->
+          <tr>
+            <td style="padding: 40px 30px; background: ${colors.bg}; border: 1px solid ${colors.border}; border-top: none; border-bottom: none;">
+              
+              <!-- PROFILE SECTION -->
+              ${boostReport ? `
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 40px; background: rgba(167,139,250,0.03); border: 1px solid rgba(167,139,250,0.2); border-radius: 16px; padding: 24px;">
+                <tr>
+                  <td>
+                    <h2 style="margin: 0; color: ${colors.purple}; font-size: 14px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">🚀 Profile Strength: ${boostReport.profileScore.percentage}%</h2>
+                    <p style="margin: 10px 0 0; color: ${colors.muted}; font-size: 13px; line-height: 1.5;">${boostReport.todaysTips[0]}</p>
+                  </td>
+                </tr>
+              </table>` : ''}
+
+              <!-- JOB LIST -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding-bottom: 20px;">
+                    <span style="color: ${colors.muted}; font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;">Curated Elite Opportunities</span>
+                  </td>
+                </tr>
+                ${hasJobs ? jobItems : `
+                <tr>
+                  <td align="center" style="padding: 60px 0;">
+                    <div style="font-size: 40px; margin-bottom: 20px;">🔍</div>
+                    <h3 style="color: #fff; margin:0;">No Perfect Matches Today</h3>
+                    <p style="color: ${colors.muted}; font-size: 14px; margin-top: 10px;">The radar was clear. Check back tomorrow!</p>
+                  </td>
+                </tr>`}
+              </table>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="padding: 40px 30px; background: #000; border: 1px solid ${colors.border}; border-top: none; border-radius: 0 0 24px 24px; text-align: center;">
+              <h4 style="margin:0; color: #fff; font-size: 16px; font-weight: 900; letter-spacing: -0.5px;">Naukri AI Monitoring System</h4>
+              <p style="margin: 10px 0 0; color: ${colors.muted}; font-size: 12px; line-height: 1.6;">Autonomous career intelligence for junior engineers.</p>
+              <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #1e293b;">
+                <p style="margin: 0; color: ${colors.muted}; font-size: 10px; font-weight: 700; letter-spacing: 1px;">© 2026 Rohit Kumar Singh • Powered by Gemini AI</p>
               </div>
-            `}
-          </td>
-        </tr>
-
-        <!-- FOOTER -->
-        <tr>
-          <td style="background: #000; border: 1px solid ${THEME.border}; border-top: none; border-radius: 0 0 40px 40px; padding: 50px 40px; text-align: center;">
-             <div style="margin-bottom: 30px;">
-               <div style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); width: 44px; height: 44px; border-radius: 14px; line-height: 44px; font-size: 22px; display: inline-block; margin-bottom: 12px; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);">🤖</div>
-               <div style="color: #fff; font-size: 20px; font-weight: 900; font-family: 'Outfit', sans-serif; letter-spacing: -0.5px;">Naukri AI System</div>
-             </div>
-             
-             <p style="color: ${THEME.text.muted}; font-size: 13px; line-height: 1.8; font-weight: 500; max-width: 440px; margin: 0 auto 30px;">
-              Autonomous recruitment intelligence monitoring Bangalore, Delhi, Pune, and Kolkata for elite junior engineering roles.
-             </p>
-             
-             <div style="margin-bottom: 35px;">
-               <table align="center" cellpadding="0" cellspacing="0">
-                 <tr>
-                   <td style="padding: 0 15px;"><a href="https://github.com/Rohitkr2002" style="color: ${THEME.text.dim}; text-decoration: none; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">GitHub</a></td>
-                   <td style="color: ${THEME.text.muted}; opacity: 0.2;">|</td>
-                   <td style="padding: 0 15px;"><a href="https://linkedin.com/in/rohit-kumar-singh" style="color: ${THEME.text.dim}; text-decoration: none; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">LinkedIn</a></td>
-                 </tr>
-               </table>
-             </div>
-             
-             <div style="padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05);">
-               <span style="color: ${THEME.text.muted}; font-size: 10px; letter-spacing: 2px; font-weight: 800; opacity: 0.5;">© 2026 NAUKRI AI AGENT • PROVISIONED VIA GEMINI FLASH</span>
-             </div>
-          </td>
-        </tr>
-
-      </table>
-    </td>
-  </tr>
-</table>
-
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>`;
 }

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-19T07:43:03.351Z",
+  "lastUpdated": "2026-03-19T09:28:37.243Z",
   "runMode": "Manual",
   "stats": {
     "totalJobs": 20,
@@ -828,8 +828,8 @@
     ],
     "todaysSignals": [
       "Update even 1 word in your profile daily to trigger \"Profile Updated\" boost",
-      "Follow companies you wish to join – Naukri shows your interest to their HRs",
-      "Set Job Alerts for your target roles – this signals intent to the algorithm"
+      "Save jobs and unsave them – this signals browsing activity to algorithm",
+      "Add rchilli verified education/experience – verification badge helps ranking"
     ],
     "todaysActions": [
       {
