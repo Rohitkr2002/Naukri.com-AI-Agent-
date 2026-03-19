@@ -18,7 +18,9 @@ import {
   CheckCircle2,
   AlertCircle,
   ShieldCheck,
-  Brain
+  Brain,
+  Copy,
+  Info
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
