@@ -20,7 +20,7 @@
 
 <br/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=700&height=80&lines=🤖+Scrapes+Naukri.com+across+4+cities+daily;🧠+Gemini+2.5+AI+scores+every+job+0–100%25;📧+Premium+email+delivered+at+9%3A00+AM+IST)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=700&height=100&lines=🤖+Scrapes+Naukri.com+across+4+cities+daily;🧠+Gemini+2.5+AI+scores+every+job+0–100%25;📧+Premium+Cyber-Pro+Email+delivered+at+9%3A00+AM+IST;📊+Interactive+Local+Intelligence+Dashboard+included)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
 
 <br/>
 
@@ -34,7 +34,7 @@
 
 ### 🛠️ Tech Stack
 
-[![My Skills](https://skillicons.dev/icons?i=nodejs,js,python,html,css,github,vscode,linux,git,gmail&theme=dark)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
+[![My Skills](https://skillicons.dev/icons?i=nodejs,react,vite,tailwind,js,python,html,css,github,vscode,linux,git,gmail&theme=dark)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
 
 <br/>
 
@@ -46,7 +46,8 @@ flowchart LR
     D(["✅ Filter\nDedupe + Sort"]) --> E
     E(["🤖 Gemini 2.5 AI\nScore 0–100%"]) --> F
     F(["📄 Resume Match\n+ Cover Letter"]) --> G
-    G(["📧 Premium Email\nDelivered @ 9 AM"])
+    G(["🎛️ Local Dashboard\nRecharts + Analytics"]) --> H
+    H(["📧 Premium Email\nDelivered @ 9 AM"])
 
     style A fill:#1e3a5f,color:#7dd3fc,stroke:#2563eb
     style B fill:#14532d,color:#4ade80,stroke:#16a34a
@@ -54,7 +55,8 @@ flowchart LR
     style D fill:#1e293b,color:#94a3b8,stroke:#475569
     style E fill:#312e81,color:#a5b4fc,stroke:#6366f1
     style F fill:#4a1d96,color:#e9d5ff,stroke:#7c3aed
-    style G fill:#450a0a,color:#fca5a5,stroke:#dc2626
+    style G fill:#0f172a,color:#38bdf8,stroke:#0284c7
+    style H fill:#450a0a,color:#fca5a5,stroke:#dc2626
 ```
 
 </div>
@@ -117,15 +119,13 @@ Every fresher in India faces this same painful daily routine:
 
 ```
 ✅  Scrapes Naukri.com at 9 AM daily — completely hands-free
-✅  Covers 4 cities × 5 roles = 20 searches per day
-✅  Filters for ONLY 0-1 year experience jobs
-✅  Google Gemini 2.5 AI scores every job 0–100% against your exact skills
-✅  Ranks all jobs — best match at top
-✅  Auto-detects SW Dev vs Data Analyst jobs → picks the right resume
-✅  Generates a personalized cover letter using your real projects
-✅  Sends a premium dark-mode email with all results by 9:00 AM IST
-✅  Daily profile completeness report + ATS tips to improve Naukri ranking
-✅  Costs ₹0 — runs free on GitHub Actions with free Gemini tier
+✅  New "Cyber-Pro" Premium Local Dashboard with Recharts
+✅  AI Job Scoring & Skill Gap Analysis (Gemini 2.5 Flash)
+✅  One-Click Automation Command Center (`LAUNCH_DASHBOARD.bat`)
+✅  Personalized AI Cover Letters & Resume Smart-Matching
+✅  Premium Glassmorphism Email Design
+✅  Daily Profile Boost Strategy & Action Steps
+✅  Costs ₹0 — runs free on GitHub Actions
 ```
 
 | Metric | Without Agent | ✅ With Agent |
@@ -137,6 +137,43 @@ Every fresher in India faces this same painful daily routine:
 | Cover letter | Manual, 20 min | **AI-generated** in seconds |
 | Profile activity | Drops if inactive | **Daily tips** to stay active |
 | Total cost | Your time | **₹0 forever** |
+
+---
+
+---
+
+## 🖥️ Feature 4 — Local Intelligence Dashboard (Cyber-Pro)
+
+> "A futuristic, interactive command center for your job search."
+
+![Dashboard Main](docs/assets/dashboard_main.png)
+
+### 📊 Market Analytics & Strategy
+Deep-dive into market trends with high-fidelity visualizations. Identify **Skill Gaps** and **Match Spectrums** across 4 major tech hubs in India.
+
+![Analytics](docs/assets/dashboard_analytics.png)
+
+### ⚡ Profile Boost Command Center
+Step-by-step action protocols to keep your Naukri profile at the top of recruiter searches. Includes a real-time **Readiness Index** and curated learning resources.
+
+![Profile Boost](docs/assets/dashboard_boost.png)
+
+---
+
+## 📧 Feature 5 — Premium Email Redesign
+The daily 9 AM report has been completely overhauled with a **"Cyber-Pro"** glassmorphism aesthetic.
+
+![Email Redesign](docs/assets/email_redesign.png)
+
+---
+
+## 🚀 One-Click Automation
+No more complex commands. Use the new **Launcher** to refresh your data and open your dashboard in one second.
+
+```bash
+# Simply double-click this file in your root folder:
+LAUNCH_DASHBOARD.bat
+```
 
 ---
 
