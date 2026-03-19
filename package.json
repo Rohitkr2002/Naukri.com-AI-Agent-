@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node index.js"
+    "test": "node index.js",
+    "dev": "LAUNCH_DASHBOARD.bat"
   },
   "keywords": [
     "naukri",

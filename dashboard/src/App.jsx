@@ -28,18 +28,19 @@ import initialData from './data/jobs.json';
 const COLORS = ['#60a5fa', '#a78bfa', '#f472b6', '#4ade80', '#fb923c'];
 
 const App = () => {
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState(initialData || { jobs: [], stats: {}, boostReport: {}, skillGapSummary: [] });
   const [selectedCity, setSelectedCity] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedJob, setSelectedJob] = useState(null);
   const [activeView, setActiveView] = useState('Dashboard');
 
-  const cities = ['All', ...new Set(data.jobs.map(j => j.city || 'Other'))];
+  const jobs = data?.jobs || [];
+  const cities = ['All', ...new Set(jobs.map(j => j.city || 'Other'))];
   
-  const filteredJobs = data.jobs.filter(job => {
+  const filteredJobs = jobs.filter(job => {
     const cityMatch = selectedCity === 'All' || job.city === selectedCity;
-    const searchMatch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                      job.company.toLowerCase().includes(searchQuery.toLowerCase());
+    const searchMatch = (job.title || '').toLowerCase().includes(searchQuery.toLowerCase()) || 
+                      (job.company || '').toLowerCase().includes(searchQuery.toLowerCase());
     return cityMatch && searchMatch;
   });
 
@@ -148,21 +149,21 @@ const MainDashboard = ({ data, filteredJobs, cities, selectedCity, setSelectedCi
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
       <StatCard 
         label="Total Opportunities" 
-        value={data.stats.totalJobs} 
+        value={data?.stats?.totalJobs || 0} 
         icon={<Briefcase className="text-cyber-neon-blue" />}
         accent="border-cyber-neon-blue"
         onClick={() => setSelectedCity('All')}
       />
       <StatCard 
         label="Peak Match Score" 
-        value={`${data.stats.topScore}%`} 
+        value={`${data?.stats?.topScore || 0}%`} 
         icon={<Target className="text-cyber-neon-purple" />}
         accent="border-cyber-neon-purple"
         onClick={() => setActiveView('Boost')}
       />
       <StatCard 
         label="Target Sectors" 
-        value={data.stats.cities} 
+        value={data?.stats?.cities || 0} 
         icon={<MapPin className="text-cyber-neon-green" />}
         accent="border-cyber-neon-green"
       />
@@ -586,15 +587,34 @@ const JobDetailOverlay = ({ job, onClose }) => {
           </div>
         </div>
 
-        <div className="p-8 border-t border-cyber-border bg-black/20 flex gap-4">
-          <a 
-            href={job.url || job.link} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex-1 bg-white text-cyber-bg font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-200 transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] uppercase tracking-widest text-sm active:scale-95"
-          >
-            Apply Now <ExternalLink size={18} />
-          </a>
+        <div className="p-8 border-t border-cyber-border bg-black/40 backdrop-blur-md">
+          <div className="flex gap-4 mb-4">
+            <a 
+              href={job.url || job.link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex-1 bg-white text-cyber-bg font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-200 transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] uppercase tracking-widest text-sm active:scale-95"
+            >
+              Apply Now <ExternalLink size={18} />
+            </a>
+            <button 
+              onClick={() => {
+                navigator.clipboard.writeText(job.url || job.link);
+                alert("Link copied! Paste it in your private browser if Naukri is acting up.");
+              }}
+              className="px-6 bg-white/5 text-white border border-white/10 rounded-2xl flex items-center justify-center hover:bg-white/10 transition-all active:scale-90"
+              title="Copy Direct Link"
+            >
+              <Copy size={20} />
+            </button>
+          </div>
+          
+          <div className="flex items-start gap-2 p-3 bg-cyber-neon-blue/5 border border-cyber-neon-blue/20 rounded-xl">
+            <Info size={14} className="text-cyber-neon-blue shrink-0 mt-0.5" />
+            <p className="text-[10px] font-bold text-slate-400 leading-tight uppercase tracking-tighter">
+              <span className="text-cyber-neon-blue">PRO TIP:</span> Log in to your <span className="text-white">Naukri.com</span> account in your browser BEFORE clicking Apply to skip the "Login" block.
+            </p>
+          </div>
         </div>
       </motion.div>
     </div>
