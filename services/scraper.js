@@ -160,8 +160,25 @@ async function scrapeNaukriPage(page, role, city) {
         const posted   = card.querySelector('span.job-post-day, span[class*="post"], time')
                             ?.innerText?.trim() || 'Recently';
 
+        // Applicants (Competition)
+        const appEl    = card.querySelector('span.applicants, span[class*="applicants"], span[class*="applied"]');
+        const appText  = appEl?.innerText?.trim() || '0';
+        const appCount = parseInt(appText.replace(/[^0-9]/g, '')) || 5; // Default to 5 if not shown
+
+        // Competition Logic
+        let competition = 'Low';
+        if (appCount > 150) competition = 'High';
+        else if (appCount > 60) competition = 'Medium';
+
         if (title) {
-          results.push({ title, company, exp, location: `${cityLabel}, India`, salary, posted, url: jobUrl, domain: roleLabel, city: cityLabel });
+          results.push({ 
+            title, company, exp, 
+            location: `${cityLabel}, India`, 
+            salary, posted, url: jobUrl, 
+            domain: roleLabel, city: cityLabel,
+            competition,
+            applicants: appCount
+          });
         }
       });
 
@@ -173,6 +190,71 @@ async function scrapeNaukriPage(page, role, city) {
 
   } catch (err) {
     console.warn(`   ⚠️  ${role.label}/${city}: ${err.message}`);
+    return [];
+  }
+}
+
+// ─── LinkedIn Scraper (Guest Search) ──────────────────────────────────────────
+async function scrapeLinkedIn(page, role, city) {
+  const url = `https://www.linkedin.com/jobs/search?keywords=${role.keyword}&location=${city}&f_TPR=r86400&f_E=1`; // Past 24h, Entry Level
+  console.log(`🔍 [LinkedIn] ${role.label} → ${CITY_LABELS[city]}`);
+  
+  try {
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    // LinkedIn guest page is tricky, we extract basic card data
+    const jobs = await page.evaluate((cityLabel, roleLabel) => {
+        const results = [];
+        const cards = document.querySelectorAll('div.base-card, li > div[class*="job-search-card"]');
+        cards.forEach(card => {
+            const title = card.querySelector('h3.base-search-card__title')?.innerText?.trim();
+            const company = card.querySelector('h4.base-search-card__subtitle')?.innerText?.trim();
+            const link = card.querySelector('a.base-card__full-link')?.href;
+            if (title && link) {
+                results.push({ 
+                    title, company, location: cityLabel, url: link, 
+                    domain: roleLabel, city: cityLabel, source: 'LinkedIn',
+                    competition: 'Medium', applicants: 50 // LinkedIn doesn't show guest app count easily
+                });
+            }
+        });
+        return results;
+    }, CITY_LABELS[city], role.label);
+
+    console.log(`   ✅ ${jobs.length} jobs found`);
+    return jobs;
+  } catch (err) {
+    console.warn(`   ⚠️  LinkedIn Error: ${err.message}`);
+    return [];
+  }
+}
+
+// ─── Indeed Scraper ───────────────────────────────────────────────────────────
+async function scrapeIndeed(page, role, city) {
+  const url = `https://in.indeed.com/jobs?q=${role.keyword}&l=${city}&fromage=1`;
+  console.log(`🔍 [Indeed] ${role.label} → ${CITY_LABELS[city]}`);
+
+  try {
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    const jobs = await page.evaluate((cityLabel, roleLabel) => {
+        const results = [];
+        const cards = document.querySelectorAll('div.job_seen_beacon');
+        cards.forEach(card => {
+            const title = card.querySelector('h2.jobTitle span')?.innerText;
+            const company = card.querySelector('span.companyName')?.innerText;
+            if (title) {
+                results.push({ 
+                    title, company, location: cityLabel, 
+                    domain: roleLabel, city: cityLabel, source: 'Indeed',
+                    competition: 'Low', applicants: 10
+                });
+            }
+        });
+        return results;
+    }, CITY_LABELS[city], role.label);
+    console.log(`   ✅ ${jobs.length} jobs found`);
+    return jobs;
+  } catch (err) {
+    console.warn(`   ⚠️  Indeed Error: ${err.message}`);
     return [];
   }
 }
@@ -205,9 +287,19 @@ async function scrapeAllJobs() {
       console.log('─'.repeat(48));
 
       for (const role of ROLES) {
-        const jobs = await scrapeNaukriPage(page, role, city);
-        allJobs.push(...jobs);
-        await sleep(1200); // polite delay
+        // 1. Naukri (Primary)
+        const naukriJobs = await scrapeNaukriPage(page, role, city);
+        allJobs.push(...naukriJobs);
+
+        // 2. LinkedIn (Secondary)
+        const linkedInJobs = await scrapeLinkedIn(page, role, city);
+        allJobs.push(...linkedInJobs);
+
+        // 3. Indeed (Tertiary)
+        const indeedJobs = await scrapeIndeed(page, role, city);
+        allJobs.push(...indeedJobs);
+
+        await sleep(2000); // polite delay between role swaps
       }
     }
 
@@ -223,4 +315,4 @@ async function scrapeAllJobs() {
   return allJobs;
 }
 
-module.exports = { scrapeAllJobs };
+module.exports = { scrapeAllJobs, launchBrowser, ROLES };

@@ -3,6 +3,12 @@ node_modules/
 
 # Environment secrets — NEVER commit this!
 .env
+dashboard/.env
+
+# Generated Dashboard Data
+dashboard/public/resumes/
+dashboard/src/data/jobs.json
+dashboard/src/data/applied_jobs.json
 
 # OS files
 .DS_Store

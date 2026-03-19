@@ -19,6 +19,9 @@ const { sendJobEmail }   = require('./services/mail');
 const { runProfileBoost }= require('./services/profileBoost');
 const { scoreJobs, getSkillGapSummary } = require('./services/aiScorer');
 const { matchResumes }   = require('./services/resumeMatcher');
+const { processAutoApplies } = require('./services/autoApply');
+const { generateTailoredResumes } = require('./services/resumeGenerator');
+const { sendDailyJobAlerts }     = require('./services/whatsapp');
 const fs = require('fs');
 const path = require('path');
 
@@ -82,7 +85,35 @@ async function runAgent() {
 
     await sendJobEmail(matchedJobs, boostReport, skillGapSummary, runMode);
     
-    // ── Step 6: Export Data for Dashboard ──────────────────
+    // ── Step 6: RUN AUTO-APPLY SYSTEM (Simulated) ─────────────
+    let applyResults = [];
+    if (matchedJobs.length > 0) {
+      try {
+        applyResults = await processAutoApplies(matchedJobs, 5);
+      } catch (err) {
+        console.warn('⚠️  Auto-Apply skipped:', err.message);
+      }
+    }
+
+    // ── Step 7: GENERATE AI TAILORED RESUMES (PDF) ─────────────
+    if (matchedJobs.length > 0) {
+      try {
+        await generateTailoredResumes(matchedJobs);
+      } catch (err) {
+        console.warn('⚠️  AI Resume Generation skipped:', err.message);
+      }
+    }
+
+    // ── Step 8: SEND WHATSAPP ALERTS (Feature 3) ─────────────
+    if (matchedJobs.length > 0) {
+      try {
+        await sendDailyJobAlerts(matchedJobs);
+      } catch (err) {
+        console.warn('⚠️  WhatsApp Alert skipped:', err.message);
+      }
+    }
+
+    // ── Step 9: Export Data for Dashboard ──────────────────
     const dashboardData = {
       lastUpdated: new Date().toISOString(),
       runMode,
@@ -92,6 +123,7 @@ async function runAgent() {
         topScore: matchedJobs[0]?.aiScore?.score || 0
       },
       jobs: matchedJobs,
+      applyResults,
       boostReport,
       skillGapSummary
     };

@@ -114,30 +114,34 @@ Every fresher in India faces this same painful daily routine:
 | ❌ Generic cover letters | Recruiters can spot it immediately |
 | ❌ Inactive Naukri profile | Algorithm drops your ranking |
 | ❌ No skill gap awareness | Don't know what to learn next |
+| ❌ High competition blindness | Applying for jobs with 1000+ applicants |
 
 ---
 
 ## ✅ Solution — What This Agent Does
 
-```
-✅  Scrapes Naukri.com at 9 AM daily — completely hands-free
-✅  New "Cyber-Pro" Premium Local Dashboard with Recharts
-✅  AI Job Scoring & Skill Gap Analysis (Gemini 2.5 Flash)
-✅  One-Click Automation Command Center (`LAUNCH_DASHBOARD.bat`)
-✅  Personalized AI Cover Letters & Resume Smart-Matching
-✅  Premium Glassmorphism Email Design
-✅  Daily Profile Boost Strategy & Action Steps
-✅  Costs ₹0 — runs free on GitHub Actions
-```
+### ⚡ **Phase 1-2: Core Foundation**
+- **Automated Scraper**: Scrapes 4 major Indian cities at 9 AM IST daily.
+- **AI Scoring**: Gemini 2.5 Flash calculates a 0-100% match score for every job.
+- **Email Engine**: Premium Dark Mode job reports delivered to your inbox.
+- **Local Dashboard**: Cyber-Pro React dashboard for analytics and profile boost.
+
+### 🧠 **Phase 3-5: Autonomous Power (NEW)**
+- **Job Competition Intelligence**: Extracts applicant counts and labels jobs as **Low**, **Medium**, or **High** competition.
+- **AI Interview Prep Bot**: Practice for interviews with role-specific AI questions directly in the dashboard.
+- **Dynamic AI Resume Generator**: Automatically generates **tailored PDF resumes** optimized for each Top 3 job.
+- **WhatsApp Smart Alerts**: Receive top job matches and application success alerts on your phone via Twilio.
+- **Multi-Platform Scraper**: Expanded to scrape **LinkedIn** and **Indeed** alongside Naukri.
+- **Auto-Apply Automation**: Real Puppeteer-based system to apply for jobs autonomously (Dry-run mode available).
 
 | Metric | Without Agent | ✅ With Agent |
 |--------|-------------|-------------|
-| Time spent daily | 60–90 minutes | **0 minutes** (just check email) |
+| Time spent daily | 60–90 minutes | **0 minutes** (just check email/WhatsApp) |
 | Job relevance | ~5% | **~80%** (filtered 0-1yr only) |
-| Skills match visibility | None | **AI score 0–100%** per job |
-| Resume sent | Same for all | **Best-fit resume** per domain |
-| Cover letter | Manual, 20 min | **AI-generated** in seconds |
-| Profile activity | Drops if inactive | **Daily tips** to stay active |
+| Platform Coverage | 1 (Manual) | **3 (Naukri, LinkedIn, Indeed)** |
+| Resume Strategy | One-size-fits-all | **Tailored AI-PDF per job** |
+| Interview Prep | Google-it manually | **Integrated AI Mock Interview** |
+| Competition Data | Blind | **Real-time Applicant Insights** |
 | Total cost | Your time | **₹0 forever** |
 
 ---

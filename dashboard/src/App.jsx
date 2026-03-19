@@ -20,7 +20,14 @@ import {
   ShieldCheck,
   Brain,
   Copy,
-  Info
+  Info,
+  Users,
+  ShieldAlert,
+  PlayCircle,
+  MessageSquare,
+  FileDown,
+  Globe,
+  Infinity
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -35,6 +42,8 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedJob, setSelectedJob] = useState(null);
   const [activeView, setActiveView] = useState('Dashboard');
+  const [isInterviewing, setIsInterviewing] = useState(false);
+  const [interviewJob, setInterviewJob] = useState(null);
 
   const jobs = data?.jobs || [];
   const cities = ['All', ...new Set(jobs.map(j => j.city || 'Other'))];
@@ -135,7 +144,28 @@ const App = () => {
         {/* JOB DETAIL SIDEBAR (Overlay) */}
         <AnimatePresence>
           {selectedJob && (
-            <JobDetailOverlay job={selectedJob} onClose={() => setSelectedJob(null)} />
+            <JobDetailOverlay 
+              job={selectedJob} 
+              onClose={() => setSelectedJob(null)} 
+              onStartInterview={() => {
+                setInterviewJob(selectedJob);
+                setIsInterviewing(true);
+                setSelectedJob(null);
+              }}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* INTERVIEW BOT MODAL */}
+        <AnimatePresence>
+          {isInterviewing && (
+            <InterviewBot 
+              job={interviewJob} 
+              onClose={() => {
+                setIsInterviewing(false);
+                setInterviewJob(null);
+              }} 
+            />
           )}
         </AnimatePresence>
       </main>
@@ -469,7 +499,12 @@ const JobGridCard = forwardRef(({ job, onClick, ...props }, ref) => {
           </div>
           <div>
             <h4 className="text-lg font-black text-white group-hover:text-cyber-neon-blue transition-colors line-clamp-1">{job.title}</h4>
-            <p className="text-slate-400 font-bold text-sm tracking-tight">{job.company}</p>
+            <div className="flex items-center gap-2">
+              <p className="text-slate-400 font-bold text-sm tracking-tight">{job.company}</p>
+              <span className={`text-[8px] font-black px-1.5 py-0.5 rounded border ${job.source === 'LinkedIn' ? 'bg-blue-900/20 border-blue-500/30 text-blue-400' : job.source === 'Indeed' ? 'bg-indigo-900/20 border-indigo-500/30 text-indigo-400' : 'bg-white/5 border-white/10 text-slate-500'} uppercase italic`}>
+                {job.source || 'Naukri'}
+              </span>
+            </div>
           </div>
         </div>
         <div className="flex flex-col items-end gap-2">
@@ -485,6 +520,11 @@ const JobGridCard = forwardRef(({ job, onClick, ...props }, ref) => {
         <IconBadge icon={<MapPin size={12} />} label={job.city} color="text-cyber-neon-purple" />
         <IconBadge icon={<Zap size={12} />} label={job.experience || job.exp} color="text-cyber-neon-orange" />
         <IconBadge icon={<Activity size={12} />} label={job.salary} color="text-cyber-neon-green" />
+        <IconBadge 
+          icon={<Users size={12} />} 
+          label={`${job.applicants || '5'} Applicants`} 
+          color={job.competition === 'High' ? 'text-cyber-neon-pink' : job.competition === 'Medium' ? 'text-cyber-neon-orange' : 'text-cyber-neon-green'} 
+        />
       </div>
 
       <div className="p-4 bg-white/5 rounded-2xl border border-white/5 mb-4 italic text-sm text-slate-400 line-clamp-2 leading-relaxed group-hover:text-slate-300 transition-colors border-l-2 border-cyber-neon-blue/20">
@@ -508,7 +548,7 @@ const IconBadge = ({ icon, label, color }) => (
   </div>
 );
 
-const JobDetailOverlay = ({ job, onClose }) => {
+const JobDetailOverlay = ({ job, onClose, onStartInterview }) => {
   return (
     <div className="fixed inset-0 z-[100] flex justify-end">
       <motion.div 
@@ -546,6 +586,12 @@ const JobDetailOverlay = ({ job, onClose }) => {
             <DetailStat label="Location Priority" value={job.city} color="text-cyber-neon-purple" />
             <DetailStat label="Experience Band" value={job.experience || job.exp} color="text-cyber-neon-orange" />
             <DetailStat label="Est. Compensation" value={job.salary} color="text-cyber-neon-blue" />
+            <DetailStat 
+              label="Competition Level" 
+              value={job.competition || 'Low'} 
+              color={job.competition === 'High' ? 'text-cyber-neon-pink' : job.competition === 'Medium' ? 'text-cyber-neon-orange' : 'text-cyber-neon-green'} 
+            />
+            <DetailStat label="Market Heat" value={`${job.applicants || '5'} Apps`} color="text-slate-400" />
           </div>
 
           <div className="space-y-8">
@@ -553,12 +599,39 @@ const JobDetailOverlay = ({ job, onClose }) => {
                 <div className="flex items-center gap-2 mb-4 text-cyber-neon-purple uppercase font-black tracking-widest text-xs">
                   <Target size={16} /> Semantic Analysis
                 </div>
-                <div className="p-6 glass bg-white/[0.02] border-l-2 border-cyber-neon-purple/50">
+                <div className="p-6 glass bg-white/[0.02] border-l-2 border-cyber-neon-purple/50 flex justify-between items-center">
                   <p className="text-slate-300 leading-relaxed font-medium italic">"{job.aiScore?.matchReason || job.aiScore?.reason}"</p>
+                  <button 
+                    onClick={onStartInterview}
+                    className="ml-4 flex flex-col items-center gap-1 bg-cyber-neon-purple/20 p-4 rounded-2xl border border-cyber-neon-purple/40 hover:bg-cyber-neon-purple hover:text-white transition-all group/btn shrink-0"
+                  >
+                    <PlayCircle size={24} className="text-cyber-neon-purple group-hover/btn:text-white" />
+                    <span className="text-[8px] font-black uppercase tracking-widest mt-1">Practice</span>
+                  </button>
                 </div>
              </section>
+              {job.tailoredResume && (
+                <section>
+                   <div className="flex items-center gap-2 mb-4 text-cyber-neon-green uppercase font-black tracking-widest text-xs">
+                     <FileDown size={16} /> Documents
+                   </div>
+                   <div className="p-6 glass bg-cyber-neon-green/5 border-l-2 border-cyber-neon-green/50 flex justify-between items-center group/doc">
+                     <div>
+                       <p className="text-white font-black text-sm uppercase">AI Tailored Resume</p>
+                       <p className="text-slate-500 text-[10px] font-bold">Optimized for this specific JD & company</p>
+                     </div>
+                     <a 
+                       href={job.tailoredResume} 
+                       download={`Resume_${job.company.replace(/\s+/g, '_')}.pdf`}
+                       className="bg-cyber-neon-green p-3 rounded-xl text-black hover:neon-glow-green transition-all shadow-lg active:scale-95"
+                     >
+                       <FileDown size={20} />
+                     </a>
+                   </div>
+                </section>
+              )}
 
-             <section>
+              <section>
                 <div className="flex items-center gap-2 mb-4 text-cyber-neon-blue uppercase font-black tracking-widest text-xs">
                   <Zap size={16} /> Knowledge Optimization
                 </div>
@@ -629,5 +702,100 @@ const DetailStat = ({ label, value, color }) => (
     <p className={`text-lg font-black ${color} tracking-tight`}>{value}</p>
   </div>
 );
+
+const InterviewBot = ({ job, onClose }) => {
+  const [messages, setMessages] = useState([
+    { role: 'bot', text: `Welcome to your AI Mock Interview for the ${job.title} role at ${job.company}. I've analyzed the JD. Are you ready for the first question?` }
+  ]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSend = async () => {
+    if (!input.trim() || loading) return;
+    const userMsg = { role: 'user', text: input };
+    const newMessages = [...messages, userMsg];
+    setMessages(newMessages);
+    setInput('');
+    setLoading(true);
+    
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      if (!apiKey) throw new Error("Missing VITE_GEMINI_API_KEY");
+
+      const prompt = `You are an expert technical interviewer for a ${job.title} role at ${job.company}. 
+      Previous conversation: ${newMessages.map(m => `${m.role}: ${m.text}`).join('\n')}
+      Provide a brief, professional follow-up question or feedback (max 2-3 sentences) based on the current context and the JD.`;
+
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      });
+
+      const data = await response.json();
+      const aiText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Interesting. Tell me more about your technical approach.";
+      setMessages(prev => [...prev, { role: 'bot', text: aiText }]);
+    } catch (err) {
+      console.error("AI Bot Error:", err);
+      setMessages(prev => [...prev, { role: 'bot', text: "I'm having a technical glitch, but let's continue. How would you handle a high-pressure deadline?" }]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="absolute inset-0 bg-black/60 backdrop-blur-md" />
+      <motion.div 
+        initial={{ scale: 0.9, opacity: 0 }} 
+        animate={{ scale: 1, opacity: 1 }} 
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="relative w-full max-w-2xl bg-cyber-bg border border-cyber-border rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[600px]"
+      >
+        <div className="p-6 border-b border-cyber-border bg-white/5 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+             <div className="bg-cyber-neon-blue p-2 rounded-lg"><Brain size={18} className="text-white" /></div>
+             <div>
+               <h3 className="text-white font-black uppercase text-xs tracking-widest">AI Interview Prep Bot</h3>
+               <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Topic: {job.title}</p>
+             </div>
+          </div>
+          <button onClick={onClose} className="text-slate-500 hover:text-white">✕</button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+          {messages.map((m, i) => (
+            <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-[80%] p-4 rounded-2xl text-sm font-medium ${m.role === 'user' ? 'bg-cyber-neon-blue text-white rounded-tr-none' : 'bg-white/5 text-slate-200 border border-white/10 rounded-tl-none'}`}>
+                {m.text}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="p-6 border-t border-cyber-border bg-black/20">
+          <div className="flex gap-4">
+            <input 
+              type="text" 
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+              placeholder={loading ? "Thinking..." : "Type your response..."}
+              disabled={loading}
+              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-cyber-neon-blue disabled:opacity-50"
+            />
+            <button 
+              onClick={handleSend} 
+              disabled={loading}
+              className={`px-6 py-3 rounded-xl font-black uppercase text-xs tracking-widest transition-all ${loading ? 'bg-slate-700 text-slate-400' : 'bg-cyber-neon-blue text-white hover:neon-glow-blue active:scale-95'}`}
+            >
+              {loading ? "..." : "Send"}
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 export default App;
