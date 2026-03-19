@@ -1,4 +1,7 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef, useMemo } from 'react';
+import { 
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area
+} from 'recharts';
 import { 
   LayoutDashboard, 
   Briefcase, 
@@ -11,20 +14,18 @@ import {
   Zap,
   Target,
   ChevronRight,
-  Activity
+  Activity,
+  CheckCircle2,
+  AlertCircle,
+  ShieldCheck,
+  Brain
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Mock data for initial development if file doesn't exist yet
 import initialData from './data/jobs.json';
 
-const THEME = {
-  blue: '#60a5fa',
-  purple: '#a78bfa',
-  pink: '#f472b6',
-  green: '#4ade80',
-  orange: '#fb923c'
-};
+const COLORS = ['#60a5fa', '#a78bfa', '#f472b6', '#4ade80', '#fb923c'];
 
 const App = () => {
   const [data, setData] = useState(initialData);
@@ -75,7 +76,7 @@ const App = () => {
           <NavItem 
             icon={<Target size={20} />} 
             label="Profile Boost" 
-            badge="New" 
+            badge="92%" 
             active={activeView === 'Boost'}
             onClick={() => setActiveView('Boost')}
           />
@@ -101,10 +102,10 @@ const App = () => {
         {/* TOP BAR */}
         <header className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-12 mt-4">
           <div>
-            <h1 className="text-4xl lg:text-5xl font-outfit font-black tracking-tight text-white mb-2">
-              Intelligence <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-neon-blue to-cyber-neon-purple">{activeView}</span>
+            <h1 className="text-4xl lg:text-5xl font-outfit font-black tracking-tight text-white mb-2 uppercase italic">
+              AI <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-neon-blue to-cyber-neon-purple">{activeView}</span>
             </h1>
-            <p className="text-slate-400 font-medium tracking-wide">Autonomous recruitment analysis for junior engineering roles.</p>
+            <p className="text-slate-400 font-medium tracking-wide">Autonomous recruitment intelligence for junior engineers.</p>
           </div>
 
           <div className="flex items-center gap-4 w-full lg:w-auto">
@@ -121,78 +122,12 @@ const App = () => {
           </div>
         </header>
 
-        {activeView === 'Dashboard' || activeView === 'Jobs' ? (
-          <>
-            {/* STATS OVERVIEW */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <StatCard 
-                label="Total Opportunities" 
-                value={data.stats.totalJobs} 
-                icon={<Briefcase className="text-cyber-neon-blue" />}
-                accent="border-cyber-neon-blue"
-                onClick={() => setActiveView('Jobs')}
-              />
-              <StatCard 
-                label="Peak Match Score" 
-                value={`${data.stats.topScore}%`} 
-                icon={<Target className="text-cyber-neon-purple" />}
-                accent="border-cyber-neon-purple"
-                onClick={() => setActiveView('Boost')}
-              />
-              <StatCard 
-                label="Active Run Cycles" 
-                value="Daily 9AM" 
-                icon={<Activity className="text-cyber-neon-green" />}
-                accent="border-cyber-neon-green"
-              />
-            </div>
-
-            {/* FILTERS */}
-            <div className="flex items-center gap-4 mb-8 overflow-x-auto pb-2 scrollbar-none">
-              <div className="flex items-center gap-2 mr-4 text-slate-500 font-bold uppercase text-[10px] tracking-widest whitespace-nowrap">
-                <Filter size={14} /> Refine Radar:
-              </div>
-              {cities.map(city => (
-                <button 
-                  key={city}
-                  onClick={() => setSelectedCity(city)}
-                  className={`px-5 py-2 rounded-full text-xs font-black tracking-widest uppercase transition-all whitespace-nowrap ${
-                    selectedCity === city 
-                    ? 'bg-cyber-neon-blue text-white shadow-lg neon-glow-blue' 
-                    : 'bg-white/5 border border-white/10 text-slate-400 hover:border-white/20'
-                  }`}
-                >
-                  {city}
-                </button>
-              ))}
-            </div>
-
-            {/* JOB GRID */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-12">
-              <AnimatePresence mode="popLayout">
-                {filteredJobs.map((job, idx) => (
-                  <JobGridCard key={job.id || idx} job={job} onClick={() => setSelectedJob(job)} />
-                ))}
-              </AnimatePresence>
-              {filteredJobs.length === 0 && (
-                <div className="col-span-full py-20 text-center glass">
-                  <p className="text-slate-500 font-bold uppercase tracking-widest">No matching frequencies detected in this sector.</p>
-                </div>
-              )}
-            </div>
-          </>
-        ) : (
-          <div className="glass p-20 text-center">
-            <h2 className="text-2xl font-black text-white mb-4 uppercase tracking-tighter">{activeView} module initializing...</h2>
-            <p className="text-slate-400 font-medium max-w-md mx-auto">This neural segment is being populated with real-time data from your next agent run.</p>
-            <button 
-              onClick={() => setActiveView('Dashboard')}
-              className="mt-8 px-8 py-3 bg-cyber-neon-blue text-white font-black rounded-xl uppercase tracking-widest text-xs hover:scale-105 transition-transform"
-            >
-              Return to Core
-            </button>
-          </div>
-        )}
+        <AnimatePresence mode="wait">
+          {activeView === 'Dashboard' && <MainDashboard key="dash" data={data} filteredJobs={filteredJobs} cities={cities} selectedCity={selectedCity} setSelectedCity={setSelectedCity} setSelectedJob={setSelectedJob} setActiveView={setActiveView} />}
+          {activeView === 'Jobs' && <MainDashboard key="jobs" data={data} filteredJobs={filteredJobs} cities={cities} selectedCity={selectedCity} setSelectedCity={setSelectedCity} setSelectedJob={setSelectedJob} setActiveView={setActiveView} />}
+          {activeView === 'Analytics' && <AnalyticsView key="analytics" data={data} />}
+          {activeView === 'Boost' && <ProfileBoostView key="boost" data={data} />}
+        </AnimatePresence>
 
         {/* JOB DETAIL SIDEBAR (Overlay) */}
         <AnimatePresence>
@@ -204,6 +139,277 @@ const App = () => {
     </div>
   );
 };
+
+/* --- SUB-VIEWS --- */
+
+const MainDashboard = ({ data, filteredJobs, cities, selectedCity, setSelectedCity, setSelectedJob, setActiveView }) => (
+  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+    {/* STATS OVERVIEW */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <StatCard 
+        label="Total Opportunities" 
+        value={data.stats.totalJobs} 
+        icon={<Briefcase className="text-cyber-neon-blue" />}
+        accent="border-cyber-neon-blue"
+        onClick={() => setSelectedCity('All')}
+      />
+      <StatCard 
+        label="Peak Match Score" 
+        value={`${data.stats.topScore}%`} 
+        icon={<Target className="text-cyber-neon-purple" />}
+        accent="border-cyber-neon-purple"
+        onClick={() => setActiveView('Boost')}
+      />
+      <StatCard 
+        label="Target Sectors" 
+        value={data.stats.cities} 
+        icon={<MapPin className="text-cyber-neon-green" />}
+        accent="border-cyber-neon-green"
+      />
+    </div>
+
+    {/* FILTERS */}
+    <div className="flex items-center gap-4 mb-8 overflow-x-auto pb-2 scrollbar-none">
+      <div className="flex items-center gap-2 mr-4 text-slate-500 font-bold uppercase text-[10px] tracking-widest whitespace-nowrap">
+        <Filter size={14} /> Refine Radar:
+      </div>
+      {cities.map(city => (
+        <button 
+          key={city}
+          onClick={() => setSelectedCity(city)}
+          className={`px-5 py-2 rounded-full text-xs font-black tracking-widest uppercase transition-all whitespace-nowrap ${
+            selectedCity === city 
+            ? 'bg-cyber-neon-blue text-white shadow-lg neon-glow-blue' 
+            : 'bg-white/5 border border-white/10 text-slate-400 hover:border-white/20'
+          }`}
+        >
+          {city}
+        </button>
+      ))}
+    </div>
+
+    {/* JOB GRID */}
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-12">
+      <AnimatePresence mode="popLayout">
+        {filteredJobs.map((job, idx) => (
+          <JobGridCard key={job.id || idx} job={job} onClick={() => setSelectedJob(job)} />
+        ))}
+      </AnimatePresence>
+      {filteredJobs.length === 0 && (
+        <div className="col-span-full py-20 text-center glass">
+          <p className="text-slate-500 font-bold uppercase tracking-widest">No matching frequencies detected in this sector.</p>
+        </div>
+      )}
+    </div>
+  </motion.div>
+);
+
+const AnalyticsView = ({ data }) => {
+  const cityData = useMemo(() => {
+    const counts = {};
+    data.jobs.forEach(j => {
+      counts[j.city] = (counts[j.city] || 0) + 1;
+    });
+    return Object.keys(counts).map(name => ({ name, value: counts[name] }));
+  }, [data]);
+
+  const skillData = useMemo(() => {
+    return data.skillGapSummary.slice(0, 5).map(s => ({ 
+      name: s.skill, 
+      count: s.count 
+    }));
+  }, [data]);
+
+  const scoreData = useMemo(() => {
+    return data.jobs.map((j, i) => ({ 
+      index: i + 1, 
+      score: j.aiScore?.score || 0 
+    })).sort((a, b) => b.score - a.score);
+  }, [data]);
+
+  return (
+    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* MARKET SHARE BY CITY */}
+        <div className="glass p-8">
+           <h3 className="text-white font-black uppercase tracking-widest text-sm mb-8 flex items-center gap-2">
+             <MapPin size={18} className="text-cyber-neon-purple" /> Geographic Distribution
+           </h3>
+           <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={cityData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {cityData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}
+                    itemStyle={{ color: '#fff', fontSize: '10px', textTransform: 'uppercase', fontWeight: 900 }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+           </div>
+           <div className="grid grid-cols-2 gap-4 mt-8">
+              {cityData.map((c, i) => (
+                <div key={c.name} className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }} />
+                  <span className="text-[10px] font-black uppercase text-slate-400">{c.name}: {c.value} Jobs</span>
+                </div>
+              ))}
+           </div>
+        </div>
+
+        {/* SKILL GAP INTENSITY */}
+        <div className="glass p-8">
+           <h3 className="text-white font-black uppercase tracking-widest text-sm mb-8 flex items-center gap-2">
+             <Zap size={18} className="text-cyber-neon-orange" /> Critical Skill Gaps
+           </h3>
+           <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={skillData} layout="vertical">
+                  <XAxis type="number" hide />
+                  <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 900 }} width={80} />
+                  <Tooltip 
+                    cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}
+                  />
+                  <Bar dataKey="count" fill="#60a5fa" radius={[0, 4, 4, 0]} barSize={20} />
+                </BarChart>
+              </ResponsiveContainer>
+           </div>
+           <p className="text-[10px] font-bold text-slate-500 mt-4 uppercase tracking-tighter">Frequency of missing skills in current market opportunities.</p>
+        </div>
+      </div>
+
+      {/* AI MATCH SCORE DISTRIBUTION */}
+      <div className="glass p-8">
+         <h3 className="text-white font-black uppercase tracking-widest text-sm mb-8 flex items-center gap-2">
+           <Brain size={18} className="text-cyber-neon-blue" /> Match Quality Spectrum
+         </h3>
+         <div className="h-72">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={scoreData}>
+                <defs>
+                  <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#60a5fa" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#60a5fa" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="index" axisLine={false} tickLine={false} tick={{ fill: '#475569', fontSize: 10 }} />
+                <YAxis domain={[0, 100]} axisLine={false} tickLine={false} tick={{ fill: '#475569', fontSize: 10 }} />
+                <Tooltip 
+                   contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}
+                />
+                <Area type="monotone" dataKey="score" stroke="#3b82f6" fillOpacity={1} fill="url(#colorScore)" strokeWidth={3} />
+              </AreaChart>
+            </ResponsiveContainer>
+         </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const ProfileBoostView = ({ data }) => {
+  const boost = data.boostReport;
+  
+  return (
+    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="space-y-8 pb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        {/* COMPLEATNESS GAUGE */}
+        <div className="lg:col-span-1 glass p-8 flex flex-col items-center justify-center text-center">
+           <h3 className="text-slate-500 font-black uppercase tracking-widest text-[10px] mb-8">Force Readiness Score</h3>
+           <div className="relative w-48 h-48 flex items-center justify-center mb-8">
+              <svg className="w-full h-full transform -rotate-90">
+                <circle cx="96" cy="96" r="80" fill="none" stroke="#1e293b" strokeWidth="12" />
+                <circle cx="96" cy="96" r="80" fill="none" stroke="#4ade80" strokeWidth="12" 
+                  strokeDasharray={2 * Math.PI * 80} 
+                  strokeDashoffset={2 * Math.PI * 80 * (1 - boost.profileScore.percentage / 100)} 
+                  className="transition-all duration-1000 shadow-lg"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <div className="absolute flex flex-col items-center">
+                <span className="text-4xl font-black text-white">{boost.profileScore.percentage}%</span>
+                <span className="text-[10px] font-black text-cyber-neon-green uppercase tracking-widest mt-1 italic">Optimized</span>
+              </div>
+           </div>
+           <div className="flex items-center gap-2 text-cyber-neon-blue font-black uppercase text-[10px] tracking-widest mt-4">
+             <ShieldCheck size={16} /> Verified Protocol
+           </div>
+        </div>
+
+        {/* TOP ACTIONS */}
+        <div className="lg:col-span-2 glass p-8">
+           <h3 className="text-white font-black uppercase tracking-widest text-sm mb-8 flex items-center gap-2">
+             <Activity size={18} className="text-cyber-neon-green" /> Immediate Optimization Protocol
+           </h3>
+           <div className="space-y-4">
+              {boost.todaysActions.map((action, i) => (
+                <div key={i} className="flex items-center gap-6 p-4 bg-white/5 rounded-2xl border border-white/5 group hover:bg-white/10 transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-cyber-bg border border-cyber-neon-green flex items-center justify-center font-black text-cyber-neon-green text-sm shadow-lg neon-glow-green">
+                    {action.step}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-slate-200 font-bold text-sm tracking-tight">{action.text}</p>
+                  </div>
+                  <a href={action.url} target="_blank" className="bg-cyber-neon-green/20 text-cyber-neon-green px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest border border-cyber-neon-green/30 hover:bg-cyber-neon-green hover:text-white transition-all">
+                    {action.btn || 'Execute'}
+                  </a>
+                </div>
+              ))}
+           </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+        {/* DAILY SIGNALS */}
+        <div className="glass p-8">
+           <h3 className="text-white font-black uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
+             <Zap size={18} className="text-cyber-neon-blue" /> Growth Signals
+           </h3>
+           <div className="space-y-4">
+              {boost.todaysSignals.map((signal, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle2 size={16} className="text-cyber-neon-blue mt-0.5 shrink-0" />
+                  <p className="text-sm text-slate-400 font-medium leading-relaxed">{signal}</p>
+                </div>
+              ))}
+           </div>
+        </div>
+
+        {/* SKILL RESOURCES */}
+        <div className="glass p-8 border-cyber-neon-purple/20">
+           <h3 className="text-white font-black uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
+             <AlertCircle size={18} className="text-cyber-neon-purple" /> Intelligence Requirements
+           </h3>
+           <div className="space-y-4">
+              {data.skillGapSummary.slice(0, 4).map((skill, i) => (
+                <div key={i} className="p-4 bg-cyber-neon-purple/5 rounded-2xl border border-cyber-neon-purple/10 flex justify-between items-center group cursor-pointer hover:border-cyber-neon-purple/30 transition-all">
+                  <div>
+                    <h4 className="text-xs font-black text-cyber-neon-purple uppercase tracking-widest mb-1">{skill.skill}</h4>
+                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Recommendation: {skill.resource}</p>
+                  </div>
+                  <ChevronRight size={16} className="text-cyber-neon-purple group-hover:translate-x-1 transition-transform" />
+                </div>
+              ))}
+           </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+/* --- SHARED COMPONENTS --- */
 
 const NavItem = ({ icon, label, active = false, badge, onClick }) => (
   <button 
@@ -278,7 +484,7 @@ const JobGridCard = forwardRef(({ job, onClick, ...props }, ref) => {
         <IconBadge icon={<Activity size={12} />} label={job.salary} color="text-cyber-neon-green" />
       </div>
 
-      <div className="p-4 bg-white/5 rounded-2xl border border-white/5 mb-4 italic text-sm text-slate-400 line-clamp-2 leading-relaxed group-hover:text-slate-300 transition-colors">
+      <div className="p-4 bg-white/5 rounded-2xl border border-white/5 mb-4 italic text-sm text-slate-400 line-clamp-2 leading-relaxed group-hover:text-slate-300 transition-colors border-l-2 border-cyber-neon-blue/20">
         "{job.aiScore?.matchReason || job.aiScore?.reason || 'Excellent match for your specialized tech stack and experience level.'}"
       </div>
 
@@ -323,7 +529,7 @@ const JobDetailOverlay = ({ job, onClose }) => {
             </div>
             <button 
               onClick={onClose}
-              className="p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors text-slate-400 hover:text-white"
+              className="p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors text-slate-400 hover:text-white border border-white/10"
             >
               <ChevronRight size={24} className="rotate-0" />
             </button>
@@ -344,7 +550,7 @@ const JobDetailOverlay = ({ job, onClose }) => {
                 <div className="flex items-center gap-2 mb-4 text-cyber-neon-purple uppercase font-black tracking-widest text-xs">
                   <Target size={16} /> Semantic Analysis
                 </div>
-                <div className="p-6 glass bg-white/[0.02]">
+                <div className="p-6 glass bg-white/[0.02] border-l-2 border-cyber-neon-purple/50">
                   <p className="text-slate-300 leading-relaxed font-medium italic">"{job.aiScore?.matchReason || job.aiScore?.reason}"</p>
                 </div>
              </section>
