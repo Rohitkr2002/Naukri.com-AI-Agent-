@@ -152,28 +152,55 @@ Every fresher in India faces this same painful daily routine:
 
 > "A futuristic, interactive command center for your job search."
 
-![Dashboard Main](docs/assets/dashboard_main.png)
+```mermaid
+mindmap
+  root((Dashboard))
+    Market Analytics
+      "4 Major Tech Hubs"
+      "Skill Gap Visualization"
+      "Match Spectrum Charts"
+    Profile Optimization
+      "14-Section Health Check"
+      "ATS Keyword Signals"
+      "Daily Action Protocols"
+    Interview Bot
+      "AI Role-Specific Prep"
+      "Real-time Feedback Loop"
+      "Performance Tracking"
+```
 
 ### 📊 Market Analytics & Strategy
 Deep-dive into market trends with high-fidelity visualizations. Identify **Skill Gaps** and **Match Spectrums** across 4 major tech hubs in India.
 
-![Analytics](docs/assets/dashboard_analytics.png)
-
 ### ⚡ Profile Boost Command Center
 Step-by-step action protocols to keep your Naukri profile at the top of recruiter searches. Includes a real-time **Readiness Index** and curated learning resources.
-
-![Profile Boost](docs/assets/dashboard_boost.png)
 
 ---
 
 ## 📧 Feature 5 — Premium Email (V2)
 The daily 9 AM report has been completely overhauled with a **robust "Cyber-Pro"** design.
+
+> [!NOTE]
+> **Email Mockup (Dark Mode)**
+> 
+> ```text
+> 🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
+> 🟦  NAUKRI AI AGENT - DAILY REPORT  (9 AM IST)  🟦
+> 🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
+> 
+> 👤 Candidate: Rohit Kumar Singh
+> 🎯 Match Score: 92% (TCS - Software Engineer)
+> 🧪 Analysis: "Strong JavaScript/Python fit..."
+> 
+> 📍 Bangalore Hits: 47 Jobs  |  📍 Delhi Hits: 32 Jobs
+> 
+> [ VIEW FULL ANALYSIS IN DASHBOARD ]
+> ```
+
 - **Max Compatibility**: Rebuilt with email-safe HTML/CSS (works in Gmail, Outlook, Apple Mail).
 - **High Contrast**: Sleek dark mode using Slate-950 and Neon Blue/Purple accents.
 - **AI Match Bars**: Instant visual indicator of your fit for every job.
 - **Direct Apply**: One-click action buttons in every job card.
-
-![Email Redesign](docs/assets/email_redesign.png)
 
 ---
 
