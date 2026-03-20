@@ -20,13 +20,13 @@
 
 <br/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=700&height=100&lines=🤖+Scrapes+Naukri.com+across+4+cities+daily;🧠+Gemini+2.5+AI+scores+every+job+0–100%25;📧+Premium+Cyber-Pro+Email+delivered+at+9%3A00+AM+IST;📊+Interactive+Local+Intelligence+Dashboard+included)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=700&height=100&lines=🤖+Scrapes+Naukri+LinkedIn+Indeed+daily;🧠+Gemini+2.5+AI+scores+every+job+0–100%25;📧+Premium+Email+with+50+Job+Matches;📊+Interactive+Local+Intelligence+Dashboard+included)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
 
 <br/>
 
 > ### 💬 *"Job dhundhna band karo — agent karne do."*
 >
-> A **fully autonomous AI Agent** that wakes up at 9:00 AM IST every day, scrapes Naukri.com across 4 cities and 5 roles, scores every job using **Google Gemini 2.5 Flash AI**, selects the best-fit resume, generates a personalized cover letter, and delivers a premium job intelligence report straight to your inbox.
+> A **fully autonomous AI Agent** that wakes up at 9:00 AM IST every day, scrapes **Naukri, LinkedIn, and Indeed** across 4 cities and 5 roles, scores every job using **Google Gemini 2.5 Flash AI**, selects the best-fit resume, generates a personalized cover letter, and delivers a premium job intelligence report with **50 matches** straight to your inbox.
 >
 > **Zero manual effort. Every single day. 100% Free.**
 >
@@ -341,7 +341,7 @@ $ node index.js
 │      │  │        │  │Gemini 2.5│  │          │  │          │
 │Score │  │4 cities│  │Flash AI  │  │SW or Data│  │Dark Mode │
 │Tips  │  │5 roles │  │0–100%    │  │+Cover Ltr│  │Glassmrph │
-│Gaps  │  │20 URLs │  │Rank jobs │  │AI letter │  │City Cards│
+│Gaps  │  │60 URLs │  │Rank jobs │  │AI letter │  │City Cards│
 └──┬───┘  └───┬────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘
    │          │             │              │              │
    └──────────┴─────────────┴──────────────┘              │
@@ -363,13 +363,13 @@ $ node index.js
 ### Complete Data Flow
 
 ```
-Naukri.com  
-  ──[Puppeteer Headless Chrome]──▶  Raw Jobs   (60–120 scraped)
-  ──[Filter Engine]───────────────▶ Clean Jobs (15–20 unique, 0-1yr)
-  ──[Gemini 2.5 Flash AI]─────────▶ Scored & Ranked (0–100% each)
+Naukri + LinkedIn + Indeed  
+  ──[Puppeteer Headless Chrome]──▶  Raw Jobs   (100+ scraped)
+  ──[Filter Engine]───────────────▶ Clean Jobs (30–50 unique, 0-1yr)
+  ──[Gemini 2.5 Flash AI]─────────▶ Scored & Ranked (Top 50 matches)
   ──[Resume Matcher]───────────────▶ +Best Resume +Cover Letter
   ──[Mail Builder]─────────────────▶ Premium HTML Email
-  ──[Gmail SMTP]───────────────────▶ 📬 Your Inbox
+  ──[Twilio / SMTP]────────────────▶ WhatsApp + Email Alert
 ```
 
 ---
@@ -606,7 +606,7 @@ GitHub: github.com/Rohitkr2002
 ### Scraping Strategy
 
 ```javascript
-// 4 cities × 5 roles = 20 Naukri pages per run
+// 4 cities × 5 roles × 3 platforms = 60 requests per run
 const CITIES = ['bangalore', 'delhi', 'pune', 'kolkata'];
 const ROLES  = [
   { keyword: 'software-developer',  label: 'Software Developer'  },
@@ -663,7 +663,7 @@ RAW JOBS  (~60–120 collected across 20 pages)
     ▼  Step 4: Top 20 Limit
     │  Keep freshest, most relevant 20 only
 
-CLEAN JOBS (~15–20 unique, fresh, 0-1yr jobs)
+CLEAN JOBS (30–50 unique, fresh, 0-1yr jobs)
 ```
 
 ---
@@ -678,7 +678,7 @@ CLEAN JOBS (~15–20 unique, fresh, 0-1yr jobs)
 ╔══════════════════════════════════════════════════════════════╗
 ║  💼  NAUKRI JOB ALERT  ·  Rohit Kumar Singh                 ║
 ║  📅  Wednesday, 18 March 2026  ·  ⏰ 9:00 AM IST            ║
-║  🎯  18 Fresh Jobs · 0-1 Year Experience · 4 Cities          ║
+║  🎯  50 Fresh Jobs · 0-1 Year Experience · 4 Cities          ║
 ╠════════════╦════════════════╦══════════════════════════════╣
 ║  18 JOBS   ║   4 CITIES    ║   5 ROLES                    ║
 ╠════════════╩════════════════╩══════════════════════════════╣
@@ -783,13 +783,17 @@ Nukari.com/                              ← Project root
 │   ├── 📄 resume_software.txt            ← SW Dev / Frontend resume
 │   └── 📄 resume_data.txt               ← Data Analyst resume
 │
+├── 📄 index.js                          ← 🎯 Main entry point
+│                                          Runs Steps 0–6 in sequence
+│                                          Full error handling
+│
 ├── 📂 services/
-│   ├── 📄 scraper.js                    ← Puppeteer headless browser
-│   │                                      Visits 20 Naukri URLs/day
-│   │                                      Anti-bot stealth mode
+│   ├── 📄 scraper.js                    ← Multi-Platform Scraper
+│   │                                      Visits 60 URLs/day
+│   │                                      Naukri, LinkedIn, Indeed
 │   │
 │   ├── 📄 filter.js                     ← Job filter engine
-│   │                                      Keeps 0-1yr, dedup, sort fresh
+│   │                                      Keeps 0-1yr, history-aware
 │   │
 │   ├── 📄 profileBoost.js               ← Feature 1: Profile Boost
 │   │                                      14-section score, ATS tips,
@@ -797,7 +801,7 @@ Nukari.com/                              ← Project root
 │   │
 │   ├── 📄 aiScorer.js                   ← Feature 2: AI Job Scoring
 │   │                                      Gemini 2.5 Flash API
-│   │                                      Heuristic fallback mode
+│   │                                      Top 50 rank per job
 │   │                                      0-100% scores per job
 │   │
 │   ├── 📄 resumeMatcher.js              ← Feature 3: Resume Matching
@@ -898,7 +902,11 @@ RECIPIENT_EMAIL=your_email@gmail.com
 GEMINI_API_KEY=AIzaSy...your_key_here
 
 # ── Optional ───────────────────────────────────────
-RAPIDAPI_KEY=your_key
+# ── WhatsApp (Twilio) ──────────────────────────────
+TWILIO_SID=AC...
+TWILIO_AUTH_TOKEN=your_token
+TWILIO_PHONE=whatsapp:+14155238886
+USER_PHONE=whatsapp:+91...
 ```
 
 ### 📝 Step 5 — Edit Your Profile
@@ -956,8 +964,11 @@ GitHub → Your Repo → Settings → Secrets and variables → Actions
 | `GMAIL_USER` | your Gmail address | ✅ |
 | `GMAIL_PASS` | 16-char App Password (no spaces) | ✅ |
 | `RECIPIENT_EMAIL` | email to receive report | ✅ |
-| `GEMINI_API_KEY` | Google AI Studio key | ⭐ Recommended |
-| `RAPIDAPI_KEY` | RapidAPI key | Optional |
+| `GEMINI_API_KEY` | Google AI Studio key | ⭐ Highly Recommended |
+| `TWILIO_SID` | Twilio Account SID | 💬 For WhatsApp |
+| `TWILIO_AUTH_TOKEN`| Twilio Auth Token | 💬 For WhatsApp |
+| `TWILIO_PHONE` | Twilio Sandbox Number | 💬 For WhatsApp |
+| `USER_PHONE` | Your WhatsApp (e.g. `whatsapp:+91...`) | 💬 For WhatsApp |
 
 ### Workflow File
 
@@ -991,7 +1002,10 @@ jobs:
           GMAIL_PASS:      ${{ secrets.GMAIL_PASS }}
           RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
           GEMINI_API_KEY:  ${{ secrets.GEMINI_API_KEY }}
-          RAPIDAPI_KEY:    ${{ secrets.RAPIDAPI_KEY }}
+          TWILIO_SID:      ${{ secrets.TWILIO_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_PHONE:    ${{ secrets.TWILIO_PHONE }}
+          USER_PHONE:      ${{ secrets.USER_PHONE }}
         run: node index.js
 ```
 
@@ -1038,7 +1052,7 @@ const ROLES = [
 
 ```javascript
 // services/filter.js
-const top20 = deduped.slice(0, 20);  // Change 20 to any number
+const top50 = deduped.slice(0, 50);  // Change 50 to any number
 ```
 
 ---
@@ -1049,7 +1063,7 @@ const top20 = deduped.slice(0, 20);  // Change 20 to any number
 |--------|-------|
 | 🌍 Cities scraped | 4 (Bangalore, Delhi, Pune, Kolkata) |
 | 💼 Job roles searched | 5 domains |
-| 🔗 Naukri URLs visited/day | 20 pages |
+| 🔗 URLs visited/day | 60 pages (3 platforms) |
 | 📦 Raw jobs collected | 60–120 |
 | ✅ After filtering | 30–50 clean jobs |
 | 🤖 Gemini AI calls/day | ≤20 (free quota: 1,500/day) |
