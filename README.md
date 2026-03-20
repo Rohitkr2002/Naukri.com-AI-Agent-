@@ -1,6 +1,15 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0f1e,50:0d2137,100:1a3a5c&height=220&section=header&text=🤖%20Naukri%20Job%20AI%20Agent&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Automated%20Daily%20Job%20Intelligence%20System%20|%20Powered%20by%20Gemini%202.5%20AI&descAlignY=54&descSize=16" alt="Naukri Job AI Agent"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d2137,70:1a3a5c,100:0a0f1e&height=240&section=header&text=🤖%20Naukri%20Job%20AI%20Agent&fontSize=50&fontColor=38BDF8&animation=twinkle&fontAlignY=38&desc=Advanced%20Daily%20Job%20Intelligence%20|%20V2.5%20Cyber-Pro&descAlignY=56&descSize=18" alt="Naukri Job AI Agent Header"/>
+
+<br/>
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=4000&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=800&height=120&lines=🚀+Auto-Scrapes+Naukri+LinkedIn+Indeed+daily;🧠+Gemini+2.5+Flash+AI+Match+Scoring;📧+Premium+Dark-Mode+Job+Reports;📊+Interactive+Local+Intelligence+Dashboard;💬+WhatsApp+Alerts+via+Twilio+included)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
+
+<br/>
+
+### 🌌 Navigation Hub
+[**📦 Installation**](#-setup--installation) • [**🤖 AI Engine**](#-gemini-25-ai-intelligence) • [**📊 Dashboard**](#-local-intelligence-dashboard) • [**📧 Daily Report**](#-daily-report-mockup) • [**❓ FAQ**](#-faq--interviewer-questions)
 
 <br/>
 
@@ -8,62 +17,16 @@
 [![Puppeteer](https://img.shields.io/badge/Puppeteer-v24-40B5A4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://pptr.dev)
 [![Gemini 2.5](https://img.shields.io/badge/Gemini%202.5%20Flash-AI%20Engine-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://aistudio.google.com)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-9AM%20Daily-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
-[![Gmail](https://img.shields.io/badge/Gmail%20SMTP-Email%20Engine-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](https://nodemailer.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-F5A623?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
-
-<br/>
-
-[![Stars](https://img.shields.io/github/stars/Rohitkr2002/Naukri.com-AI-Agent-?style=social)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
-[![Last Commit](https://img.shields.io/github/last-commit/Rohitkr2002/Naukri.com-AI-Agent-?color=green)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
-[![Repo Size](https://img.shields.io/github/repo-size/Rohitkr2002/Naukri.com-AI-Agent-)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
-[![Profile Views](https://komarev.com/ghpvc/?username=Rohitkr2002&label=Profile+Views&color=0e75b6&style=flat)](https://github.com/Rohitkr2002)
-
-<br/>
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=700&height=100&lines=🤖+Scrapes+Naukri+LinkedIn+Indeed+daily;🧠+Gemini+2.5+AI+scores+every+job+0–100%25;📧+Premium+Email+with+50+Job+Matches;📊+Interactive+Local+Intelligence+Dashboard+included)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
-
-<br/>
-
-> ### 💬 *"Job dhundhna band karo — agent karne do."*
->
-> A **fully autonomous AI Agent** that wakes up at 9:00 AM IST every day, scrapes **Naukri, LinkedIn, and Indeed** across 4 cities and 5 roles, scores every job using **Google Gemini 2.5 Flash AI**, selects the best-fit resume, generates a personalized cover letter, and delivers a premium job intelligence report with **50 matches** straight to your inbox.
->
-> **Zero manual effort. Every single day. 100% Free.**
->
-> 🚀 **New in V2**: Robust Email-Safe UI + Daily Scheduled Automations.
-
-<br/>
-
-### 🛠️ Tech Stack
-
-[![My Skills](https://skillicons.dev/icons?i=nodejs,react,vite,tailwind,js,python,html,css,github,vscode,linux,git,gmail&theme=dark)](https://github.com/Rohitkr2002/Naukri.com-AI-Agent-)
-
-<br/>
-
-```mermaid
-flowchart LR
-    A(["⏰ GitHub Actions\n9:00 AM IST"]) --> B
-    B(["🚀 Profile Boost\nScore + ATS Tips"]) --> C
-    C(["🔍 Scraper\n4 Cities × 5 Roles"]) --> D
-    D(["✅ Filter\nDedupe + Sort"]) --> E
-    E(["🤖 Gemini 2.5 AI\nScore 0–100%"]) --> F
-    F(["📄 Resume Match\n+ Cover Letter"]) --> G
-    G(["🎛️ Local Dashboard\nRecharts + Analytics"]) --> H
-    H(["📧 Premium Email\nDelivered @ 9 AM"])
-
-    style A fill:#1e3a5f,color:#7dd3fc,stroke:#2563eb
-    style B fill:#14532d,color:#4ade80,stroke:#16a34a
-    style C fill:#422006,color:#fb923c,stroke:#ea580c
-    style D fill:#1e293b,color:#94a3b8,stroke:#475569
-    style E fill:#312e81,color:#a5b4fc,stroke:#6366f1
-    style F fill:#4a1d96,color:#e9d5ff,stroke:#7c3aed
-    style G fill:#0f172a,color:#38bdf8,stroke:#0284c7
-    style H fill:#450a0a,color:#fca5a5,stroke:#dc2626
-```
 
 </div>
 
----
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0a0f1e&height=60&section=footer&flip=true" width="100%"/>
+
+</div>
+
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1a3a5c&height=60&section=footer" width="100%"/>
+<br/>
 
 ## 📌 Table of Contents
 
@@ -92,7 +55,9 @@ flowchart LR
 
 </details>
 
----
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1a3a5c&height=60&section=footer" width="100%"/>
+<br/>
 
 ## 🎯 Problem Statement
 
@@ -116,50 +81,54 @@ Every fresher in India faces this same painful daily routine:
 | ❌ No skill gap awareness | Don't know what to learn next |
 | ❌ High competition blindness | Applying for jobs with 1000+ applicants |
 
----
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1a3a5c&height=60&section=footer" width="100%"/>
+<br/>
 
 ## 🚀 Core Capabilities
 
-The Naukri AI Agent is built on three pillars of power: **Extraction**, **Intelligence**, and **Automation**.
+> [!IMPORTANT]
+> The Naukri AI Agent is built on three pillars of power: **Extraction**, **Intelligence**, and **Automation**.
 
-### 1. 🔍 Multi-Platform Scraper (Naukri, LinkedIn, Indeed)
-- **High-Fidelity Extraction**: Visits **60 URLs** daily across 4 major tech hubs (Bangalore, Delhi, Pune, Kolkata).
-- **Stealth Mode**: Mimics human behavior with Puppeteer to bypass bot detection.
-- **Deduplication**: Smart logic ensures you never see the same job twice.
+| 🔥 Pillar | 🛠️ Technology | 🎯 Impact |
+|:---:|:---:|:---|
+| **Extraction** | Puppeteer · Multi-Platform | Scrapes **60 URLs** via Naukri, LinkedIn, Indeed |
+| **Intelligence** | Gemini 2.5 Flash AI | **0–100% Match Scoring** + Personalized Cover Letters |
+| **Automation** | GitHub Actions · Twilio | **9 AM Daily Reports** via Email & WhatsApp Alerts |
 
-### 2. 🧠 Gemini 2.5 AI Intelligence
-- **AI Scoring (0-100%)**: Every job is scored against your specific profile for a perfect match.
-- **Match Reason & Gaps**: AI explains *why* a job matches and what skills you are missing.
-- **Tailored PDF Resumes**: Automatically generates custom resumes optimized for the top job matches.
-
-### 3. 📅 Automated Ecosystem
-- **9 AM Daily Reports**: A premium dark-mode email delivered exactly when you start your day.
-- **WhatsApp Alerts**: Instant notifications via Twilio for high-priority matches.
-- **Local Dashboard**: A futuristic command center for market analytics and profile health checks.
+<br/>
 
 | Metric | Manual Search | ✅ AI Agent |
-|--------|-------------|-------------|
-| Time spent / day | 60–90 min | **0 min** |
-| Job relevance | ~5% | **~90%** |
-| Platform Coverage | 1 (Manual) | **3 (Live Scrape)** |
-| Resume Strategy | Generic | **Tailored AI-PDF** |
-| Skill Gaps | Unknown | **AI-Detected** |
-| Total Cost | Your time | **₹0 Forever** |
+|:---:|:---:|:---:|
+| **Time spent / day** | 60–90 min | **0 min** |
+| **Job relevance** | ~5% | **~90%** |
+| **Platform Coverage** | 1 (Manual) | **3 (Live Scrape)** |
+| **Resume Strategy** | Generic | **Tailored AI-PDF** |
+| **Skill Gaps** | Unknown | **AI-Detected** |
+| **Total Cost** | Your time | **₹0 Forever** |
 
----
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1a3a5c&height=60&section=footer" width="100%"/>
+<br/>
 
----
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1a3a5c&height=60&section=footer" width="100%"/>
+<br/>
 
 ## 🎛️ Feature Spotlight
 
-### 📊 Local Intelligence Dashboard
-A futuristic, interactive command center for your job search. Track **Market Analytics**, **Skill Gaps**, and manage your **Profile Boost** readiness from one place.
-- **Launcher**: Double-click `LAUNCH_DASHBOARD.bat` to start instantly.
+> [!NOTE]
+> ### 📊 Local Intelligence Dashboard
+> A futuristic, interactive command center for your job search. Track **Market Analytics**, **Skill Gaps**, and manage your **Profile Boost** readiness from one place.
+> - **Launcher**: Double-click `LAUNCH_DASHBOARD.bat` to start instantly.
 
-### 📧 Premium Email Reports
-The daily 9 AM report is built for the "Cyber-Pro" professional. Rebuilt with email-safe glassmorphism, AI match spectrums, and direct-apply CTA buttons. Works in all major email clients.
+> [!TIP]
+> ### 📧 Premium Email Reports
+> The daily 9 AM report is built for the "Cyber-Pro" professional. Rebuilt with email-safe glassmorphism, AI match spectrums, and direct-apply CTA buttons. Works in all major email clients.
 
----
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1a3a5c&height=60&section=footer" width="100%"/>
+<br/>
 
 ## 🚀 One-Click Automation
 No more complex commands. Use the new **Launcher** to refresh your data and open your dashboard in one second.
@@ -169,7 +138,9 @@ No more complex commands. Use the new **Launcher** to refresh your data and open
 LAUNCH_DASHBOARD.bat
 ```
 
----
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1a3a5c&height=60&section=footer" width="100%"/>
+<br/>
 
 ## 🧪 Live Demo — Real AI Output
 
@@ -1103,14 +1074,28 @@ git push origin feature/your-feature
 
 ---
 
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=1a3a5c&height=60&section=footer" width="100%"/>
+<br/>
+
+## 🗺️ Project Roadmap
+
+- [x] **V1.0**: Core Scraper + Email Notification
+- [x] **V2.0**: Gemini AI Scoring + Dark Mode Dashboard
+- [x] **V2.5**: Multi-Platform Scraping + WhatsApp + Tailored PDF
+- [ ] **V3.0**: One-Click Auto-Apply (In Development 🛠️)
+- [ ] **V3.5**: Telegram Integration + Detailed Interview Roadmap
+
+<br/>
+
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a3a5c,100:0a0f1e&height=140&section=footer" alt="Footer"/>
 
-### 👨‍💻 Built by Rohit Kumar Singh
+### 👨‍💻 Developed with ❤️ by Rohit Kumar Singh
 
-**B.Tech — Electronics & Communication Engineering**  
-**Haldia Institute of Technology · Batch 2025 · CGPA: 7.33**
+**Electronics & Communication Engineer | Final Year '25**  
+*Building autonomous tools for the next generation of job hunters.*
 
 <br/>
 
@@ -1118,12 +1103,10 @@ git push origin feature/your-feature
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-rohit--kumar--singh-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/rohit-kumar-singh)
 [![GitHub](https://img.shields.io/badge/GitHub-Rohitkr2002-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Rohitkr2002)
 
-<br/>
-
 ---
 
-*⭐ If this project saved you hours of manual job hunting or helped you land an interview — please give it a star! It helps others discover this tool.*
+*⭐ If this project saved you hours of manual job hunting — please give it a star!*
 
-**🤖 Automated with ❤️ using Node.js · Gemini 2.5 Flash AI · GitHub Actions**
+**🤖 Fully Autonomous · Powered by Node.js · Gemini 2.5 Flash AI · GitHub Actions**
 
 </div>
