@@ -22,26 +22,26 @@ function createTransporter() {
 
 // ─── Cyber-Pro Theme Tokens (HSL) ───────────────────────────────────────────
 const THEME = {
-  bg:      '#020617', // Deeper slate-950 for better contrast
-  glass:   'rgba(255, 255, 255, 0.04)',
-  border:  'rgba(255, 255, 255, 0.12)',
-  text:    { main: '#f8fafc', dim: '#cbd5e1', muted: '#64748b' },
-  accent:  '#38bdf8', // Sky-400
-  glow:    '0 0 20px rgba(56, 189, 248, 0.4)',
+  bg: '#020617', // Deeper slate-950 for better contrast
+  glass: 'rgba(255, 255, 255, 0.04)',
+  border: 'rgba(255, 255, 255, 0.12)',
+  text: { main: '#f8fafc', dim: '#cbd5e1', muted: '#64748b' },
+  accent: '#38bdf8', // Sky-400
+  glow: '0 0 20px rgba(56, 189, 248, 0.4)',
 };
 
 const CITY_THEME = {
   'Bangalore': { accent: '#fb923c', glow: 'rgba(251, 146, 60, 0.3)', emoji: '🏙️' }, // Orange-400
-  'Delhi':     { accent: '#f87171', glow: 'rgba(248, 113, 113, 0.3)', emoji: '🕌' }, // Red-400
-  'Pune':      { accent: '#c084fc', glow: 'rgba(192, 132, 252, 0.3)', emoji: '🏯' }, // Purple-400
-  'Kolkata':   { accent: '#2dd4bf', glow: 'rgba(45, 212, 191, 0.3)',  emoji: '🌉' }, // Teal-400
+  'Delhi': { accent: '#f87171', glow: 'rgba(248, 113, 113, 0.3)', emoji: '🕌' }, // Red-400
+  'Pune': { accent: '#c084fc', glow: 'rgba(192, 132, 252, 0.3)', emoji: '🏯' }, // Purple-400
+  'Kolkata': { accent: '#2dd4bf', glow: 'rgba(45, 212, 191, 0.3)', emoji: '🌉' }, // Teal-400
 };
 
 function getScoreStyle(score) {
   if (score >= 85) return { color: '#4ade80', bg: 'rgba(74, 222, 128, 0.1)', glow: 'rgba(74, 222, 128, 0.3)' };
   if (score >= 70) return { color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.1)', glow: 'rgba(96, 165, 250, 0.3)' };
   if (score >= 50) return { color: '#fb923c', bg: 'rgba(251, 146, 60, 0.1)', glow: 'rgba(251, 146, 60, 0.3)' };
-  return                  { color: '#f87171', bg: 'rgba(248, 113, 113, 0.1)', glow: 'rgba(248, 113, 113, 0.3)' };
+  return { color: '#f87171', bg: 'rgba(248, 113, 113, 0.1)', glow: 'rgba(248, 113, 113, 0.3)' };
 }
 
 // ─── Truncate helper ──────────────────────────────────────────────────────────
@@ -59,12 +59,12 @@ function fmtSalary(s) {
 // ─── Render one job card ───────────────────────────────────────────────────────
 function renderJobCard(job, index, cityTheme) {
   const accentColor = cityTheme.accent;
-  const score       = job.aiScore?.score || 0;
-  const scoreStyle  = getScoreStyle(score);
-  const isTopJob    = index === 0;
+  const score = job.aiScore?.score || 0;
+  const scoreStyle = getScoreStyle(score);
+  const isTopJob = index === 0;
 
   // AI Match Progress Bar (Premium Redesign)
-  const meterWidth  = Math.max(10, score);
+  const meterWidth = Math.max(10, score);
   const matchMeter = `
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 16px; margin-bottom: 4px;">
       <tr>
@@ -164,19 +164,19 @@ function renderProfileBoostSection(boostReport) {
   const { profileScore, scoreLabel, todaysTips, todaysActions, keywordGaps } = boostReport;
   const pct = profileScore.percentage;
   const primaryDomain = Object.keys(keywordGaps)[0];
-  const gaps          = keywordGaps[primaryDomain] || [];
+  const gaps = keywordGaps[primaryDomain] || [];
 
   const actionRows = todaysActions.slice(0, 5).map((action, i) => {
-    const isObj   = typeof action === 'object';
-    const text    = isObj ? action.text : action;
-    const url     = isObj ? action.url  : null;
+    const isObj = typeof action === 'object';
+    const text = isObj ? action.text : action;
+    const url = isObj ? action.url : null;
 
     return `
     <div style="padding: 14px 0; border-bottom: 1px solid ${THEME.border};">
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td width="1%" style="vertical-align: top; padding-right: 14px;">
-            <div style="background: linear-gradient(135deg, ${THEME.accent}, #818cf8); color: #000; width: 22px; height: 22px; border-radius: 6px; text-align: center; line-height: 22px; font-size: 11px; font-weight: 900;">${i+1}</div>
+            <div style="background: linear-gradient(135deg, ${THEME.accent}, #818cf8); color: #000; width: 22px; height: 22px; border-radius: 6px; text-align: center; line-height: 22px; font-size: 11px; font-weight: 900;">${i + 1}</div>
           </td>
           <td style="color: ${THEME.text.dim}; font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 500;">
             ${text}
@@ -233,10 +233,10 @@ function renderProfileBoostSection(boostReport) {
 function renderAIScoreSummary(jobs, skillGapSummary) {
   if (!jobs[0]?.aiScore) return '';
 
-  const topJob  = jobs[0];
+  const topJob = jobs[0];
   const hasGemini = topJob.aiScore.source === 'gemini';
   const highMatch = jobs.filter((j) => j.aiScore?.score >= 70).length;
-  const avgScore  = Math.round(jobs.reduce((s, j) => s + (j.aiScore?.score || 0), 0) / jobs.length);
+  const avgScore = Math.round(jobs.reduce((s, j) => s + (j.aiScore?.score || 0), 0) / jobs.length);
 
   const gapRows = (skillGapSummary || []).slice(0, 3).map((item) => `
     <div style="padding: 12px 0; border-bottom: 1px solid ${THEME.border};">
@@ -284,7 +284,7 @@ function renderResumeSection(jobs) {
   if (!topJob || !topJob.resumeMatch) return '';
 
   const { resumeMatch, coverLetterPreview } = topJob;
-  const swCount   = jobs.filter((j) => j.resumeMatch?.domainType === 'software').length;
+  const swCount = jobs.filter((j) => j.resumeMatch?.domainType === 'software').length;
   const dataCount = jobs.filter((j) => j.resumeMatch?.domainType === 'data').length;
 
   return `
@@ -318,7 +318,7 @@ function renderResumeSection(jobs) {
 // ─── Build full HTML email ─────────────────────────────────────────────────────
 function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') {
   const isScheduled = runMode === 'Scheduled';
-  const hasJobs     = jobs.length > 0;
+  const hasJobs = jobs.length > 0;
   const today = new Date().toLocaleDateString('en-IN', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
     timeZone: 'Asia/Kolkata',
@@ -344,7 +344,7 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
     const domainLabel = job.domain.toUpperCase();
     const source = job.source || 'Naukri';
     const sourceColor = source === 'LinkedIn' ? '#0077B5' : (source === 'Indeed' ? '#2164f3' : colors.blue);
-    
+
     return `
       <tr>
         <td style="padding-bottom: 24px;">
@@ -355,7 +355,7 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
                 <table width="100%" cellpadding="0" cellspacing="0">
                   <tr>
                     <td>
-                      <span style="background:rgba(56,189,248,0.1); color:${colors.blue}; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(56,189,248,0.2); letter-spacing: 1px;">#${index+1} ${domainLabel}</span>
+                      <span style="background:rgba(56,189,248,0.1); color:${colors.blue}; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(56,189,248,0.2); letter-spacing: 1px;">#${index + 1} ${domainLabel}</span>
                       <span style="background:${sourceColor}22; color:${sourceColor}; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 4px; border: 1px solid ${sourceColor}44; letter-spacing: 1px; margin-left:8px;">${source.toUpperCase()}</span>
                     </td>
                     <td align="right" style="color:${colors.muted}; font-size: 11px; font-weight: 600;">
@@ -524,21 +524,21 @@ async function sendJobEmail(jobs, boostReport, skillGapSummary, runMode = 'Manua
 
   const transporter = createTransporter();
   const htmlContent = buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode);
-  const today       = new Date().toLocaleDateString('en-IN', {
+  const today = new Date().toLocaleDateString('en-IN', {
     day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata',
   });
 
-  const hasJobs     = jobs.length > 0;
-  const topScore    = jobs[0]?.aiScore?.score;
-  const scorePart   = topScore ? ` | 🤖 Match: ${topScore}%` : '';
-  const statusIcon  = hasJobs ? '💼' : '✅';
-  const statusText  = hasJobs ? `${jobs.length} Fresh Jobs` : 'Daily Status: Active';
+  const hasJobs = jobs.length > 0;
+  const topScore = jobs[0]?.aiScore?.score;
+  const scorePart = topScore ? ` | 🤖 Match: ${topScore}%` : '';
+  const statusIcon = hasJobs ? '💼' : '✅';
+  const statusText = hasJobs ? `${jobs.length} Fresh Jobs` : 'Daily Status: Active';
 
   const mailOptions = {
-    from:    `"Naukri AI Agent 🤖" <${process.env.GMAIL_USER}>`,
-    to:      process.env.RECIPIENT_EMAIL,
+    from: `"Naukri AI Agent 🤖" <${process.env.GMAIL_USER}>`,
+    to: process.env.RECIPIENT_EMAIL,
     subject: `${statusIcon} ${statusText} – ${today}${scorePart} [${runMode}]`,
-    html:    htmlContent,
+    html: htmlContent,
   };
 
   console.log(`\n📧 Sending email (${runMode}) to: ${process.env.RECIPIENT_EMAIL}`);
