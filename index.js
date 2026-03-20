@@ -22,6 +22,7 @@ const { matchResumes }   = require('./services/resumeMatcher');
 const { processAutoApplies } = require('./services/autoApply');
 const { generateTailoredResumes } = require('./services/resumeGenerator');
 const { sendDailyJobAlerts }     = require('./services/whatsapp');
+const { generateWeeklyInsights } = require('./services/analytics');
 const fs = require('fs');
 const path = require('path');
 
@@ -59,8 +60,12 @@ async function runAgent() {
       console.warn('   Check: selectors in services/scraper.js may need updating.');
     }
 
-    // ── Step 2: Filter, dedup (and skip history), sort, top 20 ─────────
-    const filteredJobs = rawJobs.length > 0 ? filterJobs(rawJobs, sentHistory) : [];
+    // ── Step 2: Filter, dedup (and skip history), sort ───────────────
+    // Handle both old string history and new object history
+    const sentUrls = sentHistory.map(item => typeof item === 'string' ? item : item.url);
+    const sentTitles = sentHistory.map(item => typeof item === 'string' ? item.split('||')[0] : item.title);
+    
+    const filteredJobs = rawJobs.length > 0 ? filterJobs(rawJobs, sentUrls) : [];
 
     if (rawJobs.length > 0 && filteredJobs.length === 0) {
       console.warn('⚠️  No NEW jobs found (or all filtered by experience/history).');
@@ -89,13 +94,16 @@ async function runAgent() {
       }
     }
 
-    // ── Step 5: Send Enriched HTML Email ─────────────────────
+    // ── Step 5: Generate Weekly Market Insights ─────────────
+    const weeklyInsights = generateWeeklyInsights(sentHistory);
+
+    // ── Step 6: Send Enriched HTML Email ─────────────────────
     // Identify run mode (Scheduled vs Manual)
     const runMode = process.env.GITHUB_EVENT_NAME === 'schedule' ? 'Scheduled' : 'Manual';
 
-    await sendJobEmail(matchedJobs, boostReport, skillGapSummary, runMode);
+    await sendJobEmail(matchedJobs, boostReport, skillGapSummary, runMode, weeklyInsights);
     
-    // ── Step 6: RUN AUTO-APPLY SYSTEM (Simulated) ─────────────
+    // ── Step 7: RUN AUTO-APPLY SYSTEM (Simulated) ─────────────
     let applyResults = [];
     if (matchedJobs.length > 0) {
       try {
@@ -140,9 +148,35 @@ async function runAgent() {
       skillGapSummary
     };
 
-    // Save history to prevent duplicates next time
-    const newHistory = [...new Set([...sentHistory, ...matchedJobs.map(j => j.url), ...matchedJobs.map(j => `${j.title}||${j.company}`)])];
-    fs.writeFileSync(historyPath, JSON.stringify(newHistory.slice(-500), null, 2)); // keep last 500
+    // Save history with metadata for analytics
+    const newJobsHistory = matchedJobs.map(j => ({
+      id: j.id,
+      url: j.url,
+      title: j.title,
+      company: j.company,
+      source: j.source || 'Naukri',
+      score: j.aiScore?.score || 0,
+      timestamp: new Date().toISOString(),
+      domain: j.domain
+    }));
+
+    // Merge and keep the most recent 1000 items (expanded for analytics)
+    const combinedHistory = [...sentHistory, ...newJobsHistory];
+    
+    // Simple URL-based dedup for history storage
+    const uniqueHistory = [];
+    const seenUrls = new Set();
+    
+    for (let i = combinedHistory.length - 1; i >= 0; i--) {
+      const item = combinedHistory[i];
+      const url = typeof item === 'string' ? item : item.url;
+      if (!seenUrls.has(url)) {
+        uniqueHistory.push(item);
+        seenUrls.add(url);
+      }
+    }
+
+    fs.writeFileSync(historyPath, JSON.stringify(uniqueHistory.reverse().slice(-1000), null, 2));
     
     const dashboardDataPath = path.join(__dirname, 'dashboard', 'src', 'data', 'jobs.json');
     const dashboardDataDir = path.dirname(dashboardDataPath);

@@ -229,6 +229,69 @@ function renderProfileBoostSection(boostReport) {
   </div>`;
 }
 
+// --- Weekly Analytics Section ---
+function renderWeeklyAnalyticsSection(insights) {
+  if (!insights) return '';
+
+  const { topCompanies, avgScore, hotRoles, platforms } = insights;
+
+  const companyRows = topCompanies.map((c, i) => `
+    <div style="padding: 10px 0; border-bottom: 1px solid ${THEME.border};">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="color: ${THEME.text.dim}; font-size: 13px; font-weight: 600;">${i+1}. ${c.name}</td>
+          <td align="right" style="color: ${THEME.accent}; font-size: 13px; font-weight: 800;">${c.count} Jobs</td>
+        </tr>
+      </table>
+    </div>
+  `).join('');
+
+  const roleBadges = hotRoles.map(r => 
+    `<span style="background: rgba(167, 139, 250, 0.1); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.2); font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 8px; margin: 4px; display: inline-block;">${r.toUpperCase()}</span>`
+  ).join('');
+
+  return `
+  <!-- WEEKLY MARKET INTELLIGENCE -->
+  <div style="background: ${THEME.glass}; border: 1px solid ${THEME.border}; border-radius: 24px; padding: 28px; margin-bottom: 24px; border-top: 4px solid #a78bfa;">
+    <div style="margin-bottom: 20px;">
+      <span style="color: #a78bfa; font-size: 18px; font-weight: 900; font-family: 'Outfit', sans-serif; letter-spacing: 0.5px; text-transform: uppercase;">📊 Weekly Market Intelligence</span>
+      <span style="float: right; color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; border: 1px solid ${THEME.text.muted}; padding: 3px 10px; border-radius: 6px; letter-spacing: 1px;">7-DAY TRENDS</span>
+    </div>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 24px;">
+      <tr>
+        <td width="50%" style="vertical-align: top; padding-right: 20px;">
+          <div style="color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; margin-bottom: 12px; text-transform: uppercase;">🏆 TOP HIRING COMPANIES</div>
+          ${companyRows}
+        </td>
+        <td width="50%" style="vertical-align: top; padding-left: 20px; border-left: 1px solid ${THEME.border};">
+          <div style="text-align: center; padding: 10px 0;">
+             <div style="color: ${THEME.accent}; font-size: 36px; font-weight: 900;">${avgScore}%</div>
+             <div style="color: ${THEME.text.muted}; font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-top: 4px;">MARKET SENTIMENT</div>
+          </div>
+          <div style="margin-top: 20px;">
+            <div style="color: ${THEME.text.muted}; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; margin-bottom: 10px; text-transform: uppercase;">🔥 TRENDING ROLES</div>
+            <div style="margin-left: -4px;">${roleBadges}</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    
+    <div style="background: rgba(255,255,255,0.02); border-radius: 12px; padding: 12px; border: 1px solid ${THEME.border};">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="color: ${THEME.text.muted}; font-size: 11px; font-weight: 700;">Platform Coverage: </td>
+          <td align="right">
+            <span style="color: #38bdf8; font-size: 11px; font-weight: 800;">Naukri: ${platforms.Naukri}</span> •
+            <span style="color: #0077b5; font-size: 11px; font-weight: 800;">LinkedIn: ${platforms.LinkedIn}</span> •
+            <span style="color: #2164f3; font-size: 11px; font-weight: 800;">Indeed: ${platforms.Indeed}</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>`;
+}
+
 // ─── AI Score Summary Section ─────────────────────────────────────────────────
 function renderAIScoreSummary(jobs, skillGapSummary) {
   if (!jobs[0]?.aiScore) return '';
@@ -316,7 +379,7 @@ function renderResumeSection(jobs) {
 }
 
 // ─── Build full HTML email ─────────────────────────────────────────────────────
-function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') {
+function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual', weeklyInsights = null) {
   const isScheduled = runMode === 'Scheduled';
   const hasJobs = jobs.length > 0;
   const today = new Date().toLocaleDateString('en-IN', {
@@ -476,6 +539,9 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
               <!-- PROFILE SECTION -->
               ${boostReport ? renderProfileBoostSection(boostReport) : ''}
 
+              <!-- WEEKLY ANALYTICS -->
+              ${renderWeeklyAnalyticsSection(weeklyInsights)}
+
               <!-- JOB LIST -->
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
@@ -514,7 +580,7 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
 }
 
 // ─── Main send function ────────────────────────────────────────────────────────
-async function sendJobEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') {
+async function sendJobEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual', weeklyInsights = null) {
   if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
     throw new Error('❌ Missing GMAIL_USER or GMAIL_PASS in .env file!');
   }
@@ -523,7 +589,7 @@ async function sendJobEmail(jobs, boostReport, skillGapSummary, runMode = 'Manua
   }
 
   const transporter = createTransporter();
-  const htmlContent = buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode);
+  const htmlContent = buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode, weeklyInsights);
   const today = new Date().toLocaleDateString('en-IN', {
     day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata',
   });
