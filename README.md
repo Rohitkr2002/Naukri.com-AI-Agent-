@@ -118,101 +118,46 @@ Every fresher in India faces this same painful daily routine:
 
 ---
 
-## ✅ Solution — What This Agent Does
+## 🚀 Core Capabilities
 
-### ⚡ **Phase 1-2: Core Foundation**
-- **Automated Scraper**: Scrapes 4 major Indian cities at 9 AM IST daily.
-- **AI Scoring**: Gemini 2.5 Flash calculates a 0-100% match score for every job.
-- **Email Engine**: Premium Dark Mode job reports delivered to your inbox.
-- **Local Dashboard**: Cyber-Pro React dashboard for analytics and profile boost.
+The Naukri AI Agent is built on three pillars of power: **Extraction**, **Intelligence**, and **Automation**.
 
-### 🧠 **Phase 3-5: Autonomous Power (NEW)**
-- **Job Competition Intelligence**: Extracts applicant counts and labels jobs as **Low**, **Medium**, or **High** competition.
-- **AI Interview Prep Bot**: Practice for interviews with role-specific AI questions directly in the dashboard.
-- **Dynamic AI Resume Generator**: Automatically generates **tailored PDF resumes** optimized for each Top 3 job.
-- **WhatsApp Smart Alerts**: Receive top job matches and application success alerts on your phone via Twilio.
-- **Multi-Platform Scraper**: Expanded to scrape **LinkedIn** and **Indeed** alongside Naukri.
-- **Auto-Apply Automation**: Real Puppeteer-based system to apply for jobs autonomously (Dry-run mode available).
+### 1. 🔍 Multi-Platform Scraper (Naukri, LinkedIn, Indeed)
+- **High-Fidelity Extraction**: Visits **60 URLs** daily across 4 major tech hubs (Bangalore, Delhi, Pune, Kolkata).
+- **Stealth Mode**: Mimics human behavior with Puppeteer to bypass bot detection.
+- **Deduplication**: Smart logic ensures you never see the same job twice.
 
-```mermaid
-graph TD
-    A[Scraper Engine] --> B{Platforms}
-    B -->|DIRECT| C(Naukri.com)
-    B -->|PUPPETEER| D(LinkedIn)
-    B -->|CHEERIO| E(Indeed)
-    C & D & E --> F[Deduplication Layer]
-    F --> G[Gemini 2.5 AI Scorer]
-    G --> H[Tailored Resume PDF]
-    H --> I[WhatsApp + Email Alert]
-```
+### 2. 🧠 Gemini 2.5 AI Intelligence
+- **AI Scoring (0-100%)**: Every job is scored against your specific profile for a perfect match.
+- **Match Reason & Gaps**: AI explains *why* a job matches and what skills you are missing.
+- **Tailored PDF Resumes**: Automatically generates custom resumes optimized for the top job matches.
 
-| Metric | Without Agent | ✅ With Agent |
+### 3. 📅 Automated Ecosystem
+- **9 AM Daily Reports**: A premium dark-mode email delivered exactly when you start your day.
+- **WhatsApp Alerts**: Instant notifications via Twilio for high-priority matches.
+- **Local Dashboard**: A futuristic command center for market analytics and profile health checks.
+
+| Metric | Manual Search | ✅ AI Agent |
 |--------|-------------|-------------|
-| Time spent daily | 60–90 minutes | **0 minutes** (just check email/WhatsApp) |
-| Job relevance | ~5% | **~80%** (filtered 0-1yr only) |
-| Platform Coverage | 1 (Manual) | **3 (Naukri, LinkedIn, Indeed)** |
-| Resume Strategy | One-size-fits-all | **Tailored AI-PDF per job** |
-| Interview Prep | Google-it manually | **Integrated AI Mock Interview** |
-| Competition Data | Blind | **Real-time Applicant Insights** |
-| Total cost | Your time | **₹0 forever** |
+| Time spent / day | 60–90 min | **0 min** |
+| Job relevance | ~5% | **~90%** |
+| Platform Coverage | 1 (Manual) | **3 (Live Scrape)** |
+| Resume Strategy | Generic | **Tailored AI-PDF** |
+| Skill Gaps | Unknown | **AI-Detected** |
+| Total Cost | Your time | **₹0 Forever** |
 
 ---
 
 ---
 
-## 🖥️ Feature 4 — Local Intelligence Dashboard (Cyber-Pro)
+## 🎛️ Feature Spotlight
 
-> "A futuristic, interactive command center for your job search."
+### 📊 Local Intelligence Dashboard
+A futuristic, interactive command center for your job search. Track **Market Analytics**, **Skill Gaps**, and manage your **Profile Boost** readiness from one place.
+- **Launcher**: Double-click `LAUNCH_DASHBOARD.bat` to start instantly.
 
-```mermaid
-mindmap
-  root((Dashboard))
-    Market Analytics
-      "4 Major Tech Hubs"
-      "Skill Gap Visualization"
-      "Match Spectrum Charts"
-    Profile Optimization
-      "14-Section Health Check"
-      "ATS Keyword Signals"
-      "Daily Action Protocols"
-    Interview Bot
-      "AI Role-Specific Prep"
-      "Real-time Feedback Loop"
-      "Performance Tracking"
-```
-
-### 📊 Market Analytics & Strategy
-Deep-dive into market trends with high-fidelity visualizations. Identify **Skill Gaps** and **Match Spectrums** across 4 major tech hubs in India.
-
-### ⚡ Profile Boost Command Center
-Step-by-step action protocols to keep your Naukri profile at the top of recruiter searches. Includes a real-time **Readiness Index** and curated learning resources.
-
----
-
-## 📧 Feature 5 — Premium Email (V2)
-The daily 9 AM report has been completely overhauled with a **robust "Cyber-Pro"** design.
-
-> [!NOTE]
-> **Email Mockup (Dark Mode)**
-> 
-> ```text
-> 🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
-> 🟦  NAUKRI AI AGENT - DAILY REPORT  (9 AM IST)  🟦
-> 🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦🟦
-> 
-> 👤 Candidate: Rohit Kumar Singh
-> 🎯 Match Score: 92% (TCS - Software Engineer)
-> 🧪 Analysis: "Strong JavaScript/Python fit..."
-> 
-> 📍 Bangalore Hits: 47 Jobs  |  📍 Delhi Hits: 32 Jobs
-> 
-> [ VIEW FULL ANALYSIS IN DASHBOARD ]
-> ```
-
-- **Max Compatibility**: Rebuilt with email-safe HTML/CSS (works in Gmail, Outlook, Apple Mail).
-- **High Contrast**: Sleek dark mode using Slate-950 and Neon Blue/Purple accents.
-- **AI Match Bars**: Instant visual indicator of your fit for every job.
-- **Direct Apply**: One-click action buttons in every job card.
+### 📧 Premium Email Reports
+The daily 9 AM report is built for the "Cyber-Pro" professional. Rebuilt with email-safe glassmorphism, AI match spectrums, and direct-apply CTA buttons. Works in all major email clients.
 
 ---
 
@@ -901,7 +846,6 @@ RECIPIENT_EMAIL=your_email@gmail.com
 # ── Google Gemini AI (free tier) ───────────────────
 GEMINI_API_KEY=AIzaSy...your_key_here
 
-# ── Optional ───────────────────────────────────────
 # ── WhatsApp (Twilio) ──────────────────────────────
 TWILIO_SID=AC...
 TWILIO_AUTH_TOKEN=your_token
@@ -910,65 +854,33 @@ USER_PHONE=whatsapp:+91...
 ```
 
 ### 📝 Step 5 — Edit Your Profile
+Customize your skills, education, and social links in `config/userProfile.js`.
 
-```javascript
-// config/userProfile.js  ← Edit name, skills, education, sections
-const USER_PROFILE = {
-  name:   'Your Name',
-  skills: {
-    languages: ['JavaScript', 'Python', 'SQL'],
-    frontend:  ['HTML5', 'CSS3', 'Bootstrap'],
-    dataTools: ['Power BI', 'Pandas', 'Excel'],
-  },
-  education: {
-    degree:    'B.Tech',
-    field:     'Your Specialization',
-    institute: 'Your College Name',
-    year:       2025,
-    cgpa:      '7.33',
-  },
-  profileSections: {
-    photo: true, headline: true, certifications: false,  // etc.
-  }
-};
-```
-
-### 📄 Step 6 — Add Your Resume Content
-
-```
-resumes/resume_software.txt   ← Paste your Software Dev resume here
-resumes/resume_data.txt       ← Paste your Data Analyst resume here
-```
+### 📄 Step 6 — Add Your Resume
+Paste your software and data analyst resumes into `resumes/resume_software.txt` and `resumes/resume_data.txt`.
 
 ### 🚀 Step 7 — Run & Test
-
+Double-click `LAUNCH_DASHBOARD.bat` or run:
 ```bash
 node index.js
 ```
-
-Check your inbox — email should arrive within 5–8 minutes!
 
 ---
 
 ## 🔑 GitHub Actions — Automated Daily Run
 
-### Add 5 Repository Secrets
-
-```
-GitHub → Your Repo → Settings → Secrets and variables → Actions
-→ "New repository secret" → Add each:
-```
+### Add Repository Secrets
 
 | Secret | Value | Required |
 |--------|-------|----------|
 | `GMAIL_USER` | your Gmail address | ✅ |
 | `GMAIL_PASS` | 16-char App Password (no spaces) | ✅ |
 | `RECIPIENT_EMAIL` | email to receive report | ✅ |
-| `GEMINI_API_KEY` | Google AI Studio key | ⭐ Highly Recommended |
+| `GEMINI_API_KEY` | Google AI Studio key | ⭐ Mandatory |
 | `TWILIO_SID` | Twilio Account SID | 💬 For WhatsApp |
 | `TWILIO_AUTH_TOKEN`| Twilio Auth Token | 💬 For WhatsApp |
 | `TWILIO_PHONE` | Twilio Sandbox Number | 💬 For WhatsApp |
-| `USER_PHONE` | Your WhatsApp (e.g. `whatsapp:+91...`) | 💬 For WhatsApp |
+| `USER_PHONE` | Your WhatsApp Phone | 💬 For WhatsApp |
 
 ### Workflow File
 
