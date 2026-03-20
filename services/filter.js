@@ -69,11 +69,11 @@ function filterJobs(rawJobs, sentHistory = []) {
   // Step 3: Sort by most recently posted
   deduped.sort((a, b) => postedScore(a.posted) - postedScore(b.posted));
 
-  // Step 4: Pick top 20
-  const top20 = deduped.slice(0, 20);
-  console.log(`   → Final top jobs selected: ${top20.length} jobs\n`);
+  // Step 4: Pick top 50
+  const top50 = deduped.slice(0, 50);
+  console.log(`   → Final top jobs selected: ${top50.length} jobs\n`);
 
-  return top20;
+  return top50;
 }
 
 module.exports = { filterJobs };

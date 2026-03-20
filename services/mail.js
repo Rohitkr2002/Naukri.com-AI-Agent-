@@ -422,7 +422,7 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
 
   // ─── Jobs Render ───────────────────────────────────────────────────────────
   let jobItems = '';
-  jobs.slice(0, 15).forEach((job, index) => {
+  jobs.slice(0, 50).forEach((job, index) => {
     jobItems += renderCard(job, index);
   });
 

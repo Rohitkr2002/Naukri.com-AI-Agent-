@@ -1051,7 +1051,7 @@ const top20 = deduped.slice(0, 20);  // Change 20 to any number
 | 💼 Job roles searched | 5 domains |
 | 🔗 Naukri URLs visited/day | 20 pages |
 | 📦 Raw jobs collected | 60–120 |
-| ✅ After filtering | 15–20 clean jobs |
+| ✅ After filtering | 30–50 clean jobs |
 | 🤖 Gemini AI calls/day | ≤20 (free quota: 1,500/day) |
 | ⏱️ Total runtime | 5–8 minutes |
 | ⚡ GitHub Actions used | ~7 min/day vs 2,000 min/month free |
