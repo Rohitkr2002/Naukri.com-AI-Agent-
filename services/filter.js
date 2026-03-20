@@ -44,19 +44,24 @@ function postedScore(postedText) {
 }
 
 // Main filter function
-function filterJobs(rawJobs) {
+function filterJobs(rawJobs, sentHistory = []) {
   console.log(`🔧 Filtering ${rawJobs.length} raw jobs...\n`);
 
   // Step 1: Filter by 0-1 year experience
   const expFiltered = rawJobs.filter((job) => isValidExperience(job.exp));
   console.log(`   → After experience filter: ${expFiltered.length} jobs`);
 
-  // Step 2: Remove duplicates
-  const seen    = new Set();
+  // Step 2: Remove duplicates (and skip history)
+  const seen    = new Set(sentHistory); // Initialize with history URLs
   const deduped = expFiltered.filter((job) => {
+    // Check both URL and Title+Company to be safe
     const key = dedupKey(job);
-    if (seen.has(key)) return false;
+    const urlKey = job.url;
+
+    if (seen.has(key) || (urlKey && seen.has(urlKey))) return false;
+    
     seen.add(key);
+    if (urlKey) seen.add(urlKey);
     return true;
   });
   console.log(`   → After deduplication:     ${deduped.length} jobs`);

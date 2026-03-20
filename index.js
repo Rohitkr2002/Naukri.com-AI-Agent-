@@ -29,8 +29,18 @@ async function runAgent() {
   console.log('============================================================');
   console.log('  🤖 Naukri Job AI Agent – Enhanced Edition');
   console.log('  ⏰ Run Time (IST):', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
-  console.log('  🚀 Features: Profile Boost | AI Scoring | Resume Matching');
+  console.log('  🚀 Features: Multi-Platform | AI Scoring | Resume Matching');
   console.log('============================================================\n');
+
+  const historyPath = path.join(__dirname, 'sent_jobs.json');
+  let sentHistory = [];
+  if (fs.existsSync(historyPath)) {
+    try {
+      sentHistory = JSON.parse(fs.readFileSync(historyPath, 'utf8'));
+    } catch (e) {
+      console.warn('⚠️  Could not read sent_jobs.json, starting fresh history.');
+    }
+  }
 
   try {
     // ── Step 0: Daily Profile Boost Analysis ─────────────────
@@ -49,11 +59,11 @@ async function runAgent() {
       console.warn('   Check: selectors in services/scraper.js may need updating.');
     }
 
-    // ── Step 2: Filter, dedup, sort, top 20 ──────────────────
-    const filteredJobs = rawJobs.length > 0 ? filterJobs(rawJobs) : [];
+    // ── Step 2: Filter, dedup (and skip history), sort, top 20 ─────────
+    const filteredJobs = rawJobs.length > 0 ? filterJobs(rawJobs, sentHistory) : [];
 
     if (rawJobs.length > 0 && filteredJobs.length === 0) {
-      console.warn('⚠️  No jobs passed the filter (0-1 yr experience).');
+      console.warn('⚠️  No NEW jobs found (or all filtered by experience/history).');
     }
 
     // ── Step 3: AI Job Scoring & Ranking ─────────────────────
@@ -113,13 +123,15 @@ async function runAgent() {
       }
     }
 
-    // ── Step 9: Export Data for Dashboard ──────────────────
+    // ─── Step 9: Export Data & Save History ──────────────────
     const dashboardData = {
       lastUpdated: new Date().toISOString(),
       runMode,
       stats: {
         totalJobs: matchedJobs.length,
-        cities: [...new Set(matchedJobs.map(j => j.city || (j.location ? j.location.split(',')[0].trim() : 'Other')))].length,
+        naukri: matchedJobs.filter(j => (j.source || 'Naukri') === 'Naukri').length,
+        linkedIn: matchedJobs.filter(j => j.source === 'LinkedIn').length,
+        indeed: matchedJobs.filter(j => j.source === 'Indeed').length,
         topScore: matchedJobs[0]?.aiScore?.score || 0
       },
       jobs: matchedJobs,
@@ -127,17 +139,25 @@ async function runAgent() {
       boostReport,
       skillGapSummary
     };
+
+    // Save history to prevent duplicates next time
+    const newHistory = [...new Set([...sentHistory, ...matchedJobs.map(j => j.url), ...matchedJobs.map(j => `${j.title}||${j.company}`)])];
+    fs.writeFileSync(historyPath, JSON.stringify(newHistory.slice(-500), null, 2)); // keep last 500
     
     const dashboardDataPath = path.join(__dirname, 'dashboard', 'src', 'data', 'jobs.json');
     const dashboardDataDir = path.dirname(dashboardDataPath);
     if (!fs.existsSync(dashboardDataDir)) fs.mkdirSync(dashboardDataDir, { recursive: true });
     fs.writeFileSync(dashboardDataPath, JSON.stringify(dashboardData, null, 2));
-    console.log('  📊 Data exported to dashboard/src/data/jobs.json');
+    console.log('  📊 Data exported to dashboard & history updated.');
 
     console.log('\n============================================================');
     console.log('  ✅ Naukri Job AI Agent completed successfully!');
     console.log('  📬 Email delivered to:', process.env.RECIPIENT_EMAIL);
     console.log(`  🕒 Run Mode: ${runMode}`);
+    console.log('  📊 Platforms:');
+    console.log(`     🔹 Naukri:   ${dashboardData.stats.naukri} jobs`);
+    console.log(`     🔹 LinkedIn: ${dashboardData.stats.linkedIn} jobs`);
+    console.log(`     🔹 Indeed:   ${dashboardData.stats.indeed} jobs`);
     console.log('  📊 Features ran:');
     console.log(`     🚀 Profile Boost:  ${boostReport ? '✅ Done (Score: ' + boostReport.profileScore.percentage + '%)' : '⚠️  Skipped'}`);
     console.log(`     🤖 AI Scoring:     ✅ Done (${scoredJobs.length} jobs scored)`);

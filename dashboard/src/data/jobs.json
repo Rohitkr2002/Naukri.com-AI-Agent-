@@ -1,62 +1,106 @@
 {
-  "lastUpdated": "2026-03-19T19:04:57.108Z",
+  "lastUpdated": "2026-03-20T06:23:57.250Z",
   "runMode": "Manual",
   "stats": {
     "totalJobs": 20,
-    "cities": 4,
-    "topScore": 54
+    "naukri": 20,
+    "linkedIn": 0,
+    "indeed": 0,
+    "topScore": 95
   },
   "jobs": [
     {
-      "title": "Data Analytics | Data Analyst Fresher",
-      "company": "Hitechmind Solutions",
+      "title": "Junior Software Developer",
+      "company": "eAspire Technolabs Inc.",
       "exp": "0-1 Yrs",
-      "location": "Kolkata, India",
+      "location": "Delhi, India",
       "salary": "Not Disclosed",
-      "posted": "3 days ago",
-      "url": "https://www.naukri.com/job-listings-data-analytics-data-analyst-fresher-hitechmind-solutions-kolkata-pune-chennai-0-to-1-years-180226038589",
-      "domain": "Data Analyst",
-      "city": "Kolkata",
+      "posted": "1 day ago",
+      "url": "https://www.naukri.com/job-listings-junior-software-developer-evoke-hr-gurugram-0-to-1-years-190326022352",
+      "domain": "Software Developer",
+      "city": "Delhi",
       "competition": "Low",
       "applicants": 5,
       "aiScore": {
-        "score": 54,
-        "matchReason": "Partial match – consider upskilling",
+        "score": 95,
+        "matchReason": "The candidate possesses a comprehensive skill set in web development (JavaScript, HTML, CSS, Node.js) and Python (including data analysis libraries), along with SQL, making them highly suitable for a Junior Software Developer role.",
         "topMatchingSkills": [
-          "data visualization",
-          "data cleaning"
+          "javascript",
+          "python"
         ],
         "skillGaps": [
-          "Tableau",
-          "SQL (Advanced)",
-          "Python (Advanced)"
+          "Git",
+          "unit testing frameworks"
         ],
-        "learningTip": "Tableau for Beginners – Edureka (YouTube)",
-        "source": "heuristic"
+        "learningTip": "Build a full-stack project using Node.js for the backend and a modern frontend framework like React to showcase integrated development skills.",
+        "source": "gemini"
       },
       "resumeMatch": {
-        "domainType": "data",
-        "resumeFile": "resume_data.txt",
-        "resumeLabel": "📊 Data Analyst Resume",
+        "domainType": "software",
+        "resumeFile": "resume_software.txt",
+        "resumeLabel": "💻 Software Developer Resume",
         "hasResume": true,
         "tips": [
-          "List tools clearly: Python, Pandas, NumPy, SQL, Power BI, Tableau",
-          "Add a \"Data Projects\" section with dataset size: \"Analyzed 50,000+ rows\"",
-          "Include your Kaggle profile URL if you have any notebooks",
-          "Mention SQL proficiency level: \"Advanced SQL – CTEs, Window Functions\""
+          "Add GitHub link at the top of resume – recruiters WILL check it",
+          "List tech stack per project: \"Built with React.js, Node.js, MongoDB\"",
+          "Use numbers: \"Reduced load time by 30%\" not \"Improved performance\"",
+          "Add a \"Technical Skills\" dedicated section above experience"
         ]
       },
-      "coverLetterPreview": "Dear Hiring Manager,\n\nI am excited to apply for the Data Analytics | Data Analyst Fresher position at Hitechmind Solutions. As a B.Tech graduate in Electronics and Communication Engineering (2025), I possess a strong foundation in JavaScript, Python, HTML5 and a genuine passion for building impactful software solutions.\n\nDuring my academic journey, I developed the \"Personal Portfolio Website\" — Responsive portfolio website with dark/light theme toggle, typing animation, and 6+ completed projects. Improved mobile compatibility by 50%.. This project sharpened my ability to design, build, and deploy production-ready applications independently.\n\nI am a fast learner, highly motivated, and eager to contribute meaningfully to your team. I would welcome the opportunity to discuss how my skills align with your requirements.\n\nWarm regards,\nRohit Kumar Singh",
-      "tailoredResume": "/resumes/Resume_Hitechmind_Solutions_1773947096432.pdf"
+      "coverLetterPreview": "Dear Hiring Manager,\n\nI am excited to apply for the Junior Software Developer position at eAspire Technolabs Inc.. As a B.Tech graduate in Electronics and Communication Engineering (2025), I possess a strong foundation in JavaScript, Python, HTML5 and a genuine passion for building impactful software solutions.\n\nDuring my academic journey, I developed the \"Personal Portfolio Website\" — Responsive portfolio website with dark/light theme toggle, typing animation, and 6+ completed projects. Improved mobile compatibility by 50%.. This project sharpened my ability to design, build, and deploy production-ready applications independently.\n\nI am a fast learner, highly motivated, and eager to contribute meaningfully to your team. I would welcome the opportunity to discuss how my skills align with your requirements.\n\nWarm regards,\nRohit Kumar Singh",
+      "tailoredResume": "/resumes/Resume_eAspire_Technolabs_Inc._1773987835978.pdf"
     },
     {
-      "title": "REACT JS DEVELOPER",
+      "title": "Java Developer - J2Ee & Node Js",
       "company": "Godigi Infotech",
       "exp": "0-1 Yrs",
       "location": "Bangalore, India",
       "salary": "Not Disclosed",
       "posted": "3+ weeks ago",
-      "url": "https://www.naukri.com/job-listings-react-js-developer-godigi-infotech-mumbai-hyderabad-pune-bengaluru-0-to-1-years-100524501467",
+      "url": "https://www.naukri.com/job-listings-java-developer-j2ee-node-js-godigi-infotech-mumbai-pune-bengaluru-0-to-1-years-100524500137",
+      "domain": "Frontend Developer",
+      "city": "Bangalore",
+      "competition": "Low",
+      "applicants": 5,
+      "aiScore": {
+        "score": 68,
+        "matchReason": "Strong keyword and domain match",
+        "topMatchingSkills": [
+          "javascript",
+          "javascript",
+          "node.js"
+        ],
+        "skillGaps": [
+          "React.js",
+          "Next.js",
+          "TypeScript"
+        ],
+        "learningTip": "React Full Course – Dave Gray (YouTube)",
+        "source": "heuristic"
+      },
+      "resumeMatch": {
+        "domainType": "software",
+        "resumeFile": "resume_software.txt",
+        "resumeLabel": "💻 Software Developer Resume",
+        "hasResume": true,
+        "tips": [
+          "Add GitHub link at the top of resume – recruiters WILL check it",
+          "List tech stack per project: \"Built with React.js, Node.js, MongoDB\"",
+          "Use numbers: \"Reduced load time by 30%\" not \"Improved performance\"",
+          "Add a \"Technical Skills\" dedicated section above experience"
+        ]
+      },
+      "coverLetterPreview": null,
+      "tailoredResume": "/resumes/Resume_Godigi_Infotech_1773987836159.pdf"
+    },
+    {
+      "title": "React Js Developer",
+      "company": "Godigi Infotech",
+      "exp": "0-1 Yrs",
+      "location": "Bangalore, India",
+      "salary": "Not Disclosed",
+      "posted": "3+ weeks ago",
+      "url": "https://www.naukri.com/job-listings-react-js-developer-godigi-infotech-mumbai-hyderabad-new-delhi-pune-ahmedabad-bengaluru-0-to-1-years-100524500144",
       "domain": "Frontend Developer",
       "city": "Bangalore",
       "competition": "Low",
@@ -89,7 +133,7 @@
         ]
       },
       "coverLetterPreview": null,
-      "tailoredResume": "/resumes/Resume_Godigi_Infotech_1773947096606.pdf"
+      "tailoredResume": "/resumes/Resume_Godigi_Infotech_1773987836322.pdf"
     },
     {
       "title": "Data Analyst",
@@ -130,128 +174,45 @@
           "Mention SQL proficiency level: \"Advanced SQL – CTEs, Window Functions\""
         ]
       },
-      "coverLetterPreview": null,
-      "tailoredResume": "/resumes/Resume_eAspire_Technolabs_Inc._1773947096703.pdf"
+      "coverLetterPreview": null
     },
     {
-      "title": "Supply Chain Analyst",
-      "company": "Cummins",
-      "exp": "0-14 Yrs",
-      "location": "Pune, India",
+      "title": "PHP Developer (Fresher)",
+      "company": "Weblee Technologies",
+      "exp": "0-1 Yrs",
+      "location": "Kolkata, India",
       "salary": "Not Disclosed",
       "posted": "1 day ago",
-      "url": "https://www.naukri.com/job-listings-supply-chain-analyst-cummins-inc-pune-0-to-14-years-190326503153",
-      "domain": "Data Analyst",
-      "city": "Pune",
+      "url": "https://www.naukri.com/job-listings-php-developer-fresher-weblee-technologies-kolkata-0-to-1-years-180326502862",
+      "domain": "Frontend Developer",
+      "city": "Kolkata",
       "competition": "Low",
       "applicants": 5,
       "aiScore": {
-        "score": 44,
-        "matchReason": "Partial match – consider upskilling",
+        "score": 35,
+        "matchReason": "The candidate possesses strong frontend development skills and matches the fresher experience level, but critically lacks PHP, which is the primary technology for this role.",
         "topMatchingSkills": [
-          "data visualization",
-          "data cleaning"
+          "javascript",
+          "html5",
+          "css3"
         ],
         "skillGaps": [
-          "Tableau",
-          "SQL (Advanced)",
-          "Python (Advanced)"
+          "PHP",
+          "PHP Frameworks"
         ],
-        "learningTip": "Tableau for Beginners – Edureka (YouTube)",
-        "source": "heuristic"
+        "learningTip": "Focus on learning PHP fundamentals and a popular framework like Laravel or Symfony.",
+        "source": "gemini"
       },
       "resumeMatch": {
-        "domainType": "data",
-        "resumeFile": "resume_data.txt",
-        "resumeLabel": "📊 Data Analyst Resume",
+        "domainType": "software",
+        "resumeFile": "resume_software.txt",
+        "resumeLabel": "💻 Software Developer Resume",
         "hasResume": true,
         "tips": [
-          "List tools clearly: Python, Pandas, NumPy, SQL, Power BI, Tableau",
-          "Add a \"Data Projects\" section with dataset size: \"Analyzed 50,000+ rows\"",
-          "Include your Kaggle profile URL if you have any notebooks",
-          "Mention SQL proficiency level: \"Advanced SQL – CTEs, Window Functions\""
-        ]
-      },
-      "coverLetterPreview": null
-    },
-    {
-      "title": "Product Analyst",
-      "company": "MyGate",
-      "exp": "0-1 Yrs",
-      "location": "Bangalore, India",
-      "salary": "Not Disclosed",
-      "posted": "2 days ago",
-      "url": "https://www.naukri.com/job-listings-product-analyst-mygate-bengaluru-0-to-1-years-170326503396",
-      "domain": "Data Analyst",
-      "city": "Bangalore",
-      "competition": "Low",
-      "applicants": 5,
-      "aiScore": {
-        "score": 44,
-        "matchReason": "Partial match – consider upskilling",
-        "topMatchingSkills": [
-          "data visualization",
-          "data cleaning"
-        ],
-        "skillGaps": [
-          "Tableau",
-          "SQL (Advanced)",
-          "Python (Advanced)"
-        ],
-        "learningTip": "Tableau for Beginners – Edureka (YouTube)",
-        "source": "heuristic"
-      },
-      "resumeMatch": {
-        "domainType": "data",
-        "resumeFile": "resume_data.txt",
-        "resumeLabel": "📊 Data Analyst Resume",
-        "hasResume": true,
-        "tips": [
-          "List tools clearly: Python, Pandas, NumPy, SQL, Power BI, Tableau",
-          "Add a \"Data Projects\" section with dataset size: \"Analyzed 50,000+ rows\"",
-          "Include your Kaggle profile URL if you have any notebooks",
-          "Mention SQL proficiency level: \"Advanced SQL – CTEs, Window Functions\""
-        ]
-      },
-      "coverLetterPreview": null
-    },
-    {
-      "title": "Data Analyst",
-      "company": "ADA Global",
-      "exp": "0-1 Yrs",
-      "location": "Bangalore, India",
-      "salary": "Not Disclosed",
-      "posted": "3+ weeks ago",
-      "url": "https://www.naukri.com/job-listings-data-analyst-ada-global-bengaluru-0-to-1-years-060226501811",
-      "domain": "Data Analyst",
-      "city": "Bangalore",
-      "competition": "Low",
-      "applicants": 5,
-      "aiScore": {
-        "score": 44,
-        "matchReason": "Partial match – consider upskilling",
-        "topMatchingSkills": [
-          "data visualization",
-          "data cleaning"
-        ],
-        "skillGaps": [
-          "Tableau",
-          "SQL (Advanced)",
-          "Python (Advanced)"
-        ],
-        "learningTip": "Tableau for Beginners – Edureka (YouTube)",
-        "source": "heuristic"
-      },
-      "resumeMatch": {
-        "domainType": "data",
-        "resumeFile": "resume_data.txt",
-        "resumeLabel": "📊 Data Analyst Resume",
-        "hasResume": true,
-        "tips": [
-          "List tools clearly: Python, Pandas, NumPy, SQL, Power BI, Tableau",
-          "Add a \"Data Projects\" section with dataset size: \"Analyzed 50,000+ rows\"",
-          "Include your Kaggle profile URL if you have any notebooks",
-          "Mention SQL proficiency level: \"Advanced SQL – CTEs, Window Functions\""
+          "Add GitHub link at the top of resume – recruiters WILL check it",
+          "List tech stack per project: \"Built with React.js, Node.js, MongoDB\"",
+          "Use numbers: \"Reduced load time by 30%\" not \"Improved performance\"",
+          "Add a \"Technical Skills\" dedicated section above experience"
         ]
       },
       "coverLetterPreview": null
@@ -337,93 +298,13 @@
       "coverLetterPreview": null
     },
     {
-      "title": "Software Engineer, PhD, Early Career, Campus, 2025 Start",
-      "company": "Google",
-      "exp": "0 Yrs",
-      "location": "Bangalore, India",
-      "salary": "Not Disclosed",
-      "posted": "3+ weeks ago",
-      "url": "https://www.naukri.com/job-listings-software-engineer-phd-early-career-campus-2025-start-google-india-private-limited-bengaluru-0-to-0-years-090725503856",
-      "domain": "Python Developer",
-      "city": "Bangalore",
-      "competition": "Low",
-      "applicants": 5,
-      "aiScore": {
-        "score": 32,
-        "matchReason": "Partial match – consider upskilling",
-        "topMatchingSkills": [
-          "python"
-        ],
-        "skillGaps": [
-          "Django",
-          "FastAPI",
-          "Flask"
-        ],
-        "learningTip": "Django Crash Course – Traversy Media (YouTube)",
-        "source": "heuristic"
-      },
-      "resumeMatch": {
-        "domainType": "data",
-        "resumeFile": "resume_data.txt",
-        "resumeLabel": "📊 Data Analyst Resume",
-        "hasResume": true,
-        "tips": [
-          "List tools clearly: Python, Pandas, NumPy, SQL, Power BI, Tableau",
-          "Add a \"Data Projects\" section with dataset size: \"Analyzed 50,000+ rows\"",
-          "Include your Kaggle profile URL if you have any notebooks",
-          "Mention SQL proficiency level: \"Advanced SQL – CTEs, Window Functions\""
-        ]
-      },
-      "coverLetterPreview": null
-    },
-    {
-      "title": "Software Engineer, University Graduate, 2026",
-      "company": "Google",
-      "exp": "0 Yrs",
-      "location": "Bangalore, India",
-      "salary": "Not Disclosed",
-      "posted": "3+ weeks ago",
-      "url": "https://www.naukri.com/job-listings-software-engineer-university-graduate-2026-google-india-private-limited-gurugram-bengaluru-0-to-0-years-090725503859",
-      "domain": "Python Developer",
-      "city": "Bangalore",
-      "competition": "Low",
-      "applicants": 5,
-      "aiScore": {
-        "score": 32,
-        "matchReason": "Partial match – consider upskilling",
-        "topMatchingSkills": [
-          "python"
-        ],
-        "skillGaps": [
-          "Django",
-          "FastAPI",
-          "Flask"
-        ],
-        "learningTip": "Django Crash Course – Traversy Media (YouTube)",
-        "source": "heuristic"
-      },
-      "resumeMatch": {
-        "domainType": "data",
-        "resumeFile": "resume_data.txt",
-        "resumeLabel": "📊 Data Analyst Resume",
-        "hasResume": true,
-        "tips": [
-          "List tools clearly: Python, Pandas, NumPy, SQL, Power BI, Tableau",
-          "Add a \"Data Projects\" section with dataset size: \"Analyzed 50,000+ rows\"",
-          "Include your Kaggle profile URL if you have any notebooks",
-          "Mention SQL proficiency level: \"Advanced SQL – CTEs, Window Functions\""
-        ]
-      },
-      "coverLetterPreview": null
-    },
-    {
-      "title": "AI Software Engineer",
-      "company": "Godigi Infotech",
+      "title": "Python Backend Developer Intern",
+      "company": "DevOps Enabler",
       "exp": "0-1 Yrs",
       "location": "Bangalore, India",
       "salary": "Not Disclosed",
-      "posted": "3+ weeks ago",
-      "url": "https://www.naukri.com/job-listings-ai-software-engineer-godigi-infotech-mumbai-new-delhi-pune-bengaluru-0-to-1-years-100524500130",
+      "posted": "3 weeks ago",
+      "url": "https://www.naukri.com/job-listings-python-backend-developer-intern-devops-enabler-bengaluru-0-to-1-years-240226931797",
       "domain": "Python Developer",
       "city": "Bangalore",
       "competition": "Low",
@@ -497,39 +378,41 @@
       "coverLetterPreview": null
     },
     {
-      "title": "Junior Software Developer",
-      "company": "eAspire Technolabs Inc.",
+      "title": "Internship- Python Developer",
+      "company": "Viga Entertainment Technology",
       "exp": "0-1 Yrs",
-      "location": "Delhi, India",
+      "location": "Bangalore, India",
       "salary": "Not Disclosed",
-      "posted": "1 day ago",
-      "url": "https://www.naukri.com/job-listings-junior-software-developer-evoke-hr-gurugram-0-to-1-years-190326022352",
-      "domain": "Software Developer",
-      "city": "Delhi",
+      "posted": "3+ weeks ago",
+      "url": "https://www.naukri.com/job-listings-internship-python-developer-viga-entertainment-technology-private-limited-kolkata-mumbai-new-delhi-hyderabad-pune-chennai-bengaluru-0-to-1-years-300625501226",
+      "domain": "Python Developer",
+      "city": "Bangalore",
       "competition": "Low",
       "applicants": 5,
       "aiScore": {
-        "score": 30,
+        "score": 32,
         "matchReason": "Partial match – consider upskilling",
-        "topMatchingSkills": [],
-        "skillGaps": [
-          "ReactJS",
-          "TypeScript",
-          "REST API"
+        "topMatchingSkills": [
+          "python"
         ],
-        "learningTip": "Learn ReactJS – search on YouTube/freeCodeCamp",
+        "skillGaps": [
+          "Django",
+          "FastAPI",
+          "Flask"
+        ],
+        "learningTip": "Django Crash Course – Traversy Media (YouTube)",
         "source": "heuristic"
       },
       "resumeMatch": {
-        "domainType": "software",
-        "resumeFile": "resume_software.txt",
-        "resumeLabel": "💻 Software Developer Resume",
+        "domainType": "data",
+        "resumeFile": "resume_data.txt",
+        "resumeLabel": "📊 Data Analyst Resume",
         "hasResume": true,
         "tips": [
-          "Add GitHub link at the top of resume – recruiters WILL check it",
-          "List tech stack per project: \"Built with React.js, Node.js, MongoDB\"",
-          "Use numbers: \"Reduced load time by 30%\" not \"Improved performance\"",
-          "Add a \"Technical Skills\" dedicated section above experience"
+          "List tools clearly: Python, Pandas, NumPy, SQL, Power BI, Tableau",
+          "Add a \"Data Projects\" section with dataset size: \"Analyzed 50,000+ rows\"",
+          "Include your Kaggle profile URL if you have any notebooks",
+          "Mention SQL proficiency level: \"Advanced SQL – CTEs, Window Functions\""
         ]
       },
       "coverLetterPreview": null
@@ -556,6 +439,44 @@
           "MongoDB"
         ],
         "learningTip": "React Full Course – Dave Gray (YouTube)",
+        "source": "heuristic"
+      },
+      "resumeMatch": {
+        "domainType": "software",
+        "resumeFile": "resume_software.txt",
+        "resumeLabel": "💻 Software Developer Resume",
+        "hasResume": true,
+        "tips": [
+          "Add GitHub link at the top of resume – recruiters WILL check it",
+          "List tech stack per project: \"Built with React.js, Node.js, MongoDB\"",
+          "Use numbers: \"Reduced load time by 30%\" not \"Improved performance\"",
+          "Add a \"Technical Skills\" dedicated section above experience"
+        ]
+      },
+      "coverLetterPreview": null
+    },
+    {
+      "title": "Junior Software Developer",
+      "company": "Infanion Software Solutions",
+      "exp": "0-1 Yrs",
+      "location": "Bangalore, India",
+      "salary": "Not Disclosed",
+      "posted": "3+ weeks ago",
+      "url": "https://www.naukri.com/job-listings-junior-software-developer-infanion-bengaluru-0-to-1-years-070126500847",
+      "domain": "Software Developer",
+      "city": "Bangalore",
+      "competition": "Low",
+      "applicants": 5,
+      "aiScore": {
+        "score": 30,
+        "matchReason": "Partial match – consider upskilling",
+        "topMatchingSkills": [],
+        "skillGaps": [
+          "ReactJS",
+          "TypeScript",
+          "REST API"
+        ],
+        "learningTip": "Learn ReactJS – search on YouTube/freeCodeCamp",
         "source": "heuristic"
       },
       "resumeMatch": {
@@ -611,15 +532,91 @@
       "coverLetterPreview": null
     },
     {
-      "title": "Jr. Frontend Developer",
-      "company": "Enzigma Software",
+      "title": "Software Developers",
+      "company": "Oxyzen Homes",
       "exp": "0-1 Yrs",
-      "location": "Pune, India",
+      "location": "Bangalore, India",
       "salary": "Not Disclosed",
-      "posted": "2 days ago",
-      "url": "https://www.naukri.com/job-listings-jr-frontend-developer-enzigma-software-pvt-ltd-pune-0-to-1-years-170326501822",
+      "posted": "3+ weeks ago",
+      "url": "https://www.naukri.com/job-listings-software-developers-oxygen-homes-kolkata-mumbai-new-delhi-hyderabad-pune-chennai-bengaluru-0-to-1-years-130519500007",
+      "domain": "Software Developer",
+      "city": "Bangalore",
+      "competition": "Low",
+      "applicants": 5,
+      "aiScore": {
+        "score": 30,
+        "matchReason": "Partial match – consider upskilling",
+        "topMatchingSkills": [],
+        "skillGaps": [
+          "ReactJS",
+          "TypeScript",
+          "REST API"
+        ],
+        "learningTip": "Learn ReactJS – search on YouTube/freeCodeCamp",
+        "source": "heuristic"
+      },
+      "resumeMatch": {
+        "domainType": "software",
+        "resumeFile": "resume_software.txt",
+        "resumeLabel": "💻 Software Developer Resume",
+        "hasResume": true,
+        "tips": [
+          "Add GitHub link at the top of resume – recruiters WILL check it",
+          "List tech stack per project: \"Built with React.js, Node.js, MongoDB\"",
+          "Use numbers: \"Reduced load time by 30%\" not \"Improved performance\"",
+          "Add a \"Technical Skills\" dedicated section above experience"
+        ]
+      },
+      "coverLetterPreview": null
+    },
+    {
+      "title": "Sr Full Stack Developer/Architect (.Net, Angular)",
+      "company": "Eurofins",
+      "exp": "0-1 Yrs",
+      "location": "Bangalore, India",
+      "salary": "Not Disclosed",
+      "posted": "3 weeks ago",
+      "url": "https://www.naukri.com/job-listings-sr-full-stack-developer-architect-net-angular-eurofins-it-solutions-india-pvt-ltd-bengaluru-0-to-1-years-230226915923",
       "domain": "Frontend Developer",
-      "city": "Pune",
+      "city": "Bangalore",
+      "competition": "Low",
+      "applicants": 5,
+      "aiScore": {
+        "score": 30,
+        "matchReason": "Partial match – consider upskilling",
+        "topMatchingSkills": [],
+        "skillGaps": [
+          "React.js",
+          "Next.js",
+          "TypeScript"
+        ],
+        "learningTip": "React Full Course – Dave Gray (YouTube)",
+        "source": "heuristic"
+      },
+      "resumeMatch": {
+        "domainType": "software",
+        "resumeFile": "resume_software.txt",
+        "resumeLabel": "💻 Software Developer Resume",
+        "hasResume": true,
+        "tips": [
+          "Add GitHub link at the top of resume – recruiters WILL check it",
+          "List tech stack per project: \"Built with React.js, Node.js, MongoDB\"",
+          "Use numbers: \"Reduced load time by 30%\" not \"Improved performance\"",
+          "Add a \"Technical Skills\" dedicated section above experience"
+        ]
+      },
+      "coverLetterPreview": null
+    },
+    {
+      "title": "Php developer- Freshers also Welcome",
+      "company": "Weblee Technologies",
+      "exp": "0-1 Yrs",
+      "location": "Kolkata, India",
+      "salary": "Not Disclosed",
+      "posted": "1 day ago",
+      "url": "https://www.naukri.com/job-listings-php-developer-freshers-also-welcome-weblee-technologies-kolkata-0-to-1-years-180326502860",
+      "domain": "Frontend Developer",
+      "city": "Kolkata",
       "competition": "Low",
       "applicants": 5,
       "aiScore": {
@@ -649,14 +646,14 @@
       "coverLetterPreview": null
     },
     {
-      "title": "Web Developer",
-      "company": "MNC",
+      "title": "Jr. Frontend Developer",
+      "company": "Enzigma Software",
       "exp": "0-1 Yrs",
       "location": "Pune, India",
       "salary": "Not Disclosed",
-      "posted": "3 days ago",
-      "url": "https://www.naukri.com/job-listings-web-developer-tele-infotech-pimpri-chinchwad-pune-0-to-1-years-160326023064",
-      "domain": "Web Developer",
+      "posted": "2 days ago",
+      "url": "https://www.naukri.com/job-listings-jr-frontend-developer-enzigma-software-pvt-ltd-pune-0-to-1-years-170326501822",
+      "domain": "Frontend Developer",
       "city": "Pune",
       "competition": "Low",
       "applicants": 5,
@@ -666,8 +663,8 @@
         "topMatchingSkills": [],
         "skillGaps": [
           "React.js",
-          "TypeScript",
-          "MongoDB"
+          "Next.js",
+          "TypeScript"
         ],
         "learningTip": "React Full Course – Dave Gray (YouTube)",
         "source": "heuristic"
@@ -725,13 +722,13 @@
       "coverLetterPreview": null
     },
     {
-      "title": "Software Developer Intern",
-      "company": "Outbox",
+      "title": "Full Stack Developer",
+      "company": "Godigi Infotech",
       "exp": "0-1 Yrs",
       "location": "Bangalore, India",
       "salary": "Not Disclosed",
       "posted": "3+ weeks ago",
-      "url": "https://www.naukri.com/job-listings-software-developer-intern-outbox-bengaluru-0-to-1-years-200126505685",
+      "url": "https://www.naukri.com/job-listings-full-stack-developer-godigi-infotech-mumbai-hyderabad-pune-bengaluru-0-to-1-years-100524500132",
       "domain": "Frontend Developer",
       "city": "Bangalore",
       "competition": "Low",
@@ -801,7 +798,14 @@
       "coverLetterPreview": null
     }
   ],
-  "applyResults": [],
+  "applyResults": [
+    {
+      "title": "Junior Software Developer",
+      "company": "eAspire Technolabs Inc.",
+      "success": true,
+      "mode": "DRY_RUN"
+    }
+  ],
   "boostReport": {
     "profileScore": {
       "percentage": 92,
@@ -881,8 +885,8 @@
       "Keep your \"Last Active\" status fresh – log in daily or set to \"Active\""
     ],
     "todaysSignals": [
-      "Set Job Alerts for your target roles – this signals intent to the algorithm",
       "Follow companies you wish to join – Naukri shows your interest to their HRs",
+      "Set Job Alerts for your target roles – this signals intent to the algorithm",
       "Complete Naukri assessments/tests – adds credibility and boosts ranking"
     ],
     "todaysActions": [
@@ -921,28 +925,28 @@
   "skillGapSummary": [
     {
       "skill": "TypeScript",
-      "count": 9,
+      "count": 12,
       "resource": "TypeScript for Beginners – freeCodeCamp (YouTube)"
     },
     {
       "skill": "React.js",
-      "count": 7,
+      "count": 9,
       "resource": "React Full Course – Dave Gray (YouTube)"
     },
     {
+      "skill": "Next.js",
+      "count": 8,
+      "resource": "Next.js 14 Course – Vercel Docs + freeCodeCamp"
+    },
+    {
       "skill": "Django",
-      "count": 6,
+      "count": 5,
       "resource": "Django Crash Course – Traversy Media (YouTube)"
     },
     {
       "skill": "FastAPI",
-      "count": 6,
+      "count": 5,
       "resource": "FastAPI Full Course – Bitfumes (YouTube)"
-    },
-    {
-      "skill": "Flask",
-      "count": 6,
-      "resource": "Learn Flask – search on YouTube"
     }
   ]
 }

@@ -213,7 +213,7 @@ async function scrapeLinkedIn(page, role, city) {
                 results.push({ 
                     title, company, location: cityLabel, url: link, 
                     domain: roleLabel, city: cityLabel, source: 'LinkedIn',
-                    competition: 'Medium', applicants: 50 // LinkedIn doesn't show guest app count easily
+                    competition: 'Medium', applicants: 50
                 });
             }
         });
@@ -261,9 +261,10 @@ async function scrapeIndeed(page, role, city) {
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 async function scrapeAllJobs() {
-  console.log('\n🚀 Starting Naukri.com Direct Scraper (Headless Browser)...');
-  console.log('   Cities : Bangalore | Delhi | Pune | Kolkata');
-  console.log('   Roles  : Software Dev | Frontend | Python | Data Analyst | Web Dev\n');
+  console.log('\n🚀 Starting Multi-Platform AI Scraper (Headless Browser)...');
+  console.log('   Platforms: Naukri | LinkedIn | Indeed');
+  console.log('   Cities   : Bangalore | Delhi | Pune | Kolkata');
+  console.log('   Roles    : Software Dev | Frontend | Python | Data Analyst | Web Dev\n');
 
   let browser;
   const allJobs = [];
@@ -310,7 +311,7 @@ async function scrapeAllJobs() {
   }
 
   console.log(`\n📊 Total raw jobs collected: ${allJobs.length}`);
-  console.log(`   From Naukri.com across 4 cities × 5 roles\n`);
+  console.log(`   From 3 platforms across 4 cities × 5 roles\n`);
 
   return allJobs;
 }

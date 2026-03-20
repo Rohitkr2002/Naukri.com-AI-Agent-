@@ -342,6 +342,8 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
     const score = job.aiScore?.score || 0;
     const scoreColor = score >= 85 ? colors.green : (score >= 70 ? colors.blue : colors.orange);
     const domainLabel = job.domain.toUpperCase();
+    const source = job.source || 'Naukri';
+    const sourceColor = source === 'LinkedIn' ? '#0077B5' : (source === 'Indeed' ? '#2164f3' : colors.blue);
     
     return `
       <tr>
@@ -354,6 +356,7 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
                   <tr>
                     <td>
                       <span style="background:rgba(56,189,248,0.1); color:${colors.blue}; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(56,189,248,0.2); letter-spacing: 1px;">#${index+1} ${domainLabel}</span>
+                      <span style="background:${sourceColor}22; color:${sourceColor}; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 4px; border: 1px solid ${sourceColor}44; letter-spacing: 1px; margin-left:8px;">${source.toUpperCase()}</span>
                     </td>
                     <td align="right" style="color:${colors.muted}; font-size: 11px; font-weight: 600;">
                       ${job.posted || 'Recently'}
@@ -471,15 +474,7 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual') 
             <td style="padding: 40px 30px; background: ${colors.bg}; border: 1px solid ${colors.border}; border-top: none; border-bottom: none;">
               
               <!-- PROFILE SECTION -->
-              ${boostReport ? `
-              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 40px; background: rgba(167,139,250,0.03); border: 1px solid rgba(167,139,250,0.2); border-radius: 16px; padding: 24px;">
-                <tr>
-                  <td>
-                    <h2 style="margin: 0; color: ${colors.purple}; font-size: 14px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">🚀 Profile Strength: ${boostReport.profileScore.percentage}%</h2>
-                    <p style="margin: 10px 0 0; color: ${colors.muted}; font-size: 13px; line-height: 1.5;">${boostReport.todaysTips[0]}</p>
-                  </td>
-                </tr>
-              </table>` : ''}
+              ${boostReport ? renderProfileBoostSection(boostReport) : ''}
 
               <!-- JOB LIST -->
               <table width="100%" cellpadding="0" cellspacing="0">
