@@ -18,13 +18,19 @@ try {
 }
 
 // ─── Target cities ────────────────────────────────────────────────────────────
-const CITIES = ['bangalore', 'delhi', 'pune', 'kolkata'];
+const CITIES = ['bangalore', 'delhi', 'pune', 'kolkata', 'mumbai', 'hyderabad', 'chennai', 'gurgaon', 'noida', 'ahmedabad'];
 
 const CITY_LABELS = {
   bangalore: 'Bangalore',
   delhi:     'Delhi',
   pune:      'Pune',
   kolkata:   'Kolkata',
+  mumbai:    'Mumbai',
+  hyderabad: 'Hyderabad',
+  chennai:   'Chennai',
+  gurgaon:   'Gurgaon',
+  noida:     'Noida',
+  ahmedabad: 'Ahmedabad'
 };
 
 // ─── Job roles ────────────────────────────────────────────────────────────────
@@ -200,20 +206,27 @@ async function scrapeLinkedIn(page, role, city) {
   console.log(`🔍 [LinkedIn] ${role.label} → ${CITY_LABELS[city]}`);
   
   try {
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    // LinkedIn guest page is tricky, we extract basic card data
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 35000 });
+    await page.waitForSelector('.base-search-card__title, .job-search-card', { timeout: 10000 }).catch(() => {});
+    await sleep(2000);
+
     const jobs = await page.evaluate((cityLabel, roleLabel) => {
         const results = [];
-        const cards = document.querySelectorAll('div.base-card, li > div[class*="job-search-card"]');
+        const cards = document.querySelectorAll('div.base-card, li > div[class*="job-search-card"], .base-search-card--clickable');
         cards.forEach(card => {
-            const title = card.querySelector('h3.base-search-card__title')?.innerText?.trim();
-            const company = card.querySelector('h4.base-search-card__subtitle')?.innerText?.trim();
-            const link = card.querySelector('a.base-card__full-link')?.href;
+            const titleEl = card.querySelector('h3.base-search-card__title, .base-search-card__title');
+            const compEl = card.querySelector('h4.base-search-card__subtitle, .base-search-card__subtitle');
+            const linkEl = card.querySelector('a.base-card__full-link, .base-card__full-link');
+            
+            const title = titleEl?.innerText?.trim();
+            const company = compEl?.innerText?.trim();
+            const link = linkEl?.href;
+
             if (title && link) {
                 results.push({ 
-                    title, company, location: cityLabel, url: link, 
+                    title, company: company || 'N/A', location: cityLabel, url: link, 
                     domain: roleLabel, city: cityLabel, source: 'LinkedIn',
-                    competition: 'Medium', applicants: 50
+                    competition: 'Medium', applicants: 45
                 });
             }
         });
@@ -234,18 +247,27 @@ async function scrapeIndeed(page, role, city) {
   console.log(`🔍 [Indeed] ${role.label} → ${CITY_LABELS[city]}`);
 
   try {
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 35000 });
+    await page.waitForSelector('.job_seen_beacon, #mosaic-provider-jobcards', { timeout: 10000 }).catch(() => {});
+    await sleep(2000);
+
     const jobs = await page.evaluate((cityLabel, roleLabel) => {
         const results = [];
-        const cards = document.querySelectorAll('div.job_seen_beacon');
+        const cards = document.querySelectorAll('div.job_seen_beacon, .job_seen_beacon');
         cards.forEach(card => {
-            const title = card.querySelector('h2.jobTitle span')?.innerText;
-            const company = card.querySelector('span.companyName')?.innerText;
+            const titleEl = card.querySelector('h2.jobTitle span, [id^="jobTitle"], .jobTitle');
+            const compEl = card.querySelector('span.companyName, .companyName, .provider-code-96v6a7');
+            const linkEl = card.querySelector('a[id^="job_"], a.jcs-JobTitle');
+            
+            const title = titleEl?.innerText?.trim();
+            const company = compEl?.innerText?.trim();
+            const link = linkEl?.href;
+
             if (title) {
                 results.push({ 
-                    title, company, location: cityLabel, 
+                    title, company: company || 'N/A', location: cityLabel, url: link || '', 
                     domain: roleLabel, city: cityLabel, source: 'Indeed',
-                    competition: 'Low', applicants: 10
+                    competition: 'Low', applicants: 15
                 });
             }
         });
