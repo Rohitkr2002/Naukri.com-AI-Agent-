@@ -123,7 +123,7 @@ Every fresher in India faces this same painful daily routine:
 The Naukri AI Agent is built on three pillars of power: **Extraction**, **Intelligence**, and **Automation**.
 
 ### 1. 🔍 Multi-Platform Scraper (Naukri, LinkedIn, Indeed)
-- **High-Fidelity Extraction**: Visits **60 URLs** daily across 4 major tech hubs (Bangalore, Delhi, Pune, Kolkata).
+- **High-Fidelity Extraction-   **Multi-City Targeting**: Automated searches across 10+ major hiring hubs (Bangalore, Delhi, Mumbai, Hyderabad, Pune, Kolkata, Chennai, Gurgaon, Noida, Ahmedabad).
 - **Stealth Mode**: Mimics human behavior with Puppeteer to bypass bot detection.
 - **Deduplication**: Smart logic ensures you never see the same job twice.
 

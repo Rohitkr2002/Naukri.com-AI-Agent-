@@ -282,10 +282,10 @@ async function scrapeIndeed(page, role, city) {
 }
 
 // ─── Main export ──────────────────────────────────────────────────────────────
-async function scrapeAllJobs() {
+  const cityNames = CITIES.map(c => CITY_LABELS[c]).join(' | ');
   console.log('\n🚀 Starting Multi-Platform AI Scraper (Headless Browser)...');
   console.log('   Platforms: Naukri | LinkedIn | Indeed');
-  console.log('   Cities   : Bangalore | Delhi | Pune | Kolkata');
+  console.log(`   Cities   : ${cityNames}`);
   console.log('   Roles    : Software Dev | Frontend | Python | Data Analyst | Web Dev\n');
 
   let browser;
@@ -304,6 +304,21 @@ async function scrapeAllJobs() {
     await page.evaluateOnNewDocument(() => {
       Object.defineProperty(navigator, 'webdriver', { get: () => false });
     });
+
+    // ─── Optional LinkedIn Login ──────────────────────────────────────────────
+    if (process.env.LINKEDIN_EMAIL && process.env.LINKEDIN_PASS) {
+      console.log('🔐 Attempting LinkedIn Login...');
+      try {
+        await page.goto('https://www.linkedin.com/login', { waitUntil: 'networkidle2' });
+        await page.type('#username', process.env.LINKEDIN_EMAIL, { delay: 100 });
+        await page.type('#password', process.env.LINKEDIN_PASS, { delay: 100 });
+        await page.click('button[type="submit"]');
+        await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 15000 });
+        console.log('   ✅ LinkedIn Login successful!');
+      } catch (err) {
+        console.warn('   ⚠️  LinkedIn Login failed (likely CAPTCHA/2FA). Continuing as Guest.');
+      }
+    }
 
     for (const city of CITIES) {
       console.log(`\n📍 City: ${CITY_LABELS[city]}`);

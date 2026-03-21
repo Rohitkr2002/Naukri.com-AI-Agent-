@@ -16,7 +16,7 @@ const USER_PROFILE = {
   ],
   experienceYears: 0,  // Fresher – internship experience
   currentLocation: 'Patna, Bihar, India',
-  preferredLocations: ['Bangalore', 'Delhi', 'Pune', 'Kolkata', 'Remote', 'Patna'],
+  preferredLocations: ['Bangalore', 'Delhi', 'Pune', 'Kolkata', 'Mumbai', 'Hyderabad', 'Chennai', 'Gurgaon', 'Noida', 'Ahmedabad', 'Remote', 'Patna'],
 
   // ─── Contact ────────────────────────────────────────────────
   contact: {
