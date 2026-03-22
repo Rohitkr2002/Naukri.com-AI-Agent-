@@ -17,7 +17,7 @@ on:
 jobs:
   run-job-agent:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
 
     steps:
       # Step 1: Checkout the repository code
