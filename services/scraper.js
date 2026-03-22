@@ -282,6 +282,7 @@ async function scrapeIndeed(page, role, city) {
 }
 
 // ─── Main export ──────────────────────────────────────────────────────────────
+async function scrapeAllJobs() {
   const cityNames = CITIES.map(c => CITY_LABELS[c]).join(' | ');
   console.log('\n🚀 Starting Multi-Platform AI Scraper (Headless Browser)...');
   console.log('   Platforms: Naukri | LinkedIn | Indeed');
