@@ -38,5 +38,455 @@
   "Jr. Frontend Developer||Enzigma Software",
   "Front-End Developer||Supercode",
   "Full Stack Developer||Godigi Infotech",
-  "Frontend Developer||Cumulations"
+  "Frontend Developer||Cumulations",
+  {
+    "url": "https://www.naukri.com/job-listings-web-developer-inboundsys-webgalaxy-mysuru-bengaluru-0-to-1-years-150125501319",
+    "title": "Web Developer",
+    "company": "Inboundsys Webgalaxy",
+    "source": "Naukri",
+    "score": 95,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Web Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-web-developer-brucode-technologies-pvt-ltd-kolkata-mohali-mumbai-new-delhi-hyderabad-pune-chennai-bengaluru-0-to-1-years-190820500306",
+    "title": "Web Developer",
+    "company": "Brucode Technologies",
+    "source": "Naukri",
+    "score": 93,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Web Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-fresher-full-stack-javascript-developer-technource-kolkata-mumbai-new-delhi-hyderabad-pune-chennai-bengaluru-0-to-1-years-200326506655",
+    "title": "Fresher Full-Stack JavaScript Developer",
+    "company": "Technource",
+    "source": "Naukri",
+    "score": 92,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-python-developer-trainee-evoke-hr-noida-0-to-1-years-200326017647",
+    "title": "Python Developer Trainee",
+    "company": "eAspire Technolabs Inc.",
+    "source": "Naukri",
+    "score": 92,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Python Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-fresher-software-developer-mauve-technologies-noida-0-to-1-years-090920500114",
+    "title": "Fresher Software Developer",
+    "company": "Mauve Technologies",
+    "source": "Naukri",
+    "score": 92,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-opening-for-python-developer-trainee-noida-squad-infotech-private-ltd-noida-0-to-0-years-280120600415",
+    "title": "Opening For Python Developer Trainee @ Noida",
+    "company": "SQUAD Infotech Private Ltd",
+    "source": "Naukri",
+    "score": 92,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Python Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-data-analyst-ada-global-bengaluru-0-to-1-years-060226501811",
+    "title": "Data Analyst",
+    "company": "ADA Global",
+    "source": "Naukri",
+    "score": 90,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Data Analyst"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-web-developers-oxygen-homes-kolkata-mumbai-new-delhi-hyderabad-pune-chennai-bengaluru-0-to-1-years-130519500008",
+    "title": "Web Developers",
+    "company": "Oxyzen Homes",
+    "source": "Naukri",
+    "score": 90,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Web Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-web-developer-designer-shipthis-bengaluru-0-to-1-years-221025506665",
+    "title": "Web Developer- Designer",
+    "company": "Onder Shipthis Technologies",
+    "source": "Naukri",
+    "score": 90,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Web Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-web-developer-growyder-plus-communication-varanasi-bengaluru-0-to-1-years-070420500368",
+    "title": "Web Developer",
+    "company": "Growyder Plus Communication",
+    "source": "Naukri",
+    "score": 90,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Web Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-front-end-developer-evoke-hr-noida-0-to-1-years-200326017820",
+    "title": "Front End Developer",
+    "company": "eAspire Technolabs Inc.",
+    "source": "Naukri",
+    "score": 88,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-requirement-of-software-developer-fresher-right-step-consulting-private-limited-noida-0-to-1-years-120717500912",
+    "title": "Requirement of Software Developer Fresher",
+    "company": "Right Step Consulting",
+    "source": "Naukri",
+    "score": 88,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-front-end-developer-godigi-infotech-new-delhi-0-to-1-years-061123500201",
+    "title": "FRONT END DEVELOPER",
+    "company": "Godigi Infotech",
+    "source": "Naukri",
+    "score": 88,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-front-end-developer-capitalsetu-noida-0-to-1-years-131224503694",
+    "title": "Front End Developer",
+    "company": "Capital Setu",
+    "source": "Naukri",
+    "score": 88,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-python-developer-thoughts2binary-gurugram-0-to-1-years-281221000347",
+    "title": "Python Developer",
+    "company": "Thoughts2Binary",
+    "source": "Naukri",
+    "score": 88,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Python Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-data-analyst-simply-vyapar-apps-bengaluru-0-to-1-years-240226033779",
+    "title": "Data Analyst",
+    "company": "Simply Vyapar Apps",
+    "source": "Naukri",
+    "score": 85,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Data Analyst"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-python-developer-speqto-technologies-pvt-ltd-noida-0-to-1-years-120424502463",
+    "title": "Python Developer",
+    "company": "Speqto Technologies",
+    "source": "Naukri",
+    "score": 75,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Python Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-data-analyst-legistify-gurugram-0-to-1-years-221124503733",
+    "title": "Data Analyst",
+    "company": "Legistify",
+    "source": "Naukri",
+    "score": 75,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Data Analyst"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=9c88f93a7c689eda&bb=8QJ2sFtOTqGAeURu-R15sV_EOo7iu_xkwuiIf-rVAr7KLbWpHn2I-KPgQjHT4CrXGjv0lhlQuPopdcZbnHgGAqZN9cxc8grRbx4_2ePVhcRQohFn8_Wx2WjDXzhLhFAX&xkcb=SoAB67M3lHk8AuzCCB0JbzkdCdPP&fccid=d9b9208177142548&vjs=3",
+    "title": "Next.JS, React.JS, Angular",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 74,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-full-stack-python-developer-logicplanet-it-services-new-delhi-0-to-1-years-210226502509",
+    "title": "Full Stack Python Developer",
+    "company": "Logic Planet",
+    "source": "Naukri",
+    "score": 72,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Python Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-front-end-developer-hack2skill-private-limited-noida-0-to-1-years-080722502447",
+    "title": "Front - end Developer",
+    "company": "Hack2skill",
+    "source": "Naukri",
+    "score": 65,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-react-js-developer-godigi-infotech-mumbai-hyderabad-pune-bengaluru-0-to-1-years-100524501467",
+    "title": "REACT JS DEVELOPER",
+    "company": "Godigi Infotech",
+    "source": "Naukri",
+    "score": 50,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=54bdfb0af05e3128&bb=tnwivBf_d4N_LmtHvq0BjGGV3-WeAWspNkfjyGL3QFL4XGxpL6pp7or3gIE2_yXpDVuUjwxL7rC48YLlFhz3_ieGLi1A4cy4di4d6M2MSp5VxQZaBHDdyPRHrlfaBizc&xkcb=SoAD67M3lHk--NT7ph0GbzkdCdPP&fccid=ff1b344fa22fc264&vjs=3",
+    "title": "Associate Backend Engineer",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 50,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/pagead/clk?mo=r&ad=-6NYlbfkN0CyJmwgmcHBoUwL-M1HuuConG52jHt21OR0WSEVXD54SWSUdQ3Cqs6QALrHEpC3SBG-AjtUCDP00Rs8vWLl-9n_jSg4bEvF4ihWztjnu_ufx7qoWufNi1gyzJl_JuhF0o--mgKYlAZ3cSFnY2v1iWGWGO-o7SCWy6bVl30Sk4vXIyKGu7DmbV1-IF18jpqWxkjotcPUzSpKKOGleJnWR9TvkaXgMZiwxerSNqEEWqIMM8-qob7qqhEyEiBewlpKvnXQqA7mWc-rQiA4JEej2Qd8FtoeNB8CP4hqR1UX1tamPyjk_ScGuv-ivdieJPe1PXitSYU4uhVLba2yPykJz5bsNoOFY6TcvmEd__FBCO6wYv8534v28OjS_oOWlWp5VZOwKiKWa_WN_UuJr3hKsm7DiKQC4en7T6DntVPf0HNFq0A95DDCVoML8u3zl9uy4zS6Z2gw8pf_m6NK9krTwqva9oWA3DGd1nti8-sG2qJkMbwA8UERZ-8C6plobnH7WazwrFPZJufCeilB2CEDVKCJKJAAsxhZU4SKBHUXN7-2mmz2_JWpTgq7R4b48lQc_whh-81EI6Oy3kUvkkJRGVtF6sBQ3bMmZhlmUl0zHvF1knTIlhV_lX_L6JT53LwVRZdskFoI4y1jSr1aYgUpthz5WwazDVyyCkn12jU4j8P2AszL_NUWLTubx1wqL6MfKSKGKS2QlgLnsB1nBT3xPMwluEZceCDXJTUrF2Nh9Vu2YlMfaKQEE1uFlKGbolX5EtU_xTO1O2eQT29eycsNiHEes2SoG9rfRUQDdgqmlJHjFYucIKoBspvlLxuLItHObJ-HqQbfsshh0A==&xkcb=SoDe6_M3lHk--NT7ph0EbzkdCdPP&camk=UoKtGZLa3XIxOc0Ffa_ziQ==&p=8&fvj=0&vjs=3",
+    "title": "Software Engineer Full stack",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 50,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-data-analyst-r-r-groups-bengaluru-0-to-1-years-240226500948",
+    "title": "Data Analyst",
+    "company": "RR Groups",
+    "source": "Naukri",
+    "score": 44,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Data Analyst"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-online-data-analyst-odia-telus-international-ai-inc-noida-0-to-1-years-020326929438",
+    "title": "Online Data Analyst Odia",
+    "company": "TELUS Digital",
+    "source": "Naukri",
+    "score": 44,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Data Analyst"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-online-data-analyst-punjabi-telus-international-ai-inc-noida-0-to-1-years-020326929437",
+    "title": "Online Data Analyst Punjabi",
+    "company": "TELUS Digital",
+    "source": "Naukri",
+    "score": 44,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Data Analyst"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-online-data-analyst-bengali-telus-international-ai-inc-noida-0-to-1-years-020326929703",
+    "title": "Online Data Analyst - Bengali",
+    "company": "TELUS Digital",
+    "source": "Naukri",
+    "score": 44,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Data Analyst"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=e1264915fca449f1&bb=8QJ2sFtOTqGAeURu-R15sdZrs7W54q2hyt33Y2S-dkNrXreNZ0A3_QGZbLdSRtYz9JX25i_Jj8gbIe5lo6yaH4WWbaq7xuPz4iXLObBfk9W4Zvr5xr7mY3SM8WHyKhjq&xkcb=SoAS67M3lHk8AuzCCB0NbzkdCdPP&fccid=9026955bffa5e9e8&cmp=Boston-Business-Solutions&ti=Full+Stack+Developer&vjs=3",
+    "title": "Java Full Stack Developer",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 44,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://in.linkedin.com/jobs/view/internship-tools-framework-python-at-harman-india-4385764029?position=1&pageNum=0&refId=A9pcxvpSzY3W0hkK4YawFg%3D%3D&trackingId=P%2B4FfKjcpnJ7c8xigWXdJw%3D%3D",
+    "title": "Internship - Tools & Framework (Python)",
+    "company": "HARMAN India",
+    "source": "LinkedIn",
+    "score": 42,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.linkedin.com/jobs/view/apprentice-product-engineering-at-five9-4377912455?position=2&pageNum=0&refId=A9pcxvpSzY3W0hkK4YawFg%3D%3D&trackingId=j3CXxDhRASqbFbJWru9N2w%3D%3D",
+    "title": "Apprentice- Product Engineering",
+    "company": "Five9",
+    "source": "LinkedIn",
+    "score": 40,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.linkedin.com/jobs/view/software-engineering-intern-at-kong-4388369451?position=3&pageNum=0&refId=A9pcxvpSzY3W0hkK4YawFg%3D%3D&trackingId=jG28XqZYCTyDckBLYPVyPA%3D%3D",
+    "title": "Software Engineering Intern",
+    "company": "Kong",
+    "source": "LinkedIn",
+    "score": 40,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=f7d926f00cf087fe&bb=tnwivBf_d4N_LmtHvq0BjOsWqaCx_yl44ghMuAH0KZ8Np-zuL2XPrrtxIsJrFe5m2F_cx9bZtvqsLqfiPkLQtARix23lGg53lgT1HX_TCAHKmP4QIbL3_mUDSRaHg2K7&xkcb=SoBN67M3lHk--NT7ph0MbzkdCdPP&fccid=86d9f1cf63592dea&vjs=3",
+    "title": "Software Engineering Intern",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 40,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=e8557229c0168deb&bb=tnwivBf_d4N_LmtHvq0BjP5jYre-m_zX0-Fn1EUwzyPES2MCzJdoVf2s09ldRGJkz5gozu5Q3tQnFQ45juLNtdnRd7QH4ZzJfsnZPaiAF_zI-8J9apgGCFttdzy0t8HB&xkcb=SoCk67M3lHk--NT7ph0DbzkdCdPP&fccid=af76a8783f0afba1&vjs=3",
+    "title": "Associate Software Engineer (HPEL Program)",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 40,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=f1b3f1803c46b85c&bb=tnwivBf_d4N_LmtHvq0BjKcn-t2HSUwKsWGuOmHtXGea5igwYB1N6IHWO2jJ7c0dPnpqSCImG8Sr__UGcqEuLAKH0bHnW5M9r92a3xbimU13UHs-7SpCCRVQt29f14kP&xkcb=SoAQ67M3lHk--NT7ph0CbzkdCdPP&fccid=105ecfd0283f415f&vjs=3",
+    "title": "Software Engineer",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 40,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=3b2ee1efbcff9811&bb=tnwivBf_d4N_LmtHvq0BjBM3FGEDCx25aw4H_Sd8ydS7EvcVZhUKeCODTZnfstlMq-OVKbCh_RMmCVSfQg0WJSxXx0omQhhi-fCIOrvK7Wfwk2XYHqJDvO8m8nH2_sFq&xkcb=SoC367M3lHk--NT7ph0HbzkdCdPP&fccid=9452e7588539114c&vjs=3",
+    "title": "Apprentice, Software Engineer",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 40,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=11d9c3d756264f2f&bb=tnwivBf_d4N_LmtHvq0BjPwWentm0U-5FwlVGTPorLcJmXYBEwfSPPfVKvODB6Q_urkhRuUHchetibV6OKQMrcj9ei0TK1BOKhkfUTkTZDCBDHEK3vxIl2BR0EjKx6l4&xkcb=SoCe67M3lHk--NT7ph0FbzkdCdPP&fccid=a4e4e2eaf26690c9&vjs=3",
+    "title": "Custom Software Engineer",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 40,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=32660d689f21bc3d&bb=tnwivBf_d4N_LmtHvq0BjHI_aG1jCefd-bE1aGp0nufSXXJNQ6SscCnhYJOGNSf-vI75qX_Kysh1re0eYQeg0IXVDRNK6tILuZ9gKz7P9fjIsz26uVFHzGqK_BDcUUL3&xkcb=SoC567M3lHk--NT7ph0abzkdCdPP&fccid=d0cd21a0ba3fbacd&vjs=3",
+    "title": "Senior Software Developer - Full Stack",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 40,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-python-software-developer-intelliinsights-software-pvt-ltd-new-delhi-0-to-1-years-170225504976",
+    "title": "Python Software Developer",
+    "company": "Intelliinsights Software Delhi",
+    "source": "Naukri",
+    "score": 32,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Python Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=8780475fcbf0c7b5&bb=tnwivBf_d4N_LmtHvq0BjNeyTYsLF_OAlPwe_pzB4VlI1LpodXHX5KKA4In-re4TPBiwhQH6ynM6Th4pPyQM_qYYRbmRCGhXOjndbIvN_PFLf1njuMQP2jduFe_f2vyW&xkcb=SoA567M3lHk--NT7ph0AbzkdCdPP&fccid=50208b5bf45ee3b8&vjs=3",
+    "title": "Software Engr II",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 30,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=1778b9e0f595a25d&bb=tnwivBf_d4N_LmtHvq0BjPQEgux6V-ilhN71IDNmdg9frUpSTuDIPDNRycaHOh8TcAu-eLuxQ8In7abG6wmZb65u4r-vDUu-QIfaZVp4GxXBe2nNnhWotkXOZ1Rs2HVu&xkcb=SoCQ67M3lHk--NT7ph0YbzkdCdPP&fccid=d0cd21a0ba3fbacd&vjs=3",
+    "title": "Senior Software Developer - Front End",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 30,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=08aae79d7d8f121c&bb=tnwivBf_d4N_LmtHvq0BjE4ZfnwnSyzsLfmkCMBzzPNu338yVDxhPsgWgY2LgnBOA3HYE0lc7y0m7E5YstEk8jRG39hF4QObUYX-8Vwnbcn2JU1kczDJHJNuFKfnOwcM&xkcb=SoAe67M3lHk--NT7ph0fbzkdCdPP&fccid=feb6bb68ecb0dc69&cmp=VegaStack-%28PeerXP%29&ti=Developer&vjs=3",
+    "title": "NextJS Developer Intern",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 30,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=8161bb1bba142f23&bb=tnwivBf_d4N_LmtHvq0BjJz0EhrKrZ3YHAzohc5dAh7elq2atsoN17WteFbzIM04otwIa80vFhkTZtK5fFf4lnAT29IQz8B7WRLlgG_pYaMaFyGrMtHnTB_xSXgSEOB5&xkcb=SoCq67M3lHk--NT7ph0ebzkdCdPP&fccid=91444a28cb181211&vjs=3",
+    "title": "Software Development Advisor",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 30,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Software Developer"
+  },
+  {
+    "url": "https://www.naukri.com/job-listings-web-developer-thinknext-technologies-private-limited-new-delhi-0-to-1-years-291025504187",
+    "title": "Web Developer",
+    "company": "Thinknext Technologies",
+    "source": "Naukri",
+    "score": 20,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Web Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=7058284f7897a349&bb=8QJ2sFtOTqGAeURu-R15sbTvMmJWXAY1S1lEKig6jwstkWzvBLrCTjviIRKsX6j9ncrc2YhPsK5bFKAvNIxepvsRlnfg4jTW-bz_Ypk3PBsLyEIXEPL6QMYTZhlUx_qr&xkcb=SoCc67M3lHk8AuzCCB0KbzkdCdPP&fccid=8dc4399ddb463d4a&vjs=3",
+    "title": "Lead, DCR Application Analyst _Frontend Developer",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 20,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=7d2bab5f422e0128&bb=8QJ2sFtOTqGAeURu-R15sVqTRsnTprm8CavgjJtduLgmm385XrFFK2EAVwjd5U7n7rfjIOpHoTAYVVRZ_moLyoGjD_JChmEpAwW1s1BvJ5Agbgj-f9GuB9DnhyHQiZlu&xkcb=SoC167M3lHk8AuzCCB0IbzkdCdPP&fccid=8dc4399ddb463d4a&vjs=3",
+    "title": "Senior , DCR Application Analyst _Frontend Developer",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 20,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=da14a91e5eb8aa90&bb=8QJ2sFtOTqGAeURu-R15sSoY4wnpTPZutI5ApUVzl29NR2g9FhA4jq9wokK0CD6HO3Br12VvHOlzwz1PS1VP_WXJ2cMGknrXElIbFPw3OtbBBApfnkFecI_LoJZPnTOm&xkcb=SoA767M3lHk8AuzCCB0PbzkdCdPP&fccid=b1196b50b819b33a&cmp=unibotai.com&ti=Full+Stack+Developer&vjs=3",
+    "title": "Full Stack Developer Intern",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 20,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=136c25e750f061ef&bb=8QJ2sFtOTqGAeURu-R15sXLQOoWFVxI9siOpxixZ2JzFLMWdulzUSxXch-sMYlCCTnFmFXWMVQUPh95UtY2-HNO5IMAVtcQXUvjMxnZhL2LERXW0TNIPgM32BnatY2HM&xkcb=SoBP67M3lHk8AuzCCB0DbzkdCdPP&fccid=df6948c9b8da6236&vjs=3",
+    "title": "Lead Software engineer -Front end",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 20,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=9364d53442160ef0&bb=8QJ2sFtOTqGAeURu-R15sU5mVrd6UezZCyd7Na_xO2MC3VtJtfjoFttbvLV0Lkc3qc_s5Ejo5opQpAHABCU2XVCwZQZxYGwCQW-MJfKQq3TpfYr5FkJWSzaImLWhHHOF&xkcb=SoD767M3lHk8AuzCCB0CbzkdCdPP&fccid=72c6f9cdef1fb7f5&cmp=Vaspp-Technologies&ti=Developer&vjs=3",
+    "title": "SAP BTP & Fiori Developer",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 20,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  },
+  {
+    "url": "https://in.indeed.com/rc/clk?jk=fc3230dbc8966522&bb=8QJ2sFtOTqGAeURu-R15sU9hkQWeNGWAalb8JYl0IFp45prGvityP89Ex0KZWnrcvM506IFKdkgZeur37RkVSdI2wI4WZLJJheZ3ZjGjhmnbIArze68GIh5aLUV-_4AC&xkcb=SoBm67M3lHk8AuzCCB0BbzkdCdPP&fccid=fc11051b2286772e&vjs=3",
+    "title": "Engineer III, Software",
+    "company": "N/A",
+    "source": "Indeed",
+    "score": 20,
+    "timestamp": "2026-03-21T08:07:09.881Z",
+    "domain": "Frontend Developer"
+  }
 ]

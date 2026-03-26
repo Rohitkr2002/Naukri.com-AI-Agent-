@@ -7,7 +7,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org)
 [![Puppeteer](https://img.shields.io/badge/Puppeteer-v24-40B5A4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://pptr.dev)
 [![Gemini 2.5](https://img.shields.io/badge/Gemini%202.5%20Flash-AI%20Engine-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://aistudio.google.com)
-[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-9AM%20Daily-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-8AM%20Daily-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 [![Gmail](https://img.shields.io/badge/Gmail%20SMTP-Email%20Engine-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](https://nodemailer.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-F5A623?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 
@@ -26,7 +26,7 @@
 
 > ### 💬 *"Job dhundhna band karo — agent karne do."*
 >
-> A **fully autonomous AI Agent** that wakes up at 9:00 AM IST every day, scrapes **Naukri, LinkedIn, and Indeed** across 4 cities and 5 roles, scores every job using **Google Gemini 2.5 Flash AI**, selects the best-fit resume, generates a personalized cover letter, and delivers a premium job intelligence report with **50 matches** straight to your inbox.
+> A **fully autonomous AI Agent** that wakes up at 8:00 AM IST every day, scrapes **Naukri, LinkedIn, and Indeed** across 4 cities and 5 roles, scores every job using **Google Gemini 2.5 Flash AI**, selects the best-fit resume, generates a personalized cover letter, and delivers a premium job intelligence report with **50 matches** straight to your inbox.
 >
 > **Zero manual effort. Every single day. 100% Free.**
 >
@@ -42,14 +42,14 @@
 
 ```mermaid
 flowchart LR
-    A(["⏰ GitHub Actions\n9:00 AM IST"]) --> B
+    A(["⏰ GitHub Actions\n8:00 AM IST"]) --> B
     B(["🚀 Profile Boost\nScore + ATS Tips"]) --> C
     C(["🔍 Scraper\n4 Cities × 5 Roles"]) --> D
     D(["✅ Filter\nDedupe + Sort"]) --> E
     E(["🤖 Gemini 2.5 AI\nScore 0–100%"]) --> F
     F(["📄 Resume Match\n+ Cover Letter"]) --> G
     G(["🎛️ Local Dashboard\nRecharts + Analytics"]) --> H
-    H(["📧 Premium Email\nDelivered @ 9 AM"])
+    H(["📧 Premium Email\nDelivered @ 8 AM"])
 
     style A fill:#1e3a5f,color:#7dd3fc,stroke:#2563eb
     style B fill:#14532d,color:#4ade80,stroke:#16a34a
@@ -133,7 +133,7 @@ The Naukri AI Agent is built on three pillars of power: **Extraction**, **Intell
 - **Tailored PDF Resumes**: Automatically generates custom resumes optimized for the top job matches.
 
 ### 3. 📅 Automated Ecosystem
-- **9 AM Daily Reports**: A premium dark-mode email delivered exactly when you start your day.
+- **8 AM Daily Reports**: A premium dark-mode email delivered exactly when you start your day.
 - **WhatsApp Alerts**: Instant notifications via Twilio for high-priority matches.
 - **Local Dashboard**: A futuristic command center for market analytics and profile health checks.
 
@@ -157,7 +157,7 @@ A futuristic, interactive command center for your job search. Track **Market Ana
 - **Launcher**: Double-click `LAUNCH_DASHBOARD.bat` to start instantly.
 
 ### 📧 Premium Email Reports
-The daily 9 AM report is built for the "Cyber-Pro" professional. Rebuilt with email-safe glassmorphism, AI match spectrums, and direct-apply CTA buttons. Works in all major email clients.
+The daily 8 AM report is built for the "Cyber-Pro" professional. Rebuilt with email-safe glassmorphism, AI match spectrums, and direct-apply CTA buttons. Works in all major email clients.
 
 ---
 
@@ -224,7 +224,7 @@ $ node index.js
 
 ═══════════════════════════════════════════════════════════════╗
   🤖 Naukri Job AI Agent – Enhanced Edition                    ║
-  ⏰ Run Time (IST): 18/3/2026, 9:00:00 am                    ║
+  ⏰ Run Time (IST): 18/3/2026, 8:00:00 am                    ║
   🚀 Features: Profile Boost | AI Scoring | Resume Matching    ║
 ═══════════════════════════════════════════════════════════════╝
 
@@ -267,7 +267,7 @@ $ node index.js
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                  ⏰ GITHUB ACTIONS (Cron Scheduler)              │
-│               Every day 3:30 AM UTC = 9:00 AM IST               │
+│               Every day 2:30 AM UTC = 8:00 AM IST               │
 └───────────────────────────┬──────────────────────────────────────┘
                             │  triggers
                             ▼
@@ -301,7 +301,7 @@ $ node index.js
                           ▼
              ┌──────────────────────────┐
              │      Gmail SMTP          │
-             │  📬 Inbox @ 9:00 AM IST  │
+             │  📬 Inbox @ 8:00 AM IST  │
              └──────────────────────────┘
 ```
 
@@ -622,7 +622,7 @@ CLEAN JOBS (30–50 unique, fresh, 0-1yr jobs)
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║  💼  NAUKRI JOB ALERT  ·  Rohit Kumar Singh                 ║
-║  📅  Wednesday, 18 March 2026  ·  ⏰ 9:00 AM IST            ║
+║  📅  Wednesday, 18 March 2026  ·  ⏰ 8:00 AM IST            ║
 ║  🎯  50 Fresh Jobs · 0-1 Year Experience · 4 Cities          ║
 ╠════════════╦════════════════╦══════════════════════════════╣
 ║  18 JOBS   ║   4 CITIES    ║   5 ROLES                    ║
@@ -688,7 +688,7 @@ CLEAN JOBS (30–50 unique, fresh, 0-1yr jobs)
 ╠═══════════════════════════════════════════════════════════╣
 ║      [ 🚀 EXPLORE ALL JOBS ON NAUKRI.COM ]                ║
 ╠═══════════════════════════════════════════════════════════╣
-║  🤖 Naukri Job AI Agent  ·  Gemini 2.5 Flash  ·  9AM IST ║
+║  🤖 Naukri Job AI Agent  ·  Gemini 2.5 Flash  ·  8AM IST ║
 ╚═══════════════════════════════════════════════════════════╝
 ```
 
@@ -716,7 +716,7 @@ Nukari.com/                              ← Project root
 │
 ├── 📂 .github/
 │   └── 📂 workflows/
-│       └── 📄 daily.yml                  ← Runs at 3:30 AM UTC = 9 AM IST
+│       └── 📄 daily.yml                  ← Runs at 2:30 AM UTC = 8 AM IST
 │                                            Manual trigger available
 │
 ├── 📂 config/
@@ -886,11 +886,11 @@ node index.js
 
 ```yaml
 # .github/workflows/daily.yml
-name: 🤖 Naukri Job AI Agent – Daily 9AM IST
+name: 🤖 Naukri Job AI Agent – Daily 8AM IST
 
 on:
   schedule:
-    - cron: '30 3 * * *'   # 3:30 AM UTC = 9:00 AM IST
+    - cron: '30 3 * * *'   # 2:30 AM UTC = 8:00 AM IST
   workflow_dispatch:         # Manual trigger from Actions tab
 
 jobs:
@@ -955,7 +955,7 @@ const ROLES = [
 ### Change Schedule
 
 ```yaml
-- cron: '30 3 * * *'   # 9:00 AM IST (default)
+- cron: '30 3 * * *'   # 8:00 AM IST (default)
 - cron: '30 1 * * *'   # 7:00 AM IST
 - cron: '0 6 * * *'    # 11:30 AM IST
 ```
@@ -1009,7 +1009,7 @@ const top50 = deduped.slice(0, 50);  // Change 50 to any number
 > The system has a smart keyword heuristic fallback — it scores jobs based on domain keyword overlap and skill matching. The email is always delivered regardless of API status. No single point of failure.
 
 **Q: How is this deployed?**
-> Via GitHub Actions cron job — runs at 3:30 AM UTC (9:00 AM IST) daily. All secrets (API keys, email credentials) are stored securely in GitHub Secrets, never in code.
+> Via GitHub Actions cron job — runs at 2:30 AM UTC (8:00 AM IST) daily. All secrets (API keys, email credentials) are stored securely in GitHub Secrets, never in code.
 
 **Q: What would you add next?**
 > LinkedIn/Indeed scraper, Telegram notification, application tracker with Google Sheets, interview prep tips per job role, and multi-recipient support.

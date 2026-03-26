@@ -1,7 +1,7 @@
 # --- Windows Scheduled Task Setup ---
 $TaskName = "Naukri_AI_Daily_Dashboard"
 $ActionScript = "c:\Users\rajpu\Desktop\Nukari.com\LAUNCH_DASHBOARD.bat"
-$Time = "10:00AM"
+$Time = "8:00AM"
 
 # Create the action
 $Action = New-ScheduledTaskAction -Execute $ActionScript -WorkingDirectory "c:\Users\rajpu\Desktop\Nukari.com"

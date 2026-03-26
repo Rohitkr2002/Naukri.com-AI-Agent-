@@ -63,9 +63,17 @@ async function runAgent() {
     // ── Step 2: Filter, dedup (and skip history), sort ───────────────
     // Handle both old string history and new object history
     const sentUrls = sentHistory.map(item => typeof item === 'string' ? item : item.url);
-    const sentTitles = sentHistory.map(item => typeof item === 'string' ? item.split('||')[0] : item.title);
+    const sentTitles = sentHistory.map(item => {
+      if (typeof item === 'string') {
+        return item; // old format was Title||Company usually, or URL
+      }
+      return `${(item.title || '').toLowerCase().replace(/\\s+/g, ' ').trim()}||${(item.company || '').toLowerCase().replace(/\\s+/g, ' ').trim()}`;
+    });
     
-    const filteredJobs = rawJobs.length > 0 ? filterJobs(rawJobs, sentUrls) : [];
+    // Combine URLs and title||company keys to ensure we catch duplicate postings with new URLs
+    const sentHistoryForFilter = [...new Set([...sentUrls, ...sentTitles])];
+    
+    const filteredJobs = rawJobs.length > 0 ? filterJobs(rawJobs, sentHistoryForFilter) : [];
 
     if (rawJobs.length > 0 && filteredJobs.length === 0) {
       console.warn('⚠️  No NEW jobs found (or all filtered by experience/history).');

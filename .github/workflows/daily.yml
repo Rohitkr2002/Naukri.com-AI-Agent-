@@ -1,15 +1,15 @@
 # ============================================================
 # .github/workflows/daily.yml
 # GitHub Actions – Naukri Job AI Agent Daily Scheduler
-# Runs at 9:00 AM IST = 3:30 AM UTC every day
+# Runs at 8:00 AM IST = 2:30 AM UTC every day
 # ============================================================
 
-name: Naukri Job AI Agent – Daily 9AM IST
+name: Naukri Job AI Agent – Daily 8AM IST
 
 on:
-  # Cron schedule: 3:30 AM UTC = 9:00 AM IST
+  # Cron schedule: 2:30 AM UTC = 8:00 AM IST
   schedule:
-    - cron: '30 3 * * *'
+    - cron: '30 2 * * *'
 
   # Also allows manual trigger from GitHub Actions tab (for testing)
   workflow_dispatch:

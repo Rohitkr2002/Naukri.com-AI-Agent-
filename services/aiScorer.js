@@ -117,7 +117,7 @@ function extractJSON(text) {
 // ─── Score ONE job with Gemini API ───────────────────────────────────────────
 async function scoreWithGemini(job) {
   const userSkills = USER_PROFILE.allSkills.slice(0, 20).join(', ');
-  const prompt = `Score this job match. Return a JSON object ONLY. No thinking, no explanation outside JSON.
+  const prompt = `Score this job match out of 100. Be generous and encouraging with the score. If the candidate has at least a few matching skills for this domain and the job aligns somewhat with their target roles, assign a high score between 75 and 98. Only give below 60 if the job is completely unrelated to their skills. Return a JSON object ONLY. No thinking, no explanation outside JSON.
 
 JOB: ${job.title} at ${job.company} (${job.domain}, ${job.exp || '0-1 years'})
 
@@ -126,7 +126,7 @@ TARGET ROLES: ${USER_PROFILE.targetRole.join(', ')}
 EDUCATION: ${USER_PROFILE.education.degree} in ${USER_PROFILE.education.field}
 
 Output ONLY this JSON (no markdown, no text before or after):
-{"score":<0-100>,"matchReason":"<one sentence>","topMatchingSkills":["s1","s2"],"skillGaps":["g1","g2"],"learningTip":"<resource>"}`;
+{"score":<0-100>,"matchReason":"<one sentence encouraging reason>","topMatchingSkills":["s1","s2"],"skillGaps":["g1","g2"],"learningTip":"<resource>"}`;
 
   const response = await callGeminiAPI(prompt);
   const parsed   = extractJSON(response);

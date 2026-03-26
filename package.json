@@ -1,7 +1,7 @@
 {
   "name": "naukri-job-ai-agent",
   "version": "1.0.0",
-  "description": "Daily Naukri Job Monitoring AI Agent – sends top 15 freshers jobs to email every morning at 9 AM IST",
+  "description": "Daily Naukri Job Monitoring AI Agent – sends top 15 freshers jobs to email every morning at 8 AM IST",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
