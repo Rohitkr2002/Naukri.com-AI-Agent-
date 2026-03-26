@@ -47,7 +47,8 @@ flowchart LR
     C(["🔍 Scraper\n4 Cities × 5 Roles"]) --> D
     D(["✅ Filter\nDedupe + Sort"]) --> E
     E(["🤖 Gemini 2.5 AI\nScore 0–100%"]) --> F
-    F(["📄 Resume Match\n+ Cover Letter"]) --> G
+    F(["📄 Resume Match\n+ Cover Letter"]) --> DRAFT
+    DRAFT(["✉️ Cold Email\nAuto-Drafted"]) --> G
     G(["🎛️ Local Dashboard\nRecharts + Analytics"]) --> H
     H(["📧 Premium Email\nDelivered @ 8 AM"])
 
@@ -57,6 +58,7 @@ flowchart LR
     style D fill:#1e293b,color:#94a3b8,stroke:#475569
     style E fill:#312e81,color:#a5b4fc,stroke:#6366f1
     style F fill:#4a1d96,color:#e9d5ff,stroke:#7c3aed
+    style DRAFT fill:#064e3b,color:#a7f3d0,stroke:#059669
     style G fill:#0f172a,color:#38bdf8,stroke:#0284c7
     style H fill:#450a0a,color:#fca5a5,stroke:#dc2626
 ```
@@ -79,8 +81,9 @@ flowchart LR
 | 5 | [🚀 Feature 1 — Daily Profile Boost](#-feature-1--daily-profile-boost-automation) |
 | 6 | [🤖 Feature 2 — AI Job Scoring](#-feature-2--ai-job-scoring--ranking) |
 | 7 | [📄 Feature 3 — Resume Matching + Cover Letter](#-feature-3--resume-smart-matching--cover-letter) |
-| 8 | [🔍 Core Engine — Naukri Scraper](#-core-engine--naukricom-scraper) |
-| 9 | [📧 Premium Email Design](#-email-engine--premium-dark-mode-design) |
+| 8 | [💌 Feature 4 — Auto-Drafted Cold Emails](#-feature-4--auto-drafted-cold-emails-for-hrs) |
+| 9 | [🔍 Core Engine — Scraper](#-core-engine--scraper) |
+| 10 | [📧 Premium Email Design](#-email-engine--premium-dark-mode-design) |
 | 10 | [📁 Project Structure](#-project-structure-every-file-explained) |
 | 11 | [🛠️ Tech Stack](#️-tech-stack-detailed) |
 | 12 | [⚙️ Setup & Installation](#️-setup--installation) |
@@ -249,6 +252,10 @@ $ node index.js
    ✅ Software Resume → 12 jobs
    ✅ Data Resume     → 6  jobs
    📝 Cover Letter generated for: Software Engineer @ TCS
+
+✉️  Feature 4: Auto-Drafting Cold Emails for Top Matches...
+   🔍 HR Email found for TCS: hr.tech@tcs.com
+   ✅ Draft generated successfully!
 
 📧 Building premium email...
 📨 Sending to: rajputrohitsingh998@gmail.com
@@ -541,6 +548,30 @@ Warm regards,
 Rohit Kumar Singh
 GitHub: github.com/Rohitkr2002
 ```
+
+---
+
+## 💌 Feature 4 — Auto-Drafted Cold Emails for HRs
+
+> *"Stop typing 'I hope this email finds you well'. Let Gemini draft a personalized 100-word outreach based on your skills and the specific job description."*
+
+### 🔍 Hidden Email Extraction
+For the **Top 5 highest scoring matches**, the agent uses a custom `emailExtractor` to fetch the raw HTML of the job description and uses RegEx to hunt for actual human recruiter emails (filtering out generic/no-reply inboxes).
+
+### 🤖 Gemini 2.5 AI Draft Generation
+If an HR email is found, Gemini generates a highly focused outreach draft:
+
+```json
+{
+  "subject": "Application for Software Engineer - Rohit Kumar Singh (JavaScript/Python)",
+  "body": "Hi team at TCS,\n\nI saw the Software Engineer opening and wanted to reach out. As a recent B.Tech ECE graduate with strong skills in JavaScript and Python, my background aligns perfectly with your requirements for frontend development. I previously built a highly responsive Personal Portfolio showcasing robust web capabilities and 6+ active projects.\n\nMy ATS-optimised resume is attached for your review. I would love to connect to discuss how I can add immediate value to your development team.\n\nBest,\nRohit Kumar Singh"
+}
+```
+
+### ✉️ One-Click Delivery (No OAuth Needed!)
+Instead of complex, error-prone Google Cloud REST API interactions, the agent seamlessly encodes this generated draft directly into your morning Premium Email report. A giant **"✉️ Review & Send Email to HR →"** button appears below the job card. 
+
+Clicking it triggers a smart `mailto:` deep link that **instantly opens Gmail on your phone or PC** with the HR's email, the AI Subject, and the AI Body entirely pre-typed! You just review, attach your CV, and hit Send.
 
 ---
 
