@@ -21,6 +21,8 @@ const { scoreJobs, getSkillGapSummary } = require('./services/aiScorer');
 const { matchResumes }   = require('./services/resumeMatcher');
 const { processAutoApplies } = require('./services/autoApply');
 const { generateTailoredResumes } = require('./services/resumeGenerator');
+const { extractEmailFromUrl }   = require('./services/emailExtractor');
+const { generateColdEmail }     = require('./services/draftGenerator');
 const { sendDailyJobAlerts }     = require('./services/whatsapp');
 const { generateWeeklyInsights } = require('./services/analytics');
 const fs = require('fs');
@@ -127,6 +129,38 @@ async function runAgent() {
         await generateTailoredResumes(matchedJobs);
       } catch (err) {
         console.warn('⚠️  AI Resume Generation skipped:', err.message);
+      }
+    }
+
+    // ── Step 7.5: AUTO-DRAFT COLD EMAILS FOR HRs ──────────────
+    if (matchedJobs.length > 0) {
+      try {
+        console.log('\n✉️  Feature 5: Auto-Drafting Cold Emails for Top Matches...');
+        const draftHistoryPath = path.join(__dirname, 'draft_history.json');
+        let draftHistory = [];
+        if (fs.existsSync(draftHistoryPath)) {
+          try { draftHistory = JSON.parse(fs.readFileSync(draftHistoryPath, 'utf8')); } catch(e){}
+        }
+
+        const topJobsForDraft = matchedJobs.filter(j => (j.aiScore?.score || 0) >= 70).slice(0, 5);
+        for (const job of topJobsForDraft) {
+            // Prevent duplicate drafts to the exact same company
+            if (draftHistory.includes(job.company)) continue;
+
+            const hrEmail = await extractEmailFromUrl(job.url);
+            if (hrEmail) {
+                console.log(`   🔍 HR Email found for ${job.company}: ${hrEmail}`);
+                const draft = await generateColdEmail(job, hrEmail);
+                if (draft) {
+                    job.draftEmail = { hrEmail, subject: draft.subject, body: draft.body };
+                    draftHistory.push(job.company);
+                    console.log(`   ✅ Draft generated successfully!`);
+                }
+            }
+        }
+        fs.writeFileSync(draftHistoryPath, JSON.stringify(draftHistory.slice(-100), null, 2));
+      } catch (err) {
+        console.warn('⚠️  Auto-Draft skipped:', err.message);
       }
     }
 

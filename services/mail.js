@@ -472,8 +472,15 @@ function buildHtmlEmail(jobs, boostReport, skillGapSummary, runMode = 'Manual', 
                   <p style="margin:0; color: #94a3b8; font-size: 13px; font-style: italic; line-height: 1.5;">"${job.aiScore.matchReason}"</p>
                 </div>` : ''}
 
+                <!-- Draft Email Button (If AI grabbed HR email) -->
+                ${job.draftEmail ? `
+                <div style="margin-top: 16px;">
+                  <a href="mailto:${job.draftEmail.hrEmail}?subject=${encodeURIComponent(job.draftEmail.subject)}&body=${encodeURIComponent(job.draftEmail.body)}" target="_blank" style="display: block; width: 100%; text-align: center; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 13px; font-weight: 800; padding: 14px 0; border-radius: 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; border: 1px solid #047857; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">✉️ Review & Send Email to HR →</a>
+                  <div style="text-align: center; margin-top: 6px; color: ${colors.muted}; font-size: 10px;">To: ${job.draftEmail.hrEmail}</div>
+                </div>` : ''}
+
                 <!-- Button -->
-                <div style="margin-top: 24px;">
+                <div style="margin-top: ${job.draftEmail ? '12px' : '24px'};">
                   <a href="${job.url}" target="_blank" style="display: block; width: 100%; text-align: center; background: ${colors.blue}; color: #020617; font-size: 13px; font-weight: 800; padding: 14px 0; border-radius: 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;">View Job Details →</a>
                 </div>
               </td>
