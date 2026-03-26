@@ -3,9 +3,9 @@ Patna, Bihar, India
 Phone: 9065039396  |  Email: rajputrohitsingh998@gmail.com
 LinkedIn: linkedin.com/in/rohit-kumar-singh  |  GitHub: github.com/Rohitkr2002
 
-──────────────────────────────────────────────
+
 PROFESSIONAL SUMMARY
-──────────────────────────────────────────────
+
 Detail-oriented B.Tech graduate (2025) with hands-on experience in data
 analysis, visualization, and dashboard development. Proficient in Python,
 Pandas, NumPy, SQL, Microsoft Excel (Advanced), and Power BI. Experienced
@@ -14,9 +14,9 @@ reporting. Built real-world analytics dashboards analyzing 1,000+ records
 and uncovering actionable business insights. Seeking a Data Analyst / Business
 Analyst / Python Developer role. Immediate joiner.
 
-──────────────────────────────────────────────
+
 EDUCATION
-──────────────────────────────────────────────
+
 Haldia Institute of Technology                        Aug 2021 – June 2025
 Bachelor of Technology – Electronics and Communication Engineering
 CGPA: 7.33 / 10.0
@@ -29,19 +29,19 @@ Jyoti Central High School, Ekma                              March 2017
 CBSE 10th Board
 Percentage: 85.5%
 
-──────────────────────────────────────────────
+
 EXPERIENCE
-──────────────────────────────────────────────
+
 Web Development Intern                          July 2022 – August 2022
-Rinex                                                          [Remote]
+Rinex                                                          
   – Developed 5+ responsive web pages with data-driven UI components
   – Improved page performance by 30% through code optimization
   – Worked with structured data and JavaScript for dynamic rendering
 
-──────────────────────────────────────────────
+
 DATA ANALYSIS PROJECTS
-──────────────────────────────────────────────
-FNP Sales Analysis Dashboard               [Microsoft Excel] Sep 2025
+
+FNP Sales Analysis Dashboard                Sep 2025
   – Analyzed 1,000+ orders generating Rs.35.2 Lakh revenue to uncover
     top-performing occasions and high-demand product categories
   – Built interactive Excel dashboard using Pivot Tables, Charts, and
@@ -50,7 +50,7 @@ FNP Sales Analysis Dashboard               [Microsoft Excel] Sep 2025
   – Applied advanced Excel functions: SUMIFS, COUNTIFS, INDEX-MATCH,
     AVERAGEIFS for data-driven business insights
 
-HR Analytics Dashboard Using Power BI  [Power BI, Power Query, DAX] Oct 2025
+HR Analytics Dashboard Using Power BI   Oct 2025
   – Developed an interactive HR Analytics Dashboard for 1,000+ employees,
     enabling insights into attrition rate, average salary, and retention
   – Implemented advanced DAX measures and Power Query transformations to
@@ -58,18 +58,18 @@ HR Analytics Dashboard Using Power BI  [Power BI, Power Query, DAX] Oct 2025
   – Designed dark-theme interface with dynamic slicers for Department,
     Gender, and Education — improving reporting efficiency by 40%
 
-Blood Bank Management System            [Python, Tkinter, Matplotlib] June 2025
+Blood Bank Management System             June 2025
   – Built a data management system to track blood stock across 8 groups
   – Improved data handling efficiency by 60% with structured data operations
   – Visualized real-time blood inventory using Matplotlib bar charts
 
-Personal Portfolio Website                     [HTML5, CSS3, JS] Aug 2022
+Personal Portfolio Website                      Aug 2022
   – Built and deployed responsive portfolio showcasing 6+ completed projects
   – Reduced page load time to under 2 seconds using CSS/JS optimization
 
-──────────────────────────────────────────────
+
 TECHNICAL SKILLS
-──────────────────────────────────────────────
+
 Languages / Database   : Python, SQL, HTML/CSS, JavaScript (Basics)
 Data Analysis          : Exploratory Data Analysis (EDA), Data Cleaning,
                          Data Wrangling, Data Visualization
@@ -83,9 +83,9 @@ OS / IDE               : VS Code, Jupyter Notebook, Google Colab, Linux
 Soft Skills            : Analytical Thinking, Problem-Solving, Communication,
                          Leadership, Attention to Detail
 
-──────────────────────────────────────────────
+
 LEADERSHIP / EXTRACURRICULAR
-──────────────────────────────────────────────
+
 Treasurer – Computer Society of India (CSI)          Jun 2024 – Jun 2025
 Haldia Institute of Technology
   – Managed Rs.50,000+ budget with 100% financial transparency for workshops,
@@ -93,9 +93,9 @@ Haldia Institute of Technology
   – Led 10+ seminars and coding workshops on web development and ML,
     increasing student participation by 40%
 
-──────────────────────────────────────────────
+
 ADDITIONAL INFORMATION
-──────────────────────────────────────────────
+
 Notice Period    : Immediate Joining
 Preferred Mode   : Remote / Hybrid / On-site
 Languages        : English (Professional), Hindi (Native)
